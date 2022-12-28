@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <div className="content">
+        <h1>RECursion</h1>
+        <h4>Programming Community of NIT Durgapur</h4>
+
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          We are programming community of NIT Durgapur, with focus on improving
+          coding culture institute wide by conducting regular lectures from
+          beginner to advance topics of programming. Our goal is to increase
+          student&apos;s participation in inter-collegiate contest like ACM-ICPC
+          and help them get better.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      </div>
     </div>
   );
 }
