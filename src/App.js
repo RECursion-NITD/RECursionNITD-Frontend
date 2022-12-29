@@ -15,6 +15,63 @@ function App() {
           and help them get better.
         </p>
       </div>
+      <div className="about"></div>
+      <div className="content2">
+        <h2>Who are we ?</h2>
+        <p> Mission</p>
+        <p> Vision</p>
+        <p> Values</p>
+        <p>
+          lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+          condimentum, nisl ut ultricies lacinia, nisl nisl aliquam nisl, eu
+          tincidunt nisl nisl euismod nisl. Nullam condimenlorem ipsum dolor sit
+          amet, consectetur adipiscing elit. Nullam condimentum, nisl ut
+          ultricieslorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Nullam condimentum, nisl ut ultricies lacinia, nisl nisl aliquam nisl,
+          eu tincidunt nisl nisl lorem ipsum dolor sit amet, consectetur
+          adipiscing elit. Nullam condimentum, nisl ut ultricies lacinia, nisl
+          nisl aliquam nisl, eu tincidunt nisl nisl euismod nilorem ipsum dolor
+          sit amet, consectetur adipiscing elit. Nullam condimentum, nisl ut
+          ultricies lacinia, nisl nisl aliquam nisl, eu tincidunt nisl nisl
+          euismod nilorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Nullam condimentum, nisl ut ultricies lacinia, nisl nisl aliquam nisl,
+          eu tincidunt nisl nisl euismod nilorem ipsum dolor sit amet,
+          consectetur adipiscing elit. Nullam condimentum, nisl ut ultricies
+          lacinia, nisl nisl aliquam nisl, eu tincidunt nisl nisl euismod
+          nilorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+          condimentum, nisl ut ultricies lacinia, nisl nisl aliquam nisl, eu
+          tincidunt nisl nisl euismod nilorem ipsum dolor sit amet, consectetur
+          adipiscing elit. Nullam condimentum, nisl ut ultricies lacinia, nisl
+          nisl aliquam nisl, eu tincidunt nisl nisl euismod nilorem ipsum dolor
+          sit amet, consectetur adipiscing elit. Nullam condimentum, nisl ut
+          ultricies lacinia, nisl nisl aliquam nisl, eu tincidunt nisl nisl
+          euismod nilorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Nullam condimentum, nisl ut ultricies lacinia, nisl nisl aliquam nisl,
+          eu tincidunt nisl nisl euismod nilorem ipsum dolor sit amet,
+          consectetur adipiscing elit. Nullam condimentum, nisl ut ultricies
+          lacinia, nisl nisl aliquam nisl, eu tincidunt nisl nisl euismod
+          nilorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+          condimentum, nisl ut ultricies lacinia, nisl nisl aliquam nisl, eu
+          tincidunt nisl nisl euismod nilorem ipsum dolor sit amet, consectetur
+          adipiscing elit. Nullam condimentum, nisl ut ultricies lacinia, nisl
+          nisl aliquam nisl, eu tincidunt nisl nisl euismod nilorem ipsum dolor
+          sit amet, consectetur adipiscing elit. Nullam condimentum, nisl ut
+          ultricies lacinia, nisl nisl aliquam nisl, eu tincidunt nisl nisl
+          euismod nilorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Nullam condimentum, nisl ut ultricies lacinia, nisl nisl aliquam nisl,
+          eu tincidunt nisl nisl euismod nilorem ipsum dolor sit amet,
+          consectetur adipiscing elit. Nullam condimentum, nisl ut ultricies
+          lacinia, nisl nisl aliquam nisl, eu tincidunt nisl nisl euismod
+          nilorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+          condimentum, nisl ut ultricies lacinia, nisl nisl aliquam nisl, eu
+          tincidunt nisl nisl euismod nieuismod nilorem ipsum dolor sit amet,
+          consectetur adipiscing elit. Nullam condimentum, nisl ut ultricies
+          lacinia, nisl nisl aliquam nisl, eu tincidunt nisl nisl euismod ni
+          lacinia, nisl nisl aliquam nisl, eu tincidunt nisl nisl euismod nitum,
+          nisl ut ultricies lacinia, nisl nisl aliquam nisl, eu tincidunt nisl
+          nisl euismod nisl.
+        </p>
+      </div>
     </div>
   );
 }
