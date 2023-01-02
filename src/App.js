@@ -1,4 +1,5 @@
 import "./App.css";
+import Home from "./components/Home";
 import Login from "./components/Login";
 import { Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
@@ -9,7 +10,7 @@ function App() {
       <AuthProvider>
         <h1>RECursion 2022</h1>
         <Routes>
-          <Route element={<App />} path="/"></Route>
+          <Route element={<Home />} path="/"></Route>
           <Route element={<Login />} path="/login"></Route>
         </Routes>
       </AuthProvider>
