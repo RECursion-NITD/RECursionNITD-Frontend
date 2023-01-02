@@ -1,7 +1,9 @@
-import { useState } from "react";
-import { loginUser } from "../api/login";
+import { useContext, useState } from "react";
+import AuthContext from "../context/AuthContext";
 
 const Login = () => {
+  const { loginUser } = useContext(AuthContext);
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
