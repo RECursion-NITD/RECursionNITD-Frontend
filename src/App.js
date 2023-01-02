@@ -1,17 +1,25 @@
 import "./App.css";
 import Home from "./components/Home";
 import Login from "./components/Login";
+import Layout from "./components/Layout";
 import { Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import RequireAuth from "./components/RequireAuth";
 
 function App() {
   return (
     <>
       <AuthProvider>
-        <h1>RECursion 2022</h1>
         <Routes>
-          <Route element={<Home />} path="/"></Route>
-          <Route element={<Login />} path="/login"></Route>
+          <Route path="/" element={<Layout />}>
+            {/* public routes*/}
+            <Route path="login" element={<Login />} />
+
+            {/* private routes */}
+            <Route element={<RequireAuth />}>
+              <Route path="" element={<Home />} />
+            </Route>
+          </Route>
         </Routes>
       </AuthProvider>
     </>

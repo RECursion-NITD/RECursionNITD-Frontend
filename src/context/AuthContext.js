@@ -1,32 +1,17 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
+import { loginUser } from "../api/login";
 
 const AuthContext = createContext();
 
 export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
-  //   const [user, setUser] = useState(null);
-  //   const [authToken, setAuthToken] = useState(null);
-
-  const loginUser = async (formData) => {
-    const response = await fetch(
-      "http://recursionnitd.pythonanywhere.com/api/token/",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: formData.username,
-          password: formData.password,
-        }),
-      }
-    );
-    const data = await response.json();
-    console.log("data", data);
-  };
+  const [user] = useState(null);
+  const [authToken] = useState(null);
 
   const contextData = {
+    user: user,
+    token: authToken,
     loginUser: loginUser,
   };
 
