@@ -7,7 +7,6 @@
 - https://pc.iitmandi.co.in/
 - https://luxiren-react.vercel.app/en/education/
 
-
 ## Login workflow
 
 - user enters credentials and req is sent to server /token
@@ -50,5 +49,7 @@ USER[login] -> see if auth? -> save token in localstorage -> setAuth
 
 # TODOS
 
-- after logged in , if user tries to access /login redirect to homepage
-- BACKEND : new refresh token isnt generated , so old token is used. ?? 
+- ~~after logged in , if user tries to access /login redirect to homepage~~
+- BACKEND : new refresh token isnt generated , so old token is used. ??
+- navigate user to page(-1) after login [ currently redirects to home]
+- Ui ! :'
