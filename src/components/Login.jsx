@@ -1,9 +1,9 @@
-import { useContext, useState } from "react";
-import AuthContext from "../context/AuthContext";
+import { useState } from "react";
+import { Navigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const Login = () => {
-  const { loginUser } = useContext(AuthContext);
-
+  const { token, loginUser } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,31 +23,34 @@ const Login = () => {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", margin: "4em" }}>
-      <h1>Login Page</h1>
-      <form onSubmit={(e) => handleFormSubmit(e)}>
-        <input
-          style={{ display: "flex", flexDirection: "column", margin: "4em" }}
-          onChange={(e) => handleUsernameChange(e)}
-          placeholder="username"
-          value={username}
-        />
+    <>
+      {token && <Navigate to="/" />}
+      <div style={{ display: "flex", flexDirection: "column", margin: "4em" }}>
+        <h1>Login Page</h1>
+        <form onSubmit={(e) => handleFormSubmit(e)}>
+          <input
+            style={{ display: "flex", flexDirection: "column", margin: "4em" }}
+            onChange={(e) => handleUsernameChange(e)}
+            placeholder="username"
+            value={username}
+          />
 
-        <input
-          style={{ display: "flex", flexDirection: "column", margin: "4em" }}
-          onChange={(e) => handlePasswordChange(e)}
-          placeholder="password"
-          value={password}
-        />
+          <input
+            style={{ display: "flex", flexDirection: "column", margin: "4em" }}
+            onChange={(e) => handlePasswordChange(e)}
+            placeholder="password"
+            value={password}
+          />
 
-        <button
-          style={{ display: "flex", flexDirection: "column", margin: "4em" }}
-          type="submit"
-        >
-          Login
-        </button>
-      </form>
-    </div>
+          <button
+            style={{ display: "flex", flexDirection: "column", margin: "4em" }}
+            type="submit"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 

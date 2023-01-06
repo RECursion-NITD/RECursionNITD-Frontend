@@ -4,7 +4,6 @@ import { refresh } from "../api/refreshToken";
 import jwtDecode from "jwt-decode";
 
 const AuthContext = createContext();
-
 export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
@@ -24,7 +23,7 @@ export const AuthProvider = ({ children }) => {
         setAuthToken(data);
       })
       .catch((err) => {
-        console.log("err", err);
+        console.log("cant login user -> err", err);
       });
   };
 
@@ -35,18 +34,19 @@ export const AuthProvider = ({ children }) => {
   };
 
   const refreshTokens = async () => {
-    refresh(authToken.refresh)
-      .then((data) => {
-        data = { access: data.access, refresh: authToken?.refresh };
-        localStorage.setItem("authTokens", JSON.stringify(data));
-        setAuthToken(data);
-        setUser(jwtDecode(data?.access).user_id);
-      })
-      .catch((err) => {
-        console.log("err", err);
-        logoutUser();
-        // history.pushState("/login");
-      });
+    authToken &&
+      refresh(authToken?.refresh)
+        .then((data) => {
+          data = { access: data?.access, refresh: authToken?.refresh };
+          localStorage.setItem("authTokens", JSON.stringify(data));
+          setAuthToken(data);
+          setUser(jwtDecode(data?.access).user_id);
+        })
+        .catch(() => {
+          console.log("cant refresh token -> err");
+          logoutUser();
+        });
+
     if (loading) setLoading(false);
   };
 
