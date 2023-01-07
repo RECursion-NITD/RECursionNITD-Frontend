@@ -31,7 +31,7 @@ USER[login] -> see if auth? -> save token in localstorage -> setAuth
 - Login Page
 - Register Page
 - Events Page
-- Get Started Page [can make static - only img calls can be from server]
+- Get Started Page
 
 # Used Best Coding Practices
 
