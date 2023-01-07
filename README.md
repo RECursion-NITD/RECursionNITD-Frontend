@@ -46,10 +46,3 @@ USER[login] -> see if auth? -> save token in localstorage -> setAuth
 - /utils : all other stuff constants , data , routes , roles etc
 
 <strong>Focus should be on code quality and highly maintainable code</strong>
-
-# TODOS
-
-- ~~after logged in , if user tries to access /login redirect to homepage~~
-- BACKEND : new refresh token isnt generated , so old token is used. ??
-- navigate user to page(-1) after login [ currently redirects to home]
-- Ui ! :'
