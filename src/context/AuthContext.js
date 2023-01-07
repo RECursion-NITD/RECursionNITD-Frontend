@@ -8,7 +8,11 @@ export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(
+    localStorage.getItem("user")
+      ? JSON.parse(localStorage.getItem("user"))
+      : null
+  );
   const [authToken, setAuthToken] = useState(
     localStorage.getItem("authTokens")
       ? JSON.parse(localStorage.getItem("authTokens"))
@@ -19,7 +23,17 @@ export const AuthProvider = ({ children }) => {
     login(formData)
       .then((data) => {
         localStorage.setItem("authTokens", JSON.stringify(data));
-        setUser(jwtDecode(data?.access).user_id);
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            id: jwtDecode(data?.access).user_id,
+            username: formData.username,
+          })
+        );
+        setUser({
+          id: jwtDecode(data?.access).user_id,
+          username: formData.username,
+        });
         setAuthToken(data);
       })
       .catch((err) => {
@@ -29,6 +43,7 @@ export const AuthProvider = ({ children }) => {
 
   const logoutUser = () => {
     localStorage.removeItem("authTokens");
+    localStorage.removeItem("user");
     setUser(null);
     setAuthToken(null);
   };
@@ -40,7 +55,6 @@ export const AuthProvider = ({ children }) => {
           data = { access: data?.access, refresh: authToken?.refresh };
           localStorage.setItem("authTokens", JSON.stringify(data));
           setAuthToken(data);
-          setUser(jwtDecode(data?.access).user_id);
         })
         .catch(() => {
           console.log("cant refresh token -> err");

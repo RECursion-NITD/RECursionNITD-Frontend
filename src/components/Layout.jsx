@@ -51,7 +51,9 @@ const Layout = () => {
         </ul>
 
         {user && <button onClick={logoutUser}>Logout</button>}
-        {user && <p>Hello {user}</p>}
+        {user && (
+          <h1 style={{ color: "whitesmoke" }}>Welcome {user?.username}</h1>
+        )}
       </div>
       <div className="App">
         <Outlet />

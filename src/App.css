@@ -16,6 +16,18 @@
   min-height: 10vh;
 }
 
+.heading {
+  margin: auto;
+  padding-top: 5em;
+  font-size: x-large;
+  height: 20vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: ease-in-out 0.5s;
+}
+
 .content {
   margin-top: 5em;
   font-size: larger;
@@ -26,24 +38,15 @@
 .about {
   width: 100vw;
   min-height: 25vh;
-  background: linear-gradient(#a7f3a6, #cbf5cb);
-  border-radius: 40% 50% 0% 0%;
-  transform: scaleX(1.1);
+  overflow: hidden;
 }
 .content2 {
+  padding: 5em;
   text-align: center;
   align-items: center;
-  height: 80vh;
-  background: linear-gradient(#cbf5cb, #ffffff);
-}
-
-.heading {
-  margin: auto;
-  padding-top: 5em;
-  font-size: x-large;
-  height: 20vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  background-image: url("/public/images/keyboardBg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  /* background: linear-gradient(#cbf5cb, #ffffff); */
 }
