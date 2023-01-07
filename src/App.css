@@ -4,18 +4,24 @@
 }
 
 .App {
+  background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  min-height: 80vh;
+}
+
+.Navbar {
+  text-align: center;
+  min-height: 10vh;
 }
 
 .content {
+  margin-top: 5em;
+  font-size: larger;
   text-align: center;
   align-items: center;
-  border: solid blue 2px;
-  height: 80vh;
-  margin: 5em;
+  min-height: 30vh;
 }
 .about {
   width: 100vw;
@@ -29,4 +35,15 @@
   align-items: center;
   height: 80vh;
   background: linear-gradient(#cbf5cb, #ffffff);
+}
+
+.heading {
+  margin: auto;
+  padding-top: 5em;
+  font-size: x-large;
+  height: 20vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

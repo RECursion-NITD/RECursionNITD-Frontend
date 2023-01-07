@@ -1,10 +1,31 @@
+import { useEffect, useState } from "react";
 import "../App.css";
 
 function Home() {
+  const [text, setText] = useState("");
+  const [index, setIndex] = useState(0);
+  const [typing, setTyping] = useState(true);
+  useEffect(() => {
+    console.log("useEffect called");
+    if (index < "RECursion 2022".length) {
+      setTimeout(() => {
+        setText((text) => text + "RECursion 2023"[index]);
+        setIndex((index) => index + 1);
+      }, 300);
+    } else {
+      setTyping(false);
+    }
+  });
+
   return (
     <div className="App">
+      <div className="heading">
+        <h1>
+          {text}
+          {typing && "_"}
+        </h1>
+      </div>
       <div className="content">
-        <h1>RECursion</h1>
         <h4>Programming Community of NIT Durgapur</h4>
 
         <p>
