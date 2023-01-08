@@ -5,14 +5,25 @@ import useAuth from "../hooks/useAuth";
 const Layout = () => {
   const { user } = useAuth();
   const { logoutUser } = useAuth();
+
   return (
     <>
-      <div className="Navbar" style={{ backgroundColor: "black" }}>
+      <div
+        style={{
+          height: "5vh",
+          backgroundColor: "black",
+          display: "flex",
+          justifyContent: "space-between",
+          padding: "1em",
+        }}
+      >
         <Link
           to="/"
           style={{ color: "white", textDecoration: "none", margin: "5px" }}
         >
-          <h1 style={{ color: "white" }}>RECursion 2022</h1>
+          <p style={{ color: "white", fontSize: "x-large" }}>
+            <strong>REC</strong>ursion 2022
+          </p>
         </Link>
 
         <ul
@@ -20,16 +31,18 @@ const Layout = () => {
             listStyle: "none",
             display: "flex",
             flexDirection: "row",
+            width: "50%",
+            alignItems: "flex-end",
             fontColor: "white",
             margin: "5px",
           }}
         >
           <li>
             <Link
-              to="/team"
+              to="/forum"
               style={{ color: "white", textDecoration: "none", margin: "5px" }}
             >
-              Team
+              AskREC
             </Link>
           </li>
           <li>
@@ -42,18 +55,57 @@ const Layout = () => {
           </li>
           <li>
             <Link
+              to="/experience"
+              style={{ color: "white", textDecoration: "none", margin: "5px" }}
+            >
+              Interview Experiences
+            </Link>
+          </li>
+
+          <li>
+            <Link
               to="/events"
               style={{ color: "white", textDecoration: "none", margin: "5px" }}
             >
               Events
             </Link>
           </li>
+          <li>
+            <Link
+              to="/get_started"
+              style={{ color: "white", textDecoration: "none", margin: "5px" }}
+            >
+              Getting Started
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/team"
+              style={{ color: "white", textDecoration: "none", margin: "5px" }}
+            >
+              Team
+            </Link>
+          </li>
+          {!user && (
+            <li>
+              <Link
+                to="/login"
+                style={{
+                  color: "white",
+                  textDecoration: "none",
+                  margin: "5px",
+                }}
+              >
+                Login
+              </Link>
+            </li>
+          )}
+          {user && (
+            <button onClick={logoutUser}>
+              <span style={{ color: "red", margin: "5px" }}>Logout</span>
+            </button>
+          )}
         </ul>
-
-        {user && <button onClick={logoutUser}>Logout</button>}
-        {user && (
-          <h1 style={{ color: "whitesmoke" }}>Welcome {user?.username}</h1>
-        )}
       </div>
       <div className="App">
         <Outlet />

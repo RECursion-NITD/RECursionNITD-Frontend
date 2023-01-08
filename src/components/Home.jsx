@@ -1,28 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useToast } from "@chakra-ui/react";
+import useAuth from "../hooks/useAuth";
 import "../App.css";
 
 function Home() {
-  const [text, setText] = useState("");
-  const [index, setIndex] = useState(0);
-  const [typing, setTyping] = useState(true);
+  const { user } = useAuth();
+  const toast = useToast();
+
   useEffect(() => {
-    console.log("useEffect called");
-    if (index < "RECursion 2022".length) {
-      setTimeout(() => {
-        setText((text) => text + "RECursion 2023"[index]);
-        setIndex((index) => index + 1);
-      }, 300);
-    } else {
-      setTyping(false);
-    }
-  });
+    if (!user) return;
+    toast({
+      title: `Welcome ${user?.username}.`,
+      position: "top-right",
+      status: "success",
+      duration: 2500,
+      isClosable: false,
+    });
+  }, [user]);
 
   return (
     <div className="App">
       <div className="heading">
         <h1>
-          {text}
-          {typing && "_"}
+          <strong>REC</strong>ursion 2023
         </h1>
       </div>
       <div className="content">

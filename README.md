@@ -20,7 +20,7 @@ USER[login] -> see if auth? -> save token in localstorage -> setAuth
 <br/> yes -> use that token to req -> if fails , intercept and ask new token
 
 # Pages
-
+- UI Library : Chakra UI  (Dark theme)
 - Homepage should contain links to events/IE/blogs/etc
 - Make Auth mandatory for IE,Blogs,AskREC [keep experimenting]
 - Home Page
@@ -46,3 +46,4 @@ USER[login] -> see if auth? -> save token in localstorage -> setAuth
 - /utils : all other stuff constants , data , routes , roles etc
 
 <strong>Focus should be on code quality and highly maintainable code</strong>
+
