@@ -13,6 +13,7 @@ import AskREC from "./components/AskREC";
 import Events from "./components/Events";
 import GetStarted from "./components/GetStarted";
 import NotFound from "./components/NotFound";
+import React from "react";
 
 function App() {
   return (
@@ -35,7 +36,7 @@ function App() {
               <Route path="experience" element={<Experiences />} />
             </Route>
           </Route>
-          <Route path="*" element=<NotFound /> />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </AuthProvider>
     </>
