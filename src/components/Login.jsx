@@ -8,7 +8,6 @@ const Login = () => {
   const { token, loginUser } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  console.log(token);
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
