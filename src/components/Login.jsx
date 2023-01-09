@@ -1,12 +1,14 @@
-import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import React, { useState } from "react";
 
 const Login = () => {
+  const location = useLocation();
+  const from = location.state?.from.pathname || "/";
   const { token, loginUser } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  console.log(token);
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
@@ -24,7 +26,7 @@ const Login = () => {
 
   return (
     <>
-      {token && <Navigate to="/" />}
+      {token && <Navigate to={from} />}
       <div style={{ display: "flex", flexDirection: "column", margin: "4em" }}>
         <h1>Login Page</h1>
         <form onSubmit={(e) => handleFormSubmit(e)}>
