@@ -2,6 +2,8 @@
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { GetExperiences, GetNextExperiences } from "../api/experiences";
+import { getroute } from "../utils/GetRoute";
+import { API_ROUTES } from "../utils/api_routes";
 import useLoading from "../hooks/useLoading";
 import Loader from "./Loader";
 
@@ -10,16 +12,20 @@ const Experiences = () => {
   const { loading, setLoading } = useLoading();
 
   useEffect(() => {
-    setLoading(true);
-    GetExperiences().then((results) => {
-      setInterviewExperiences(results);
-      setLoading(false);
+    GetExperiences("").then((results) => {
+      setLoading(true);
+      GetExperiences().then((results) => {
+        setInterviewExperiences(results);
+        setLoading(false);
+      });
     });
   }, []);
 
-  const NextExperiences = async (url) => {
-    const results = await GetNextExperiences(url);
-    setInterviewExperiences(results);
+  const NextAndPrevExperiences = async (url) => {
+    const route = getroute(url, API_ROUTES.EXPERIENCES); //Getting the route form the, because there is a URL insted of a route(eg: page1,page2)
+    GetExperiences(route).then((results) => {
+      setInterviewExperiences(results);
+    });
   };
 
   const getYear = (created_at) => {
@@ -53,7 +59,7 @@ const Experiences = () => {
         <button
           style={{ margin: "1em", padding: "15px", border: "solid 1px" }}
           onClick={() => {
-            NextExperiences(InterviewExperiences?.previous);
+            NextAndPrevExperiences(InterviewExperiences?.previous);
           }}
         >
           Prev
@@ -66,7 +72,7 @@ const Experiences = () => {
         <button
           style={{ margin: "1em", padding: "15px", border: "solid 1px" }}
           onClick={() => {
-            NextExperiences(InterviewExperiences?.next);
+            NextAndPrevExperiences(InterviewExperiences?.next);
           }}
         >
           Next
