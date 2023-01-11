@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { GetExperiences, GetNextExperiences } from "../api/experiences";
 
@@ -25,13 +26,15 @@ const Experiences = () => {
     <div>
       {InterviewExperiences?.results?.map((interview, key) => {
         return (
-          <h1 key={key} style={{ margin: "1em" }}>
-            <strong>
-              {interview.company} interview Experience{" "}
-              {getYear(interview.created_at)}
-            </strong>
-            #{interview.id}
-          </h1>
+          <Link key={key} to={`detail/${interview.id}`}>
+            <h1 style={{ margin: "1em" }}>
+              <strong>
+                {interview.company} interview Experience{" "}
+                {getYear(interview.created_at)}
+              </strong>
+              #{interview.id}
+            </h1>
+          </Link>
         );
       })}
 
