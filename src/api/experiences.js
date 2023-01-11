@@ -11,6 +11,7 @@ export const GetExperiences = async () => {
     },
   });
   const data = await response.data;
+  console.log("experiences api called")
   return data;
 };
 
