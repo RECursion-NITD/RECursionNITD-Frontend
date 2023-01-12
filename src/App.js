@@ -9,6 +9,7 @@ import RequireAuth from "./components/RequireAuth";
 import Register from "./components/Register";
 import Blog from "./components/Blog";
 import Experiences from "./components/Experiences";
+import DetailExperience from "./components/DetailExperience";
 import AskREC from "./components/AskREC";
 import Events from "./components/Events";
 import GetStarted from "./components/GetStarted";
@@ -34,6 +35,10 @@ function App() {
               <Route path="forum" element={<AskREC />} />
               <Route path="blog" element={<Blog />} />
               <Route path="experience" element={<Experiences />} />
+              <Route
+                path="experience/detail/:experienceId"
+                element={<DetailExperience />}
+              />
             </Route>
           </Route>
           <Route path="*" element={<NotFound />} />
