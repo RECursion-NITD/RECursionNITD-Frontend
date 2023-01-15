@@ -1,6 +1,8 @@
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import useLoading from "../hooks/useLoading";
+import Loader from "./Loader";
 
 const Login = () => {
   const location = useLocation();
@@ -8,6 +10,12 @@ const Login = () => {
   const { token, loginUser } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { loading, setLoading } = useLoading();
+
+  useEffect(() => {
+    if (token) setLoading(false);
+  }, [token]);
+
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
@@ -18,12 +26,17 @@ const Login = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     const formData = { username: username, password: password };
     console.log(formData);
     loginUser(formData);
   };
 
-  return (
+  return loading ? (
+    <div>
+      <Loader />
+    </div>
+  ) : (
     <>
       {token && <Navigate to={from} />}
       <div style={{ display: "flex", flexDirection: "column", margin: "4em" }}>

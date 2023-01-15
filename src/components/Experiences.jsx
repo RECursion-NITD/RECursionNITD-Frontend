@@ -2,12 +2,18 @@
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { GetExperiences, GetNextExperiences } from "../api/experiences";
+import useLoading from "../hooks/useLoading";
+import Loader from "./Loader";
 
 const Experiences = () => {
   const [InterviewExperiences, setInterviewExperiences] = useState();
+  const { loading, setLoading } = useLoading();
+
   useEffect(() => {
+    setLoading(true);
     GetExperiences().then((results) => {
       setInterviewExperiences(results);
+      setLoading(false);
     });
   }, []);
 
@@ -22,7 +28,11 @@ const Experiences = () => {
     return year;
   };
 
-  return (
+  return loading ? (
+    <div>
+      <Loader />
+    </div>
+  ) : (
     <div>
       {InterviewExperiences?.results?.map((interview, key) => {
         return (

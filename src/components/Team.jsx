@@ -1,25 +1,26 @@
 import { useEffect, useState } from "react";
 import { getTeam } from "../api/team";
 import useLoading from "../hooks/useLoading";
+import Loader from "./Loader";
 
 const Team = () => {
-  const { setLoading } = useLoading();
+  const { loading, setLoading } = useLoading();
+
   const [team, setTeam] = useState();
   useEffect(() => {
+    setLoading(true);
     getTeam()
       .then((teamData) => {
         setTeam(teamData);
         setLoading(false);
       })
       .catch((err) => console.err(err));
-
-    return () => {
-      setLoading(false);
-    };
   }, []);
 
   return (
     <div>
+      {loading && <Loader />}
+
       <h1>Team Page</h1>
 
       {team &&
