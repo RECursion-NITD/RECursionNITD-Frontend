@@ -14,6 +14,8 @@ const Layout = () => {
           display: "flex",
           justifyContent: "space-between",
           padding: "1em",
+          position: "relative",
+          zIndex: "5",
         }}
       >
         <Link

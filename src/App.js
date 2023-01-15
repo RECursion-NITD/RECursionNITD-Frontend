@@ -1,5 +1,6 @@
 import "./App.css";
 import Home from "./components/Home";
+import ExperimentalHome from "./components/ExperimentalHome";
 import Login from "./components/Login";
 import Layout from "./components/Layout";
 import Team from "./components/Team";
@@ -25,7 +26,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout />}>
               {/* public routes*/}
-              <Route path="" element={<Home />} />
+              <Route path="home" element={<Home />} />
+              <Route path="" element={<ExperimentalHome />} />
               <Route path="login" element={<Login />} />
               <Route path="register" element={<Register />} />
               <Route path="team" element={<Team />} />
