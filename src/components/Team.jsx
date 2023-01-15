@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { getTeam } from "../api/team";
+import useLoading from "../hooks/useLoading";
 
 const Team = () => {
-  const [loading, setLoading] = useState(true);
+  const { setLoading } = useLoading();
   const [team, setTeam] = useState();
-
   useEffect(() => {
     getTeam()
       .then((teamData) => {
@@ -21,7 +21,7 @@ const Team = () => {
   return (
     <div>
       <h1>Team Page</h1>
-      {loading && <p>Loading...</p>}
+
       {team &&
         team?.map((member, id) => (
           <div key={id}>

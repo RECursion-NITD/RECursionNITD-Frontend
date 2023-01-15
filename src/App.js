@@ -15,35 +15,38 @@ import Events from "./components/Events";
 import GetStarted from "./components/GetStarted";
 import NotFound from "./components/NotFound";
 import React from "react";
+import { LoadingProvider } from "./context/LoadingContext";
 
 function App() {
   return (
     <>
-      <AuthProvider>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            {/* public routes*/}
-            <Route path="" element={<Home />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route path="team" element={<Team />} />
-            <Route path="events" element={<Events />} />
-            <Route path="get_started" element={<GetStarted />} />
+      <LoadingProvider>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              {/* public routes*/}
+              <Route path="" element={<Home />} />
+              <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
+              <Route path="team" element={<Team />} />
+              <Route path="events" element={<Events />} />
+              <Route path="get_started" element={<GetStarted />} />
 
-            {/* private routes */}
-            <Route element={<RequireAuth />}>
-              <Route path="forum" element={<AskREC />} />
-              <Route path="blog" element={<Blog />} />
-              <Route path="experience" element={<Experiences />} />
-              <Route
-                path="experience/detail/:experienceId"
-                element={<DetailExperience />}
-              />
+              {/* private routes */}
+              <Route element={<RequireAuth />}>
+                <Route path="forum" element={<AskREC />} />
+                <Route path="blog" element={<Blog />} />
+                <Route path="experience" element={<Experiences />} />
+                <Route
+                  path="experience/detail/:experienceId"
+                  element={<DetailExperience />}
+                />
+              </Route>
             </Route>
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </AuthProvider>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AuthProvider>
+      </LoadingProvider>
     </>
   );
 }
