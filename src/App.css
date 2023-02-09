@@ -4,7 +4,7 @@
 }
 
 .App {
-  background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+  background-color: #000000;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,14 +12,30 @@
 }
 
 .content {
-  border: solid red 2px;
+  background: linear-gradient(
+      to left bottom,
+      rgb(50, 47, 223) 0%,
+      rgba(0, 0, 0, 0.2) 30%,
+      rgba(0, 0, 0, 0.2) 90%
+    ),
+    linear-gradient(
+      to bottom,
+      rgb(11, 66, 218) 0%,
+      rgb(37, 19, 196) 5%,
+      rgba(0, 0, 0, 1) 30%
+    );
+  background-blend-mode: exclusion;
+  padding: 15vh;
+  height: 100vh;
   font-size: larger;
   text-align: center;
   align-items: center;
 }
 
+.homepageCard {
+  background-color: aliceblue;
+}
 .about {
-  border: solid red 2px;
   width: 100vw;
   min-height: 25vh;
   overflow: hidden;
@@ -43,6 +59,10 @@
   width: 100vw;
 }
 
+.menu {
+  margin: 2em;
+  border: solid red 2px;
+}
 .loading-spinner {
   display: flex;
   justify-content: center;

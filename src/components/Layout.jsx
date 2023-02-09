@@ -13,8 +13,9 @@ const Layout = () => {
           backgroundColor: "black",
           display: "flex",
           justifyContent: "space-between",
-          padding: "1em",
-          position: "relative",
+          padding: "2em",
+          position: "fixed",
+          width: "100%",
           zIndex: "5",
         }}
       >

@@ -5,4 +5,5 @@ export const API_ROUTES = {
   EVENTS: "/events",
   USERS: "/users",
   EXPERIENCES: "/experiences",
+  HOME: "/",
 };

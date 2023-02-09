@@ -1,10 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import useAuth from "../hooks/useAuth";
+import useLoading from "../hooks/useLoading";
+import Loader from "./Loader";
+import { getHome } from "../api/home";
 import "../App.css";
 
 function Home() {
   const { user } = useAuth();
+  const { loading, setLoading } = useLoading();
+  const [homeData, setHomeData] = useState(null);
   const toast = useToast();
 
   useEffect(() => {
@@ -18,7 +23,19 @@ function Home() {
     });
   }, [user]);
 
-  return (
+  useEffect(() => {
+    setLoading(true);
+    getHome()
+      .then((data) => {
+        setHomeData(data);
+        setLoading(false);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  return loading ? (
+    <Loader />
+  ) : (
     <div className="App">
       <div className="heading">
         <h1>
@@ -35,6 +52,10 @@ function Home() {
           student&apos;s participation in inter-collegiate contest like ACM-ICPC
           and help them get better.
         </p>
+        <div>
+          <p>{homeData?.years_of_experience}+years of experience</p>
+          <p>{homeData?.hours_teaching} + hours of teaching</p>
+        </div>
       </div>
       <div className="about"></div>
       <div className="content2">
