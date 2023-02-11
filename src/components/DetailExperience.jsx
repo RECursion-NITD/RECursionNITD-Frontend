@@ -25,7 +25,7 @@ const DetailExperience = () => {
   return loading ? (
     <Loader />
   ) : (
-    <div>
+    <div className="detailexperience_container">
       <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>
         {experience?.interview_Questions}
       </ReactMarkdown>
