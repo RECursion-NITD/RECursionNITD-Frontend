@@ -11,6 +11,7 @@ import Register from "./components/Register";
 import Blog from "./components/Blog";
 import Experiences from "./components/Experiences";
 import DetailExperience from "./components/DetailExperience";
+import DetailEvent from "./components/DetailEvent";
 import AskREC from "./components/AskREC";
 import Events from "./components/Events";
 import GetStarted from "./components/GetStarted";
@@ -44,6 +45,10 @@ function App() {
                   element={<DetailExperience />}
                 />
               </Route>
+              <Route
+                path="events/detail/:eventId"
+                element={<DetailEvent />}
+              ></Route>
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

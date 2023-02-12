@@ -14,5 +14,4 @@ export const getTeam = async () => {
   const data = await response.data;
   console.log("data", data);
   return data;
-
 };

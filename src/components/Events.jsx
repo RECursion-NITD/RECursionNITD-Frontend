@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { getEvents, getNextEvents } from "../api/events";
 import useLoading from "../hooks/useLoading";
@@ -11,6 +12,7 @@ const Events = () => {
     getEvents()
       .then((response) => {
         setEvents(response);
+        console.log("The event type is : ", Events[0]?.event_type);
         setLoading(false);
       })
       .catch((err) => console.error(err));
@@ -22,10 +24,15 @@ const Events = () => {
     </div>
   ) : (
     <div>
-      {Events?.results?.map((event, id) => (
-        <div key={id}>{event.description}</div>
-      ))}
-
+      {Events?.results?.map((event, key) => {
+        return (
+          <Link key={key} to={`detail/${event.id}`}>
+            <h1 style={{ margin: "10px" }}>
+              <strong>{event.title}</strong>#{event.id}
+            </h1>
+          </Link>
+        );
+      })}
       {Events?.previous ? (
         <button
           style={{ margin: "10px", border: "1px solid black" }}
