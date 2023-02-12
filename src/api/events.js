@@ -16,6 +16,18 @@ export const getEvents = async () => {
   return data;
 };
 
+export const getClassEvents = async () => {
+  console.log("Class events api called");
+  const response = await axios.get(EVENTS_URL, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await response.data;
+  console.log(" class events data", data);
+  return data;
+};
+
 export const getNextEvents = async (next) => {
   const response = await fetch(next, {
     method: "GET",
@@ -24,5 +36,17 @@ export const getNextEvents = async (next) => {
     },
   });
   const data = await response.json();
+  return data;
+};
+
+export const GetDetailEvent = async (eventId) => {
+  const response = await axios.get(`${EVENTS_URL}/${eventId}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await response.data;
+  console.log("detailed events api called");
+  console.log(data);
   return data;
 };
