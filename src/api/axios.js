@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api = process.env.API || "https://recnitd.pythonanywhere.com/api";
+const api = process.env.API || "https://recnitdgp.pythonanywhere.com/api";
 
 export default axios.create({
   baseURL: api,
