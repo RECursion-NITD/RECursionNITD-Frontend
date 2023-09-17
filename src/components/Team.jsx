@@ -23,48 +23,43 @@ import {
 import { FaFacebook, FaLinkedin, FaPhoneSquare } from "react-icons/fa";
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 
-const TeamMember = ({ member }) => {
-  {
-    console.log(member);
-  }
-  return (
-    <Box className="our-team" p="20%">
-      <Box className="pic" boxShadow="2px 2px 50px #0a0a0a">
-        <Image
-          src={member.image_url}
-          alt={member.name}
-          borderRadius="100%"
-          borderColor="#343A3F"
-          borderWidth="10px"
-          borderStyle="solid"
-        />
+const TeamMember = ({ member }) => (
+  <Box className="our-team">
+    <Box className="pic" boxShadow="2px 2px 50px #0a0a0a">
+      <Image
+        src={member.image}
+        alt={member.name}
+        borderRadius="100%"
+        borderColor="#343A3F"
+        borderWidth="10px"
+        borderStyle="solid"
+      />
 
-        <List className="social-links">
-          <ListItem>
-            <Link href={member.url_Facebook} target="_blank" color="white">
-              <Icon as={FaFacebook} />
-            </Link>
-          </ListItem>
+      <List className="social-links">
+        <ListItem>
+          <Link href={member.url_Facebook} target="_blank" color="white">
+            <Icon as={FaFacebook} />
+          </Link>
+        </ListItem>
 
-          <ListItem>
-            <Link href={member.url_LinkedIn} target="_blank" color="white">
-              <Icon as={FaLinkedin} />
-            </Link>
-          </ListItem>
+        <ListItem>
+          <Link href={member.url_LinkedIn} target="_blank" color="white">
+            <Icon as={FaLinkedin} />
+          </Link>
+        </ListItem>
 
-          <ListItem>
-            <Link href={`tel:${member.mobile}`} color="white">
-              <Icon as={FaPhoneSquare} />
-            </Link>
-          </ListItem>
-        </List>
-      </Box>
-
-      <Heading className="team-title">{member.name}</Heading>
-      <Box color="#a7b3b3">{member.designation}</Box>
+        <ListItem>
+          <Link href={`tel:${member.mobile}`} color="white">
+            <Icon as={FaPhoneSquare} />
+          </Link>
+        </ListItem>
+      </List>
     </Box>
-  );
-};
+
+    <Heading className="team-title">{member.name}</Heading>
+    <Box color="#a7b3b3">{member.designation}</Box>
+  </Box>
+);
 
 // const MemberCard = ({ member }) => (
 //   <Box as="div" p={3} textAlign="center">
@@ -243,22 +238,21 @@ const Team = () => {
     // setBatch();
     getTeam()
       .then((data) => {
-        console.log(data);
         setTeam(data);
-
         setLoading(false);
       })
       .catch((err) => console.err(err));
   }, []);
 
-  useEffect(() => {
-    if (team) {
-      console.log(team["2024"]);
-    }
-  }, [team]);
-
   return (
-    <Box bg="#3e3b3b">
+    <Box
+      bg="#3e3b3b"
+      style={{
+        padding: "auto 10vw",
+        width: "100vw",
+        overflowX: "hidden",
+      }}
+    >
       {loading && <Loader />}
 
       {/* TEAM HEADER */}
@@ -270,31 +264,25 @@ const Team = () => {
         </Center>
 
         {team &&
-          Object.keys(team).map((year) => {
-            <Box key={year}>
+          Object.keys(team).map((year, i) => (
+            <Box key={i}>
               <Center mt="3rem">
                 <Heading className="team-heading" mt={1} mb={3} fontSize="2xl">
                   Batch of {year}
                 </Heading>
               </Center>
 
-              <SimpleGrid columns={[1, 2, 3, 4]} spacing={4}>
+              <SimpleGrid
+                columns={[1, 2, 3, 4, 5]}
+                justifyContent={"space-around"}
+              >
                 {team[year]?.length > 0 &&
-                  team[year].map((member, id) => {
-                    <TeamMember key={id} member={member} />;
-                  })}
+                  team[year].map((member, id) => (
+                    <TeamMember key={id} member={member} />
+                  ))}
               </SimpleGrid>
-            </Box>;
-          })}
-
-        <SimpleGrid columns={[1, 2, 3, 4]} spacing={4}>
-          {team &&
-            team["2024"]?.length > 0 &&
-            team["2024"].map((member, id) => {
-              // console.log("hi") && <TeamMember key={id} member={member} />;
-              console.log("hi") && <Box key={id}>{member.batch_year}</Box>;
-            })}
-        </SimpleGrid>
+            </Box>
+          ))}
       </Box>
 
       {/* ALUMNI SECTION */}
@@ -413,6 +401,7 @@ const Team = () => {
 
           <Grid
             px="3rem"
+            my="3rem"
             templateColumns={{
               base: "repeat(1, 1fr)",
               lg: "repeat(3, 1fr)",
@@ -426,16 +415,6 @@ const Team = () => {
           </Grid>
         </Grid>
       </Box>
-
-      <h1>Team Page</h1>
-
-      {/* {team &&
-        team?.map((member, id) => (
-          <div key={id}>
-            <p>{member.name}</p>
-            <p>{member.role}</p>
-          </div>
-        ))} */}
     </Box>
   );
 };

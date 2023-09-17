@@ -129,6 +129,9 @@
 
 .our-team {
 	text-align: center;
+  margin: 5em auto;
+  height: 10em;
+  width : 10em;
 }
 
 .our-team .pic {
@@ -155,8 +158,8 @@
 }
 
 .pic img {
-	width: 100%;
-	height: auto;
+	width: 10em;
+	height: 10em;
 }
 
 .our-team .social-links {
