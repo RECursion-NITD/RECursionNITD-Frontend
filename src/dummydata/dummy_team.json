@@ -1,0 +1,202 @@
+{
+    "presi":{
+        "id":1,
+        "name":"Akshay A Baiju",
+        "designation":"President",
+        "mobile":1234567890,
+        "url_Facebook":"",
+        "url_LinkedIn":"",
+        "image_url":"https://www.recursionnitd.in/media/images/Akshay_A_Baiju_eB1F99H.png"
+    },
+    "vice_presi":{
+        "id":2,
+        "name":"D.Mahamood Sameer",
+        "designation":"Vice President",
+        "mobile":1234567890,
+        "url_Facebook":"",
+        "url_LinkedIn":"",
+        "image_url":"https://www.recursionnitd.in/media/images/Akshay_A_Baiju_eB1F99H.png"
+    },
+    "gen_sec":{
+        "id":3,
+        "name":"Prashant Shukla",
+        "designation":"General Secretary",
+        "mobile":1234567890,
+        "url_Facebook":"",
+        "url_LinkedIn":"",
+        "image_url":"https://www.recursionnitd.in/media/images/Akshay_A_Baiju_eB1F99H.png"
+    },
+    "convener":{
+        "id":4,
+        "name":"Varandeep Sahota",
+        "designation":"Convener",
+        "mobile":1234567890,
+        "url_Facebook":"",
+        "url_LinkedIn":"",
+        "image_url":"https://www.recursionnitd.in/media/images/Akshay_A_Baiju_eB1F99H.png"
+    },
+    "treasurer":{
+        "id":5,
+        "name":"Rick Sarkar",
+        "designation":"Treasurer",
+        "mobile":1234567890,
+        "url_Facebook":"",
+        "url_LinkedIn":"",
+        "image_url":"https://www.recursionnitd.in/media/images/Akshay_A_Baiju_eB1F99H.png"
+    },
+    "members":[
+        {
+            "id":6,
+            "name":"Abhishek Singh",
+            "designation":"Contest Head",
+            "image_url":"https://www.recursionnitd.in/media/images/Abhishek_Singh.png"
+        },
+        {
+            "id":7,
+            "name":"Abhishek Singh",
+            "designation":"Contest Head",
+            "image_url":"https://www.recursionnitd.in/media/images/Abhishek_Singh.png"
+        },
+        {
+            "id":8,
+            "name":"Abhishek Singh",
+            "designation":"Contest Head",
+            "image_url":"https://www.recursionnitd.in/media/images/Abhishek_Singh.png"
+        },
+        {
+            "id":9,
+            "name":"Abhishek Singh",
+            "designation":"Contest Head",
+            "image_url":"https://www.recursionnitd.in/media/images/Abhishek_Singh.png"
+        },
+        {
+            "id":10,
+            "name":"Abhishek Singh",
+            "designation":"Contest Head",
+            "image_url":"https://www.recursionnitd.in/media/images/Abhishek_Singh.png"
+        },
+        {
+            "id":11,
+            "name":"Abhishek Singh",
+            "designation":"Contest Head",
+            "image_url":"https://www.recursionnitd.in/media/images/Abhishek_Singh.png"
+        },
+        {
+            "id":12,
+            "name":"Abhishek Singh",
+            "designation":"Contest Head",
+            "image_url":"https://www.recursionnitd.in/media/images/Abhishek_Singh.png"
+        },
+        {
+            "id":13,
+            "name":"Abhishek Singh",
+            "designation":"Contest Head",
+            "image_url":"https://www.recursionnitd.in/media/images/Abhishek_Singh.png"
+        },
+        {
+            "id":14,
+            "name":"Abhishek Singh",
+            "designation":"Contest Head",
+            "image_url":"https://www.recursionnitd.in/media/images/Abhishek_Singh.png"
+        },
+        {
+            "id":15,
+            "name":"Abhishek Singh",
+            "designation":"Contest Head",
+            "image_url":"https://www.recursionnitd.in/media/images/Abhishek_Singh.png"
+        }
+    ],
+    "alumni":[
+        {
+            "id":16,
+            "name":"Ankit Maskara",
+            "branch":"Computer Science",
+            "url_LinkedIn":"https://www.linkedin.com/in/ankit-m-61b35b11b/",
+            "batch_year":2023,
+            "image_url":"https://www.recursionnitd.in/media/images/Ankit_Maskara_Lo68HRh.png"
+        },
+        {
+            "id":17,
+            "name":"Ankit Maskara",
+            "branch":"Computer Science",
+            "url_LinkedIn":"https://www.linkedin.com/in/ankit-m-61b35b11b/",
+            "batch_year":2023,
+            "image_url":"https://www.recursionnitd.in/media/images/Ankit_Maskara_Lo68HRh.png"
+        },
+        {
+            "id":18,
+            "name":"Ankit Maskara",
+            "branch":"Computer Science",
+            "url_LinkedIn":"https://www.linkedin.com/in/ankit-m-61b35b11b/",
+            "batch_year":2023,
+            "image_url":"https://www.recursionnitd.in/media/images/Ankit_Maskara_Lo68HRh.png"
+        },
+        {
+            "id":19,
+            "name":"Ankit Maskara",
+            "branch":"Computer Science",
+            "url_LinkedIn":"https://www.linkedin.com/in/ankit-m-61b35b11b/",
+            "batch_year":2023,
+            "image_url":"https://www.recursionnitd.in/media/images/Ankit_Maskara_Lo68HRh.png"
+        },
+        {
+            "id":20,
+            "name":"Ankit Maskara",
+            "branch":"Computer Science",
+            "url_LinkedIn":"https://www.linkedin.com/in/ankit-m-61b35b11b/",
+            "batch_year":2023,
+            "image_url":"https://www.recursionnitd.in/media/images/Ankit_Maskara_Lo68HRh.png"
+        },
+        {
+            "id":21,
+            "name":"Ankit Maskara",
+            "branch":"Computer Science",
+            "url_LinkedIn":"https://www.linkedin.com/in/ankit-m-61b35b11b/",
+            "batch_year":2023,
+            "image_url":"https://www.recursionnitd.in/media/images/Ankit_Maskara_Lo68HRh.png"
+        },
+        {
+            "id":22,
+            "name":"Ankit Maskara",
+            "branch":"Computer Science",
+            "url_LinkedIn":"https://www.linkedin.com/in/ankit-m-61b35b11b/",
+            "batch_year":2023,
+            "image_url":"https://www.recursionnitd.in/media/images/Ankit_Maskara_Lo68HRh.png"
+        },
+        {
+            "id":23,
+            "name":"Ankit Maskara",
+            "branch":"Computer Science",
+            "url_LinkedIn":"https://www.linkedin.com/in/ankit-m-61b35b11b/",
+            "batch_year":2023,
+            "image_url":"https://www.recursionnitd.in/media/images/Ankit_Maskara_Lo68HRh.png"
+        },
+        {
+            "id":24,
+            "name":"Ankit Maskara",
+            "branch":"Computer Science",
+            "url_LinkedIn":"https://www.linkedin.com/in/ankit-m-61b35b11b/",
+            "batch_year":2023,
+            "image_url":"https://www.recursionnitd.in/media/images/Ankit_Maskara_Lo68HRh.png"
+        },
+        {
+            "id":25,
+            "name":"Ankit Maskara",
+            "branch":"Computer Science",
+            "url_LinkedIn":"https://www.linkedin.com/in/ankit-m-61b35b11b/",
+            "batch_year":2023,
+            "image_url":"https://www.recursionnitd.in/media/images/Ankit_Maskara_Lo68HRh.png"
+        },
+        {
+            "id":26,
+            "name":"Anuj Patel",
+            "branch":"Chemical Engineering",
+            "url_LinkedIn":"https://www.linkedin.com/in/anuj-patel-b87399195/",
+            "batch_year":2022,
+            "image_url":"https://www.recursionnitd.in/media/images/Anuj_Patel_FRV75hz.png"
+        }
+    ],
+    "year_set":[
+        2023,2022,2021,2020,2019,2018,2017,2016
+    ]
+}

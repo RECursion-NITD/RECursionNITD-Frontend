@@ -15,7 +15,7 @@ export const GetExperiences = async () => {
   return data;
 };
 
-//Not written in axios beacuse next is having the whole link. Should try to think of an approach.
+//Not written in axios because next is having the whole link. Should try to think of an approach.
 
 export const GetNextExperiences = async (next) => {
   const token = JSON.parse(localStorage.getItem("authTokens")).access;
