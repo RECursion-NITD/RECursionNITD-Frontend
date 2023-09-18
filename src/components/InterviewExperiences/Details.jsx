@@ -2,10 +2,10 @@
 import React from 'react';
 import remarkGfm from 'remark-gfm'
 import ReactMarkdown from 'react-markdown'
-import rehypeKatex from 'rehype-katex';
 import msLogo from '../../assets/images/ms-logo.png';
 import oracleLogo from '../../assets/images/oracle-logo.png';
 import profile from '../../assets/images/profile.png';
+import rehypeRaw from 'rehype-raw'
 
 const Details = ({experience}) => {
     const getDate = (created_at) => {
@@ -44,7 +44,7 @@ const Details = ({experience}) => {
         >
           {experience?.interview_Questions}
         </blockquote> */}
-          <ReactMarkdown children={experience?.interview_Questions} className='font-sub text-lg' remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeKatex]}/>
+          <ReactMarkdown children={experience?.interview_Questions} className='font-sub text-lg' remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}/>
         <div className='flex justify-end w-full mt-5'>
           <div className = "w-full font-bold text-sm text-secondaryText">
             <div className='w-full text-right'> Added By {experience?.user.username} </div>
