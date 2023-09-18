@@ -28,14 +28,14 @@ const DetailExperience = () => {
       })
       // eslint-disable-next-line
       .catch((e) => console.log("error fetching detailed exp ", e));
-  }, []);
+  }, [experienceId]);
 
   return loading ? (
     <Loader />
   ) : (
-    <div className="mt-[10vh] w-screen flex">
+    <div className="mt-[10vh] w-screen flex items-start justify-start">
       {Details({ experience })}
-      <div className="h-screen w-1/3 flex flex-col items-start">
+      <div className="h-screen w-1/3 h-screen mt-0">
         {InterviewExperiences?.results?.map((interview, key) => {
           if(interview.id != experienceId){
             return (
