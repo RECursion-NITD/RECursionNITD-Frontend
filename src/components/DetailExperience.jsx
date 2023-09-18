@@ -28,7 +28,7 @@ const DetailExperience = () => {
       })
       // eslint-disable-next-line
       .catch((e) => console.log("error fetching detailed exp ", e));
-  }, []);
+  }, [experienceId]);
 
   return loading ? (
     <Loader />
