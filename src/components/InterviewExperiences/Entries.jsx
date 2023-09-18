@@ -24,14 +24,14 @@ const Entries = ({ key, interview}) => {
 
   return (
     <Container w='100%' key={key} className='m-0 mb-2 p-0 min-w-[100%] border-[1px] rounded-xl h-fit bg-surface border-outline'>
-        <Link key={key} to={`/detail/${interview.id}`}>
+        <Link key={key} to={`/experience/detail/${interview.id}`}>
             <div className="justify-start flex font-sub p-2 text-xl">
                 <div className = 'h-[50px] w-[50px] me-2 ms-0'>
                     <img src={msLogo} alt="company logo" className="h-[50px] w-[50px] object-cover rounded-md" />
                 </div>
                 <div className = "w-full font-bold">
                     <div className = "w-full font-bold flex">
-                        <div className = "w-full font-bold text-xl text-onSurface">
+                        <div className = "w-full font-bold font-head text-xl text-onSurface">
                             <div> {interview.company} Interview Experience {getYear(interview.created_at)} | #{interview.id}  </div>
                             <div className = "text-sm text-secondaryText">
                                 SWE / <span className="text-[#EF6041]"> {interview.job_Profile} </span>
