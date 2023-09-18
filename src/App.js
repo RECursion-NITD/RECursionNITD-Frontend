@@ -34,12 +34,12 @@ function App() {
               <Route path="team" element={<Team />} />
               <Route path="events" element={<Events />} />
               <Route path="get_started" element={<GetStarted />} />
+              <Route path="experience" element={<Experiences />} />
 
               {/* private routes */}
               <Route element={<RequireAuth />}>
                 <Route path="forum" element={<AskREC />} />
                 <Route path="blog" element={<Blog />} />
-                <Route path="experience" element={<Experiences />} />
                 <Route
                   path="experience/detail/:experienceId"
                   element={<DetailExperience />}

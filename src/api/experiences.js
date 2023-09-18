@@ -3,7 +3,9 @@ import axios from "./axios";
 import { API_ROUTES } from "../utils/api_routes";
 
 export const GetExperiences = async () => {
-  const token = JSON.parse(localStorage.getItem("authTokens")).access;
+  // const token = JSON.parse(localStorage.getItem("authTokens")).access;
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk1ODUzMTIzLCJpYXQiOjE2OTM0MzM5MjMsImp0aSI6ImU2NTFmOGZmYmEyZDQ0YzM5NTI4MmEyNjJiNTRhYTc1IiwidXNlcl9pZCI6Mn0.hezhqE5qWNOYipJa6lVf_5DGAEfsQRlBTWbSmrpQFJ8";
   const response = await axios.get(API_ROUTES.EXPERIENCES, {
     headers: {
       "Content-Type": "application/json",
@@ -12,6 +14,7 @@ export const GetExperiences = async () => {
   });
   const data = await response.data;
   console.log("experiences api called");
+  console.log(data);
   return data;
 };
 
@@ -46,3 +49,19 @@ export const GetDetailExperience = async (experienceId) => {
   console.log(data);
   return data;
 };
+export const SearchExp = async (searchQuery) => {
+  const token = JSON.parse(localStorage.getItem("authTokens")).access;
+  const response = await axios.get(
+    `${API_ROUTES.EXPERIENCES}/?search=${searchQuery}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  const data = await response.data;
+  console.log("search experience api called");
+  console.log(data);
+  return data;
+}

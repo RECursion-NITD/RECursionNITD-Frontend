@@ -1,8 +1,10 @@
+/* eslint-disable */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { GetDetailExperience } from "../api/experiences";
+import { GetDetailExperience, GetExperiences } from "../api/experiences";
 import useLoading from "../hooks/useLoading";
 import Loader from "./Loader";
+import Entries from "./InterviewExperiences/Entries";
 // import ReactMarkdown from "react-markdown";
 // import remarkGfm from "remark-gfm";
 // import rehypeRaw from "rehype-raw";
@@ -11,6 +13,15 @@ const DetailExperience = () => {
   const { loading, setLoading } = useLoading();
   const { experienceId } = useParams();
   const [experience, setExperience] = useState();
+  const [InterviewExperiences, setInterviewExperiences] = useState();
+
+  useEffect(() => {
+    setLoading(true);
+    GetExperiences().then((results) => {
+      setInterviewExperiences(results);
+      setLoading(false);
+    });
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -26,86 +37,9 @@ const DetailExperience = () => {
   return loading ? (
     <Loader />
   ) : (
-    <div
-      style={{
-        marginTop: "5em",
-        display: "flex",
-        flexDirection: "row",
-      }}
-    >
+    <div className="mt-[10vh] w-5/6 flex">
       <div
-        style={{
-          height: "100vh",
-          marginRight: "15px",
-          width: "15vw",
-        }}
-      >
-        <ul
-          style={{
-            color: "white",
-            listStyle: "none",
-            textAlign: "center",
-          }}
-        >
-          <li
-            style={{
-              border: "solid black 2px",
-              borderRadius: "5px",
-              margin: "1px",
-            }}
-          >
-            Experience 1{" "}
-          </li>
-          <li
-            style={{
-              border: "solid black 2px",
-              borderRadius: "5px",
-              margin: "1px",
-            }}
-          >
-            Experience 2
-          </li>
-          <li
-            style={{
-              border: "solid black 2px",
-              borderRadius: "5px",
-              margin: "1px",
-            }}
-          >
-            Experience 3
-          </li>
-          <li
-            style={{
-              border: "solid black 2px",
-              borderRadius: "5px",
-              margin: "1px",
-            }}
-          >
-            Experience 4
-          </li>
-          <li
-            style={{
-              border: "solid black 2px",
-              borderRadius: "5px",
-              margin: "1px",
-            }}
-          >
-            Experience 5
-          </li>
-        </ul>
-      </div>
-      <div
-        style={{
-          height: "95vh",
-          width: "70vw",
-          backgroundColor: "#2B2E30",
-          margin: "5px",
-          borderRadius: "5px",
-          padding: "10px",
-          boxShadow: "10px 10px 25px #202324",
-          textAlign: "center",
-          backdropFilter: "blur(10px)",
-        }}
+        className="h-full min-h-screen mb-20 w-1/2 bg-surface rounded-xl p-4 border-outline"
       >
         <h2 style={{ color: "white", marginBottom: "15px" }}>
           MS Interview Experience
@@ -115,6 +49,15 @@ const DetailExperience = () => {
         >
           {experience?.interview_Questions}
         </blockquote>
+      </div>
+      <div className="h-screen w-1/3 flex  items-start">
+        {InterviewExperiences?.results?.map((interview, key) => {
+          if(interview.id != experienceId){
+            return (
+              Entries({key,interview})
+            );
+          }
+        })}
       </div>
     </div>
   );
