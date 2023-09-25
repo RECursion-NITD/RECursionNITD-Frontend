@@ -31,7 +31,7 @@ const Details = ({ experience }) => {
     return dateString;
   };
   return (
-    <div className="h-full min-h-screen mb-20 w-1/2 bg-surface rounded-xl p-4 border-outline text-white">
+    <div className="h-full min-h-screen mb-20 w-11/12  lg:w-1/2 bg-surface rounded-xl min-w-[500px] p-4 border-outline text-white">
       <div className="justify-start flex font-sub p-2 text-xl">
         <div className="h-[50px] w-[50px] me-2 ms-0">
           <img
@@ -63,7 +63,7 @@ const Details = ({ experience }) => {
         >
           {experience?.interview_Questions}
         </blockquote> */}
-          <ReactMarkdown children={experience?.interview_Questions} className='font-sub text-lg' remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}/>
+          <ReactMarkdown children={experience?.interview_Questions} className='font-sub text-sm lg:text-lg' remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}/>
         <div className='flex justify-end w-full mt-5'>
           <div className = "w-full font-bold text-sm text-secondaryText">
             <div className='w-full text-right'> Added By {experience?.user.username} </div>

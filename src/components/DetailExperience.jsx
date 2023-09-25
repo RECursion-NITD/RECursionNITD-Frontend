@@ -33,9 +33,9 @@ const DetailExperience = () => {
   return loading ? (
     <Loader />
   ) : (
-    <div className="mt-[10vh] w-screen flex items-start justify-start">
+    <div className="mt-[10vh] w-screen flex items-start justify-start flex-col flex-row lg:flex-row">
       {Details({ experience })}
-      <div className="h-screen w-1/3 h-screen mt-0">
+      <div className="h-screen w-full lg:w-1/3 min-w-[500px] h-screen mt-0">
         {InterviewExperiences?.results?.map((interview, key) => {
           if(interview.id != experienceId){
             return (
