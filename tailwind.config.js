@@ -13,6 +13,7 @@ module.exports = {
         primary: "#0062CC",
         onSurface: "#51514E",
         secondaryText: "#7D776D",
+        onPrimary: "#002f68",
       },
     },
     screens: {

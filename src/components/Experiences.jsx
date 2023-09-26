@@ -53,7 +53,7 @@ const Experiences = () => {
           <p className="text-onSurface font-sub italic"> Nothing ever becomes real'til it is experienced - John Keats </p>
         </div>
         <div>
-          {SearchExperiences({setInterviewExperiences})}
+          <SearchExperiences setInterviewExperiences={setInterviewExperiences}/>
         </div>
         <Container minW='container.sm' p={0} pt='4px'  borderBottom = '0px' maxW='container.xm' w='45vw' minH='container.sm' h='50vh'>
         {InterviewExperiences?.results?.map((interview, key) => {

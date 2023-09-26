@@ -23,7 +23,7 @@ const Entries = ({ key, interview}) => {
   };
 
   return (
-    <Container w='100%' key={key} className='m-0 mb-2 p-0 min-w-[100%] border-[1px] rounded-xl h-fit bg-surface border-outline'>
+    <Container w='95%' key={key} className='m-0 mb-2 p-0 min-w-[95%] border-[1px] rounded-xl h-fit bg-surface border-outline'>
         <Link key={key} to={`/experience/detail/${interview.id}`}>
             <div className="justify-start flex font-sub p-2 text-xl">
                 <div className = 'h-[50px] w-[50px] me-2 ms-0'>
@@ -31,13 +31,13 @@ const Entries = ({ key, interview}) => {
                 </div>
                 <div className = "w-full font-bold">
                     <div className = "w-full font-bold flex">
-                        <div className = "w-full font-bold font-head text-xl text-onSurface">
+                        <div className = "w-full font-bold font-head text-sm lg:text-xl text-onSurface">
                             <div> {interview.company} Interview Experience {getYear(interview.created_at)} | #{interview.id}  </div>
-                            <div className = "text-sm text-secondaryText">
+                            <div className = "text-xs lg:text-sm text-secondaryText">
                                 SWE / <span className="text-[#EF6041]"> {interview.job_Profile} </span>
                             </div>
                         </div>
-                        <div className='font-head text-green-500 font-bold text-sm'>
+                        <div className='font-head text-green-500 font-bold text-xs lg:text-sm'>
                             SELECTED
                         </div>
                     </div>
@@ -48,11 +48,11 @@ const Entries = ({ key, interview}) => {
                     <img src={profile} alt="company logo" className="h-[50px] w-[50px] object-cover rounded-full" />
                 </div>
                 <div className = "w-full font-bold flex">
-                    <div className = "w-full font-bold text-sm text-secondaryText">
+                    <div className = "w-full font-bold text-xs md:text-sm text-secondaryText">
                         <div> Added By {interview.user.username} </div>
                         <div> <i className="text-sm material-icons">date_range</i> {getDate(interview.created_at)} </div>
                     </div>
-                    <div className='font-sub font-bold text-secondaryText text-sm flex justify-end w-1/6'>
+                    <div className='font-sub font-bold text-secondaryText text-xs md:text-sm flex justify-end w-2/6'>
                         {interview.no_of_Rounds} {interview.no_of_Rounds>1 ? "Rounds" : "Round"}
                     </div>
                 </div>

@@ -2,8 +2,7 @@
 import React from "react";
 import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
-import parse from "html-react-parser";
-import rehypeKatex from "rehype-katex";
+import rehypeRaw from "rehype-raw";
 import msLogo from "../../assets/images/ms-logo.png";
 import oracleLogo from "../../assets/images/oracle-logo.png";
 import profile from "../../assets/images/profile.png";
@@ -32,7 +31,7 @@ const Details = ({ experience }) => {
     return dateString;
   };
   return (
-    <div className="h-full min-h-screen mb-20 w-1/2 bg-surface rounded-xl p-4 border-outline text-white">
+    <div className="h-full min-h-screen mb-20 w-11/12  lg:w-1/2 bg-surface rounded-xl min-w-[500px] p-4 border-outline text-white">
       <div className="justify-start flex font-sub p-2 text-xl">
         <div className="h-[50px] w-[50px] me-2 ms-0">
           <img
@@ -64,33 +63,13 @@ const Details = ({ experience }) => {
         >
           {experience?.interview_Questions}
         </blockquote> */}
-      {console.log(experience?.interview_Questions)}
-      {experience && (
-        <div
-          dangerouslySetInnerHTML={{__html: experience?.interview_Questions.toString()}}
-        />
-      )}
-      {/* {experience && (
-        <ReactMarkdown
-          children={experience?.interview_Questions}
-          className="font-sub text-lg text-white"
-          remarkPlugins={[remarkGfm]}
-          rehypePlugins={[rehypeKatex]}
-        />
-      )} */}
-      <div className="flex justify-end w-full mt-5">
-        <div className="w-full font-bold text-sm text-secondaryText">
-          <div className="w-full text-right">
-            {" "}
-            Added By {experience?.user.username}{" "}
-          </div>
-          <div className="w-full text-right">
-            {" "}
-            <i className="text-sm material-icons">date_range</i>{" "}
-            {getDate(experience?.created_at)}{" "}
+          <ReactMarkdown children={experience?.interview_Questions} className='font-sub text-sm lg:text-lg' remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}/>
+        <div className='flex justify-end w-full mt-5'>
+          <div className = "w-full font-bold text-sm text-secondaryText">
+            <div className='w-full text-right'> Added By {experience?.user.username} </div>
+            <div className='w-full text-right'> <i className="text-sm material-icons">date_range</i> {getDate(experience?.created_at)} </div>
           </div>
         </div>
-      </div>
     </div>
   );
 };
