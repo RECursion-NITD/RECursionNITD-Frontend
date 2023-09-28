@@ -4,7 +4,7 @@ import ExperimentalHome from "./components/ExperimentalHome";
 import Login from "./components/Login";
 import Layout from "./components/Layout";
 import Team from "./components/Team";
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import RequireAuth from "./components/RequireAuth";
 import Register from "./components/Register";
@@ -24,36 +24,36 @@ function App() {
     <>
       <LoadingProvider>
         <AuthProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Layout />}>
-                {/* public routes*/}
-                <Route path="home" element={<Home />} />
-                <Route path="" element={<ExperimentalHome />} />
-                <Route path="login" element={<Login />} />
-                <Route path="register" element={<Register />} />
-                <Route path="team" element={<Team />} />
-                <Route path="events" element={<Events />} />
-                <Route path="get_started" element={<GetStarted />} />
+          {/* <BrowserRouter> */}
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              {/* public routes*/}
+              <Route path="home" element={<Home />} />
+              <Route path="" element={<ExperimentalHome />} />
+              <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
+              <Route path="team" element={<Team />} />
+              <Route path="events" element={<Events />} />
+              <Route path="get_started" element={<GetStarted />} />
 
-                {/* private routes */}
-                {/* <Route element={<RequireAuth />}>
-                  <Route path="forum" element={<AskREC />} />
-                  <Route path="blog" element={<Blog />} />
-                  <Route path="experience" element={<Experiences />} />
-                  <Route
-                    path="experience/detail/:experienceId"
-                    element={<DetailExperience />}
-                  />
-                </Route> */}
-                {/* <Route
-                  path="events/detail/:eventId"
-                  element={<DetailEvent />}
-                ></Route> */}
+              {/* private routes */}
+              <Route element={<RequireAuth />}>
+                <Route path="forum" element={<AskREC />} />
+                <Route path="blog" element={<Blog />} />
+                <Route path="experience" element={<Experiences />} />
+                <Route
+                  path="experience/detail/:experienceId"
+                  element={<DetailExperience />}
+                />
               </Route>
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
+              <Route
+                path="events/detail/:eventId"
+                element={<DetailEvent />}
+              ></Route>
+            </Route>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          {/* </BrowserRouter> */}
         </AuthProvider>
       </LoadingProvider>
     </>

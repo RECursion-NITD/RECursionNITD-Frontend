@@ -1,4 +1,4 @@
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import React, { useState, useEffect } from "react";
 import useLoading from "../hooks/useLoading";
@@ -9,20 +9,20 @@ import {
   Input,
   Button,
   useColorMode,
-  useColorModeValue
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { login } from "../api/login";
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+// import { useContext } from "react";
+// import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
   // const {user,
   //   token,
   //   loginUser,
   //   logoutUser}=useContext(AuthContext);
-  const {toggleColorMode} = useColorMode();
-  const formBackground = useColorModeValue('gray.300', 'gray.700');
-  const navigate=useNavigate();
+  const { toggleColorMode } = useColorMode();
+  const formBackground = useColorModeValue("gray.300", "gray.700");
+  // const navigate=useNavigate();
   const location = useLocation();
   const from = location.state?.from.pathname || "/";
   const { token, loginUser } = useAuth();
@@ -42,15 +42,15 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const handleFormSubmit = async(e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     const formData = { username: username, password: password };
 
     // if(token) navigate("/home");
-    
+
     await loginUser(formData);
-    console.log(formData);
+    // console.log(formData);
   };
 
   return loading ? (
@@ -63,12 +63,44 @@ const Login = () => {
       <div style={{ display: "flex", flexDirection: "column", margin: "4em" }}>
         <h1>Login Page</h1>
         <form onSubmit={(e) => handleFormSubmit(e)}>
-          <Flex height={'100vh'} alignItems={'center'} justifyContent={'center'}>
-            <Flex direction={'column'} background={formBackground} p={12} rounded={6}> 
+          <Flex
+            height={"100vh"}
+            alignItems={"center"}
+            justifyContent={"center"}
+          >
+            <Flex
+              direction={"column"}
+              background={formBackground}
+              p={12}
+              rounded={6}
+            >
               <Heading mb={50}> Log in</Heading>
-              <Input placeholder="Email ID" variant={"filled"} mb={3} type={'text'} onChange={(e) => handleUsernameChange(e)} value={username}/>
-              <Input placeholder="Password" variant={"filled"} mb={3} type={'password'} onChange={(e) => handlePasswordChange(e)} value={password}/>
-              <Button onClick={()=>{login({username,password});}} colorScheme={'teal'} mb={3}>Log in</Button>
+              <Input
+                placeholder="Email ID"
+                variant={"filled"}
+                mb={3}
+                type={"text"}
+                onChange={(e) => handleUsernameChange(e)}
+                value={username}
+              />
+              <Input
+                placeholder="Password"
+                variant={"filled"}
+                mb={3}
+                type={"password"}
+                onChange={(e) => handlePasswordChange(e)}
+                value={password}
+              />
+              <Button
+                onClick={() => {
+                  login({ username, password });
+                }}
+                colorScheme={"teal"}
+                mb={3}
+                type="submit"
+              >
+                Log in
+              </Button>
               <Button onClick={toggleColorMode}>Toggle Color Mode</Button>
             </Flex>
           </Flex>
