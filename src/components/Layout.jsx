@@ -1,134 +1,186 @@
+import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import styled from "styled-components";
-import "../App.css";
-
-const Navbar = styled.div`
-  height: 5vh;
-  background-color: #212121;
-  display: flex;
-  align-items: center; /* Vertically center items */
-  justify-content: space-between;
-  padding: 2em;
-  position: fixed;
-  width: 100%;
-  z-index: 5;
-`;
-
-const NavbarLink = styled(Link)`
-  color: #ccc; /* Muted text color */
-  text-decoration: none;
-  margin: 5px;
-  font-size: 18px; /* Adjust font size as needed */
-  transition: color 0.3s; /* Smooth color transition on hover */
-
-  &:hover {
-    color: white; /* White text color on hover */
-  }
-`;
-
-const NavbarImage = styled.img`
-  height: 5vh;
-  margin-right: 10px; /* Add some space between image and text */
-`;
-
-const NavbarText = styled.p`
-  color: #ccc; /* Muted text color */
-  font-size: x-large;
-  margin: 0; /* Remove default margin */
-  font-weight: bold;
-`;
-
-const NavbarList = styled.ul`
-  list-style: none;
-  display: flex;
-  margin: 0;
-  padding: 0;
-`;
-
-const NavbarListItem = styled.li`
-  margin-right: 10px; /* Add space between list items */
-`;
+import {
+  Box,
+  Flex,
+  Text,
+  Button,
+  IconButton,
+  Collapse,
+  VStack,
+} from "@chakra-ui/react";
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
 const Layout = () => {
-  const { user, logoutUser } = useAuth(); // Destructure both user and logoutUser
+  const { user, logoutUser } = useAuth();
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <>
-      <Navbar>
-        <NavbarLink
-          to="/"
-          style={{
-            textDecoration: "none",
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <NavbarImage
-            src="https://recursionnitd.in/static/image/logoInverted.png"
-            alt="Logo"
-          />
-          <NavbarText>
-            <strong>REC</strong>ursion
-          </NavbarText>
-        </NavbarLink>
+      <Flex
+        h="8vh"
+        bg="#212121"
+        alignItems="space-around"
+        justifyContent="space-between"
+        px={{ base: "1em", md: "2em" }}
+        position="fixed"
+        width="100%"
+        zIndex="5"
+      >
+        {/* Left Side: Logo and Text */}
+        <Flex display="flex" listStyle="none" margin="0" padding="0">
+          <Link
+            to="/"
+            style={{
+              textDecoration: "none",
+              display: "flex",
+            }}
+          >
+            <img
+              src="https://recursionnitd.in/static/image/logoInverted.png"
+              alt="Logo"
+              style={{
+                marginRight: "10px",
+                maxHeight: "5vh",
+              }}
+            />
+            <Text fontSize="x-large" fontWeight="bold" color="#ccc">
+              <strong>REC</strong>ursion
+            </Text>
+          </Link>
+        </Flex>
 
-        <NavbarList className="navbar-links">
-          <NavbarListItem>
-            <NavbarLink to="/experience">Interview Experiences</NavbarLink>
-          </NavbarListItem>
-          <NavbarListItem>
-            <NavbarLink to="/events">Events</NavbarLink>
-          </NavbarListItem>
-          <NavbarListItem>
-            <NavbarLink to="/get_started">Getting Started</NavbarLink>
-          </NavbarListItem>
-          <NavbarListItem>
-            <NavbarLink to="/team">Team</NavbarLink>
-          </NavbarListItem>
-          {!user && (
-            <NavbarListItem>
-              <NavbarLink to="/login">
-                <button
+        {/* Desktop Menu (visible on desktop) */}
+        <Flex
+          className="navbar-links"
+          display={{ base: "none", md: "flex" }}
+          listStyle="none"
+          margin="0"
+          padding="0"
+        >
+          <MenuItem to="/experience">Interview Experiences</MenuItem>
+          <MenuItem to="/events">Events</MenuItem>
+          <MenuItem to="/get_started">Getting Started</MenuItem>
+          <MenuItem to="/team">Team</MenuItem>
+          {!user ? (
+            <MenuItem to="/login">
+              <Button
+                onClick={logoutUser}
+                variant="solid"
+                bg="lightGreen"
+                color="black"
+                fontWeight="bold"
+                borderRadius="8px"
+                margin="5px"
+                padding="5px"
+              >
+                Login
+              </Button>
+            </MenuItem>
+          ) : (
+            <Button
+              onClick={logoutUser}
+              variant="solid"
+              bg="#ff6c2f"
+              color="white"
+              fontWeight="bold"
+              borderRadius="8px"
+              margin="5px"
+              padding="5px"
+            >
+              Logout
+            </Button>
+          )}
+        </Flex>
+
+        {/* Hamburger Menu Icon (visible on mobile) */}
+        <IconButton
+          display={{ base: "block", md: "none" }}
+          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+          aria-label="Menu"
+          variant="ghost"
+          onClick={toggleMenu}
+        />
+      </Flex>
+
+      {/* Collapsible Menu (visible on mobile) */}
+      <Collapse in={isOpen}>
+        <Box
+          bg="#212121"
+          top="8vh"
+          bottom="0"
+          left="0"
+          right="0"
+          textAlign="center"
+          position="fixed"
+          zIndex="10"
+        >
+          <VStack spacing="2" mt="5vh">
+            <MenuItem to="/experience">Interview Experiences</MenuItem>
+            <MenuItem to="/events">Events</MenuItem>
+            <MenuItem to="/get_started">Getting Started</MenuItem>
+            <MenuItem to="/team">Team</MenuItem>
+            {!user ? (
+              <MenuItem to="/login">
+                <Button
                   onClick={logoutUser}
-                  style={{
-                    background: "lightGreen",
-                    color: "black",
-                    fontWeight: "bold",
-                    borderRadius: "8px",
-                    margin: "5px",
-                    padding: "5px",
-                  }}
+                  variant="solid"
+                  bg="lightGreen"
+                  color="black"
+                  fontWeight="bold"
+                  borderRadius="8px"
+                  margin="5px"
+                  padding="5px"
                 >
                   Login
-                </button>
-              </NavbarLink>
-            </NavbarListItem>
-          )}
-          {user && (
-            <NavbarListItem>
-              <button
+                </Button>
+              </MenuItem>
+            ) : (
+              <Button
                 onClick={logoutUser}
-                style={{
-                  background: "#ff6c2f",
-                  color: "white",
-                  fontWeight: "bold",
-                  borderRadius: "8px",
-                  margin: "5px",
-                  padding: "5px",
-                }}
+                variant="solid"
+                bg="#ff6c2f"
+                color="white"
+                fontWeight="bold"
+                borderRadius="8px"
+                margin="5px"
+                padding="5px"
               >
                 Logout
-              </button>
-            </NavbarListItem>
-          )}
-        </NavbarList>
-      </Navbar>
+              </Button>
+            )}
+          </VStack>
+        </Box>
+      </Collapse>
+
       <div className="App">
         <Outlet />
       </div>
     </>
   );
 };
+
+const MenuItem = ({ to, children }) => (
+  <Text>
+    <Link
+      to={to}
+      style={{
+        textDecoration: "none",
+        color: "#ccc",
+        fontSize: "18px",
+        transition: "color 0.3s",
+        marginRight: "10px",
+        marginBottom: "10px",
+      }}
+    >
+      {children}
+    </Link>
+  </Text>
+);
 
 export default Layout;
