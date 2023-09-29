@@ -1,138 +1,129 @@
 import { Outlet, Link } from "react-router-dom";
-import "../App.css";
 import useAuth from "../hooks/useAuth";
+import styled from "styled-components";
+import "../App.css";
+
+const Navbar = styled.div`
+  height: 5vh;
+  background-color: #212121;
+  display: flex;
+  align-items: center; /* Vertically center items */
+  justify-content: space-between;
+  padding: 2em;
+  position: fixed;
+  width: 100%;
+  z-index: 5;
+`;
+
+const NavbarLink = styled(Link)`
+  color: #ccc; /* Muted text color */
+  text-decoration: none;
+  margin: 5px;
+  font-size: 18px; /* Adjust font size as needed */
+  transition: color 0.3s; /* Smooth color transition on hover */
+
+  &:hover {
+    color: white; /* White text color on hover */
+  }
+`;
+
+const NavbarImage = styled.img`
+  height: 5vh;
+  margin-right: 10px; /* Add some space between image and text */
+`;
+
+const NavbarText = styled.p`
+  color: #ccc; /* Muted text color */
+  font-size: x-large;
+  margin: 0; /* Remove default margin */
+  font-weight: bold;
+`;
+
+const NavbarList = styled.ul`
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+`;
+
+const NavbarListItem = styled.li`
+  margin-right: 10px; /* Add space between list items */
+`;
 
 const Layout = () => {
-  const { user } = useAuth();
-  const { logoutUser } = useAuth();
+  const { user, logoutUser } = useAuth(); // Destructure both user and logoutUser
+
   return (
     <>
-      <div
-        style={{
-          height: "5vh",
-          backgroundColor: "black",
-          display: "flex",
-          justifyContent: "space-between",
-          padding: "2em",
-          position: "fixed",
-          width: "100%",
-          zIndex: "5",
-        }}
-      >
-        <Link
+      <Navbar>
+        <NavbarLink
           to="/"
-          style={{ color: "white", textDecoration: "none", margin: "5px" }}
-        >
-          <p style={{ color: "white", fontSize: "x-large" }}>
-            <strong>REC</strong>ursion 2022
-          </p>
-        </Link>
-
-        <ul
           style={{
-            listStyle: "none",
+            textDecoration: "none",
             display: "flex",
-            flexDirection: "row",
-            width: "50%",
-            alignItems: "flex-end",
-            fontColor: "white",
-            margin: "5px",
+            alignItems: "center",
           }}
         >
-          <li>
-            <Link
-              to="/forum"
-              style={{
-                color: "white",
-                textDecoration: "none",
-                margin: "5px",
-              }}
-            >
-              AskREC
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/blog"
-              style={{
-                color: "white",
-                textDecoration: "none",
-                margin: "5px",
-              }}
-            >
-              Blogs
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/experience"
-              style={{
-                color: "white",
-                textDecoration: "none",
-                margin: "5px",
-              }}
-            >
-              Interview Experiences
-            </Link>
-          </li>
+          <NavbarImage
+            src="https://recursionnitd.in/static/image/logoInverted.png"
+            alt="Logo"
+          />
+          <NavbarText>
+            <strong>REC</strong>ursion
+          </NavbarText>
+        </NavbarLink>
 
-          <li>
-            <Link
-              to="/events"
-              style={{
-                color: "white",
-                textDecoration: "none",
-                margin: "5px",
-              }}
-            >
-              Events
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/get_started"
-              style={{
-                color: "white",
-                textDecoration: "none",
-                margin: "5px",
-              }}
-            >
-              Getting Started
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/team"
-              style={{
-                color: "white",
-                textDecoration: "none",
-                margin: "5px",
-              }}
-            >
-              Team
-            </Link>
-          </li>
+        <NavbarList className="navbar-links">
+          <NavbarListItem>
+            <NavbarLink to="/experience">Interview Experiences</NavbarLink>
+          </NavbarListItem>
+          <NavbarListItem>
+            <NavbarLink to="/events">Events</NavbarLink>
+          </NavbarListItem>
+          <NavbarListItem>
+            <NavbarLink to="/get_started">Getting Started</NavbarLink>
+          </NavbarListItem>
+          <NavbarListItem>
+            <NavbarLink to="/team">Team</NavbarLink>
+          </NavbarListItem>
           {!user && (
-            <li>
-              <Link
-                to="/login"
-                style={{
-                  color: "white",
-                  textDecoration: "none",
-                  margin: "5px",
-                }}
-              >
-                Login
-              </Link>
-            </li>
+            <NavbarListItem>
+              <NavbarLink to="/login">
+                <button
+                  onClick={logoutUser}
+                  style={{
+                    background: "lightGreen",
+                    color: "black",
+                    fontWeight: "bold",
+                    borderRadius: "8px",
+                    margin: "5px",
+                    padding: "5px",
+                  }}
+                >
+                  Login
+                </button>
+              </NavbarLink>
+            </NavbarListItem>
           )}
           {user && (
-            <button onClick={logoutUser}>
-              <span style={{ color: "red", margin: "5px" }}>Logout</span>
-            </button>
+            <NavbarListItem>
+              <button
+                onClick={logoutUser}
+                style={{
+                  background: "#ff6c2f",
+                  color: "white",
+                  fontWeight: "bold",
+                  borderRadius: "8px",
+                  margin: "5px",
+                  padding: "5px",
+                }}
+              >
+                Logout
+              </button>
+            </NavbarListItem>
           )}
-        </ul>
-      </div>
+        </NavbarList>
+      </Navbar>
       <div className="App">
         <Outlet />
       </div>
