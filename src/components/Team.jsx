@@ -61,72 +61,6 @@ const TeamMember = ({ member }) => (
   </Box>
 );
 
-// const MemberCard = ({ member }) => (
-//   <Box as="div" p={3} textAlign="center">
-//     <Image
-//       src={member.image_url}
-//       alt={member.name}
-//       borderRadius="full"
-//       border="5px solid #343A3F"
-//       boxSize="120px"
-//       objectFit="cover"
-//       mx="auto"
-//       mb={2}
-//       mt={3}
-//       boxShadow="2px 2px 50px #0a0a0a"
-//     />
-//     <Text color="#19e5d4" fontWeight="bold">
-//       {member.name}
-//     </Text>
-//     <Text fontSize="sm" color="gray.500">
-//       {member.designation}
-//     </Text>
-//   </Box>
-// );
-
-// const AlumniCard = ({ alumni }) => (
-//   <Box mb={2}>
-//     <Box
-//       className="jumbotron shadow-sm p-2 mb-3 bg-white rounded"
-//       p={2}
-//       borderRadius="md"
-//       boxShadow="sm"
-//       bg="white"
-//     >
-//       <Box display="flex">
-//         <Box flex="0 0 25%">
-//           <Image
-//             className="alumni rounded-circle shadow-sm"
-//             src={alumni.image_url}
-//             alt={alumni.name}
-//             borderRadius="full"
-//             border="4px solid #7F7F7F"
-//             boxSize="80px"
-//             objectFit="cover"
-//           />
-//         </Box>
-//         <Box flex="0 0 75%" pl={2}>
-//           <Text color="green.500" fontSize="sm">
-//             {alumni.name}
-//           </Text>
-//           <Text fontSize="sm">B.Tech. in {alumni.branch}</Text>
-//           <Link
-//             href={alumni.url_LinkedIn}
-//             target="_blank"
-//             rel="noopener noreferrer"
-//             color="blue.500"
-//             fontSize="sm"
-//             display="flex"
-//             alignItems="center"
-//           >
-//             <FaLinkedin style={{ marginRight: "0.5rem" }} /> LinkedIn Profile
-//           </Link>
-//         </Box>
-//       </Box>
-//     </Box>
-//   </Box>
-// );
-
 const AlumniCard2 = ({ alumni }) => (
   <Card
     direction={{ base: "column", sm: "row" }}
@@ -197,32 +131,6 @@ const Team = () => {
 
   const [team, setTeam] = useState(null);
 
-  // const setBatch = () => {
-  //   console.log("Inside set batch function");
-  //   const years = [];
-  //   const currentDate = new Date();
-  //   const year = currentDate.getFullYear();
-  //   const month = currentDate.getMonth() + 1;
-
-  //   let currBatchYear;
-
-  //   if (month >= 6 && month <= 12) {
-  //     currBatchYear = year + 1;
-  //   } else {
-  //     currBatchYear = year;
-  //   }
-
-  //   years.push(currBatchYear);
-  //   years.push(currBatchYear + 1);
-
-  //   if (currBatchYear === year) {
-  //     years.push(currBatchYear + 2);
-  //   }
-  //   console.log(years);
-  //   setBatchYears(years);
-  //   console.log(batchYears);
-  // };
-
   useEffect(() => {
     setLoading(true);
     getAlumni(alumniYear)
@@ -235,7 +143,6 @@ const Team = () => {
 
   useEffect(() => {
     setLoading(true);
-    // setBatch();
     getTeam()
       .then((data) => {
         setTeam(data);
