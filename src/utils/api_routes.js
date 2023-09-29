@@ -8,4 +8,5 @@ export const API_ROUTES = {
   USERS: "/users",
   EXPERIENCES: "/experiences",
   HOME: "/",
+  GET_STARTED: "/getting_started",
 };
