@@ -8,15 +8,12 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    // "plugin:react/jsx-runtime",
-    // "plugin:react-hooks/recommended",
     "plugin:prettier/recommended"
   ],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
-    // "ecmaVersion": "latest",
     "sourceType": "module"
   },
   "settings":{
@@ -25,10 +22,6 @@
     }
   },
   "plugins": ["react"],
-  // "plugins": ["react-refresh"],
-  // "rules": {
-  //       "react-refresh/only-export-components": "warn"
-  //     }
   "rules": {
     "camelcase": "error",
     "spaced-comment": "error",

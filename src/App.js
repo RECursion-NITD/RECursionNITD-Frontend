@@ -24,7 +24,6 @@ function App() {
     <>
       <LoadingProvider>
         <AuthProvider>
-          {/* <BrowserRouter> */}
           <Routes>
             <Route path="/" element={<Layout />}>
               {/* public routes*/}
@@ -53,7 +52,6 @@ function App() {
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
-          {/* </BrowserRouter> */}
         </AuthProvider>
       </LoadingProvider>
     </>
