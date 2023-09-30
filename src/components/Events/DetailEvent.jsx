@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { GetDetailEvent } from "../api/events";
-import useLoading from "../hooks/useLoading";
-import Loader from "./Loader";
+import { GetDetailEvent } from "../../api/events";
+import useLoading from "../../hooks/useLoading";
+import Loader from "../Loader";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
