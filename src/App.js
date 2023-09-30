@@ -14,8 +14,8 @@ import DetailExperience from "./components/DetailExperience";
 import DetailEvent from "./components/DetailEvent";
 import AskREC from "./components/AskREC";
 import Events from "./components/Events";
-
-import GetStarted from "./components/GetStarted";
+import GetStarted from "./components/GetStarted/GetStarted";
+import SubtopicDetails from "./components/GetStarted/SubtopicDetails";
 import NotFound from "./components/NotFound";
 import React from "react";
 import { LoadingProvider } from "./context/LoadingContext";
@@ -35,6 +35,10 @@ function App() {
               <Route path="team" element={<Team />} />
               <Route path="events" element={<Events />} />
               <Route path="get_started" element={<GetStarted />} />
+              <Route
+                path="get_started/:subtopicId"
+                element={<SubtopicDetails />}
+              />
 
               {/* private routes */}
               <Route element={<RequireAuth />}>

@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import React, { useEffect, useState } from "react";
-import { getContents } from "../api/getStarted";
+import { getContents } from "../../api/getStarted";
 
 const GetStarted = () => {
   const [contents, setContents] = useState(null);
