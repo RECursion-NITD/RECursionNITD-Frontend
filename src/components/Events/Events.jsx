@@ -89,19 +89,23 @@ const Events = () => {
     //   )}
     // </div>
     <>
-      <FilterEvent
-        EventType={EventType}
-        setEventType={setEventType}
-        setSearchQuery={setSearchQuery}
-        FilterSearchHandler={FilterSearchHandler}
-      />
+      {!isMobile && (
+        <FilterEvent
+          EventType={EventType}
+          setEventType={setEventType}
+          setSearchQuery={setSearchQuery}
+          FilterSearchHandler={FilterSearchHandler}
+        />
+      )}
 
       <Box
         marginTop={"8vh"}
-        marginLeft={isMobile ? "35vw" : "20vw"}
-        maxWidth={isMobile ? "65vw" : "80vw"}
+        marginLeft={isMobile ? "0vw" : "20vw"}
+        width={isMobile ? "100%" : "80vw"}
         minHeight={"92vh"}
         bg="gray.800"
+        justifyContent={"center"}
+        alignItems={"center"}
       >
         <Box mt="2%">
           <Heading
@@ -125,7 +129,17 @@ const Events = () => {
           >
             We don remember the dates, we remember events!
           </Text>
+          <hr className="m-auto mt-[2em] w-[90%] d-flex align-center color-secondaryText " />
         </Box>
+
+        {isMobile && (
+          <FilterEvent
+            EventType={EventType}
+            setEventType={setEventType}
+            setSearchQuery={setSearchQuery}
+            FilterSearchHandler={FilterSearchHandler}
+          />
+        )}
 
         <Flex
           mt={12}
@@ -133,7 +147,7 @@ const Events = () => {
           flexWrap={"wrap"}
           justifyContent={"flex-start"}
           alignItems={"flex-start"}
-          minWidth={isMobile ? "60vw" : "80vw"}
+          maxWidth={isMobile ? "100%" : "80vw"}
         >
           {Events?.results?.map((event, key) => (
             <EventCard margin={"1em 5px"} key={key} event={event} />

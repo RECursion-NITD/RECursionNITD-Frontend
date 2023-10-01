@@ -19,20 +19,24 @@ const FilterEvent = ({
 
   return (
     <Flex
-      flexDirection="column" // Stack items vertically
-      width={isMobile ? "35vw" : "20vw"} // Increase width slightly on mobile
-      height="100vh"
-      position="fixed"
+      borderRadius={isMobile && "16px"}
+      padding={isMobile && "15px"}
+      flexDirection={"column"} // Stack items vertically
+      width={isMobile ? "90%" : "20vw"} // Increase width slightly on mobile
+      height={isMobile ? "fit-content" : "100vh"}
+      position={isMobile ? "relative" : "fixed"}
       top="8vh"
       bg={"gray.700"}
-      left="0"
-      alignItems={"flex-start"} // Center align items on mobile
+      left={!isMobile && "0"}
+      alignItems={isMobile ? "center" : "flex-start"}
+      color={"#BDE0FF"}
+      marginBottom={isMobile && "5em"}
     >
       {/* Filter (All, classes, contests, events) */}
       <Box
         width="100%"
         bg="gray.700"
-        padding="2em 1em"
+        padding={isMobile ? "15px" : "2em 1em"}
         marginTop={"1em"}
         marginBottom={isMobile ? "1em" : "0"} // Add margin for spacing on mobile
         borderBottom={"solid #212121 2px"}
@@ -57,11 +61,12 @@ const FilterEvent = ({
       </Box>
 
       <Box
+        borderRadius={isMobile && "16px"}
         width="100%"
         bg="gray.700"
-        height="100%"
+        height={!isMobile && "100%"}
         display="flex"
-        flexDirection="column"
+        flexDirection={isMobile ? "row" : "column"}
         alignItems="flex-start" // Align items to the left
         justifyContent="space-evenly" // Space around items
       >
@@ -72,14 +77,14 @@ const FilterEvent = ({
           p={2}
           marginLeft={"5%"}
           width={"95%"}
-          borderRadius={"16px 0px 0px 16px"}
+          borderRadius={isMobile ? "16px" : "16px 0px 0px 16px"}
           textAlign="left"
           background={EventType === "All" ? "gray.800" : "gray.700"}
           onClick={() => {
             setEventType("All");
           }}
         >
-          All Events
+          {isMobile ? "All" : "All Events"}
         </Button>
 
         <Button
@@ -89,7 +94,7 @@ const FilterEvent = ({
           p={2}
           marginLeft={"5%"}
           width={"95%"}
-          borderRadius={"16px 0px 0px 16px"}
+          borderRadius={isMobile ? "16px" : "16px 0px 0px 16px"}
           textAlign="left"
           background={EventType === "Contest" ? "gray.800" : "gray.700"}
           onClick={() => {
@@ -106,7 +111,7 @@ const FilterEvent = ({
           p={2}
           marginLeft={"5%"}
           width={"95%"}
-          borderRadius={"16px 0px 0px 16px"}
+          borderRadius={isMobile ? "16px" : "16px 0px 0px 16px"}
           textAlign="left"
           background={EventType === "Class" ? "gray.800" : "gray.700"}
           onClick={() => {
@@ -123,7 +128,7 @@ const FilterEvent = ({
           }}
           marginLeft={"5%"}
           width={"95%"}
-          borderRadius={"16px 0px 0px 16px"}
+          borderRadius={isMobile ? "16px" : "16px 0px 0px 16px"}
           textAlign="left"
           background={EventType === "Event" ? "gray.800" : "gray.700"}
           onClick={() => {
