@@ -57,18 +57,19 @@ const TeamMember = ({ member }) => (
     </Box>
 
     <Heading className="team-title">{member.name}</Heading>
-    <Box color="#a7b3b3">{member.designation}</Box>
+    <Box color="#90ee90">{member.designation}</Box>
   </Box>
 );
 
-const AlumniCard2 = ({ alumni }) => (
+const AlumniCard = ({ alumni }) => (
   <Card
     direction={{ base: "column", sm: "row" }}
     overflow="hidden"
     variant="outline"
-    bg="#100f0f"
+    bg="whiteAlpha.200"
     border="none"
-    boxShadow="2px 2px 50px #100e0e"
+    boxShadow="2px 2px 4px #BDE0FF"
+    _hover={{ transform: "scale(1.05)", transition: "ease-in 0.3s" }}
   >
     <Image
       objectFit="cover"
@@ -80,7 +81,7 @@ const AlumniCard2 = ({ alumni }) => (
 
     <Stack width="60%">
       <CardBody>
-        <Heading color="#a9f103" size="md">
+        <Heading color="#add8e6" size="md">
           {alumni.name}
         </Heading>
 
@@ -153,7 +154,7 @@ const Team = () => {
 
   return (
     <Box
-      bg="#3e3b3b"
+      bg="#1a202c"
       style={{
         padding: "auto 10vw",
         width: "100vw",
@@ -171,25 +172,32 @@ const Team = () => {
         </Center>
 
         {team &&
-          Object.keys(team).map((year, i) => (
-            <Box key={i}>
-              <Center mt="3rem">
-                <Heading className="team-heading" mt={1} mb={3} fontSize="2xl">
-                  Batch of {year}
-                </Heading>
-              </Center>
+          Object.keys(team)
+            .filter((year) => team[year]?.length > 0)
+            .map((year, i) => (
+              <Box key={i}>
+                <Center mt="3rem">
+                  <Heading
+                    className="team-heading"
+                    mt={1}
+                    mb={3}
+                    fontSize="2xl"
+                  >
+                    Batch of {year}
+                  </Heading>
+                </Center>
 
-              <SimpleGrid
-                columns={[1, 2, 3, 4, 5]}
-                justifyContent={"space-around"}
-              >
-                {team[year]?.length > 0 &&
-                  team[year].map((member, id) => (
-                    <TeamMember key={id} member={member} />
-                  ))}
-              </SimpleGrid>
-            </Box>
-          ))}
+                <SimpleGrid
+                  columns={[1, 2, 3, 4, 5]}
+                  justifyContent={"space-around"}
+                >
+                  {team[year]?.length > 0 &&
+                    team[year].map((member, id) => (
+                      <TeamMember key={id} member={member} />
+                    ))}
+                </SimpleGrid>
+              </Box>
+            ))}
       </Box>
 
       {/* ALUMNI SECTION */}
@@ -200,14 +208,14 @@ const Team = () => {
             as="h1"
             mt="5%"
             mb="2%"
-            color="rgb(207, 188, 188)"
+            color="white"
             fontSize={{ base: "xl", md: "2xl" }}
           >
             Meet our Alumni
           </Heading>
         </Center>
 
-        <Flex width="90%" borderRadius="2rem" backgroundColor="grey">
+        <Flex width="90%" borderRadius="2rem" backgroundColor="#596274">
           <Box
             w="40px"
             h="40px"
@@ -255,7 +263,7 @@ const Team = () => {
                 >
                   <Text
                     color="white"
-                    borderBottom="1px solid white"
+                    // borderBottom="1px solid white"
                     display="inline"
                     cursor="pointer"
                     fontSize="lg"
@@ -299,8 +307,8 @@ const Team = () => {
             as="h1"
             mt="1%"
             mb="2%"
-            color="rgb(207, 188, 188)"
-            fontSize={{ base: "lg", md: "xl" }}
+            color="white"
+            fontSize={{ base: "lg", md: "2xl" }}
             textAlign="center"
           >
             <small>Batch of {alumniYear}</small>
@@ -317,7 +325,7 @@ const Team = () => {
           >
             {alumni &&
               alumni?.map((alumni, id) => (
-                <AlumniCard2 key={id} alumni={alumni} />
+                <AlumniCard key={id} alumni={alumni} />
               ))}
           </Grid>
         </Grid>
