@@ -114,8 +114,8 @@ const Experiences = () => {
         minH="container.sm"
         h="50vh"
       >
-        {InterviewExperiences?.results?.map((interview, key) => {
-          return Entries({ key, interview });
+        {InterviewExperiences?.results?.map((interview, id) => {
+          return <Entries key={id} interview={interview} />;
         })}
 
         {/* For Previous 10 Experiences. */}

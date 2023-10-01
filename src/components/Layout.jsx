@@ -33,7 +33,7 @@ const Layout = () => {
         zIndex="5"
       >
         {/* Left Side: Logo and Text */}
-        <Flex display="flex" listStyle="none" margin="0" padding="0">
+        <Flex display="flex" listStyleType="none" margin="0" padding="0">
           <Link
             to="/"
             style={{
@@ -59,7 +59,7 @@ const Layout = () => {
         <Flex
           className="navbar-links"
           display={{ base: "none", md: "flex" }}
-          listStyle="none"
+          listStyleType="none"
           margin="0"
           padding="0"
         >
