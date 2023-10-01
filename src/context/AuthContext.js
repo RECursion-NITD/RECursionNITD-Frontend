@@ -2,11 +2,14 @@ import { createContext, useEffect, useState } from "react";
 import { login } from "../api/login";
 import { refresh } from "../api/refreshToken";
 import jwtDecode from "jwt-decode";
+import { useToast } from "@chakra-ui/react";
+// import useLoading from "../hooks/useLoading";
 
 const AuthContext = createContext();
 export default AuthContext;
 export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
+  const toast = useToast();
   const [user, setUser] = useState(
     localStorage.getItem("user")
       ? JSON.parse(localStorage.getItem("user"))
@@ -36,6 +39,26 @@ export const AuthProvider = ({ children }) => {
         setAuthToken(data);
       })
       .catch((err) => {
+        setLoading(false);
+        if (formData.username && formData.password) {
+          toast({
+            title: "Account not Found",
+            description: "Username or Password is incorrect.",
+            position: "top",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          });
+        } else {
+          toast({
+            title: "Login Failed",
+            description: "Please fill in all the fields",
+            position: "top",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          });
+        }
         console.log("cant login user -> err", err);
       });
   };
