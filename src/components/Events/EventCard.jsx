@@ -118,7 +118,7 @@ const EventCard = ({ event }) => {
               borderRadius: "8px",
 
               backgroundImage:
-                "linear-gradient(to right, #a6a6dc 50%, #596274 50%)",
+                "linear-gradient(to right, #BDE0FF 50%, #596274 50%)",
               backgroundSize: "200% 100%",
               transition: "background-position .5s ease-out",
               backgroundPosition: "right",
@@ -128,7 +128,7 @@ const EventCard = ({ event }) => {
               cursor: "pointer", // Change cursor on hover
               "&:hover": {
                 backgroundImage:
-                  "linear-gradient(to right, #a6a6dc 50%, #596274 50%)",
+                  "linear-gradient(to right, #BDE0FF 50%, #596274 50%)",
                 backgroundPosition: "left",
                 color: "black",
                 fontWeight: "bold",

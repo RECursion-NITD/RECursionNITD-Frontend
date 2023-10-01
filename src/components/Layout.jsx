@@ -100,6 +100,7 @@ const Layout = () => {
 
         {/* Hamburger Menu Icon (visible on mobile) */}
         <IconButton
+          color={"whitesmoke"}
           display={{ base: "block", md: "none" }}
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
           aria-label="Menu"
@@ -109,7 +110,7 @@ const Layout = () => {
       </Flex>
 
       {/* Collapsible Menu (visible on mobile) */}
-      <Collapse in={isOpen}>
+      <Collapse in={isOpen} onClick={() => setIsOpen(false)}>
         <Box
           bg="#212121"
           top="8vh"
