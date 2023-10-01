@@ -2,7 +2,7 @@
   "env": {
     "browser": true,
     "node": true,
-    "es2020": true,
+    "es2021": true,
     "jest": true
   },
   "extends": [
@@ -14,12 +14,8 @@
     "ecmaFeatures": {
       "jsx": true
     },
+    "ecmaVersion": 12,
     "sourceType": "module"
-  },
-  "settings":{
-    "react": {
-      "version": "18.2"
-    }
   },
   "plugins": ["react"],
   "rules": {

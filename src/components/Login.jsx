@@ -3,26 +3,10 @@ import useAuth from "../hooks/useAuth";
 import React, { useState, useEffect } from "react";
 import useLoading from "../hooks/useLoading";
 import Loader from "./Loader";
-import {
-  Flex,
-  Heading,
-  Input,
-  Button,
-  useColorMode,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Flex, Heading, Input, Button } from "@chakra-ui/react";
 import { login } from "../api/login";
-// import { useContext } from "react";
-// import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
-  // const {user,
-  //   token,
-  //   loginUser,
-  //   logoutUser}=useContext(AuthContext);
-  const { toggleColorMode } = useColorMode();
-  const formBackground = useColorModeValue("gray.300", "gray.700");
-  // const navigate=useNavigate();
   const location = useLocation();
   const from = location.state?.from.pathname || "/";
   const { token, loginUser } = useAuth();
@@ -31,7 +15,9 @@ const Login = () => {
   const { loading, setLoading } = useLoading();
 
   useEffect(() => {
-    if (token) setLoading(false);
+    if (token) {
+      setLoading(false);
+    }
   }, [token]);
 
   const handleUsernameChange = (e) => {
@@ -44,13 +30,9 @@ const Login = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    // setLoading(true);
     const formData = { username: username, password: password };
-
-    // if(token) navigate("/home");
-
     await loginUser(formData);
-    // console.log(formData);
   };
 
   return loading ? (
@@ -61,7 +43,6 @@ const Login = () => {
     <>
       {token && <Navigate to={from} />}
       <div style={{ display: "flex", flexDirection: "column", margin: "4em" }}>
-        <h1>Login Page</h1>
         <form onSubmit={(e) => handleFormSubmit(e)}>
           <Flex
             height={"100vh"}
@@ -70,14 +51,19 @@ const Login = () => {
           >
             <Flex
               direction={"column"}
-              background={formBackground}
+              background={"gray.700"}
               p={12}
               rounded={6}
             >
-              <Heading mb={50}> Log in</Heading>
+              <Heading mb={50} color={"white"}>
+                Log in
+              </Heading>
               <Input
-                placeholder="Email ID"
+                placeholder="Username"
                 variant={"filled"}
+                background={"whiteAlpha.50"}
+                border="1px"
+                borderColor="teal.200"
                 mb={3}
                 type={"text"}
                 onChange={(e) => handleUsernameChange(e)}
@@ -87,6 +73,9 @@ const Login = () => {
                 placeholder="Password"
                 variant={"filled"}
                 mb={3}
+                background={"whiteAlpha.50"}
+                border="1px"
+                borderColor="teal.200"
                 type={"password"}
                 onChange={(e) => handlePasswordChange(e)}
                 value={password}
@@ -95,13 +84,21 @@ const Login = () => {
                 onClick={() => {
                   login({ username, password });
                 }}
-                colorScheme={"teal"}
+                background={"teal.200"}
+                _hover={{ bg: "teal.300" }}
+                _active={{
+                  bg: "teal.400",
+                  transform: "scale(0.95)",
+                }}
+                color={"gray.900"}
                 mb={3}
                 type="submit"
+                // className="loginbtn"
+                style={{ hover: "teal.300" }}
               >
                 Log in
               </Button>
-              <Button onClick={toggleColorMode}>Toggle Color Mode</Button>
+              {/* <Button onClick={toggleColorMode}>Toggle Color Mode</Button> */}
             </Flex>
           </Flex>
           {/* <input
