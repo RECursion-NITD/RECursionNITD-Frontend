@@ -1,4 +1,4 @@
-/* eslint-disable */
+// /* eslint-disable */
 import axios from "./axios";
 import { API_ROUTES } from "../utils/api_routes";
 
@@ -18,7 +18,7 @@ export const GetExperiences = async () => {
   return data;
 };
 
-//Not written in axios because next is having the whole link. Should try to think of an approach.
+// Not written in axios because next is having the whole link. Should try to think of an approach.
 
 export const GetNextExperiences = async (next) => {
   const token = JSON.parse(localStorage.getItem("authTokens")).access;
@@ -49,19 +49,43 @@ export const GetDetailExperience = async (experienceId) => {
   console.log(data);
   return data;
 };
-export const SearchExp = async (searchQuery) => {
+export const SearchExp = async (Company, RoleType, search) => {
+  // console.log("Inside search experience", Company, RoleType, search);
   const token = JSON.parse(localStorage.getItem("authTokens")).access;
-  const response = await axios.get(
-    `${API_ROUTES.EXPERIENCES}/?search=${searchQuery}`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+
+  let URL;
+  if (search === "") {
+    if (Company === null && RoleType === null)
+      URL = `${API_ROUTES.EXPERIENCES}`;
+    else if (Company === null)
+      URL = `${API_ROUTES.EXPERIENCES}/?role_type=${RoleType}`;
+    else if (RoleType === null)
+      URL = `${API_ROUTES.EXPERIENCES}/?search=${Company}`;
+    else
+      URL = `${API_ROUTES.EXPERIENCES}/?role_type=${RoleType}&search=${Company}`;
+  } else if (Company === null && RoleType === null)
+    URL = `${API_ROUTES.EXPERIENCES}/?search=${search}`;
+  else if (Company === null) {
+    URL = `${API_ROUTES.EXPERIENCES}/?role_type=${RoleType}&search=${search}`;
+  }
+
+  // Here is the problem (can't accomodate search and company filter together)
+  else if (RoleType === null) {
+    // URL=`${API_ROUTES.EXPERIENCES}/?search=${Company}&search=${search}`;  //this wouldn't work
+    URL = `${API_ROUTES.EXPERIENCES}/?search=${search}`;
+  } else {
+    URL = `${API_ROUTES.EXPERIENCES}/?role_type=${RoleType}&search=${search}`;
+    // URL=`${API_ROUTES.EXPERIENCES}/?role_type=${RoleType}&search=${search}&company=${Company}`;  (NEED SOMETHING LIKE THIS)
+  }
+
+  const response = await axios.get(URL, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
   const data = await response.data;
   console.log("search experience api called");
   console.log(data);
   return data;
-}
+};
