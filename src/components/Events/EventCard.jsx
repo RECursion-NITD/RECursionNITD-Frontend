@@ -62,8 +62,8 @@ const EventCard = ({ event }) => {
           textAlign="center"
           width="100%"
           height="100%"
-          bg="gray.600"
-          boxShadow="5px 5px 3px #a6a6dc94"
+          bg="whiteAlpha.200"
+          boxShadow="2px 2px 4px #BDE0FF"
         >
           {event.image ? (
             <Image
@@ -84,10 +84,8 @@ const EventCard = ({ event }) => {
             />
           )}
 
-          <Heading as="h5" fontSize="20px" color="#adff2f" mb={3}>
-            <a textDecoration="none" color="#323744">
-              {event.title}
-            </a>
+          <Heading as="h5" fontSize="20px" color="lightBlue" mb={3}>
+            <a textDecoration="none">{event.title}</a>
             {perms && (
               <>
                 <br />
@@ -107,7 +105,7 @@ const EventCard = ({ event }) => {
             </span>
           </Text>
 
-          <Text color="#ebeb07">
+          <Text color="lightBlue">
             <Icon as={IoLocationSharp} />
             {event.venue}
           </Text>
