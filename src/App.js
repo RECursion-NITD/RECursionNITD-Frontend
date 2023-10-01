@@ -9,8 +9,8 @@ import { AuthProvider } from "./context/AuthContext";
 import RequireAuth from "./components/RequireAuth";
 import Register from "./components/Register";
 import Blog from "./components/Blog";
-import Experiences from "./components/Experiences";
-import DetailExperience from "./components/DetailExperience";
+import Experiences from "./components/InterviewExperiences/Experiences";
+import DetailedExperiencePage from "./components/InterviewExperiences/DetailedExperiencePage";
 import DetailEvent from "./components/Events/DetailEvent";
 import AskREC from "./components/AskREC";
 import Events from "./components/Events/Events";
@@ -47,7 +47,7 @@ function App() {
                 <Route path="experience" element={<Experiences />} />
                 <Route
                   path="experience/detail/:experienceId"
-                  element={<DetailExperience />}
+                  element={<DetailedExperiencePage />}
                 />
               </Route>
               <Route

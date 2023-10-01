@@ -1,13 +1,13 @@
 /* eslint-disable */
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { GetExperiences, GetNextExperiences } from "../api/experiences";
-import useLoading from "../hooks/useLoading";
-import Loader from "./Loader";
+import { GetExperiences, GetNextExperiences } from "../../api/experiences";
+import useLoading from "../../hooks/useLoading";
+import Loader from "../Loader";
 import { Container } from "@chakra-ui/react";
-import Entries from "./InterviewExperiences/Entries";
-import SearchExperiences from "./InterviewExperiences/SearchExperiences";
-import { SearchExp } from "../api/experiences";
+import IECard from "./IECard";
+import SearchExperiences from "./SearchExperiences";
+import { SearchExp } from "../../api/experiences";
 
 const Experiences = () => {
   const [InterviewExperiences, setInterviewExperiences] = useState();
@@ -83,12 +83,19 @@ const Experiences = () => {
       <Loader />
     </div>
   ) : (
-    <div>
-      <div>
-        <h1 className="text-onSurface font-head text-3xl mb-2">
+    <Container
+      marginTop={"8vh"}
+      padding={"1em"}
+      bg={"gray.800"}
+      minWidth={"100vw"}
+      minHeight={"100vh"}
+      maxHeight={"fit-content"}
+    >
+      <div style={{ textAlign: "center", marginTop: "4vh" }}>
+        <h1 className="text-white font-head text-3xl mb-2">
           Interview Experiences
         </h1>
-        <p className="text-onSurface font-sub italic">
+        <p className="text-whitesmoke font-sub italic">
           {" "}
           Nothing ever becomes real'til it is experienced - John Keats{" "}
         </p>
@@ -105,45 +112,66 @@ const Experiences = () => {
         />
       </div>
       <Container
-        minW="container.sm"
         p={0}
         pt="4px"
         borderBottom="0px"
-        maxW="container.xm"
-        w="45vw"
+        width={"100vh"}
+        maxWidth={"90vw"}
         minH="container.sm"
-        h="50vh"
       >
         {InterviewExperiences?.results?.map((interview, id) => {
-          return <Entries key={id} interview={interview} />;
+          return <IECard key={id} interview={interview} />;
         })}
 
-        {/* For Previous 10 Experiences. */}
-        {InterviewExperiences?.previous && (
-          <button
-            style={{ margin: "1em", padding: "15px", border: "solid 1px" }}
-            onClick={() => {
-              NextExperiences(InterviewExperiences?.previous);
-            }}
-          >
-            Prev
-          </button>
-        )}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {/* For Previous 10 Experiences. */}
+          {InterviewExperiences?.previous && (
+            <button
+              style={{
+                margin: "1em",
+                width: "5em",
+                padding: "15px",
+                boxShadow: "3px 3px #BDE0FF",
+                border: "solid 1px #BDE0FF",
+                border: "solid 1px",
+              }}
+              onClick={() => {
+                NextExperiences(InterviewExperiences?.previous);
+              }}
+            >
+              Prev
+            </button>
+          )}
 
-        {/* For Next 10 Experiences. */}
+          {/* For Next 10 Experiences. */}
 
-        {InterviewExperiences?.next && (
-          <button
-            style={{ margin: "1em", padding: "15px", border: "solid 1px" }}
-            onClick={() => {
-              NextExperiences(InterviewExperiences?.next);
-            }}
-          >
-            Next
-          </button>
-        )}
+          {InterviewExperiences?.next && (
+            <button
+              style={{
+                margin: "1em",
+                width: "5em",
+                padding: "15px",
+                boxShadow: "3px 3px #BDE0FF",
+                border: "solid 1px #BDE0FF",
+                borderRadius: "8px",
+              }}
+              onClick={() => {
+                NextExperiences(InterviewExperiences?.next);
+              }}
+            >
+              Next
+            </button>
+          )}
+        </div>
       </Container>
-    </div>
+    </Container>
   );
 };
 

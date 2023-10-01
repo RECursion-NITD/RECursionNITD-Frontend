@@ -5,7 +5,7 @@ import { Container } from "@chakra-ui/react";
 import msLogo from "../../assets/images/ms-logo.png";
 import profile from "../../assets/images/profile.png";
 import { type } from "@testing-library/user-event/dist/type";
-const Entries = ({ interview }) => {
+const IECard = ({ interview }) => {
   const getYear = (created_at) => {
     const date = new Date(created_at);
     const year = date.getFullYear();
@@ -38,7 +38,9 @@ const Entries = ({ interview }) => {
   return (
     <Container
       w="95%"
-      className="m-0 mb-2 p-0 min-w-[95%] border-[1px] rounded-xl h-fit bg-surface border-outline"
+      className="mt-2 mb-5 p-0 min-w-[95%] border-[1px] rounded-xl h-fit border-outline"
+      boxShadow={"3px 3px #BDE0FF"}
+      bg={"whiteAlpha.200"}
     >
       <Link to={`/experience/detail/${interview.id}`}>
         <div className="justify-start flex font-sub p-2 text-xl">
@@ -57,7 +59,7 @@ const Entries = ({ interview }) => {
                   {interview.company} Interview Experience{" "}
                   {getYear(interview.created_at)} | #{interview.id}{" "}
                 </div>
-                <div className="text-xs lg:text-sm text-secondaryText">
+                <div className="text-xs lg:text-sm text-onSurface">
                   SWE /{" "}
                   <span className="text-[#EF6041]">
                     {" "}
@@ -99,4 +101,4 @@ const Entries = ({ interview }) => {
   );
 };
 
-export default Entries;
+export default IECard;
