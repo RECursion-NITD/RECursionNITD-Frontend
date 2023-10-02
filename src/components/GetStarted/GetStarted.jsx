@@ -7,8 +7,10 @@ import Sidebar from "./Sidebar";
 import SubtopicDetails from "./SubtopicDetails";
 import Loader from "../Loader";
 import { ContentProvider } from "../../context/ContentContext";
+import { useParams } from "react-router-dom";
 
 const GetStarted = () => {
+  const { subtopicId } = useParams();
   const { loading } = useLoading(true);
 
   return loading ? (
@@ -16,7 +18,7 @@ const GetStarted = () => {
   ) : (
     <ContentProvider>
       <div className="flex justify-start h-auto mt-[8vh] items-start w-full bg-background">
-        <Sidebar />
+        <Sidebar subtopicId={subtopicId}/>
         <SubtopicDetails />
       </div>
     </ContentProvider>

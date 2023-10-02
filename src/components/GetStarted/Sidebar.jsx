@@ -7,7 +7,7 @@ import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import Collapsible from "./Collapsible";
 import useContent from "../../hooks/useContent";
 
-const Sidebar = () => {
+const Sidebar = ({ subtopicId }) => {
   const {
     contents,
     setContents,
@@ -17,17 +17,27 @@ const Sidebar = () => {
     setTopicSelected,
     setSubTopicSelected,
   } = useContent();
-  const { loading, setLoading } = useLoading(true);
 
   useEffect(() => {
     async function fetch() {
       const result = await getContents();
       setContents(result);
-      console.log(result);
+
+      result?.forEach((level) => {
+        let levelNumber = level.Number;
+        level.topic?.forEach((curr_topic, idx) => {
+          let topicNumber = idx;
+          curr_topic.subtopic?.forEach((subTopic) => {
+            if (subTopic.id == subtopicId) {
+              setLevelSelected(levelNumber);
+              setTopicSelected(topicNumber);
+            }
+          });
+        });
+      });
     }
-    setLoading(true);
     fetch();
-    setLoading(false);
+    setSubTopicSelected(subtopicId);
   }, []);
 
   return (
@@ -43,7 +53,7 @@ const Sidebar = () => {
               }}
               onClick={(e) => {
                 setLevelSelected(idx);
-                setSubTopicSelected(0);
+                setTopicSelected(0);
                 setSubTopicSelected(contents[idx].topic[0].subtopic[0].id);
               }}
             >
