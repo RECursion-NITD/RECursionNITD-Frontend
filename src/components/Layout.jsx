@@ -24,7 +24,7 @@ const Layout = () => {
     <>
       <Flex
         h="8vh"
-        bg="#212121"
+        bg="#171923"
         alignItems="space-around"
         justifyContent="space-between"
         px={{ base: "1em", md: "2em" }}

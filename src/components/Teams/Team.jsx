@@ -92,7 +92,7 @@ const Team = () => {
       {/* TEAM HEADER */}
       <Box p={4}>
         <Center mt="5rem">
-          <Heading className="team-heading" mt={1} mb={3}>
+          <Heading className="team-heading" mt={1} mb={3} zIndex={1}>
             Meet The Team
           </Heading>
         </Center>
@@ -102,15 +102,20 @@ const Team = () => {
             .filter((year) => team[year]?.length > 0)
             .map((year, i) => (
               <Box key={i}>
-                <Center mt="5rem">
+                <Center mt="5rem" display={"flex"} flexDir={"row"}>
+                  <hr style={{ flex: 1, color: "BDE0FF99" }} />
                   <Heading
+                    color={"#BDE0FF"}
+                    width={"max-content"}
+                    justifyContent={"center"}
                     className="team-heading"
-                    mt={1}
-                    mb={3}
+                    zIndex={1}
+                    margin={"1em 1em 1em 1em"}
                     fontSize="2xl"
                   >
                     Batch of {year}
                   </Heading>
+                  <hr style={{ flex: 1, color: "BDE0FF99" }} />
                 </Center>
 
                 <SimpleGrid
@@ -141,7 +146,7 @@ const Team = () => {
           </Heading>
         </Center>
 
-        <Flex width="90%" borderRadius="2rem" backgroundColor="#596274">
+        <Flex width="90%" borderRadius="2rem" backgroundColor="whiteAlpha.50">
           <Box
             w="40px"
             h="40px"
@@ -188,7 +193,10 @@ const Team = () => {
                   }}
                 >
                   <Text
-                    color="white"
+                    color={year === alumniYear ? "white" : "#BDE0FF99"}
+                    _hover={{
+                      color: year === alumniYear ? "#fff" : "#ffffff99",
+                    }}
                     // borderBottom="1px solid white"
                     display="inline"
                     cursor="pointer"
@@ -233,7 +241,7 @@ const Team = () => {
             as="h1"
             mt="3rem"
             mb="2%"
-            color="white"
+            color="#BDE0FF"
             fontSize={{ base: "lg", md: "2xl" }}
             textAlign="center"
           >
