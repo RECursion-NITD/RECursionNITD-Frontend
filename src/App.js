@@ -3,17 +3,17 @@ import Home from "./components/Home";
 import ExperimentalHome from "./components/ExperimentalHome";
 import Login from "./components/Login";
 import Layout from "./components/Layout";
-import Team from "./components/Team";
+import Team from "./components/Teams/Team";
 import { Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import RequireAuth from "./components/RequireAuth";
 import Register from "./components/Register";
 import Blog from "./components/Blog";
-import Experiences from "./components/Experiences";
-import DetailExperience from "./components/DetailExperience";
-import DetailEvent from "./components/DetailEvent";
+import Experiences from "./components/InterviewExperiences/Experiences";
+import DetailedExperiencePage from "./components/InterviewExperiences/DetailedExperiencePage";
+import DetailEvent from "./components/Events/DetailEvent";
 import AskREC from "./components/AskREC";
-import Events from "./components/Events";
+import Events from "./components/Events/Events";
 import GetStarted from "./components/GetStarted/GetStarted";
 import SubtopicDetails from "./components/GetStarted/SubtopicDetails";
 import NotFound from "./components/NotFound";
@@ -47,7 +47,7 @@ function App() {
                 <Route path="experience" element={<Experiences />} />
                 <Route
                   path="experience/detail/:experienceId"
-                  element={<DetailExperience />}
+                  element={<DetailedExperiencePage />}
                 />
               </Route>
               <Route

@@ -24,7 +24,7 @@ const Layout = () => {
     <>
       <Flex
         h="8vh"
-        bg="#212121"
+        bg="#171923"
         alignItems="space-around"
         justifyContent="space-between"
         px={{ base: "1em", md: "2em" }}
@@ -33,7 +33,7 @@ const Layout = () => {
         zIndex="5"
       >
         {/* Left Side: Logo and Text */}
-        <Flex display="flex" listStyle="none" margin="0" padding="0">
+        <Flex display="flex" listStyleType="none" margin="0" padding="0">
           <Link
             to="/"
             style={{
@@ -59,7 +59,7 @@ const Layout = () => {
         <Flex
           className="navbar-links"
           display={{ base: "none", md: "flex" }}
-          listStyle="none"
+          listStyleType="none"
           margin="0"
           padding="0"
         >
@@ -100,6 +100,7 @@ const Layout = () => {
 
         {/* Hamburger Menu Icon (visible on mobile) */}
         <IconButton
+          color={"whitesmoke"}
           display={{ base: "block", md: "none" }}
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
           aria-label="Menu"
@@ -109,7 +110,7 @@ const Layout = () => {
       </Flex>
 
       {/* Collapsible Menu (visible on mobile) */}
-      <Collapse in={isOpen}>
+      <Collapse in={isOpen} onClick={() => setIsOpen(false)}>
         <Box
           bg="#212121"
           top="8vh"

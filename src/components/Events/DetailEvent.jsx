@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { GetDetailEvent } from "../api/events";
-import useLoading from "../hooks/useLoading";
-import Loader from "./Loader";
+import { GetDetailEvent } from "../../api/events";
+import useLoading from "../../hooks/useLoading";
+import Loader from "../Loader";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -54,21 +54,24 @@ const DetailEvent = () => {
     <Loader />
   ) : (
     <Flex
-      justifyContent="center"
+      justifyContent={{ base: "start", md: "center" }}
       alignItems="center"
       width="100%"
-      height="800px"
+      height={{ base: "1200px", md: "800px" }}
       bg="rgb(35 39 47)"
       padding={4}
       mt="3rem"
+      flexDirection={{ base: "column", md: "row" }}
     >
       <Box
-        width="40%"
+        // width="40%"
+        width={{ base: "100%", md: "40%" }}
         maxHeight="90%"
         bg="rgb(52 58 70)"
         borderRadius="lg"
         marginRight={2}
         mt={4}
+        mb={{ base: "10px" }}
       >
         <Box
           width="100%"
@@ -163,7 +166,12 @@ const DetailEvent = () => {
         </UnorderedList>
 
         {event?.image && (
-          <Box mt={4} mb={4} height="400px" width="90%">
+          <Box
+            mt={4}
+            mb={4}
+            height={{ base: "300px", md: "400px" }}
+            width="90%"
+          >
             <Center height="100%" width="100%">
               <Image
                 src={event.image}
@@ -177,7 +185,7 @@ const DetailEvent = () => {
         )}
       </Box>
       <Box
-        width="60%"
+        width={{ base: "100%", md: "60%" }}
         maxHeight="90%"
         bg="rgb(52 58 70)"
         borderRadius="lg"

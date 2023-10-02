@@ -5,15 +5,8 @@ import useLoading from "../hooks/useLoading";
 import Loader from "./Loader";
 import { Flex, Heading, Input, Button } from "@chakra-ui/react";
 import { login } from "../api/login";
-// import { useContext } from "react";
-// import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
-  // const {user,
-  //   token,
-  //   loginUser,
-  //   logoutUser}=useContext(AuthContext);
-  // const navigate=useNavigate();
   const location = useLocation();
   const from = location.state?.from.pathname || "/";
   const { token, loginUser } = useAuth();
@@ -22,7 +15,9 @@ const Login = () => {
   const { loading, setLoading } = useLoading();
 
   useEffect(() => {
-    if (token) setLoading(false);
+    if (token) {
+      setLoading(false);
+    }
   }, [token]);
 
   const handleUsernameChange = (e) => {
@@ -35,13 +30,9 @@ const Login = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    // setLoading(true);
     const formData = { username: username, password: password };
-
-    // if(token) navigate("/home");
-
     await loginUser(formData);
-    // console.log(formData);
   };
 
   return loading ? (
@@ -51,21 +42,28 @@ const Login = () => {
   ) : (
     <>
       {token && <Navigate to={from} />}
-      <div
-        style={{ display: "flex", flexDirection: "column", marginTop: "4em" }}
-      >
+      <div style={{ display: "flex", flexDirection: "column", margin: "4em" }}>
         <form onSubmit={(e) => handleFormSubmit(e)}>
-          <Flex height={"90vh"} alignItems={"center"} justifyContent={"center"}>
+          <Flex
+            height={"100vh"}
+            alignItems={"center"}
+            justifyContent={"center"}
+          >
             <Flex
               direction={"column"}
               background={"gray.700"}
               p={12}
               rounded={6}
             >
-              <Heading mb={50}> Log in</Heading>
+              <Heading mb={50} color={"white"}>
+                Log in
+              </Heading>
               <Input
-                placeholder="Email ID"
+                placeholder="Username"
                 variant={"filled"}
+                background={"whiteAlpha.50"}
+                border="1px"
+                borderColor="teal.200"
                 mb={3}
                 type={"text"}
                 onChange={(e) => handleUsernameChange(e)}
@@ -75,6 +73,9 @@ const Login = () => {
                 placeholder="Password"
                 variant={"filled"}
                 mb={3}
+                background={"whiteAlpha.50"}
+                border="1px"
+                borderColor="teal.200"
                 type={"password"}
                 onChange={(e) => handlePasswordChange(e)}
                 value={password}
@@ -83,35 +84,21 @@ const Login = () => {
                 onClick={() => {
                   login({ username, password });
                 }}
-                colorScheme={"teal"}
-                mt={3}
+                background={"teal.200"}
+                _hover={{ bg: "teal.300" }}
+                _active={{
+                  bg: "teal.400",
+                  transform: "scale(0.95)",
+                }}
+                color={"gray.900"}
                 mb={3}
                 type="submit"
+                style={{ hover: "teal.300" }}
               >
                 Log in
               </Button>
             </Flex>
           </Flex>
-          {/* <input
-            style={{ display: "flex", flexDirection: "column", margin: "4em" }}
-            onChange={(e) => handleUsernameChange(e)}
-            placeholder="username"
-            value={username}
-          />
-
-          <input
-            style={{ display: "flex", flexDirection: "column", margin: "4em" }}
-            onChange={(e) => handlePasswordChange(e)}
-            placeholder="password"
-            value={password}
-          />
-
-          <button
-            style={{ display: "flex", flexDirection: "column", margin: "4em" }}
-            type="submit"
-          >
-            Login
-          </button> */}
         </form>
       </div>
     </>

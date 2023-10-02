@@ -4,7 +4,7 @@
 }
 
 .App {
-  background-color: #000000;
+  background-color: #1A202C;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,7 +68,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #000;
+  background-color: #171923;
   min-height: 100vh;
   min-width: 100vw;
   z-index: 1;
@@ -124,7 +124,7 @@
 /* Teams page */
 
 .team-heading{
-  color: rgb(207, 188, 188);
+  color: white;
   font-family: "Orbitron", sans-serif;
 }
 
@@ -149,13 +149,13 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	box-shadow: 0 0 0 0 #f45b38 inset;
+	box-shadow: 0 0 0 0 #6498ff98 inset;
 	opacity: 0.5;
 	transition: all 1s ease-in-out 0s;
 }
 
 .our-team:hover .pic:before {
-	box-shadow: 0 0 0 400px #f45b38 inset;
+	box-shadow: 0 0 0 400px #6498ff98 inset;
 }
 
 .pic img {
@@ -217,7 +217,7 @@
 .our-team .team-title {
 	font-size: 22px;
 	font-weight: bold;
-	color: yellow;
+	color: #add8e6;
 	text-transform: capitalize;
 	margin-top: 10px;
 }
