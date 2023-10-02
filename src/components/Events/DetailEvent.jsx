@@ -31,7 +31,7 @@ import {
 function formatDate(inputDate) {
   const date = new Date(inputDate);
   const adjustedDate = addHours(date, date.getTimezoneOffset() / 60);
-  const formattedDate = format(adjustedDate, "MMM. dd, yyyy, h a (zzz)");
+  const formattedDate = format(adjustedDate, "MMM. dd, yyyy, h a");
   return formattedDate;
 }
 
@@ -55,7 +55,7 @@ const DetailEvent = () => {
   ) : (
     <Flex
       justifyContent={{ base: "start", md: "center" }}
-      alignItems="center"
+      alignItems="start"
       width="100%"
       height={{ base: "1200px", md: "800px" }}
       bg="rgb(35 39 47)"
@@ -72,6 +72,8 @@ const DetailEvent = () => {
         marginRight={2}
         mt={4}
         mb={{ base: "10px" }}
+        mr={4}
+        boxShadow="2px 2px 4px #BDE0FF"
       >
         <Box
           width="100%"
@@ -87,78 +89,115 @@ const DetailEvent = () => {
         <UnorderedList fontSize="100%" listStyleType="none" ml={0}>
           <ListItem display="flex" justifyContent="start" alignItems="center">
             <Box as={FaCalendar} width="10%" m={0} />
-            <Box as="b" m={0} width="30%" color="#f5f3f3" fontSize="17px">
+            <Box
+              as="b"
+              m={0}
+              width={{ base: "40%", md: "30%" }}
+              color="#f5f3f3"
+              fontSize="17px"
+            >
               Event Category:{" "}
             </Box>
+
             <ReactMarkdown
               rehypePlugins={[rehypeRaw]}
               remarkPlugins={[remarkGfm]}
-              className="markdown-style"
+              className="markdown-style w-3/5"
             >
               {event?.event_type}
             </ReactMarkdown>
           </ListItem>
           <ListItem display="flex" justifyContent="start" alignItems="center">
             <Box as={FaUserTie} width="10%" m={0} />
-            <Box as="b" m={0} width="30%" color="#f5f3f3" fontSize="17px">
+            <Box
+              as="b"
+              m={0}
+              width={{ base: "40%", md: "30%" }}
+              color="#f5f3f3"
+              fontSize="17px"
+            >
               Open To:{" "}
             </Box>
             <ReactMarkdown
               rehypePlugins={[rehypeRaw]}
               remarkPlugins={[remarkGfm]}
-              className="markdown-style"
+              className="markdown-style w-3/5"
             >
               {event?.target_year}
             </ReactMarkdown>
           </ListItem>
           <ListItem display="flex" justifyContent="start" alignItems="center">
             <Box as={FaCalendarCheck} width="10%" m={0} />
-            <Box as="b" m={0} width="30%" color="#f5f3f3" fontSize="17px">
+            <Box
+              as="b"
+              m={0}
+              width={{ base: "40%", md: "30%" }}
+              color="#f5f3f3"
+              fontSize="17px"
+            >
               Start Time:{" "}
             </Box>
             <ReactMarkdown
               rehypePlugins={[rehypeRaw]}
               remarkPlugins={[remarkGfm]}
-              className="markdown-style"
+              className="markdown-style w-3/5"
             >
               {event?.start_time && formatDate(event.start_time)}
             </ReactMarkdown>
           </ListItem>
           <ListItem display="flex" justifyContent="start" alignItems="center">
             <Box as={FaCalendarMinus} width="10%" m={0} />
-            <Box as="b" m={0} width="30%" color="#f5f3f3" fontSize="17px">
+            <Box
+              as="b"
+              m={0}
+              width={{ base: "40%", md: "30%" }}
+              color="#f5f3f3"
+              fontSize="17px"
+            >
               End Time:{" "}
             </Box>
             <ReactMarkdown
               rehypePlugins={[rehypeRaw]}
               remarkPlugins={[remarkGfm]}
-              className="markdown-style"
+              className="markdown-style w-3/5"
             >
               {event?.end_time && formatDate(event.end_time)}
             </ReactMarkdown>
           </ListItem>
           <ListItem display="flex" justifyContent="start" alignItems="center">
             <Box as={FaClock} width="10%" m={0} />
-            <Box as="b" m={0} width="30%" color="#f5f3f3" fontSize="17px">
+            <Box
+              as="b"
+              m={0}
+              width={{ base: "40%", md: "30%" }}
+              color="#f5f3f3"
+              fontSize="17px"
+            >
               Duration:{" "}
             </Box>
             <ReactMarkdown
               rehypePlugins={[rehypeRaw]}
               remarkPlugins={[remarkGfm]}
-              className="markdown-style"
+              className="markdown-style w-3/5"
             >
               {event?.duration}
             </ReactMarkdown>
           </ListItem>
           <ListItem display="flex" justifyContent="start" alignItems="center">
             <Box as={FaMapMarkerAlt} width="10%" m={0} />
-            <Box as="b" m={0} width="30%" color="#f5f3f3" fontSize="17px">
+            <Box
+              as="b"
+              m={0}
+              width={{ base: "40%", md: "30%" }}
+              color="#f5f3f3"
+              fontSize="17px"
+            >
               Venue:{" "}
             </Box>
             <ReactMarkdown
               rehypePlugins={[rehypeRaw]}
               remarkPlugins={[remarkGfm]}
-              className="markdown-style"
+              className="markdown-style w-3/5"
             >
               {event?.venue}
             </ReactMarkdown>
@@ -191,6 +230,7 @@ const DetailEvent = () => {
         borderRadius="lg"
         marginRight={2}
         mt={4}
+        boxShadow="2px 2px 4px #BDE0FF"
       >
         <Box
           width="100%"
