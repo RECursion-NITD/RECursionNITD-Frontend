@@ -27,7 +27,7 @@ const GetStarted = () => {
     <Loader />
   ):(
     <ContentProvider>
-      <div className="flex justify-start h-screen mt-[8vh] items-start w-full bg-background">
+      <div className="flex justify-start h-auto mt-[8vh] items-start w-full bg-background">
         <Sidebar/>
         <SubtopicDetails/>
       </div>

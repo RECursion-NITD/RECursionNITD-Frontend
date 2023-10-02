@@ -14,6 +14,7 @@ module.exports = {
         onSurface: "#d7ECEF",
         secondaryText: "#BDE0FF99",
         onPrimary: "#002f68",
+        codeSnippet: "#16181D",
       },
     },
     screens: {
