@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Text, Center, Image } from "@chakra-ui/react";
+import { Text, Center, Image, useMediaQuery } from "@chakra-ui/react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { tomorrowNight } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import React, { useEffect, useState } from "react";
@@ -24,6 +24,7 @@ function TextWithLineBreaks({ text }) {
 const SubtopicDetails = () => {
   const { subTopicSelected } = useContent();
   const [subtopic, setSubtopic] = useState();
+  const [isMobile] = useMediaQuery("(max-width: 768px)");
   useEffect(() => {
     getSubTopicDetails(subTopicSelected).then((res) => {
       setSubtopic(res);
@@ -32,7 +33,13 @@ const SubtopicDetails = () => {
   }, [subTopicSelected]);
 
   return (
-    <div className="sub text-white w-3/4 ml-[25vw] mt-[5vh] pd-12 p-5">
+    <div
+      className={
+        isMobile
+          ? " text-white w-[100vw] mt-[8vh] p-5 "
+          : "sub text-white w-3/4 ml-[25vw] mt-[5vh] pd-12 p-5"
+      }
+    >
       <div className="text-5xl font-head font-bold">{subtopic?.sub_topic}</div>
       <div className="pt-12">
         {subtopic?.note?.map((item, idx) => (
