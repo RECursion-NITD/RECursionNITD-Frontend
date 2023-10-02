@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "#000000",
+        background: "#23272F",
         surface: "#1B1D1E",
         outline: "#363B3D",
         heading: "#5E95D2",
@@ -24,7 +24,7 @@ module.exports = {
       "2xl": "1536px",
     },
     fontFamily: {
-      head: ["Roboto Slab", "sans-serif"],
+      head: ["Roboto", "sans-serif"],
       sub: ["Merriweather", "serif"],
       alt: ["Montserrat", "sans-serif"],
     },
