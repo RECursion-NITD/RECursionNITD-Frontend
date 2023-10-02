@@ -12,9 +12,22 @@ import {
   Text,
   Grid,
   Flex,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  // MenuItemOption,
+  // MenuGroup,
+  // MenuOptionGroup,
+  // MenuDivider,
+  Button,
   // useBreakpointValue,
 } from "@chakra-ui/react";
-import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ChevronDownIcon,
+} from "@chakra-ui/icons";
 
 const Team = () => {
   const { loading, setLoading } = useLoading();
@@ -235,6 +248,19 @@ const Team = () => {
             <ArrowRightIcon color="black" />
           </Box>
         </Flex>
+
+        <Menu>
+          <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+            Actions
+          </MenuButton>
+          <MenuList>
+            <MenuItem>Download</MenuItem>
+            <MenuItem>Create a Copy</MenuItem>
+            <MenuItem>Mark as Draft</MenuItem>
+            <MenuItem>Delete</MenuItem>
+            <MenuItem>Attend a Workshop</MenuItem>
+          </MenuList>
+        </Menu>
 
         <Grid key={alumniYear} mb={2} direction="column">
           <Heading
