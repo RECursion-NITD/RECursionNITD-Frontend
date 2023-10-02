@@ -4,11 +4,12 @@
 }
 
 .App {
-  background-color: #1A202C;
+  background-color: #23272F;
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  height: fit-content;
 }
 
 .content {
