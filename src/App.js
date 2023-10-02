@@ -3,7 +3,7 @@ import Home from "./components/Home";
 import ExperimentalHome from "./components/ExperimentalHome";
 import Login from "./components/Login";
 import Layout from "./components/Layout";
-import Team from "./components/Team";
+import Team from "./components/Teams/Team";
 import { Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import RequireAuth from "./components/RequireAuth";

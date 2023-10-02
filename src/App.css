@@ -123,7 +123,7 @@
 /* Teams page */
 
 .team-heading{
-  color: rgb(207, 188, 188);
+  color: white;
   font-family: "Orbitron", sans-serif;
 }
 
@@ -216,7 +216,7 @@
 .our-team .team-title {
 	font-size: 22px;
 	font-weight: bold;
-	color: yellow;
+	color: #add8e6;
 	text-transform: capitalize;
 	margin-top: 10px;
 }
