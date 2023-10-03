@@ -105,7 +105,7 @@ const Team = () => {
                 <Center mt="5rem" display={"flex"} flexDir={"row"}>
                   <hr style={{ flex: 1, color: "BDE0FF99" }} />
                   <Heading
-                    color={"#BDE0FF"}
+                    color={"teal.100"}
                     width={"max-content"}
                     justifyContent={"center"}
                     className="team-heading"
@@ -241,7 +241,7 @@ const Team = () => {
             as="h1"
             mt="3rem"
             mb="2%"
-            color="#BDE0FF"
+            color="teal.100"
             fontSize={{ base: "lg", md: "2xl" }}
             textAlign="center"
           >

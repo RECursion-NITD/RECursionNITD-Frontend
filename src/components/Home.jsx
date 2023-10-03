@@ -1,5 +1,23 @@
+import logoInverted from "../assets/images/logoInverted.png";
 import { useEffect, useState } from "react";
-import { useToast } from "@chakra-ui/react";
+import {
+  Box,
+  Image,
+  Badge,
+  Text,
+  Stack,
+  Button,
+  Flex,
+  Spacer,
+  useToast,
+  // SimpleGrid,
+  Card,
+  HStack,
+  // Heading,
+  // CardHeader,
+  // CardBody,
+  // CardFooter,
+} from "@chakra-ui/react";
 import useAuth from "../hooks/useAuth";
 import useLoading from "../hooks/useLoading";
 import Loader from "./Loader";
@@ -56,6 +74,106 @@ function Home() {
           <p>{homeData?.years_of_experience}+years of experience</p>
           <p>{homeData?.hours_teaching} + hours of teaching</p>
         </div>
+      </div>
+      <div className="card">
+        <HStack spacing="24px" mt={10}>
+          <Card
+            w="280px"
+            height="420px"
+            rounded="20px"
+            overflow="hidden"
+            bg="gray.700"
+            mt={10}
+          >
+            <Image src={logoInverted} alt="Card Image" boxSize="210px"></Image>
+            <Box p={5}>
+              <Stack align="center">
+                <Badge variant="solid" color="teal.100" rounded="full" px={2}>
+                  RECursion
+                </Badge>
+              </Stack>
+              <Stack align="center">
+                <Text as="h2" fontWeight="normal" my={2}>
+                  Mission
+                </Text>
+                <Text fontWeight="light">
+                  Working towards the improvement of campus&apos;s coding
+                  culture by organizing regular coding classes and contests.
+                </Text>
+              </Stack>
+              <Flex>
+                <Spacer />
+                <Button variant="solid" color="teal.200" size="sm">
+                  Learn More
+                </Button>
+              </Flex>
+            </Box>
+          </Card>
+          <Card
+            w="280px"
+            height="420px"
+            rounded="20px"
+            overflow="hidden"
+            bg="gray.700"
+            mt={10}
+          >
+            <Image src={logoInverted} alt="Card Image" boxSize="210px"></Image>
+            <Box p={5}>
+              <Stack align="center">
+                <Badge variant="solid" color="teal.100" rounded="full" px={2}>
+                  RECursion
+                </Badge>
+              </Stack>
+              <Stack align="center">
+                <Text as="h2" fontWeight="normal" my={2}>
+                  Value
+                </Text>
+                <Text fontWeight="light">
+                  We believe that helping each other is the only way. We take
+                  care and always look to get the best out of everyone.
+                </Text>
+              </Stack>
+              <Flex>
+                <Spacer />
+                <Button variant="solid" color="teal.200" size="sm">
+                  Learn More
+                </Button>
+              </Flex>
+            </Box>
+          </Card>
+          <Card
+            w="280px"
+            height="420px"
+            rounded="20px"
+            overflow="hidden"
+            bg="gray.700"
+            mt={10}
+          >
+            <Image src={logoInverted} alt="Card Image" boxSize="210px"></Image>
+            <Box p={5}>
+              <Stack align="center">
+                <Badge variant="solid" color="teal.100" rounded="full" px={2}>
+                  RECursion
+                </Badge>
+              </Stack>
+              <Stack align="center">
+                <Text as="h2" fontWeight="normal" my={2}>
+                  Vision
+                </Text>
+                <Text fontWeight="light">
+                  To grow as a strong coding community and uphold the integrity
+                  of NIT Durgapur as a technical institution.
+                </Text>
+              </Stack>
+              <Flex>
+                <Spacer />
+                <Button variant="solid" color="teal.200" size="sm">
+                  Learn More
+                </Button>
+              </Flex>
+            </Box>
+          </Card>
+        </HStack>
       </div>
       <div className="about"></div>
       <div className="content2">
