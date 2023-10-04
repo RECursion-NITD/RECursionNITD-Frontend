@@ -9,7 +9,7 @@ import { login } from "../api/login";
 const Login = () => {
   const location = useLocation();
   const from = location.state?.from.pathname || "/";
-  const { token, loginUser } = useAuth();
+  const { token, loginUser, setStatus, status } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { loading, setLoading } = useLoading();
@@ -17,6 +17,7 @@ const Login = () => {
   useEffect(() => {
     if (token) {
       setLoading(false);
+      setStatus("typing");
     }
   }, [token]);
 
@@ -30,8 +31,11 @@ const Login = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    // setLoading(true);
-    const formData = { username: username, password: password };
+    setStatus("submitting");
+    const formData = {
+      username: username,
+      password: password,
+    };
     await loginUser(formData);
   };
 
@@ -68,6 +72,7 @@ const Login = () => {
                 type={"text"}
                 onChange={(e) => handleUsernameChange(e)}
                 value={username}
+                disabled={status === "submitting"}
               />
               <Input
                 placeholder="Password"
@@ -79,6 +84,7 @@ const Login = () => {
                 type={"password"}
                 onChange={(e) => handlePasswordChange(e)}
                 value={password}
+                disabled={status === "submitting"}
               />
               <Button
                 onClick={() => {
@@ -94,6 +100,7 @@ const Login = () => {
                 mb={3}
                 type="submit"
                 style={{ hover: "teal.300" }}
+                disabled={status === "submitting"}
               >
                 Log in
               </Button>
