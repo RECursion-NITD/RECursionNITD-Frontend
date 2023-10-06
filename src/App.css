@@ -4,11 +4,12 @@
 }
 
 .App {
-  background-color: #1A202C;
+  background-color: #23272F;
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  height: fit-content;
 }
 
 .content {
@@ -240,4 +241,10 @@
   margin-left: 5px;
   font-weight: 500;
 }
+
+/* .card{
+  display:felx;
+  justify-content: center;
+  align-items: center;
+} */
 

@@ -1,4 +1,5 @@
 // define apis for events page
+/* eslint-disable */
 import axios from "./axios";
 import { API_ROUTES } from "../utils/api_routes";
 
@@ -16,8 +17,22 @@ export const getContents = async () => {
       "Content-Type": "application/json",
     },
   });
-  return [
-    ...(await responsePage1.data.results),
-    ...(await responsePage2.data.results),
+  // process the results and consolidate into a single array
+  // this is done because api response was not sorted by level.Number
+  const results = [
+    ...responsePage1.data.results,
+    ...responsePage2.data.results,
   ];
+  results.sort((level1, level2) => level1.Number - level2.Number);
+  return results;
+};
+
+export const getSubTopicDetails = async (subTopic) => {
+  console.log("getting_started/subTopicDetails api called");
+  const response = await axios.get(`${GET_STARTED_URL}/${subTopic}/`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return response.data;
 };

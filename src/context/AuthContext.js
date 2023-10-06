@@ -9,6 +9,7 @@ const AuthContext = createContext();
 export default AuthContext;
 export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
+  const [status, setStatus] = useState("typing");
   const toast = useToast();
   const [user, setUser] = useState(
     localStorage.getItem("user")
@@ -60,6 +61,7 @@ export const AuthProvider = ({ children }) => {
           });
         }
         console.log("cant login user -> err", err);
+        setStatus("typing");
       });
   };
 
@@ -91,6 +93,8 @@ export const AuthProvider = ({ children }) => {
     token: authToken,
     loginUser: loginUser,
     logoutUser: logoutUser,
+    setStatus: setStatus,
+    status: status,
   };
 
   useEffect(() => {
