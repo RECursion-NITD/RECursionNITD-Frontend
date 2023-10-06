@@ -219,7 +219,7 @@ const Team = () => {
                       fontSize="lg"
                       fontWeight="bold"
                       onClick={() => {
-                        // setSelectedAlumniYear(year);
+                        if (alumniYear === year) return;
                         setAlumni(null);
                         setAlumniYear(year);
                       }}
@@ -253,7 +253,6 @@ const Team = () => {
           </Flex>
         )}
 
-        {/* linear-gradient(to right, #BDE0FF 50%, #596274 50%) */}
         {isMobile && (
           <Center>
             <Menu>
@@ -273,9 +272,10 @@ const Team = () => {
                     width="90%"
                     borderRadius="10px"
                     backgroundColor={
-                      year === alumniYear ? "#add8e6" : "#ffffff"
+                      year === alumniYear ? "#BDE0FF" : "#ffffff"
                     }
                     onClick={() => {
+                      if (alumniYear === year) return;
                       setAlumni(null);
                       setAlumniYear(year);
                     }}

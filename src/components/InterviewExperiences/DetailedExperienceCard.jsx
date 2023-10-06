@@ -32,7 +32,7 @@ const DetailedExperienceCard = ({ experience }) => {
   };
   return (
     <div
-      className="h-full min-h-screen mb-20 w-11/12 lg:w-1/2 rounded-xl min-w-[500px] p-4 border-outline text-white"
+      className="h-full min-h-screen mb-20 w-full lg:w-1/2 rounded-xl p-4 border-outline text-white"
       style={{
         boxShadow: "3px 3px #BDE0FF",
         background: "#ffffff22",
