@@ -22,6 +22,7 @@ import {
   // MenuDivider,
   Button,
   // useBreakpointValue,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import {
   ArrowLeftIcon,
@@ -32,6 +33,7 @@ import {
 const Team = () => {
   const { loading, setLoading } = useLoading();
   const scrollContainerRef = useRef(null);
+  const [isMobile] = useMediaQuery("(max-width: 768px)");
 
   const scroll = (direction) => {
     // const scrollDistance = useBreakpointValue({
@@ -159,108 +161,133 @@ const Team = () => {
           </Heading>
         </Center>
 
-        <Flex width="90%" borderRadius="2rem" backgroundColor="whiteAlpha.50">
-          <Box
-            w="40px"
-            h="40px"
-            borderRadius="50%"
-            bg="gray.300"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            cursor="pointer"
-            marginLeft="50px"
-            marginRight="20px"
-            onClick={() => scroll("left")}
-            _hover={{
-              transform: "scale(1.2)",
-              transition: "transform 0.3s ease-in-out",
-            }}
-          >
-            <ArrowLeftIcon color="black" />
-          </Box>
+        {!isMobile && (
+          <Flex width="90%" borderRadius="2rem" backgroundColor="whiteAlpha.50">
+            <Box
+              w="40px"
+              h="40px"
+              borderRadius="50%"
+              bg="gray.300"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              cursor="pointer"
+              marginLeft="50px"
+              marginRight="20px"
+              onClick={() => scroll("left")}
+              _hover={{
+                transform: "scale(1.2)",
+                transition: "transform 0.3s ease-in-out",
+              }}
+            >
+              <ArrowLeftIcon color="black" />
+            </Box>
 
-          <Box
-            flex="60%"
-            mr={2}
-            overflowX="scroll"
-            whiteSpace="nowrap"
-            p={4}
-            ref={scrollContainerRef}
-            sx={{
-              "&::-webkit-scrollbar": {
-                display: "none",
-              },
-            }}
-          >
-            <Flex>
-              {yearSet.map((year) => (
-                <Box
-                  flex="0 0 33.33%"
-                  p={2}
-                  textAlign="center"
-                  key={year}
-                  _hover={{
-                    transform: "scale(1.2)",
-                    transition: "transform 0.3s ease-in-out",
-                  }}
-                >
-                  <Text
-                    color={year === alumniYear ? "white" : "#BDE0FF99"}
+            <Box
+              flex="60%"
+              mr={2}
+              overflowX="scroll"
+              whiteSpace="nowrap"
+              p={4}
+              ref={scrollContainerRef}
+              sx={{
+                "&::-webkit-scrollbar": {
+                  display: "none",
+                },
+              }}
+            >
+              <Flex>
+                {yearSet.map((year) => (
+                  <Box
+                    flex="0 0 33.33%"
+                    p={2}
+                    textAlign="center"
+                    key={year}
                     _hover={{
-                      color: year === alumniYear ? "#fff" : "#ffffff99",
+                      transform: "scale(1.2)",
+                      transition: "transform 0.3s ease-in-out",
                     }}
-                    // borderBottom="1px solid white"
-                    display="inline"
-                    cursor="pointer"
-                    fontSize="lg"
-                    fontWeight="bold"
+                  >
+                    <Text
+                      color={year === alumniYear ? "white" : "#BDE0FF99"}
+                      _hover={{
+                        color: year === alumniYear ? "#fff" : "#ffffff99",
+                      }}
+                      // borderBottom="1px solid white"
+                      display="inline"
+                      cursor="pointer"
+                      fontSize="lg"
+                      fontWeight="bold"
+                      onClick={() => {
+                        // setSelectedAlumniYear(year);
+                        setAlumni(null);
+                        setAlumniYear(year);
+                      }}
+                    >
+                      Batch of {year}
+                    </Text>
+                  </Box>
+                ))}
+              </Flex>
+            </Box>
+
+            <Box
+              w="40px" // Set the width and height to create a circular shape
+              h="40px"
+              borderRadius="50%"
+              bg="gray.300"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              cursor="pointer"
+              marginLeft="20px"
+              marginRight="50px"
+              onClick={() => scroll("right")}
+              _hover={{
+                transform: "scale(1.2)",
+                transition: "transform 0.3s ease-in-out",
+              }}
+            >
+              <ArrowRightIcon color="black" />
+            </Box>
+          </Flex>
+        )}
+
+        {/* linear-gradient(to right, #BDE0FF 50%, #596274 50%) */}
+        {isMobile && (
+          <Center>
+            <Menu>
+              <MenuButton
+                className="w-4/5"
+                as={Button}
+                rightIcon={<ChevronDownIcon />}
+                backgroundColor="#596274"
+                color="#ffffff"
+                pl="41px"
+              >
+                {alumniYear === null ? "Select Batch Year" : alumniYear}
+              </MenuButton>
+              <MenuList display="flex" flexDirection="column">
+                {yearSet.map((year) => (
+                  <MenuItem
+                    width="90%"
+                    borderRadius="10px"
+                    backgroundColor={
+                      year === alumniYear ? "#add8e6" : "#ffffff"
+                    }
                     onClick={() => {
-                      // setSelectedAlumniYear(year);
                       setAlumni(null);
                       setAlumniYear(year);
                     }}
+                    key={year}
                   >
-                    Batch of {year}
-                  </Text>
-                </Box>
-              ))}
-            </Flex>
-          </Box>
-
-          <Box
-            w="40px" // Set the width and height to create a circular shape
-            h="40px"
-            borderRadius="50%"
-            bg="gray.300"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            cursor="pointer"
-            marginLeft="20px"
-            marginRight="50px"
-            onClick={() => scroll("right")}
-            _hover={{
-              transform: "scale(1.2)",
-              transition: "transform 0.3s ease-in-out",
-            }}
-          >
-            <ArrowRightIcon color="black" />
-          </Box>
-        </Flex>
-
-        <Menu>
-          <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-            Actions
-          </MenuButton>
-          <MenuList>
-            <MenuItem>Download</MenuItem>
-            <MenuItem>Create a Copy</MenuItem>
-            <MenuItem>Mark as Draft</MenuItem>
-            <MenuItem>Delete</MenuItem>
-            <MenuItem>Attend a Workshop</MenuItem>
-          </MenuList>
-        </Menu>
+                    {year}
+                  </MenuItem>
+                ))}
+              </MenuList>
+            </Menu>
+          </Center>
+        )}
 
         <Grid key={alumniYear} mb={2} direction="column">
           <Heading
