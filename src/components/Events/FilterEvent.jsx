@@ -53,6 +53,12 @@ const FilterEvent = ({
             }}
           />
           <IconButton
+            backgroundColor="#BDE0FF"
+            color="#596274"
+            _hover={{
+              background: "gray.700",
+              color: "#BDE0FF",
+            }}
             aria-label="Search database"
             icon={<SearchIcon />}
             onClick={FilterSearchHandler}

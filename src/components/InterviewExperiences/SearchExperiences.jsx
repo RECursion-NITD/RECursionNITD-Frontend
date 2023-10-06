@@ -5,29 +5,6 @@ import { SearchExp } from "../../api/experiences";
 
 const SearchExperiences = ({ setInterviewExperiences,setSearch,setCompany,setInterviewType,FilterHandler,Company,InterviewType }) => {
   const { loading, setLoading } = useLoading();
-  // const [query, setQuery] = useState("Company");
-  // const [search, setSearch] = useState("");
-  // const [Company, setCompany] = useState(null);
-  // const [InterviewType, setInterviewType] = useState(null);
-
-  // const FilterHandler = () => {
-  //   console.log("Inside filterHandler", Company, InterviewType, search);
-  //   if (Company === null && InterviewType === null && search === "") return;
-  //   setLoading(true);
-  //   SearchExp(Company, InterviewType, search)
-  //     .then((response) => {
-  //       console.log(response);
-  //       setInterviewExperiences(response);
-  //       setLoading(false);
-  //       // setSearch("");
-  //     })
-  //     .catch((err) => console.error(err));
-  // };
-
-  // useEffect(() => {
-  //   console.log("Useeffect called now");
-  //   FilterHandler();
-  // }, [Company, InterviewType]);
 
   const companies = [
     "Company",
@@ -41,23 +18,23 @@ const SearchExperiences = ({ setInterviewExperiences,setSearch,setCompany,setInt
   ];
   const interviewType = ["All", "Internship", "Full Time"];
   return (
-    <div className="w-full mt-4 mb-4 flex justify-between">
-      <div className="flex w-1/2 justify-start ml-0 mr-3">
+    <div className="w-full mt-4 mb-4 flex flex-col md:flex-row justify-between">
+      <div className="flex w-full md:w-1/2 justify-start ml-0 mr-3">
         <input
-          className="h-9 w-full outline-none me-2 border-outline rounded-lg ps-3 pe-2 text-onSurface"
+          className="h-9 w-full outline-none me-2 border-outline rounded-lg ps-3 pe-2 text-black"
           onChange={(e) => {
             setSearch(e.target.value);
           }}
           placeholder="Search by title"
         />
         <button
-          className="h-9 w-1/6 bg-primary text-onPrimary rounded-lg font-alt p-1 font-semibold"
+          className="h-9 w-3/10 md:w-1/6 bg-primary text-white rounded-lg font-alt p-1 font-semibold"
           onClick={FilterHandler}
         >
           Search
         </button>
       </div>
-      <div className="flex w-1/2 justify-end">
+      <div className="flex w-full md:w-1/2 justify-between md:justify-end mt-4 md:mt-0">
         <select
           onChange={(e) => setCompany(e.target.value==="Company" ? null : e.target.value)}
           value={Company === null ? "Company" : Company}
