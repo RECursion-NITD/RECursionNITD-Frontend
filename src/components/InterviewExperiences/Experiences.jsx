@@ -141,6 +141,7 @@ const Experiences = () => {
                 boxShadow: "3px 3px #BDE0FF",
                 border: "solid 1px #BDE0FF",
                 border: "solid 1px",
+                color:"#BDE0FF"
               }}
               onClick={() => {
                 NextExperiences(InterviewExperiences?.previous);
@@ -161,6 +162,7 @@ const Experiences = () => {
                 boxShadow: "3px 3px #BDE0FF",
                 border: "solid 1px #BDE0FF",
                 borderRadius: "8px",
+                color:"#BDE0FF"
               }}
               onClick={() => {
                 NextExperiences(InterviewExperiences?.next);
