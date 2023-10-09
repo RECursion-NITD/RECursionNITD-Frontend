@@ -242,9 +242,19 @@
   font-weight: 500;
 }
 
-/* .card{
-  display:felx;
-  justify-content: center;
-  align-items: center;
-} */
+.slide-fade1,
+.slide-fade2,
+.slide-fade3 {
+  transition: opacity 0.3s ease-in-out;
+  display: none;
+}
+
+.slide-fade1.visible,
+.slide-fade2.visible,
+.slide-fade3.visible {
+  opacity: 0.8;
+  display:block;
+  transform: translateY(-20px);
+  position:absolute;
+}
 
