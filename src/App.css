@@ -4,16 +4,20 @@
 }
 
 .App {
-  background-color: #23272F;
+  background-color: #001f20;
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: fit-content;
   min-height: 100vh;
   height: fit-content;
 }
 
-.content {
-  background: linear-gradient(
+.content,.container01 {
+  /* background: 
+  linear-gradient(
       to left bottom,
       rgb(50, 47, 223) 0%,
       rgba(0, 0, 0, 0.2) 30%,
@@ -24,12 +28,14 @@
       rgb(11, 66, 218) 0%,
       rgb(37, 19, 196) 5%,
       rgba(0, 0, 0, 1) 30%
-    );
+    ); */
   background-blend-mode: exclusion;
-  padding: 15vh;
-  height: 100vh;
+  /* padding: 15vh; */
+  height: 50vh;
+  width:100 vw;
   font-size: larger;
   text-align: center;
+  justify-content: center;
   align-items: center;
 }
 
@@ -49,9 +55,12 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  /* background: linear-gradient(#cbf5cb, #ffffff); */
 }
-
+.content1{
+  padding: 5em;
+  text-align: center;
+  align-items: center;
+}
 .loader {
   position: fixed;
   top: 0;
@@ -242,19 +251,148 @@
   font-weight: 500;
 }
 
-.slide-fade1,
-.slide-fade2,
-.slide-fade3 {
+.slide-fade1 {
   transition: opacity 0.3s ease-in-out;
   display: none;
 }
 
-.slide-fade1.visible,
-.slide-fade2.visible,
-.slide-fade3.visible {
+.slide-fade1.visible{
   opacity: 0.8;
   display:block;
   transform: translateY(-20px);
   position:absolute;
 }
 
+.instagram-post {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.instagram-post .overlap-group-wrapper {
+  height: 1080px;
+  width: 700px;
+}
+
+.instagram-post .overlap-group {
+  height: 750px;
+  position: relative;
+  top: 50px;
+  width: 50px;
+}
+
+.instagram-post .line {
+  height: 718px;
+  left: 25px;
+  object-fit: cover;
+  position: absolute;
+  top: 12px;
+  width: 1px;
+  background-color: white;
+}
+
+.instagram-post .ellipse-0 {
+  background-color: #b2f5ea;
+  border-radius: 25px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 50px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 50px;
+}
+
+.instagram-post .ellipse-1 {
+  background-color: #b2f5ea;
+  border-radius: 25px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 50px;
+  left: 0;
+  position: absolute;
+  top: 100px;
+  width: 50px;
+}
+
+.instagram-post .ellipse-2 {
+  background-color: #b2f5ea;
+  border-radius: 25px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 50px;
+  left: 0;
+  position: absolute;
+  top: 200px;
+  width: 50px;
+}
+
+.instagram-post .ellipse-3 {
+  background-color: #b2f5ea;
+  border-radius: 25px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 50px;
+  left: 0;
+  position: absolute;
+  top: 300px;
+  width: 50px;
+}
+
+.instagram-post .ellipse-4 {
+  background-color: #b2f5ea;
+  border-radius: 25px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 50px;
+  left: 0;
+  position: absolute;
+  top: 400px;
+  width: 50px;
+}
+
+.instagram-post .ellipse-5 {
+  background-color: #b2f5ea;
+  border-radius: 25px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 50px;
+  left: 0;
+  position: absolute;
+  top: 500px;
+  width: 50px;
+}
+
+.instagram-post .ellipse-6 {
+  background-color: #b2f5ea;
+  border-radius: 25px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 50px;
+  left: 0;
+  position: absolute;
+  top: 600px;
+  width: 50px;
+}
+
+.instagram-post .ellipse-7 {
+  background-color: #b2f5ea;
+  border-radius: 25px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 50px;
+  left: 0;
+  position: absolute;
+  top: 700px;
+  width: 50px;
+}
+  
