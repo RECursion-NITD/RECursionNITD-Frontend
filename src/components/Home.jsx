@@ -21,9 +21,6 @@ import {
 import useAuth from "../hooks/useAuth";
 import useLoading from "../hooks/useLoading";
 import Loader from "./Loader";
-import DashedLine from "./dashedline";
-import RevDashedLine from "./dashedlinerev";
-import Carousel from "./carousel";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { gsap } from "gsap";

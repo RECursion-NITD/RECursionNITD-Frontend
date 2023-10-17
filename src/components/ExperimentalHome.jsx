@@ -1,6 +1,6 @@
 import homepageCodeSnippet from "../assets/images/homepageCodeSnippet.png";
-
-import { useEffect, useLayoutEffect, useState } from "react";
+import logoInverted from "../assets/images/logoInverted.png";
+import { useEffect, useLayoutEffect, useState, useRef } from "react";
 import {
   useToast,
   Menu,
@@ -8,6 +8,15 @@ import {
   MenuList,
   MenuItem,
   Button,
+  Stack,
+  Flex,
+  Spacer,
+  Text,
+  Card,
+  HStack,
+  Box,
+  Image,
+  Badge,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import useAuth from "../hooks/useAuth";
@@ -26,7 +35,6 @@ function Home() {
   const { loading, setLoading } = useLoading();
   const [homeData, setHomeData] = useState(null);
   const toast = useToast();
-
   useEffect(() => {
     if (!user) return;
     toast({
@@ -38,6 +46,7 @@ function Home() {
     });
   }, [user]);
 
+  const containerRef = useRef(null);
   // for gsap animation
   useLayoutEffect(() => {
     gsap.set(".container", { autoAlpha: 1 });
@@ -61,6 +70,35 @@ function Home() {
         color: "#E9F841",
         duration: 0.1,
       });
+
+    // CARD ANIMATIONS
+    const createCardAnimation = (card, start, end) => {
+      gsap.fromTo(
+        card,
+        { autoAlpha: 0, scale: 0.8 },
+        {
+          autoAlpha: 1,
+          scale: 1,
+          duration: 0.5,
+          scrollTrigger: {
+            pin: ".content2",
+            trigger: card,
+            start,
+            end,
+            scrub: true,
+            markers: true,
+          },
+        }
+      );
+    };
+
+    const missionCard = document.querySelector(".missionCard");
+    const visionCard = document.querySelector(".visionCard");
+    const valueCard = document.querySelector(".valueCard");
+
+    createCardAnimation(missionCard, "top 30%", "top 20%");
+    createCardAnimation(visionCard, "top 20%", "top 10%");
+    createCardAnimation(valueCard, "top 10%", "top 0%");
 
     () => {
       animate.kill();
@@ -171,59 +209,140 @@ function Home() {
       </div>
 
       <div className="content2">
-        <h2 style={{ color: "white", margin: "2em" }}>Who are we ?</h2>
-        <div className="WhoAreWeCard">
-          <p style={{ color: "white" }}>
-            lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-            condimentum, nisl ut ultricies lacinia, nisl nisl aliquam nisl, eu
-            tincidunt nisl nisl euismod nisl. Nullam condimenlorem ipsum dolor
-            sit amet, consectetur adipiscing elit. Nullam condimentum, nisl ut
-            ultricieslorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Nullam condimentum, nisl ut ultricies lacinia, nisl nisl aliquam
-            nisl, eu tincidunt nisl nisl lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Nullam condimentum, nisl ut ultricies lacinia, nisl
-            nisl aliquam nisl, eu tincidunt nisl nisl euismod nilorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Nullam condimentum,
-            nisl ut ultricies lacinia, nisl nisl aliquam nisl, eu tincidunt nisl
-            nisl euismod nilorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Nullam condimentum, nisl ut ultricies lacinia, nisl nisl
-            aliquam nisl, eu tincidunt nisl nisl euismod nilorem ipsum dolor sit
-            amet, consectetur adipiscing elit. Nullam condimentum, nisl ut
-            ultricies lacinia, nisl nisl aliquam nisl, eu tincidunt nisl nisl
-            euismod nilorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Nullam condimentum, nisl ut ultricies lacinia, nisl nisl aliquam
-            nisl, eu tincidunt nisl nisl euismod nilorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Nullam condimentum, nisl ut ultricies
-            lacinia, nisl nisl aliquam nisl, eu tincidunt nisl nisl euismod
-            nilorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-            condimentum, nisl ut ultricies lacinia, nisl nisl aliquam nisl, eu
-            tincidunt nisl nisl euismod nilorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Nullam condimentum, nisl ut ultricies
-            lacinia, nisl nisl aliquam nisl, eu tincidunt nisl nisl euismod
-            nilorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-            condimentum, nisl ut ultricies lacinia, nisl nisl aliquam nisl, eu
-            tincidunt nisl nisl euismod nilorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Nullam condimentum, nisl ut ultricies
-            lacinia, nisl nisl aliquam nisl, eu tincidunt nisl nisl euismod
-            nilorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-            condimentum, nisl ut ultricies lacinia, nisl nisl aliquam nisl, eu
-            tincidunt nisl nisl euismod nilorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Nullam condimentum, nisl ut ultricies
-            lacinia, nisl nisl aliquam nisl, eu tincidunt nisl nisl euismod
-            nilorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-            condimentum, nisl ut ultricies lacinia, nisl nisl aliquam nisl, eu
-            tincidunt nisl nisl euismod nilorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Nullam condimentum, nisl ut ultricies
-            lacinia, nisl nisl aliquam nisl, eu tincidunt nisl nisl euismod
-            nilorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-            condimentum, nisl ut ultricies lacinia, nisl nisl aliquam nisl, eu
-            tincidunt nisl nisl euismod nieuismod nilorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Nullam condimentum, nisl ut ultricies
-            lacinia, nisl nisl aliquam nisl, eu tincidunt nisl nisl euismod ni
-            lacinia, nisl nisl aliquam nisl, eu tincidunt nisl nisl euismod
-            nitum, nisl ut ultricies lacinia, nisl nisl aliquam nisl, eu
-            tincidunt nisl nisl euismod nisl.
-          </p>
+        <Text style={{ color: "white", margin: "2em", fontWeight: "bold" }}>
+          Who are we ?
+        </Text>
+        <div ref={containerRef} className="WhoAreWeCard">
+          <div className="card">
+            <HStack spacing="24px" mt={10}>
+              <Card
+                className="missionCard"
+                w="280px"
+                height="420px"
+                rounded="20px"
+                overflow="hidden"
+                bg="gray.700"
+                mt={10}
+              >
+                <Image
+                  src={logoInverted}
+                  alt="Card Image"
+                  boxSize="210px"
+                ></Image>
+                <Box p={5}>
+                  <Stack align="center">
+                    <Badge
+                      variant="solid"
+                      color="teal.100"
+                      rounded="full"
+                      px={2}
+                    >
+                      RECursion
+                    </Badge>
+                  </Stack>
+                  <Stack align="center">
+                    <Text as="h2" fontWeight="normal" my={2}>
+                      Mission
+                    </Text>
+                    <Text fontWeight="light">
+                      Working towards the improvement of campus&apos;s coding
+                      culture by organizing regular coding classes and contests.
+                    </Text>
+                  </Stack>
+                  <Flex>
+                    <Spacer />
+                    <Button variant="solid" color="teal.200" size="sm">
+                      Learn More
+                    </Button>
+                  </Flex>
+                </Box>
+              </Card>
+              <Card
+                className="visionCard"
+                w="280px"
+                height="420px"
+                rounded="20px"
+                overflow="hidden"
+                bg="gray.700"
+                mt={10}
+              >
+                <Image
+                  src={logoInverted}
+                  alt="Card Image"
+                  boxSize="210px"
+                ></Image>
+                <Box p={5}>
+                  <Stack align="center">
+                    <Badge
+                      variant="solid"
+                      color="teal.100"
+                      rounded="full"
+                      px={2}
+                    >
+                      RECursion
+                    </Badge>
+                  </Stack>
+                  <Stack align="center">
+                    <Text as="h2" fontWeight="normal" my={2}>
+                      Value
+                    </Text>
+                    <Text fontWeight="light">
+                      We believe that helping each other is the only way. We
+                      take care and always look to get the best out of everyone.
+                    </Text>
+                  </Stack>
+                  <Flex>
+                    <Spacer />
+                    <Button variant="solid" color="teal.200" size="sm">
+                      Learn More
+                    </Button>
+                  </Flex>
+                </Box>
+              </Card>
+              <Card
+                className="valueCard"
+                w="280px"
+                height="420px"
+                rounded="20px"
+                overflow="hidden"
+                bg="gray.700"
+                mt={10}
+              >
+                <Image
+                  src={logoInverted}
+                  alt="Card Image"
+                  boxSize="210px"
+                ></Image>
+                <Box p={5}>
+                  <Stack align="center">
+                    <Badge
+                      variant="solid"
+                      color="teal.100"
+                      rounded="full"
+                      px={2}
+                    >
+                      RECursion
+                    </Badge>
+                  </Stack>
+                  <Stack align="center">
+                    <Text as="h2" fontWeight="normal" my={2}>
+                      Vision
+                    </Text>
+                    <Text fontWeight="light">
+                      To grow as a strong coding community and uphold the
+                      integrity of NIT Durgapur as a technical institution.
+                    </Text>
+                  </Stack>
+                  <Flex>
+                    <Spacer />
+                    <Button variant="solid" color="teal.200" size="sm">
+                      Learn More
+                    </Button>
+                  </Flex>
+                </Box>
+              </Card>
+            </HStack>
+          </div>
         </div>
       </div>
 
