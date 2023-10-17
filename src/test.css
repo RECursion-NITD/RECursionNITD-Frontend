@@ -3,24 +3,32 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  text-align: center;
+  width: max-content;
   height: 100vh;
   visibility: hidden;
 }
 .container01 {
+  width:max-content;
   background: linear-gradient(
     to bottom,
     rgb(0, 0, 0) 80%,
     rgb(20, 51, 227) 95%
   );
 }
-
+.container02{
+  width:max-content;
+}
 .headContainer {
-  height: 90vh;
+  height: 100vh;
   z-index: 1;
   position: absolute;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   top: 0;
-  left: 0;
+  left: 50%;
+  width:max-content;
   background: transparent;
 }
 .head {
@@ -28,6 +36,7 @@
   margin-top: 15px;
   top: 50%;
   left: 50%;
+  width:fit-content;
   font-family: "Orbitron", sans-serif;
   font-size: clamp(1rem, 14vw, 7rem);
   color: rgb(207, 188, 188);
