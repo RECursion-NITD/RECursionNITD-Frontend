@@ -28,8 +28,12 @@ const SearchExperiences = ({ setInterviewExperiences,setSearch,setCompany,setInt
           placeholder="Search by title"
         />
         <button
-          className="h-9 w-3/10 md:w-1/6 bg-primary text-white rounded-lg font-alt p-1 font-semibold"
+          className="h-9 w-3/10 md:w-1/6 bg-teal-200 text-white rounded-lg font-alt p-1 font-semibold"
           onClick={FilterHandler}
+          style={{
+            boxShadow: "1px 1px 1px 1px #80CBC4",
+            border: "solid 1px #80CBC4",
+          }}
         >
           Search
         </button>
