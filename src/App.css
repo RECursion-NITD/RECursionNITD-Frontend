@@ -251,17 +251,11 @@
   font-weight: 500;
 }
 
-.slide-fade1 {
-  transition: opacity 0.3s ease-in-out;
-  display: none;
-}
-
-.slide-fade1.visible{
-  opacity: 0.8;
-  display:block;
-  transform: translateY(-20px);
-  position:absolute;
-}
+/* .card{
+  display:felx;
+  justify-content: center;
+  align-items: center;
+} */
 
 .instagram-post {
   display: flex;

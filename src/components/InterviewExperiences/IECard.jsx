@@ -39,7 +39,7 @@ const IECard = ({ interview }) => {
     <Container
       w="95%"
       className="mt-2 mb-5 p-0 min-w-[95%] border-[1px] rounded-xl h-fit border-outline"
-      boxShadow={"3px 3px #80CBC4"}
+      boxShadow={"3px 3px #BDE0FF"}
       bg={"whiteAlpha.200"}
     >
       <Link to={`/experience/detail/${interview.id}`}>
@@ -67,7 +67,7 @@ const IECard = ({ interview }) => {
                   </span>
                 </div>
               </div>
-              <div className="font-head text-teal-200 font-bold text-xs lg:text-sm">
+              <div className="font-head text-green-500 font-bold text-xs lg:text-sm">
                 SELECTED
               </div>
             </div>
