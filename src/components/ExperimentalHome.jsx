@@ -86,7 +86,7 @@ function Home() {
             start,
             end,
             scrub: true,
-            markers: true,
+            // markers: true,
           },
         }
       );
