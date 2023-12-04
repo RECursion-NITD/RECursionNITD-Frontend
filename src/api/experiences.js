@@ -1,4 +1,4 @@
-// /* eslint-disable */
+/* eslint-disable */
 import axios from "./axios";
 import { API_ROUTES } from "../utils/api_routes";
 
@@ -86,6 +86,31 @@ export const SearchExp = async (Company, RoleType, search) => {
   });
   const data = await response.data;
   console.log("search experience api called");
+  console.log(data);
+  return data;
+};
+
+export const createExperience = async (userData) => {
+
+  const token = JSON.parse(localStorage.getItem("authTokens")).access;
+  // const  experienceData={
+  //   company:userData.companyName,
+  //   year:Number(userData.year),
+  //   role_Type:userData.roleType,
+  //   no_of_Rounds:Number(userData.rounds),
+  //   job_Profile:userData.jobProfile,
+  //   interview_Questions:userData.details
+  // }
+  console.log(userData);
+  console.log(token);
+  const response = await axios.post(API_ROUTES.EXPERIENCES,userData , {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = await response.data;
+  console.log("create experience api called");
   console.log(data);
   return data;
 };

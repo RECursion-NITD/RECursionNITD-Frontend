@@ -8,6 +8,8 @@ import { Container } from "@chakra-ui/react";
 import IECard from "./IECard";
 import SearchExperiences from "./SearchExperiences";
 import { SearchExp } from "../../api/experiences";
+import { Button } from '@chakra-ui/react';
+import { EditIcon } from '@chakra-ui/icons'
 
 const Experiences = () => {
   const [InterviewExperiences, setInterviewExperiences] = useState();
@@ -111,6 +113,16 @@ const Experiences = () => {
           InterviewType={InterviewType}
         />
       </div>
+
+      <div>
+      <Link to="/experience/add">
+        <Button colorScheme='teal' variant='outline'>
+            <EditIcon />
+            Post Experience
+        </Button>
+      </Link>
+      </div>
+      
       <Container
         p={0}
         pt="4px"
@@ -119,6 +131,7 @@ const Experiences = () => {
         maxWidth={"90vw"}
         minH="container.sm"
       >
+
         {InterviewExperiences?.results?.map((interview, id) => {
           return <IECard key={id} interview={interview} />;
         })}

@@ -19,6 +19,7 @@ import ContentsPage from "./components/GetStarted/ContentsPage";
 import NotFound from "./components/NotFound";
 import React from "react";
 import { LoadingProvider } from "./context/LoadingContext";
+import PostExperience from "./components/InterviewExperiences/PostExperience";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
                   path="experience/detail/:experienceId"
                   element={<DetailedExperiencePage />}
                 />
+                <Route path="experience/add" element={<PostExperience />} />
               </Route>
               <Route
                 path="events/detail/:eventId"
