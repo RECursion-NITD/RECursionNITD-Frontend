@@ -4,20 +4,16 @@
 }
 
 .App {
-  background-color: #001f20;
+  background-color: #23272F;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  justify-content: center;
-  width: fit-content;
   min-height: 100vh;
   height: fit-content;
 }
 
-.content,.container01 {
-  /* background: 
-  linear-gradient(
+.content {
+  background: linear-gradient(
       to left bottom,
       rgb(50, 47, 223) 0%,
       rgba(0, 0, 0, 0.2) 30%,
@@ -28,14 +24,12 @@
       rgb(11, 66, 218) 0%,
       rgb(37, 19, 196) 5%,
       rgba(0, 0, 0, 1) 30%
-    ); */
+    );
   background-blend-mode: exclusion;
-  /* padding: 15vh; */
-  height: 50vh;
-  width:100 vw;
+  padding: 15vh;
+  height: 100vh;
   font-size: larger;
   text-align: center;
-  justify-content: center;
   align-items: center;
 }
 
@@ -47,34 +41,17 @@
   min-height: 25vh;
   overflow: hidden;
 }
-
-
 .content2 {
   padding: 5em;
   text-align: center;
   align-items: center;
-  position: relative;
-  z-index: 1;
-}
-.content2::before {
-  content: "";
-  background-image: url("/src/assets/images/team.jpeg");
+  background-image: url("/public/images/keyboardBg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  filter: grayscale(80%) opacity(1.0) blur(2px); /* Adjust opacity as needed */
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
+  /* background: linear-gradient(#cbf5cb, #ffffff); */
 }
-.content1{
-  padding: 5em;
-  text-align: center;
-  align-items: center;
-}
+
 .loader {
   position: fixed;
   top: 0;
@@ -271,136 +248,3 @@
   align-items: center;
 } */
 
-.instagram-post {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
-}
-
-.instagram-post .overlap-group-wrapper {
-  height: 1080px;
-  width: 700px;
-}
-
-.instagram-post .overlap-group {
-  height: 750px;
-  position: relative;
-  top: 50px;
-  width: 50px;
-}
-
-.instagram-post .line {
-  height: 718px;
-  left: 25px;
-  object-fit: cover;
-  position: absolute;
-  top: 12px;
-  width: 1px;
-  background-color: white;
-}
-
-.instagram-post .ellipse-0 {
-  background-color: #b2f5ea;
-  border-radius: 25px;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  height: 50px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 50px;
-}
-
-.instagram-post .ellipse-1 {
-  background-color: #b2f5ea;
-  border-radius: 25px;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  height: 50px;
-  left: 0;
-  position: absolute;
-  top: 100px;
-  width: 50px;
-}
-
-.instagram-post .ellipse-2 {
-  background-color: #b2f5ea;
-  border-radius: 25px;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  height: 50px;
-  left: 0;
-  position: absolute;
-  top: 200px;
-  width: 50px;
-}
-
-.instagram-post .ellipse-3 {
-  background-color: #b2f5ea;
-  border-radius: 25px;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  height: 50px;
-  left: 0;
-  position: absolute;
-  top: 300px;
-  width: 50px;
-}
-
-.instagram-post .ellipse-4 {
-  background-color: #b2f5ea;
-  border-radius: 25px;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  height: 50px;
-  left: 0;
-  position: absolute;
-  top: 400px;
-  width: 50px;
-}
-
-.instagram-post .ellipse-5 {
-  background-color: #b2f5ea;
-  border-radius: 25px;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  height: 50px;
-  left: 0;
-  position: absolute;
-  top: 500px;
-  width: 50px;
-}
-
-.instagram-post .ellipse-6 {
-  background-color: #b2f5ea;
-  border-radius: 25px;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  height: 50px;
-  left: 0;
-  position: absolute;
-  top: 600px;
-  width: 50px;
-}
-
-.instagram-post .ellipse-7 {
-  background-color: #b2f5ea;
-  border-radius: 25px;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  height: 50px;
-  left: 0;
-  position: absolute;
-  top: 700px;
-  width: 50px;
-}
-  
