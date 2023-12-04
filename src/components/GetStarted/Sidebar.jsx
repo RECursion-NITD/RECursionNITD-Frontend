@@ -76,7 +76,7 @@ const Sidebar = ({ subtopicId, isFullScreen, setFullScreen }) => {
                   <ChevronDownIcon className="ml-0 mr-3" />
                 )}
               </div>
-              <Collapsible key={idx} idx={idx} item={item} />
+              <Collapsible key={idx} idx={idx} item={item} setFullScreen={setFullScreen} />
               <hr
                 style={{
                   color: "#343a46",
@@ -126,7 +126,7 @@ const Sidebar = ({ subtopicId, isFullScreen, setFullScreen }) => {
                 <ChevronDownIcon className="ml-0 mr-3" />
               )}
             </div>
-            <Collapsible key={idx} idx={idx} item={item} />
+            <Collapsible key={idx} idx={idx} item={item} setFullScreen={setFullScreen} />
             <hr
               style={{
                 color: "#343a46",

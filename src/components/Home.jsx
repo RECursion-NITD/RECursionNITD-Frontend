@@ -21,7 +21,11 @@ import {
   AccordionIcon,
   List,
   ListItem,
+  // Center,
+  Link,
+  Heading,
   // ListIcon,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import useAuth from "../hooks/useAuth";
 import useLoading from "../hooks/useLoading";
@@ -50,6 +54,7 @@ function Home() {
   const [isHovered6, setIsHovered6] = useState(false);
   const [isHovered7, setIsHovered7] = useState(false);
   const toast = useToast();
+  const [isMobile] = useMediaQuery("(max-width: 768px)");
 
   useEffect(() => {
     if (!user) return;
@@ -103,53 +108,139 @@ function Home() {
   return loading ? (
     <Loader />
   ) : (
-    <div className="App">
-      <div className="container headContainer">
-        <div className="head">
-          <h1
-            style={{
-              fontWeight: "500",
-              textAlign: "center",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <strong>REC</strong>ursion
-          </h1>
-        </div>
-      </div>
-      <div className="container container01"></div>
-      {/* <div className="heading">
+    <Box
+      style={{
+        padding: "auto 10vw",
+        width: "100vw",
+        overflowX: "hidden",
+        marginTop: "50px",
+      }}
+    >
+      {/* Desktop UI top section */}
+
+      {!isMobile && (
+        <>
+          <div className="container headContainer">
+            <div className="head">
+              <h1
+                style={{
+                  fontWeight: "500",
+                  textAlign: "center",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <strong>REC</strong>ursion
+              </h1>
+            </div>
+          </div>
+          <div className="container container01"></div>
+          {/* <div className="heading">
         <h1>
           <strong>REC</strong>ursion 2023
         </h1>
       </div> */}
-      <div className="container container02">
-        <div className="content">
-          <h4
-          // style={{
-          //   color: "white",
-          //   fontStyle: "normal",
-          //   fontWeight: "400",
-          //   fontSize: "30px",
-          // }}
-          >
-            Programming Community of NIT Durgapur
-          </h4>
-          <br></br>
-          <p>
-            We are programming community of NIT Durgapur, with focus on
-            improving coding culture institute wide by conducting regular
-            lectures from beginner to advance topics of programming. Our goal is
-            to increase student&apos;s participation in inter-collegiate contest
-            like ACM-ICPC and help them get better.
-          </p>
-          <div>
-            <p>{homeData?.years_of_experience}+years of experience</p>
-            <p>{homeData?.hours_teaching} + hours of teaching</p>
+
+          {/* About Us  */}
+          <div className="container container02">
+            <div className="content">
+              <h4
+              // style={{
+              //   color: "white",
+              //   fontStyle: "normal",
+              //   fontWeight: "400",
+              //   fontSize: "30px",
+              // }}
+              >
+                Programming Community of NIT Durgapur
+              </h4>
+              <br></br>
+              <p>
+                We are programming community of NIT Durgapur, with focus on
+                improving coding culture institute wide by conducting regular
+                lectures from beginner to advance topics of programming. Our
+                goal is to increase student&apos;s participation in
+                inter-collegiate contest like ACM-ICPC and help them get better.
+              </p>
+              <div>
+                <p>{homeData?.years_of_experience}+years of experience</p>
+                <p>{homeData?.hours_teaching} + hours of teaching</p>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
+
+      {/* Mobile UI top section */}
+
+      {isMobile && (
+        <Flex
+          align="center"
+          justify={{ base: "center", md: "space-around", xl: "space-between" }}
+          direction={{ base: "column-reverse", md: "row" }}
+          wrap="no-wrap"
+          minH="70vh"
+          px={8}
+          mb={16}
+        >
+          <Stack
+            spacing={4}
+            w={{ base: "80%", md: "40%" }}
+            align={["center", "center", "flex-start", "flex-start"]}
+          >
+            <Heading
+              as="h1"
+              size="xl"
+              fontWeight="bold"
+              color="primary.800"
+              textAlign={["center", "center", "left", "left"]}
+            >
+              RECursion
+            </Heading>
+            <Heading
+              as="h2"
+              size="md"
+              color="primary.800"
+              opacity="0.8"
+              fontWeight="normal"
+              lineHeight={1.5}
+              textAlign={["center", "center", "left", "left"]}
+            >
+              RECursion
+            </Heading>
+            <Link to="/">
+              <Button
+                colorScheme="primary"
+                borderRadius="8px"
+                py="4"
+                px="4"
+                lineHeight="1"
+                size="md"
+              >
+                RECursion
+              </Button>
+            </Link>
+            <Text
+              fontSize="xs"
+              mt={2}
+              textAlign="center"
+              color="primary.800"
+              opacity="0.6"
+            >
+              No credit card required.
+            </Text>
+          </Stack>
+          <Box
+            w={{ base: "80%", sm: "60%", md: "50%" }}
+            mb={{ base: 12, md: 0 }}
+          >
+            {/* TODO: Make this change every X secs */}
+            {/* <Image src={image} size="100%" rounded="1rem" shadow="2xl" /> */}
+          </Box>
+        </Flex>
+      )}
+
+      {/* Who we are */}
       <div className="card">
         <h2
           style={{
@@ -375,6 +466,7 @@ function Home() {
           </Card>
         </HStack>
       </div>
+      {/* Our Activities */}
       <div className="content1">
         <h2 style={{ color: "white", margin: "2em", fontSize: "25px" }}>
           Our Activities
@@ -726,6 +818,7 @@ function Home() {
           </div>
         </div>
       </div>
+      {/* Testimonials */}
       <div className="card">
         <h2
           style={{
@@ -938,6 +1031,7 @@ function Home() {
           </Card>
         </HStack>
       </div>
+      {/* Sponsors */}
       <div className="sponsors">
         <h2
           style={{
@@ -966,6 +1060,7 @@ function Home() {
         </List>
         <br></br>
       </div>
+      {/* Footer */}
       <div className="content2">
         <p style={{ color: "white" }}>
           lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
@@ -1018,7 +1113,7 @@ function Home() {
           nisl euismod nisl.
         </p>
       </div>
-    </div>
+    </Box>
   );
 }
 export default Home;
