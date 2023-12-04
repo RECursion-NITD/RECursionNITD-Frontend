@@ -39,6 +39,12 @@
   align-items: center;
 }
 
+.content{
+  border:1px solid #b2f5ea;
+  border-radius: 20px;
+  padding: 2em;
+}
+
 .homepageCard {
   background-color: aliceblue;
 }
@@ -404,3 +410,14 @@
   width: 50px;
 }
   
+.slide-fade1 {
+  transition: opacity 0.3s ease-in-out;
+  display: none;
+}
+
+.slide-fade1.visible{
+  opacity: 0.8;
+  display:block;
+  transform: translateY(-20px);
+  position:absolute;
+}
