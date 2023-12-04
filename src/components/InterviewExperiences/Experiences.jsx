@@ -138,10 +138,9 @@ const Experiences = () => {
                 margin: "1em",
                 width: "5em",
                 padding: "15px",
-                boxShadow: "3px 3px #80CBC4",
-                border: "solid 1px #80CBC4",
-                borderRadius: "8 px",
-
+                boxShadow: "3px 3px #BDE0FF",
+                border: "solid 1px #BDE0FF",
+                border: "solid 1px",
               }}
               onClick={() => {
                 NextExperiences(InterviewExperiences?.previous);
@@ -159,8 +158,8 @@ const Experiences = () => {
                 margin: "1em",
                 width: "5em",
                 padding: "15px",
-                boxShadow: "3px 3px #80CBC4",
-                border: "solid 1px #80CBC4",
+                boxShadow: "3px 3px #BDE0FF",
+                border: "solid 1px #BDE0FF",
                 borderRadius: "8px",
                 color:"#BDE0FF"
               }}

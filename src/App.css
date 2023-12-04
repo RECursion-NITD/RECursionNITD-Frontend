@@ -47,14 +47,28 @@
   min-height: 25vh;
   overflow: hidden;
 }
+
+
 .content2 {
   padding: 5em;
   text-align: center;
   align-items: center;
-  background-image: url("/public/images/keyboardBg.jpg");
+  position: relative;
+  z-index: 1;
+}
+.content2::before {
+  content: "";
+  background-image: url("/src/assets/images/team.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  filter: grayscale(80%) opacity(1.0) blur(2px); /* Adjust opacity as needed */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
 }
 .content1{
   padding: 5em;
@@ -251,17 +265,11 @@
   font-weight: 500;
 }
 
-.slide-fade1 {
-  transition: opacity 0.3s ease-in-out;
-  display: none;
-}
-
-.slide-fade1.visible{
-  opacity: 0.8;
-  display:block;
-  transform: translateY(-20px);
-  position:absolute;
-}
+/* .card{
+  display:felx;
+  justify-content: center;
+  align-items: center;
+} */
 
 .instagram-post {
   display: flex;
