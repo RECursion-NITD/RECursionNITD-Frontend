@@ -346,7 +346,7 @@ function Home() {
         </div>
       </div>
 
-      <div className="content">
+      <div className="content3">
         <h2>Who are we ?</h2>
         <div className="whoAreWeCard">
           <p>
