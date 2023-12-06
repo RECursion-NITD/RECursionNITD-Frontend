@@ -3,7 +3,7 @@
 export const loginWithGoogle = async (token) => {
   const response = await fetch(
     // "https://recnitdgp.pythonanywhere.com/api/tokenforgoogle/", // for production
-    "http://127.0.0.1:8000/api/tokenforgoogle/", // for development
+    "http://127.0.0.1:8000/api/token/google/", // for development
     {
       method: "POST",
       headers: {
