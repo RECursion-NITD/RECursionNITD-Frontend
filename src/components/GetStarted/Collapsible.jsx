@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import useContent from "../../hooks/useContent";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 
-const Collapsible = ({ idx, item }) => {
+const Collapsible = ({ idx, item, setFullScreen }) => {
   const {
     contents,
     levelSelected,
@@ -17,9 +17,12 @@ const Collapsible = ({ idx, item }) => {
   const subTopicRef = useRef(contents[idx].topic[0].subtopic[0].id);
 
   function subTopicSelectionHandler(id) {
+    console.log("Inside subTopicSelectionHandler");
     setSubTopicSelected(id);
     subTopicRef.current = id;
     console.log(id);
+    console.log(subtopicSelected);
+    setFullScreen(false);
   }
 
   const variants = {
