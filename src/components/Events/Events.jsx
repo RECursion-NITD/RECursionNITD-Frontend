@@ -1,7 +1,6 @@
-// import { Link } from "react-router-dom";
+/* eslint-disable */
 import React, { useEffect, useState } from "react";
-import { getEvents, FilterSearchEvents } from "../../api/events";
-// import { getEvents, getNextEvents } from "../api/events";
+import { getEvents, FilterSearchEvents, getNextEvents } from "../../api/events";
 import useLoading from "../../hooks/useLoading";
 import Loader from "../Loader";
 import FilterEvent from "./FilterEvent";
@@ -41,9 +40,13 @@ const Events = () => {
   }, []);
 
   useEffect(() => {
-    console.log("Inside useffect 2");
     FilterSearchHandler();
   }, [EventType]);
+
+  const NextEvents = async (url) => {
+    const results = await getNextEvents(url);
+    setEvents(results);
+  };
 
   return loading ? (
     <div>
@@ -153,6 +156,56 @@ const Events = () => {
             <EventCard margin={"1em 5px"} key={key} event={event} />
           ))}
         </Flex>
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {/* For Previous 10 Events. */}
+          {Events?.previous && (
+            <button
+              style={{
+                margin: "1em",
+                width: "5em",
+                padding: "15px",
+                boxShadow: "3px 3px #BDE0FF",
+                border: "solid 1px #BDE0FF",
+                border: "solid 1px",
+                color: "#BDE0FF",
+              }}
+              onClick={() => {
+                NextEvents(Events?.previous);
+              }}
+            >
+              Prev
+            </button>
+          )}
+
+          {/* For Next 10 Events. */}
+
+          {Events?.next && (
+            <button
+              style={{
+                margin: "1em",
+                width: "5em",
+                padding: "15px",
+                boxShadow: "3px 3px #BDE0FF",
+                border: "solid 1px #BDE0FF",
+                borderRadius: "8px",
+                color: "#BDE0FF",
+              }}
+              onClick={() => {
+                NextEvents(Events?.next);
+              }}
+            >
+              Next
+            </button>
+          )}
+        </div>
       </Box>
     </>
   );

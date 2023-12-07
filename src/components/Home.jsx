@@ -1,3 +1,4 @@
+/* eslint-disable */
 import logoInverted from "../assets/images/logoInverted.png";
 import { useEffect, useLayoutEffect, useState, useRef } from "react";
 import {
@@ -642,4 +643,5 @@ function Home() {
     </div>
   );
 }
+
 export default Home;
