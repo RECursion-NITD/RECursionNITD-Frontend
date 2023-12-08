@@ -1,4 +1,6 @@
+// eslint-disable-next-line
 import ReactDOM from "react-dom/client";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import "./index.css";
 import { extendTheme, ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -17,11 +19,18 @@ const theme = extendTheme({
     Montserrat: "Montserrat",
   },
 });
+
+const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+console.log(clientId);
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
-    <ChakraProvider theme={theme}>
-      <App />
-    </ChakraProvider>
+    <GoogleOAuthProvider clientId={clientId}>
+      <ChakraProvider theme={theme}>
+        <App />
+      </ChakraProvider>
+    </GoogleOAuthProvider>
+    ;
   </Router>
 );

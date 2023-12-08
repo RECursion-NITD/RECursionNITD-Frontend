@@ -1,5 +1,6 @@
 // define apis for login
 export const login = async (formData) => {
+  console.log(formData);
   const response = await fetch(
     "https://recnitdgp.pythonanywhere.com/api/token/",
     {
