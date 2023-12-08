@@ -95,3 +95,17 @@ export const GetDetailEvent = async (eventId) => {
   console.log(data);
   return data;
 };
+
+export const createEvent = async (userData) => {
+  const token = JSON.parse(localStorage.getItem("authTokens")).access;
+  const response = await axios.post(`${EVENTS_URL}/`, userData, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = await response.data;
+  console.log("create event api called");
+  console.log(data);
+  return data;
+};

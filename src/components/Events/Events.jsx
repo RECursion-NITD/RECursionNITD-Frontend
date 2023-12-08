@@ -1,10 +1,12 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getEvents, FilterSearchEvents, getNextEvents } from "../../api/events";
 import useLoading from "../../hooks/useLoading";
 import Loader from "../Loader";
 import FilterEvent from "./FilterEvent";
-import { Box, Flex, Heading, useMediaQuery, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, useMediaQuery, Text,Button } from "@chakra-ui/react";
+import { EditIcon } from '@chakra-ui/icons'
 import EventCard from "./EventCard";
 
 const Events = () => {
@@ -134,6 +136,15 @@ const Events = () => {
           </Text>
           <hr className="m-auto mt-[2em] w-[90%] d-flex align-center color-secondaryText " />
         </Box>
+
+        <div>
+          <Link to="/events/create">
+            <Button colorScheme='teal' variant='outline' className="mt-4">
+                <EditIcon />
+                Add Event
+            </Button>
+          </Link>
+        </div>
 
         {isMobile && (
           <FilterEvent
