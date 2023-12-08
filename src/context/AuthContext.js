@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createContext, useEffect, useState } from "react";
 import { login } from "../api/login";
 import { refresh } from "../api/refreshToken";
@@ -21,6 +22,29 @@ export const AuthProvider = ({ children }) => {
       ? JSON.parse(localStorage.getItem("authTokens"))
       : null
   );
+
+  const decodeTokens = async (tokens) => {
+    if (tokens.response !== "valid") {
+      toast({
+        title: "Cant Authorize",
+        description: tokens.response,
+        position: "top",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+    setUser({
+      id: jwtDecode(tokens?.access).user_id,
+      username: jwtDecode(tokens?.access).email,
+    });
+    setAuthToken({
+      access: tokens.access,
+      refresh: tokens.refresh,
+    });
+    localStorage.setItem("authTokens", JSON.stringify(tokens));
+  };
 
   const loginUser = async (formData) => {
     login(formData)
@@ -95,9 +119,14 @@ export const AuthProvider = ({ children }) => {
     logoutUser: logoutUser,
     setStatus: setStatus,
     status: status,
+    decodeTokens: decodeTokens,
   };
 
   useEffect(() => {
+    if(authToken && !user){
+      decodeTokens(authToken)
+    }
+
     if (loading) refreshTokens();
 
     let interval = setInterval(() => {
