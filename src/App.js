@@ -20,6 +20,7 @@ import NotFound from "./components/NotFound";
 import React from "react";
 import { LoadingProvider } from "./context/LoadingContext";
 import PostExperience from "./components/InterviewExperiences/PostExperience";
+import CreateEvent from "./components/Events/CreateEvent";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
                   element={<DetailedExperiencePage />}
                 />
                 <Route path="experience/add" element={<PostExperience />} />
+                <Route path="events/create" element={<CreateEvent />} />
               </Route>
               <Route
                 path="events/detail/:eventId"
