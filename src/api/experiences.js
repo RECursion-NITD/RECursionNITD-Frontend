@@ -93,17 +93,7 @@ export const SearchExp = async (Company, RoleType, search) => {
 export const createExperience = async (userData) => {
 
   const token = JSON.parse(localStorage.getItem("authTokens")).access;
-  // const  experienceData={
-  //   company:userData.companyName,
-  //   year:Number(userData.year),
-  //   role_Type:userData.roleType,
-  //   no_of_Rounds:Number(userData.rounds),
-  //   job_Profile:userData.jobProfile,
-  //   interview_Questions:userData.details
-  // }
-  console.log(userData);
-  console.log(token);
-  const response = await axios.post(API_ROUTES.EXPERIENCES,userData , {
+  const response = await axios.post(`${API_ROUTES.EXPERIENCES}/`,userData , {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
