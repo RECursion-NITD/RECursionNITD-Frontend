@@ -1,10 +1,12 @@
+/* eslint-disable */
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import React, { useState, useEffect } from "react";
 import useLoading from "../hooks/useLoading";
 import Loader from "./Loader";
-import { Flex, Heading, Input, Button } from "@chakra-ui/react";
+import { Flex, Heading, Input, Button, Box } from "@chakra-ui/react";
 import { login } from "../api/login";
+import Glogin from "./GoogleLogin/Glogin";
 
 const Login = () => {
   const location = useLocation();
@@ -46,17 +48,21 @@ const Login = () => {
   ) : (
     <>
       {token && <Navigate to={from} />}
-      <div style={{ display: "flex", flexDirection: "column", margin: "4em" }}>
+      <Box 
+        background={"gray.700"}
+        style={{ display: "flex", flexDirection: "column", margin: "auto", padding:'10px',justifyContent:'space-around' }}
+        rounded={6}
+      >
         <form onSubmit={(e) => handleFormSubmit(e)}>
           <Flex
-            height={"100vh"}
-            alignItems={"center"}
+            height={"fit-content"}
+            alignItems={"flex-end"}
             justifyContent={"center"}
           >
             <Flex
               direction={"column"}
               background={"gray.700"}
-              p={12}
+              px={12}
               rounded={6}
             >
               <Heading mb={50} color={"white"}>
@@ -100,14 +106,16 @@ const Login = () => {
                 mb={3}
                 type="submit"
                 style={{ hover: "teal.300" }}
+                width={"100%"}
                 disabled={status === "submitting"}
               >
                 Log in
               </Button>
+              <Glogin />
             </Flex>
           </Flex>
         </form>
-      </div>
+      </Box>
     </>
   );
 };
