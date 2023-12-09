@@ -30,6 +30,5 @@ root.render(
         <App />
       </ChakraProvider>
     </GoogleOAuthProvider>
-    ;
   </Router>
 );
