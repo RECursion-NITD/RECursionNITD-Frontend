@@ -100,7 +100,7 @@ export const createEvent = async (userData) => {
   const token = JSON.parse(localStorage.getItem("authTokens")).access;
   const response = await axios.post(`${EVENTS_URL}/`, userData, {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${token}`,
     },
   });
