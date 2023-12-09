@@ -61,6 +61,7 @@
   text-align: center;
   align-items: center;
   position: relative;
+  height: 100vh;
   z-index: 1;
 }
 .content2::before {
