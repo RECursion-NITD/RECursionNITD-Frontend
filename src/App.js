@@ -21,7 +21,8 @@ import React from "react";
 import { LoadingProvider } from "./context/LoadingContext";
 import PostExperience from "./components/InterviewExperiences/PostExperience";
 import CreateEvent from "./components/Events/CreateEvent";
-
+import EditProfile from "./components/Profile/EditProfile";
+import ViewProfile from "./components/Profile/ViewProfile";
 function App() {
   return (
     <>
@@ -50,6 +51,8 @@ function App() {
                 />
                 <Route path="experience/add" element={<PostExperience />} />
                 <Route path="events/create" element={<CreateEvent />} />
+                <Route path="profile/editprofile" element={<EditProfile />} />
+                <Route path="profile/viewprofile" element={<ViewProfile />} />
               </Route>
               <Route
                 path="events/detail/:eventId"
