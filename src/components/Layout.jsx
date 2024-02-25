@@ -11,6 +11,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import Footer from "./Footer";
 
 const Layout = () => {
   const { user, logoutUser } = useAuth();
@@ -162,6 +163,7 @@ const Layout = () => {
       <div className="App">
         <Outlet />
       </div>
+      <Footer />
     </>
   );
 };

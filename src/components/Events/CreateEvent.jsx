@@ -58,22 +58,20 @@ const CreateEvent = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("Inside handle Submit");
+    const data = new FormData();
     console.log(eventData);
-    const  data={
-        title:eventData.title,
-        event_type:eventData.eventType,
-        target_year:eventData.targetYear,
-        link:eventData.eventLink,
-        start_time:eventData.startTime,
-        end_time:eventData.endTime,
-        description:eventData.description,
-        image:eventData.image,
-        venue:eventData.venue,
-
-    }
+    data.append("title", eventData.title);
+    data.append("event_type", eventData.eventType);
+    data.append("target_year", eventData.targetYear);
+    data.append("link", eventData.eventLink);
+    data.append("start_time", eventData.startTime);
+    data.append("end_time", eventData.endTime);
+    data.append("description", eventData.description);
+    data.append("image", eventData.image);
+    data.append("venue", eventData.venue);
     console.log(data);
     const response = await createEvent(data);
-    console.log(response); 
+    console.log(response);
   };
 
   return (
