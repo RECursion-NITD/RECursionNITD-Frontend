@@ -4,6 +4,7 @@ import { login } from "../api/login";
 import { refresh } from "../api/refreshToken";
 import jwtDecode from "jwt-decode";
 import { useToast } from "@chakra-ui/react";
+import { getProfileRoles } from "../api/getRoles";
 // import useLoading from "../hooks/useLoading";
 
 const AuthContext = createContext();
@@ -24,7 +25,8 @@ export const AuthProvider = ({ children }) => {
   );
 
   const decodeTokens = async (tokens) => {
-    if (tokens.response !== "valid") {
+
+    if (!tokens.access) {
       toast({
         title: "Cant Authorize",
         description: tokens.response,
@@ -35,32 +37,48 @@ export const AuthProvider = ({ children }) => {
       });
       return;
     }
-    setUser({
-      id: jwtDecode(tokens?.access).user_id,
-      username: jwtDecode(tokens?.access).email,
-    });
     setAuthToken({
       access: tokens.access,
       refresh: tokens.refresh,
     });
     localStorage.setItem("authTokens", JSON.stringify(tokens));
+    getProfileRoles(jwtDecode(tokens?.access).user_id).then((res) => {
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          id: jwtDecode(tokens?.access).user_id,
+          username: jwtDecode(tokens?.access).email.split("@")[0],
+          role: res.role,
+        })
+      );
+      setUser({
+        id: jwtDecode(tokens?.access).user_id,
+        username: jwtDecode(tokens?.access).email.split("@")[0],
+        role: res.role,
+      });
+    });
   };
 
   const loginUser = async (formData) => {
     login(formData)
       .then((data) => {
         localStorage.setItem("authTokens", JSON.stringify(data));
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
+        getProfileRoles(jwtDecode(data?.access).user_id)
+        .then((res)=>{
+          localStorage.setItem(
+            "user",
+            JSON.stringify({
+              id: jwtDecode(data?.access).user_id,
+              username: formData.username,
+              role:res.role,
+            })
+          );
+          setUser({
             id: jwtDecode(data?.access).user_id,
             username: formData.username,
-          })
-        );
-        setUser({
-          id: jwtDecode(data?.access).user_id,
-          username: formData.username,
-        });
+            role:res.role,
+          });
+        })
         setAuthToken(data);
       })
       .catch((err) => {
@@ -123,9 +141,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if(authToken && !user){
-      decodeTokens(authToken)
-    }
 
     if (loading) refreshTokens();
 
