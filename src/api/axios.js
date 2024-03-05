@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const api = process.env.API || "https://recnitdgp.pythonanywhere.com/api";
+// const api = "http://localhost:8000/api";
 
 export default axios.create({
   baseURL: api,
