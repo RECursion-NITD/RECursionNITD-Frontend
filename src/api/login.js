@@ -1,8 +1,8 @@
 // define apis for login
 export const login = async (formData) => {
   const response = await fetch(
-    // "https://recnitdgp.pythonanywhere.com/api/token/",
-    "http://localhost:8000/api/token/",
+    "https://recnitdgp.pythonanywhere.com/api/token/",
+    // "http://localhost:8000/api/token/",
     {
       method: "POST",
       headers: {
