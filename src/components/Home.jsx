@@ -559,7 +559,7 @@ function Home() {
                           borderRadius: "10px",
                           width: "100%",
                           height: "100%",
-                          backgroundImage: "linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0))",
+                          backgroundImage: "linear-gradient(to top right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))"
                       }} 
                       />
                       <div className={item.co} 
