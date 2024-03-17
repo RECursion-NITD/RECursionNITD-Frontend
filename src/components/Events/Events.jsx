@@ -8,6 +8,8 @@ import FilterEvent from "./FilterEvent";
 import { Box, Flex, Heading, useMediaQuery, Text,Button } from "@chakra-ui/react";
 import { EditIcon } from '@chakra-ui/icons'
 import EventCard from "./EventCard";
+import useAuth from "../../hooks/useAuth";
+import { ROLES } from "../../utils/roles";
 
 const Events = () => {
   const [Events, setEvents] = useState([]);
@@ -15,6 +17,7 @@ const Events = () => {
   const { loading, setLoading } = useLoading();
   const [SearchQuery, setSearchQuery] = useState("");
   const [EventType, setEventType] = useState("All");
+  const {user} = useAuth();
 
   const FilterSearchHandler = () => {
     console.log("Inside search handler", EventType, SearchQuery);
@@ -136,15 +139,17 @@ const Events = () => {
           </Text>
           <hr className="m-auto mt-[2em] w-[90%] d-flex align-center color-secondaryText " />
         </Box>
-
-        <div>
-          <Link to="/events/create">
-            <Button colorScheme='teal' variant='outline' className="mt-4">
-                <EditIcon />
-                Add Event
-            </Button>
-          </Link>
-        </div>
+        { user?.role<=ROLES.MODERATOR &&
+            <div>
+              <Link to="/events/create">
+                <Button colorScheme='teal' variant='outline' className="mt-4">
+                    <EditIcon />
+                    Add Event
+                </Button>
+              </Link>
+            </div>
+         
+        }
 
         {isMobile && (
           <FilterEvent

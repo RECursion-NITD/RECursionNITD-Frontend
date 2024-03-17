@@ -22,6 +22,7 @@ import { createExperience } from "../../api/experiences";
 import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
+import { useNavigate } from "react-router-dom";
 
 const PostExperience = () => {
   const [experienceData, setExperienceData] = useState({
@@ -32,6 +33,8 @@ const PostExperience = () => {
     rounds: 1,
     details: "",
   });
+
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -69,6 +72,7 @@ const PostExperience = () => {
     console.log(data);
     const response = await createExperience(data);
     console.log(response);
+    navigate('/experience');
   };
 
   return (
