@@ -97,20 +97,12 @@ const Events = () => {
     //   )}
     // </div>
     <>
-      {!isMobile && (
-        <FilterEvent
-          EventType={EventType}
-          setEventType={setEventType}
-          setSearchQuery={setSearchQuery}
-          FilterSearchHandler={FilterSearchHandler}
-        />
-      )}
-
       <Box
-        marginTop={"8vh"}
-        marginLeft={isMobile ? "0vw" : "20vw"}
-        width={isMobile ? "100%" : "80vw"}
-        minHeight={"92vh"}
+        // marginTop={"8vh"}
+        // marginLeft={isMobile ? "0vw" : "20vw"}
+        // marginLeft={"0vw"}
+        // width={"100%"}
+        // minHeight={"92vh"}
         bg="gray.800"
         justifyContent={"center"}
         alignItems={"center"}
@@ -151,22 +143,24 @@ const Events = () => {
          
         }
 
-        {isMobile && (
+        {
           <FilterEvent
             EventType={EventType}
             setEventType={setEventType}
             setSearchQuery={setSearchQuery}
             FilterSearchHandler={FilterSearchHandler}
           />
-        )}
+        }
 
+        {/*The main box with all the event cards */}
         <Flex
           mt={12}
           flexDirection={"row"}
           flexWrap={"wrap"}
           justifyContent={"flex-start"}
           alignItems={"flex-start"}
-          maxWidth={isMobile ? "100%" : "80vw"}
+          // maxWidth={isMobile ? "100%" : "80vw"}
+          maxWidth={"100%"}
         >
           {Events?.results?.map((event, key) => (
             <EventCard margin={"1em 5px"} key={key} event={event} />
