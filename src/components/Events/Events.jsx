@@ -5,7 +5,7 @@ import { getEvents, FilterSearchEvents, getNextEvents } from "../../api/events";
 import useLoading from "../../hooks/useLoading";
 import Loader from "../Loader";
 import FilterEvent from "./FilterEvent";
-import { Box, Flex, Heading, useMediaQuery, Text,Button } from "@chakra-ui/react";
+import { Box, Flex, Heading, useMediaQuery, Text,Button, SimpleGrid } from "@chakra-ui/react";
 import { EditIcon } from '@chakra-ui/icons'
 import EventCard from "./EventCard";
 import useAuth from "../../hooks/useAuth";
@@ -154,7 +154,7 @@ const Events = () => {
         }
 
         {/*The main box with all the event cards */}
-        <Flex
+        {/* <Flex
           // mt={5}
           flexDirection={"row"}
           flexWrap={"wrap"}
@@ -166,7 +166,18 @@ const Events = () => {
           {Events?.results?.map((event, key) => (
             <EventCard key={key} event={event} />
           ))}
-        </Flex>
+        </Flex> */}
+
+        <SimpleGrid
+          // mt={5}
+          spacing={2}
+          minChildWidth={"300px"}
+          width={"86%"}
+        >
+          {Events?.results?.map((event, key) => (
+            <EventCard key={key} event={event} />
+          ))}
+        </SimpleGrid>
 
         <div
           style={{
