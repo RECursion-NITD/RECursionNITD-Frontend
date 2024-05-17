@@ -63,7 +63,7 @@ const EventCard = ({ event }) => {
           width="100%"
           height="100%"
           bg="whiteAlpha.200"
-          boxShadow="2px 2px 4px #BDE0FF"
+          // boxShadow="2px 2px 4px #BDE0FF"
         >
           {event.image ? (
             <Image

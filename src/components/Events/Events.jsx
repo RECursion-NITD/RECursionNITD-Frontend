@@ -97,6 +97,7 @@ const Events = () => {
     //   )}
     // </div>
     <>
+    <Box bg={"gray.800"} height={"100%"} width={"100%"}>
       <Box
         // marginTop={"8vh"}
         // marginLeft={isMobile ? "0vw" : "20vw"}
@@ -154,7 +155,7 @@ const Events = () => {
 
         {/*The main box with all the event cards */}
         <Flex
-          mt={12}
+          // mt={5}
           flexDirection={"row"}
           flexWrap={"wrap"}
           justifyContent={"flex-start"}
@@ -163,7 +164,7 @@ const Events = () => {
           maxWidth={"100%"}
         >
           {Events?.results?.map((event, key) => (
-            <EventCard margin={"1em 5px"} key={key} event={event} />
+            <EventCard key={key} event={event} />
           ))}
         </Flex>
 
@@ -217,6 +218,7 @@ const Events = () => {
           )}
         </div>
       </Box>
+    </Box>
     </>
   );
 };

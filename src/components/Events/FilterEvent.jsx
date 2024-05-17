@@ -1,12 +1,13 @@
 import React from "react";
-import {
-  Box,
-  Button,
-  Flex,
-  IconButton,
-  Input,
-  useMediaQuery,
-} from "@chakra-ui/react";
+// import {
+//   Box,
+//   Button,
+//   Flex,
+//   IconButton,
+//   Input,
+//   useMediaQuery,
+// } from "@chakra-ui/react";
+import { Box, Button, Flex, IconButton, Input } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
 const FilterEvent = ({
@@ -15,33 +16,33 @@ const FilterEvent = ({
   FilterSearchHandler,
   EventType,
 }) => {
-  const [isMobile] = useMediaQuery("(max-width: 768px)");
+  // const [isMobile] = useMediaQuery("(max-width: 768px)");
 
   return (
     <Flex
-      borderRadius={isMobile && "16px"}
-      padding={isMobile && "15px"}
+      borderRadius={"16px"}
+      padding={"15px"}
       flexDirection={"column"} // Stack items vertically
-      width={isMobile ? "90%" : "20vw"} // Increase width slightly on mobile
-      height={isMobile ? "fit-content" : "100vh"}
-      position={isMobile ? "relative" : "fixed"}
-      top="8vh"
+      width={"80%"} // Increase width slightly on mobile
+      height={"fit-content"}
+      position={"relative"}
+      top={"6vh"}
       bg={"gray.700"}
-      left={!isMobile && "0"}
-      alignItems={isMobile ? "center" : "flex-start"}
-      color={"#BDE0FF"}
-      marginBottom={isMobile && "5em"}
+      // left={!"0"}
+      alignItems={"center"}
+      // color={"#BDE0FF"}
+      marginBottom={"4em"}
     >
       {/* Filter (All, classes, contests, events) */}
       <Box
         width="100%"
         bg="gray.700"
-        padding={isMobile ? "15px" : "2em 1em"}
-        marginTop={"1em"}
-        marginBottom={isMobile ? "1em" : "0"} // Add margin for spacing on mobile
-        borderBottom={"solid #212121 2px"}
+        // paddingBottom={"15px"}
+        // marginTop={"1em"}
+        // marginBottom={"1em"} // Add margin for spacing on mobile
+        // borderBottom={"solid #212121 2px"}
       >
-        <Flex justifyContent="space-between" alignItems="center" width="100%">
+        <Flex width="100%">
           <Input
             color="black"
             bg="white"
@@ -55,6 +56,7 @@ const FilterEvent = ({
           <IconButton
             backgroundColor="#BDE0FF"
             color="#596274"
+            marginBottom={"1em"}
             _hover={{
               background: "gray.700",
               color: "#BDE0FF",
@@ -67,42 +69,44 @@ const FilterEvent = ({
       </Box>
 
       <Box
-        borderRadius={isMobile && "16px"}
+        borderRadius={"16px"}
         width="100%"
         bg="gray.700"
-        height={!isMobile && "100%"}
+        // height={!"100%"}
         display="flex"
-        flexDirection={isMobile ? "row" : "column"}
-        alignItems="flex-start" // Align items to the left
+        flexDirection={"row"}
+        // alignItems="center" // Align items to the left
         justifyContent="space-evenly" // Space around items
       >
         <Button
           _hover={{
             background: "gray.800",
           }}
-          p={2}
-          marginLeft={"5%"}
-          width={"95%"}
-          borderRadius={isMobile ? "16px" : "16px 0px 0px 16px"}
-          textAlign="left"
+          margin={"0.1em"}
+          padding={"0.5em"}
+          flex={1}
+          borderRadius={"16px"}
+          // textAlign="left"
           background={EventType === "All" ? "gray.800" : "gray.700"}
+          color="lightBlue"
           onClick={() => {
             setEventType("All");
           }}
         >
-          {isMobile ? "All" : "All Events"}
+          {"All"}
         </Button>
 
         <Button
           _hover={{
             background: "gray.800",
           }}
-          p={2}
-          marginLeft={"5%"}
-          width={"95%"}
-          borderRadius={isMobile ? "16px" : "16px 0px 0px 16px"}
-          textAlign="left"
+          margin={"0.1em"}
+          borderRadius={"16px"}
+          flex={1}
+          padding={"1em"}
+          // textAlign="left"
           background={EventType === "Contest" ? "gray.800" : "gray.700"}
+          color="lightBlue"
           onClick={() => {
             setEventType("Contest");
           }}
@@ -114,12 +118,13 @@ const FilterEvent = ({
           _hover={{
             background: "gray.800",
           }}
-          p={2}
-          marginLeft={"5%"}
-          width={"95%"}
-          borderRadius={isMobile ? "16px" : "16px 0px 0px 16px"}
-          textAlign="left"
+          margin={"0.1em"}
+          borderRadius={"16px"}
+          flex={1}
+          // textAlign="left"
+          padding={"1em"}
           background={EventType === "Class" ? "gray.800" : "gray.700"}
+          color="lightBlue"
           onClick={() => {
             setEventType("Class");
           }}
@@ -128,15 +133,16 @@ const FilterEvent = ({
         </Button>
 
         <Button
-          p={2}
           _hover={{
             background: "gray.800",
           }}
-          marginLeft={"5%"}
-          width={"95%"}
-          borderRadius={isMobile ? "16px" : "16px 0px 0px 16px"}
-          textAlign="left"
+          margin={"0.1em"}
+          borderRadius={"16px"}
+          flex={1}
+          // textAlign="left"
+          padding={"1em"}
           background={EventType === "Event" ? "gray.800" : "gray.700"}
+          color="lightBlue"
           onClick={() => {
             setEventType("Event");
           }}
