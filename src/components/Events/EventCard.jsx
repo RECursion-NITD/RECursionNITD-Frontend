@@ -49,7 +49,7 @@ const EventCard = ({ event }) => {
         display="flex"
         justifyContent="center"
         width="300px"
-        height="450px"
+        height="470px"
         cursor="pointer"
       >
         <Box
@@ -70,21 +70,21 @@ const EventCard = ({ event }) => {
               borderRadius={"8px"}
               src={event.image}
               alt="RECursion Event Poster"
-              height="200px"
+              height="220px"
               width="100%"
-              mb={3}
+              // mb={3}
             />
           ) : (
             <Image
               src="{% static 'image/logo_event.png'%}"
               alt="RECursion Event Poster"
               height="200px"
-              width="200px"
-              mb={3}
+              width="150px"
+              // mb={3}
             />
           )}
 
-          <Heading as="h5" fontSize="20px" color="lightBlue" mb={3}>
+          <Heading as="h5" fontSize="20px" color="lightBlue" margin={3}>
             <a textDecoration="none">{event.title}</a>
             {perms && (
               <>
@@ -112,7 +112,7 @@ const EventCard = ({ event }) => {
 
           <Button
             as="a"
-            mt={3}
+            margin={4}
             p={2}
             sx={{
               borderRadius: "8px",
