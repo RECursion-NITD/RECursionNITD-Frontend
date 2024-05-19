@@ -60,7 +60,7 @@ const Sidebar = ({ subtopicId, isFullScreen, setFullScreen }) => {
               <div
                 className="font-head pl-6 rounded-r-xl cursor-pointer flex justify-between  pb-3 pt-3 font-semibold text-md text-secondaryText"
                 style={{
-                  backgroundColor: idx == levelSelected ? "#212121" : "#23272F",
+                  backgroundColor: idx == levelSelected ? "#19486A" : "#23272F",
                   color: idx == levelSelected ? "#149ECA" : "#98A0B2",
                 }}
                 onClick={(e) => {
@@ -110,7 +110,7 @@ const Sidebar = ({ subtopicId, isFullScreen, setFullScreen }) => {
             <div
               className="font-head pl-6 rounded-r-xl cursor-pointer flex justify-between  pb-3 pt-3 font-semibold text-md text-secondaryText"
               style={{
-                backgroundColor: idx == levelSelected ? "#212121" : "#23272F",
+                backgroundColor: idx == levelSelected ? "#19486A" : "#23272F",
                 color: idx == levelSelected ? "#149ECA" : "#98A0B2",
               }}
               onClick={(e) => {
