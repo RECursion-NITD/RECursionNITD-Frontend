@@ -122,7 +122,7 @@ const Layout = () => {
           position="fixed"
           zIndex="10"
         >
-          <VStack spacing="2" mt="5vh">
+          <VStack spacing="20" mt="5vh">
             <MenuItem to="/experience">Interview Experiences</MenuItem>
             <MenuItem to="/events">Events</MenuItem>
             <MenuItem to="/get_started">Getting Started</MenuItem>
