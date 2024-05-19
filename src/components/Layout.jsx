@@ -26,7 +26,7 @@ const Layout = () => {
       <Flex
         h="8vh"
         bg="#171923"
-        alignItems="space-around"
+        alignItems="center"
         justifyContent="space-between"
         px={{ base: "1em", md: "2em" }}
         position="fixed"
@@ -40,6 +40,7 @@ const Layout = () => {
             style={{
               textDecoration: "none",
               display: "flex",
+              alignItems: "center",
             }}
           >
             <img
@@ -60,25 +61,34 @@ const Layout = () => {
         <Flex
           className="navbar-links"
           display={{ base: "none", md: "flex" }}
+          alignItems="center"
           listStyleType="none"
           margin="0"
           padding="0"
         >
-          <MenuItem to="/experience">Interview Experiences</MenuItem>
-          <MenuItem to="/events">Events</MenuItem>
-          <MenuItem to="/get_started">Getting Started</MenuItem>
-          <MenuItem to="/team">Team</MenuItem>
+          <MenuItem to="/experience" noButton>
+            Interview Experiences
+          </MenuItem>
+          <MenuItem to="/events" noButton>
+            Events
+          </MenuItem>
+          <MenuItem to="/get_started" noButton>
+            Getting Started
+          </MenuItem>
+          <MenuItem to="/team" noButton>
+            Team
+          </MenuItem>
           {!user ? (
             <MenuItem to="/login">
               <Button
-                onClick={logoutUser}
                 variant="solid"
                 bg="lightGreen"
                 color="black"
                 fontWeight="bold"
                 borderRadius="8px"
                 margin="5px"
-                padding="5px"
+                padding="10px"
+                _hover={{ bg: "#60C80A" }}
               >
                 Login
               </Button>
@@ -92,7 +102,7 @@ const Layout = () => {
               fontWeight="bold"
               borderRadius="8px"
               margin="5px"
-              padding="5px"
+              padding="10px"
             >
               Logout
             </Button>
@@ -101,7 +111,7 @@ const Layout = () => {
 
         {/* Hamburger Menu Icon (visible on mobile) */}
         <IconButton
-          color={"whitesmoke"}
+          color="whitesmoke"
           display={{ base: "block", md: "none" }}
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
           aria-label="Menu"
@@ -122,7 +132,7 @@ const Layout = () => {
           position="fixed"
           zIndex="10"
         >
-          <VStack spacing="20" mt="5vh">
+          <VStack spacing="4" mt="5vh">
             <MenuItem to="/experience">Interview Experiences</MenuItem>
             <MenuItem to="/events">Events</MenuItem>
             <MenuItem to="/get_started">Getting Started</MenuItem>
@@ -130,14 +140,13 @@ const Layout = () => {
             {!user ? (
               <MenuItem to="/login">
                 <Button
-                  onClick={logoutUser}
                   variant="solid"
                   bg="lightGreen"
                   color="black"
                   fontWeight="bold"
                   borderRadius="8px"
                   margin="5px"
-                  padding="5px"
+                  padding="10px"
                 >
                   Login
                 </Button>
@@ -151,7 +160,7 @@ const Layout = () => {
                 fontWeight="bold"
                 borderRadius="8px"
                 margin="5px"
-                padding="5px"
+                padding="10px"
               >
                 Logout
               </Button>
@@ -168,8 +177,8 @@ const Layout = () => {
   );
 };
 
-const MenuItem = ({ to, children }) => (
-  <Text>
+const MenuItem = ({ to, children, noButton }) => (
+  <Text style={{ marginRight: noButton ? "20px" : "0" }}>
     <Link
       to={to}
       style={{
@@ -178,7 +187,7 @@ const MenuItem = ({ to, children }) => (
         fontSize: "18px",
         transition: "color 0.3s",
         marginRight: "10px",
-        marginBottom: "10px",
+        marginBottom: "0",
       }}
     >
       {children}

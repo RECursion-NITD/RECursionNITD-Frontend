@@ -18,6 +18,7 @@ import {
   // Link,
   Center,
   Image,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import {
   FaCalendar,
@@ -31,7 +32,7 @@ import {
 function formatDate(inputDate) {
   const date = new Date(inputDate);
   const adjustedDate = addHours(date, date.getTimezoneOffset() / 60);
-  const formattedDate = format(adjustedDate, "MMM. dd, yyyy, h a");
+  const formattedDate = format(adjustedDate, "MMM. dd, yy, h a");
   return formattedDate;
 }
 
@@ -50,45 +51,57 @@ const DetailEvent = () => {
       .catch((e) => console.log("error fetching details of event ", e));
   }, []);
 
+  const [isMobile] = useMediaQuery("(max-width: 768px)");
   return loading ? (
     <Loader />
   ) : (
     <Flex
-      justifyContent={{ base: "start", md: "center" }}
+      // justifyContent={{ base: "start", md: "center" }}
+      justifyContent={"start"}
       alignItems="start"
       width="100%"
-      height={{ base: "1200px", md: "800px" }}
+      height={"100%"}
       bg="rgb(35 39 47)"
       padding={4}
-      mt="3rem"
+      mt="2rem"
       flexDirection={{ base: "column", md: "row" }}
+      // flexDirection={"row"}
+      // flexWrap={"wrap"}
     >
       <Box
-        // width="40%"
-        width={{ base: "100%", md: "40%" }}
-        maxHeight="90%"
+        // width="100%"
+        width={isMobile ? "100%" : "750px"}
+        // width="600px"
+        // maxHeight="90%"
         bg="rgb(52 58 70)"
         borderRadius="lg"
         marginRight={2}
         mt={4}
         mb={{ base: "10px" }}
         mr={4}
-        boxShadow="2px 2px 4px #BDE0FF"
+        // flex="1"
+        // boxShadow="2px 2px 4px #BDE0FF"
       >
         <Box
           width="100%"
-          color="#f5f3f3"
-          fontSize="30px"
-          mb={4}
-          borderBottom="1px solid white"
-          pl={4}
+          fontSize="35px"
+          mb={1}
+          textDecoration={"underline"}
+          color="lightblue"
         >
           {event?.title}
         </Box>
 
-        <UnorderedList fontSize="100%" listStyleType="none" ml={0}>
+        <UnorderedList
+          fontSize="100%"
+          listStyleType="none"
+          mr={4}
+          padding={3}
+          border="1px solid lightblue"
+          borderRadius={"lg"}
+        >
           <ListItem display="flex" justifyContent="start" alignItems="center">
-            <Box as={FaCalendar} width="10%" m={0} />
+            <Box as={FaCalendar} width="10%" m={0} color="white" />
             <Box
               as="b"
               m={0}
@@ -96,7 +109,7 @@ const DetailEvent = () => {
               color="#f5f3f3"
               fontSize="17px"
             >
-              Event Category:{" "}
+              {"Category:"}{" "}
             </Box>
 
             <ReactMarkdown
@@ -108,7 +121,7 @@ const DetailEvent = () => {
             </ReactMarkdown>
           </ListItem>
           <ListItem display="flex" justifyContent="start" alignItems="center">
-            <Box as={FaUserTie} width="10%" m={0} />
+            <Box as={FaUserTie} width="10%" m={0} color="white" />
             <Box
               as="b"
               m={0}
@@ -127,7 +140,7 @@ const DetailEvent = () => {
             </ReactMarkdown>
           </ListItem>
           <ListItem display="flex" justifyContent="start" alignItems="center">
-            <Box as={FaCalendarCheck} width="10%" m={0} />
+            <Box as={FaCalendarCheck} width="10%" m={0} color="white" />
             <Box
               as="b"
               m={0}
@@ -146,7 +159,7 @@ const DetailEvent = () => {
             </ReactMarkdown>
           </ListItem>
           <ListItem display="flex" justifyContent="start" alignItems="center">
-            <Box as={FaCalendarMinus} width="10%" m={0} />
+            <Box as={FaCalendarMinus} width="10%" m={0} color="white" />
             <Box
               as="b"
               m={0}
@@ -165,7 +178,7 @@ const DetailEvent = () => {
             </ReactMarkdown>
           </ListItem>
           <ListItem display="flex" justifyContent="start" alignItems="center">
-            <Box as={FaClock} width="10%" m={0} />
+            <Box as={FaClock} width="10%" m={0} color="white" />
             <Box
               as="b"
               m={0}
@@ -184,7 +197,7 @@ const DetailEvent = () => {
             </ReactMarkdown>
           </ListItem>
           <ListItem display="flex" justifyContent="start" alignItems="center">
-            <Box as={FaMapMarkerAlt} width="10%" m={0} />
+            <Box as={FaMapMarkerAlt} width="10%" m={0} color="white" />
             <Box
               as="b"
               m={0}
@@ -209,7 +222,7 @@ const DetailEvent = () => {
             mt={4}
             mb={4}
             height={{ base: "300px", md: "400px" }}
-            width="90%"
+            width="95%"
           >
             <Center height="100%" width="100%">
               <Image
@@ -224,20 +237,24 @@ const DetailEvent = () => {
         )}
       </Box>
       <Box
-        width={{ base: "100%", md: "60%" }}
-        maxHeight="90%"
+        // width={{ base: "100%", md: "50%", "2xl": "65%" }}
+        width="100%"
+        height="100%"
+        // maxHeight="90%"
         bg="rgb(52 58 70)"
         borderRadius="lg"
         marginRight={2}
         mt={4}
-        boxShadow="2px 2px 4px #BDE0FF"
+        // flex="1"
+        // boxShadow="2px 2px 4px #BDE0FF"
       >
         <Box
           width="100%"
-          color="#f5f3f3"
+          color="lightblue"
           fontSize="30px"
           mb={4}
-          borderBottom="1px solid white"
+          textDecoration={"underline"}
+          // borderBottom="1px solid white"
           pl={4}
         >
           {event?.event_type === "Class"
