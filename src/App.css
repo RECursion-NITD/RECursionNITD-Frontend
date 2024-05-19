@@ -558,3 +558,6 @@ ul, ol {
 .container {
   display: flex;
 }
+.custom-font-size {
+  font-size: 16px;
+}

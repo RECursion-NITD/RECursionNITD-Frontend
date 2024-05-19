@@ -26,7 +26,7 @@ const Layout = () => {
       <Flex
         h="8vh"
         bg="#171923"
-        alignItems="space-around"
+        alignItems="center"
         justifyContent="space-between"
         px={{ base: "1em", md: "2em" }}
         position="fixed"
@@ -40,6 +40,7 @@ const Layout = () => {
             style={{
               textDecoration: "none",
               display: "flex",
+              alignItems: "center",
             }}
           >
             <img
@@ -80,7 +81,6 @@ const Layout = () => {
           {!user ? (
             <MenuItem to="/login">
               <Button
-                onClick={logoutUser}
                 variant="solid"
                 bg="lightGreen"
                 color="black"
@@ -140,7 +140,6 @@ const Layout = () => {
             {!user ? (
               <MenuItem to="/login">
                 <Button
-                  onClick={logoutUser}
                   variant="solid"
                   bg="lightGreen"
                   color="black"
