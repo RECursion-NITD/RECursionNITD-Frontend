@@ -58,6 +58,7 @@ function Home() {
       image:
         "https://images.unsplash.com/photo-1566522650166-bd8b3e3a2b4b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
       c: "c1",
+      t: "t1",
       co: "co1",
     },
     {
@@ -68,6 +69,7 @@ function Home() {
       image:
         "https://images.unsplash.com/photo-1581836499506-4a660b39478a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
       c: "c2",
+      t: "t2",
       co: "co2",
     },
     {
@@ -78,6 +80,7 @@ function Home() {
       image:
         "https://images.unsplash.com/photo-1566522650166-bd8b3e3a2b4b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
       c: "c3",
+      t: "t3",
       co: "co3",
     },
     {
@@ -88,6 +91,7 @@ function Home() {
       image:
         "https://images.unsplash.com/flagged/photo-1564918031455-72f4e35ba7a6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
       c: "c4",
+      t: "t4",
       co: "co4",
     },
     {
@@ -98,6 +102,7 @@ function Home() {
       image:
         "https://images.unsplash.com/photo-1579130781921-76e18892b57b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
       c: "c5",
+      t: "t5",
       co: "co5",
     },
     {
@@ -108,6 +113,7 @@ function Home() {
       image:
         "https://images.unsplash.com/flagged/photo-1564918031455-72f4e35ba7a6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
       c: "c6",
+      t: "t6",
       co: "co6",
     },
   ];
@@ -155,7 +161,7 @@ function Home() {
         scale: 0.75,
       })
       .to(".head", {
-        color: "#b2f5ea",
+        color: "#FFD700",
         duration: 0.1,
       });
 
@@ -194,53 +200,53 @@ function Home() {
       animate.kill();
     };
 
-  const slider = sliderRef.current;
+    const slider = sliderRef.current;
 
-  const createItemAnimation = (item, start, end, i) => {
-    gsap.fromTo(
-      item,
-      { 
-        autoAlpha: 0,
-        scale: 0.5,
-        xPercent: i % 2 === 0 ? -100 : 100,
-        height:400,
-        width:550, 
-      },
-      {
-        xPercent: 30,
-        autoAlpha: 1,
-        scale: 1,
-        duration: 3,
-        scrollTrigger: {
-          pin: ".content4",
-          trigger: item,
-          start: start,
-          end: end,
-          scrub: true,
+    const createItemAnimation = (item, start, end, i) => {
+      gsap.fromTo(
+        item,
+        {
+          autoAlpha: 0,
+          scale: 0.5,
+          xPercent: i % 2 === 0 ? -100 : 100,
+          height: 400,
+          width: 550,
         },
-      }
-    );
-  };
+        {
+          xPercent: 30,
+          autoAlpha: 1,
+          scale: 1,
+          duration: 3,
+          scrollTrigger: {
+            pin: ".content4",
+            trigger: item,
+            start: start,
+            end: end,
+            scrub: true,
+          },
+        }
+      );
+    };
 
-  const c1 = document.querySelector(".c1");
-  const c2 = document.querySelector(".c2");
-  const c3 = document.querySelector(".c3");
-  const c4 = document.querySelector(".c4");
-  const c5 = document.querySelector(".c5");
-  const c6 = document.querySelector(".c6");
+    const t1 = document.querySelector(".t1");
+    const t2 = document.querySelector(".t2");
+    const t3 = document.querySelector(".t3");
+    const t4 = document.querySelector(".t4");
+    const t5 = document.querySelector(".t5");
+    const t6 = document.querySelector(".t6");
 
-  createItemAnimation(c1, "top 40%", "top 20%", 1);
-  createItemAnimation(c2, "top 20%", "top 0%", 2);
-  createItemAnimation(c3, "top 0%", "top -20%", 3);
-  createItemAnimation(c4, "top -20%", "top -40%", 4);
-  createItemAnimation(c5, "top -40%", "top -60%", 5);
-  createItemAnimation(c6, "top -60%", "top -80%", 6);
+    createItemAnimation(t1, "top 40%", "top 20%", 1);
+    createItemAnimation(t2, "top 20%", "top 0%", 2);
+    createItemAnimation(t3, "top 0%", "top -20%", 3);
+    createItemAnimation(t4, "top -20%", "top -40%", 4);
+    createItemAnimation(t5, "top -40%", "top -60%", 5);
+    createItemAnimation(t6, "top -60%", "top -80%", 6);
 
-  () => {
-    animate.kill();
-  };
+    () => {
+      animate.kill();
+    };
 
-}, [loading]);
+  }, [loading]);
 
   return loading ? (
     <Loader />
@@ -262,8 +268,14 @@ function Home() {
       </div>
       <div className="container container01"></div>
       <div className="container">
-        <div className="content">
-          <h4>Programming Community of NIT Durgapur</h4>
+        <div style={{ color: "#FFFFFF" }} className="content">
+          <h2 style={{
+            fontWeight: "500",
+            textAlign: "center",
+            justifyContent: "center",
+            alignItems: "center",
+            fontSize: "1.6em",
+          }}>Programming Community of NIT Durgapur</h2>
           <hr style={{ flex: 1, color: "teal.200" }} className="mt-2" />
           <br></br>
           <p>
@@ -279,19 +291,26 @@ function Home() {
           </div>
         </div>
       </div>
-      <div className="content2 mt-0 mb-20">
+      <div style={{
+        width: "90vw"
+      }} className="whoareweheader">
         <h2
           style={{
-            color: "white",
+            color: "#FFD700",
             alignContent: "center",
             textAlign: "center",
-            fontSize: "25px",
-            fontWeight: "500",
+            fontSize: "35px",
+            fontWeight: "600",
           }}
         >
           Who are we ?
         </h2>
-        <hr style={{ flex: 1, color: "80CBC4" }}></hr>
+        <br></br>
+        <hr style={{ flex: 1, color: "80CBC4", border: "2px solid #80CBC4" }}></hr>
+        <br></br>
+      </div>
+      <div className="content2 mt-0 mb-20">
+
         <div ref={containerRef} className="WhoAreWeCard">
           <HStack
             spacing="30px"
@@ -335,7 +354,7 @@ function Home() {
                     w="280px"
                     color="black"
                     mt="4"
-                    bg="teal.100"
+                    //bg="teal.100"
                     rounded="md"
                     shadow="md"
                   >
@@ -357,20 +376,21 @@ function Home() {
                     rounded="full"
                     px={2}
                     fontSize="0.8em"
+                    backgroundColor="black"
                   >
                     Mission
                   </Badge>
                 </Stack>
                 <Stack align="center">
                   <br></br>
-                  <Text fontWeight="light">
+                  <Text fontWeight="light" color="white">
                     Working towards the improvement of campus&apos;s coding
                     culture by organizing regular coding classes and contests.
                   </Text>
                 </Stack>
                 <Flex>
                   <Spacer />
-                  <Button variant="solid" color="teal.200" size="sm">
+                  <Button variant="solid" color="teal.200" size="sm" backgroundColor="black">
                     Learn More
                   </Button>
                 </Flex>
@@ -407,7 +427,7 @@ function Home() {
                     w="280px"
                     color="black"
                     mt="4"
-                    bg="teal.100"
+                    //bg="teal.100"
                     rounded="md"
                     shadow="md"
                   >
@@ -429,20 +449,21 @@ function Home() {
                     rounded="full"
                     px={2}
                     fontSize="0.8em"
+                    backgroundColor="black"
                   >
                     Value
                   </Badge>
                 </Stack>
                 <Stack align="center">
                   <br></br>
-                  <Text fontWeight="light">
+                  <Text fontWeight="light" color="white">
                     We believe that helping each other is the only way. We take
                     care and always look to get the best out of everyone.
                   </Text>
                 </Stack>
                 <Flex>
                   <Spacer />
-                  <Button variant="solid" color="teal.200" size="sm">
+                  <Button variant="solid" color="teal.200" size="sm" backgroundColor="black">
                     Learn More
                   </Button>
                 </Flex>
@@ -479,7 +500,7 @@ function Home() {
                     w="280px"
                     color="black"
                     mt="4"
-                    bg="teal.100"
+                    //bg="teal.100"
                     rounded="md"
                     shadow="md"
                   >
@@ -501,20 +522,21 @@ function Home() {
                     rounded="full"
                     px={2}
                     fontSize="0.8em"
+                    backgroundColor="black"
                   >
                     Vision
                   </Badge>
                 </Stack>
                 <Stack align="center">
                   <br></br>
-                  <Text fontWeight="light">
+                  <Text fontWeight="light" color="white">
                     To grow as a strong coding community and uphold the
                     integrity of NIT Durgapur as a technical institution.
                   </Text>
                 </Stack>
                 <Flex>
                   <Spacer />
-                  <Button variant="solid" color="teal.200" size="sm">
+                  <Button variant="solid" color="teal.200" size="sm" backgroundColor="black">
                     Learn More
                   </Button>
                 </Flex>
@@ -545,31 +567,39 @@ function Home() {
                   {myacti.map((item) => (
                     <li
                       key={item.key}
-                      className={item.c}
-                      style={{
-                        backgroundImage: `url(${item.image})`,
-                        borderRadius: "10px",
-                      }}
+                      className={item.t}
+
                     >
-                     <div 
-                      style={{
-                          position: "absolute",
-                          top: 0,
-                          left: 0,
+                      <div className={item.c}
+                        style={{
+                          backgroundImage: `url(${item.image})`,
                           borderRadius: "10px",
-                          width: "100%",
-                          height: "100%",
-                          backgroundImage: "linear-gradient(to top right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))"
-                      }} 
-                      />
-                      <div className={item.co} 
-                      style={{
-                        backgroundColor: "rgba(0, 0, 0, 0)",
-                        borderRadius: "10px",
-                      }}>
-                        <h2 className="title mt-2 mb-1">{item.title}</h2>
-                        <hr></hr>
-                        <p className="description mb-0">{item.description}</p>
+                        }}
+                      >
+                        <div
+                          style={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            borderRadius: "10px",
+                            width: "100%",
+                            height: "100%",
+                            backgroundImage: "linear-gradient(to top right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))"
+                          }}
+                        />
+                        <div className={item.co}
+                          style={{
+                            backgroundColor: "rgba(0, 0, 0, 0)",
+                            borderRadius: "10px",
+                          }}>
+                          <h2 className="title mt-2 mb-1">{item.title}</h2>
+                          <hr></hr>
+                          <p className="description mb-0">{item.description}</p>
+                        </div>
+                      </div>
+                      <div style={{ color: "white" }} className="detail">
+                        <h2>{item.title}</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor sit vitae libero a dolores eaque aliquam, cumque harum facere inventore.</p>
                       </div>
                     </li>
                   ))}
@@ -608,8 +638,8 @@ function Home() {
                   />
                 </svg>
                 <br></br>
-                <Text fontWeight="light">550+</Text>
-                <Text>Hours of Teaching</Text>
+                <Text color={"white"} fontWeight="light">550+</Text>
+                <Text color={"white"}  >Hours of Teaching</Text>
               </Box>
             </div>
           </Card>
@@ -627,8 +657,8 @@ function Home() {
                   />
                 </svg>
                 <br></br>
-                <Text fontWeight="light">9+</Text>
-                <Text>Years of Experience</Text>
+                <Text color={"white"} fontWeight="light">9+</Text>
+                <Text color={"white"} >Years of Experience</Text>
               </Box>
             </div>
           </Card>
@@ -646,8 +676,8 @@ function Home() {
                   />
                 </svg>
                 <br></br>
-                <Text fontWeight="light">70+</Text>
-                <Text>On/Offline Contests</Text>
+                <Text color={"white"} fontWeight="light">70+</Text>
+                <Text color={"white"} >On/Offline Contests</Text>
               </Box>
             </div>
           </Card>
@@ -665,8 +695,8 @@ function Home() {
                   />
                 </svg>
                 <br></br>
-                <Text fontWeight="light">2000+</Text>
-                <Text>Users</Text>
+                <Text color={"white"} fontWeight="light">2000+</Text>
+                <Text color={"white"} >Users</Text>
               </Box>
             </div>
           </Card>
@@ -686,7 +716,7 @@ function Home() {
         </h2>
         <hr style={{ flex: 1, color: "80CBC4" }}></hr>
         <div className="row mt-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 place-content-center mx-auto">
             <a href="https://www.jetbrains.com/" target="_blank">
               <Image
                 className="sponsorImg ml-4 max-w-120 max-h-120"
@@ -755,6 +785,7 @@ function Home() {
             </a>
           </div>
         </div>
+
       </div>
     </div>
   );
