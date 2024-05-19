@@ -56,7 +56,7 @@ const Collapsible = ({ idx, item, setFullScreen }) => {
                   color:
                     topicIdx == topicSelected && levelSelected == idx
                       ? "#149ECA"
-                      : "#BDE0FF",
+                      : "#A5CCE8",
                 }}
               >
                 ⦿ <span style={{ marginRight: "3px" }} />
@@ -87,10 +87,10 @@ const Collapsible = ({ idx, item, setFullScreen }) => {
                   <div
                     key={subtopicIdx}
                     onClick={() => subTopicSelectionHandler(sub.id)}
-                    className="font-head font-semibold text-sm pb-4 pl-12 cursor-pointer"
+                    className="font-head font-semibold text-left pb-4 pl-12 cursor-pointer"
                     style={{
                       color:
-                        sub.id === subTopicRef.current ? "#149ECA" : "#BDE0FF",
+                        sub.id === subTopicRef.current ? "#149eca":"#0b5394",
                     }}
                   >
                     ○ <span style={{ marginRight: "3px" }} />
