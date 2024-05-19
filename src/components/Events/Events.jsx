@@ -104,8 +104,10 @@ const Events = () => {
         // marginLeft={"0vw"}
         // width={"100%"}
         // minHeight={"92vh"}
+        display={"flex"}   //added flex caused the white line to shrink
+        flexDirection={"column"}
         bg="gray.800"
-        justifyContent={"center"}
+        justifyContent={"flex-start"}
         alignItems={"center"}
       >
         <Box mt="2%">
@@ -128,7 +130,7 @@ const Events = () => {
             textAlign="center"
             color="whitesmoke"
           >
-            We don remember the dates, we remember events!
+            We don't remember the dates, we remember events!
           </Text>
           <hr className="m-auto mt-[2em] w-[90%] d-flex align-center color-secondaryText " />
         </Box>
@@ -154,20 +156,6 @@ const Events = () => {
         }
 
         {/*The main box with all the event cards */}
-        {/* <Flex
-          // mt={5}
-          flexDirection={"row"}
-          flexWrap={"wrap"}
-          justifyContent={"flex-start"}
-          alignItems={"flex-start"}
-          // maxWidth={isMobile ? "100%" : "80vw"}
-          maxWidth={"100%"}
-        >
-          {Events?.results?.map((event, key) => (
-            <EventCard key={key} event={event} />
-          ))}
-        </Flex> */}
-
         <SimpleGrid
           // mt={5}
           spacing={2}

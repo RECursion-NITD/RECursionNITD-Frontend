@@ -45,7 +45,7 @@ const EventCard = ({ event }) => {
       <Box
         className="col-md-4 lg-4 col-sm-6 item"
         // p={3}
-        m={"10px 10px"}
+        m={"17px 10px"}
         display="flex"
         justifyContent="center"
         width="300px"
@@ -112,7 +112,7 @@ const EventCard = ({ event }) => {
 
           <Button
             as="a"
-            margin={4}
+            margin={2}
             p={2}
             sx={{
               borderRadius: "8px",
