@@ -196,14 +196,22 @@ const ContentsPage = () => {
                                   : "Expand"
                               }
                             />
-                            <Text
-                              fontSize="md"
+                            <Box
+                              as="button"
+                              onClick={() =>
+                                toggleTopic(levelIndex, topicIndex)
+                              }
+                              _hover={{ cursor: "pointer" }}
                               padding="15px"
-                              fontWeight="bold"
-                              color="#10344F"
                             >
-                              {topic.Topic_title}
-                            </Text>
+                              <Text
+                                fontSize="md"
+                                fontWeight="bold"
+                                color="#10344F"
+                              >
+                                {topic.Topic_title}
+                              </Text>
+                            </Box>
                           </Flex>
                           <Collapse
                             in={
@@ -398,14 +406,22 @@ const ContentsPage = () => {
                                   : "Expand"
                               }
                             />
-                            <Text
-                              fontSize="md"
+                            <Box
+                              as="button"
+                              onClick={() =>
+                                toggleTopic(levelIndex, topicIndex)
+                              }
+                              _hover={{ cursor: "pointer" }}
                               padding="15px"
-                              fontWeight="bold"
-                              color="#10344F"
                             >
-                              {topic.Topic_title}
-                            </Text>
+                              <Text
+                                fontSize="md"
+                                fontWeight="bold"
+                                color="#10344F"
+                              >
+                                {topic.Topic_title}
+                              </Text>
+                            </Box>
                           </Flex>
                           <Collapse
                             in={
