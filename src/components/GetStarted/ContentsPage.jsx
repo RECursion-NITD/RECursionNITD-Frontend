@@ -39,7 +39,7 @@ const ContentsPage = () => {
   const [reduceContainerSize, setReduceContainerSize] = useState(false);
   const [openTopic, setOpenTopic] = useState(null);
 
-  const [isMobile] = useMediaQuery("(max-width: 768px)");
+  const [isMobile] = useMediaQuery("(max-width: 1013px)");
 
   const toggleVisibility = (index) => {
     setVisibleContainer(visibleContainer === index ? null : index);
@@ -69,6 +69,7 @@ const ContentsPage = () => {
     return (
       <Flex
         minHeight="92vh"
+        minWidth="90vw"
         margin={0}
         padding="15px"
         mt="8vh"
@@ -131,7 +132,7 @@ const ContentsPage = () => {
             {contents.map((level, levelIndex) => (
               <React.Fragment key={levelIndex}>
                 <Container
-                  width="90vw"
+                  width="95vw"
                   style={{
                     background: `#${level.Color}`,
                     color: "#F4FBFF",
@@ -159,7 +160,7 @@ const ContentsPage = () => {
                         duration: 0.7,
                       }}
                       style={{
-                        width: "90vw",
+                        width: "100%",
                         background: `#${level.Color}`,
                         color: "#F4FBFF",
                         margin: "0",
