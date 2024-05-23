@@ -14,6 +14,8 @@ const Footer = () => {
         alignItems: "center",
         display: "flex",
         flexDirection: "column",
+        marginTop: "5px",
+        backgroundImage: "fixed",
       }}
     >
       <footer
@@ -57,7 +59,7 @@ const Footer = () => {
             }}
           >
             <div>
-              <h2 style={{ margin: "5px" }}>
+              <h2 style={{ margin: "5px", fontSize: "1.5rem" }}>
                 <strong>Contacts</strong>
               </h2>
               <div style={{ display: "flex", alignItems: "center" }}>
@@ -91,7 +93,9 @@ const Footer = () => {
           >
             <div className="col-md-4 col-xl-5 m-0 d-flex">
               <div className="pr-xl-4">
-                <strong>Contribute to this community</strong>
+                <strong style={{ fontSize: "1.5rem" }}>
+                  Contribute to this community
+                </strong>
                 <br />
                 <div
                   style={{
@@ -143,11 +147,13 @@ const Footer = () => {
                   Follow us on our social media handles.
                 </p>
                 <p className="text-xs" style={{ marginTop: "20px" }}>
-                  Designed and developed by Recursion NITDGP Team. <br />
-                  All rights reserved.
+                  {/* Designed and developed by Recursion NITDGP Team. <br />
+                  All rights reserved. */}
                 </p>
                 <p className="rights">
-                  <strong>Developed & designed with ❤️ by Web Team 24-25</strong>
+                  <strong>
+                    Developed & designed with ❤️ by Web Team 24-25
+                  </strong>
                   <br />
                   <span>© </span>
                   <span className="copyright-year">
