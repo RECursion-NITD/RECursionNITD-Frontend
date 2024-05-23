@@ -18,27 +18,27 @@ const SearchExperiences = ({ setInterviewExperiences,setSearch,setCompany,setInt
   ];
   const interviewType = ["All", "Internship", "Full Time"];
   return (
-    <div className="w-full mt-4 mb-4 flex flex-col md:flex-row justify-between">
+    <div className="mt-4 mb-4 flex flex-col justify-between">
       <div className="flex w-full md:w-1/2 justify-start ml-0 mr-3">
         <input
-          className="h-9 w-full outline-none me-2 border-outline rounded-lg ps-3 pe-2 text-black"
+          className="h-9 flex-1 ml-1.5 outline-none me-2 border-outline rounded-lg ps-3 pe-2 text-black"
           onChange={(e) => {
             setSearch(e.target.value);
           }}
           placeholder="Search by title"
         />
         <button
-          className="h-9 w-3/10 md:w-1/6 bg-primary text-white rounded-lg font-alt p-1 font-semibold"
+          className="h-9 flex-none bg-primary text-white rounded-lg font-alt p-1 mb-3.5 font-semibold"
           onClick={FilterHandler}
         >
           Search
         </button>
       </div>
-      <div className="flex w-full md:w-1/2 justify-between md:justify-end mt-4 md:mt-0">
+      <div className="flex w-full md:w-1/2">
         <select
           onChange={(e) => setCompany(e.target.value==="Company" ? null : e.target.value)}
           value={Company === null ? "Company" : Company}
-          className="h-9 w-2/6 me-2 border-outline rounded-lg ps-3 pe-2"
+          className="h-9 flex-auto me-2 border-outline rounded-lg ps-3 pe-2"
         >
           {companies.map((company, idx) => {
             return (
@@ -49,7 +49,7 @@ const SearchExperiences = ({ setInterviewExperiences,setSearch,setCompany,setInt
           })}
         </select>
         <select
-          className="h-9 w-2/6 rounded-lg ps-3 pe-2"
+          className="h-9 flex-auto rounded-lg ps-3 pe-2"
           onChange={(e) => setInterviewType(e.target.value==="All" ? null : e.target.value)}
           value={InterviewType === null ? "All" : InterviewType}
         >
