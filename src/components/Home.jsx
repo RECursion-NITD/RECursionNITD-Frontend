@@ -302,13 +302,16 @@ function Home() {
       <div className="container container01"></div>
       <div className="container">
         <div style={{ color: "#FFFFFF" }} className="content">
-          <h2 style={{
-            fontWeight: "500",
+          <div className="shadow">
+            <p>Programming Community of NIT Durgapur</p>
+            <h2 style={{
+            fontWeight: "600",
             textAlign: "center",
             justifyContent: "center",
             alignItems: "center",
-            fontSize: "1.6em",
+            fontSize: ".4em",
           }}>Programming Community of NIT Durgapur</h2>
+          </div>
           <hr style={{ flex: 1, color: "teal.200" }} className="mt-2" />
           <br></br>
           <p>
@@ -351,6 +354,8 @@ function Home() {
         justifyContent: "center",
         flexDirection: "column",
       }} className="whoareweheader">
+        <div className="shadow">
+          <p>Who are we ?</p>
         <h2
           style={{
             color: "#FFD700",
@@ -362,6 +367,7 @@ function Home() {
         >
           Who are we ?
         </h2>
+        </div>
         <br></br>
         <hr style={{ flex: 1, width: "100%", color: "80CBC4", border: "2px solid #80CBC4" }}></hr>
         <br></br>
@@ -387,7 +393,7 @@ function Home() {
                 height="400px"
                 rounded="20px"
                 overflow="hidden"
-                bg="teal.900"
+                bg="#31363F"
                 cursor="pointer"
                 _hover={{
                   border: "1px solid white",
@@ -462,7 +468,7 @@ function Home() {
                 height="400px"
                 rounded="20px"
                 overflow="hidden"
-                bg="teal.900"
+                bg="#31363F"
                 cursor="pointer"
                 _hover={{
                   border: "1px solid white",
@@ -537,7 +543,7 @@ function Home() {
                 height="400px"
                 rounded="20px"
                 overflow="hidden"
-                bg="teal.900"
+                bg="#31363F"
                 cursor="pointer"
                 _hover={{
                   border: "1px solid white",
@@ -610,7 +616,9 @@ function Home() {
       </div>
       {/* <div className="content3"></div> */}
       <div className="content4 mt-0 mb-20">
-        <h2
+        <div className="shadow">
+          <p>Our Activities</p>
+          <h2
           style={{
             color: "white",
             alignContent: "center",
@@ -621,6 +629,7 @@ function Home() {
         >
           Our Activities
         </h2>
+        </div>
         <hr></hr>
         <div className="wrapper">
           <div className="titlecontainer">
@@ -668,7 +677,9 @@ function Home() {
       </div>
       <div className="contentstop"></div>
       <div className="content5">
-        <h2
+        <div className="shadow">
+          <p>So far we have witnessed...</p>
+          <h2
           style={{
             color: "white",
             alignContent: "center",
@@ -679,11 +690,13 @@ function Home() {
         >
           So far we have witnessed...
         </h2>
+        </div>
         <hr style={{ flex: 1, color: "80CBC4" }}></hr>
-        <HStack spacing="20px">
+        <StackComponent spacing="20px">
           <Card w="200px" height="200px" overflow="hidden" border="none" mt={8}>
             <div className={"slide-fade1 visible"}>
-              <Box py="60px" w="200px" mt="5" bg="#001f20" shadow="md">
+              <Box py="60px" w="200px" mt="5" 
+                bg="#31363F" shadow="md">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="3em"
@@ -702,7 +715,8 @@ function Home() {
           </Card>
           <Card w="200px" height="200px" overflow="hidden" border="none" mt={8}>
             <div className={"slide-fade1 visible"}>
-              <Box py="60px" w="200px" mt="5" bg="#001f20" shadow="md">
+              <Box py="60px" w="200px" mt="5" 
+                bg="#31363F" shadow="md">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="3em"
@@ -721,7 +735,8 @@ function Home() {
           </Card>
           <Card w="200px" height="200px" overflow="hidden" border="none" mt={8}>
             <div className="slide-fade1 visible">
-              <Box py="60px" w="200px" mt="5" bg="#001f20" shadow="md">
+              <Box py="60px" w="200px" mt="5" 
+                bg="#31363F" shadow="md">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="3em"
@@ -740,7 +755,8 @@ function Home() {
           </Card>
           <Card w="200px" height="200px" overflow="hidden" border="none" mt={8}>
             <div className="slide-fade1 visible">
-              <Box py="60px" w="200px" mt="5" bg="#001f20" shadow="md">
+              <Box py="60px" w="200px" mt="5" 
+                bg="#31363F" shadow="md">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="3em"
@@ -757,10 +773,12 @@ function Home() {
               </Box>
             </div>
           </Card>
-        </HStack>
+        </StackComponent>
       </div>
       <div className="content6 mt-20">
-        <h2
+        <div className="shadow">
+          <p>Our Past Sponsors</p>
+          <h2
           style={{
             color: "white",
             alignContent: "center",
@@ -771,6 +789,7 @@ function Home() {
         >
           Our Past Sponsors
         </h2>
+        </div>
         <hr style={{ flex: 1, color: "80CBC4" }}></hr>
         <div className="row mt-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 place-content-center mx-auto">

@@ -296,7 +296,10 @@
     height: 1500px;
   }
   .container{
-    margin-bottom: 150px;
+    margin-bottom: 75px;
+  }
+  .content{
+    margin-top: 50px;
   }
 }
 
@@ -629,4 +632,24 @@ ul, ol {
 }
 .custom-font-size {
   font-size: 16px;
+}
+
+.shadow{
+  color: #ccc;
+  position: relative;
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.shadow p{
+  font-weight: 100;
+  opacity: 0.2;
+}
+
+.shadow h2{
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
 }
