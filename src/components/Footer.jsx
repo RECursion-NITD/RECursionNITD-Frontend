@@ -9,7 +9,7 @@ const Footer = () => {
     <div
       className="content6 mt-20"
       style={{
-        width: "100vw",
+        width: "100%",
         justifyContent: "center",
         alignItems: "center",
         display: "flex",
