@@ -25,7 +25,8 @@ const Layout = () => {
     <>
       <Flex
         h="8vh"
-        bg="#171923"
+        backdropFilter="auto"
+        backdropBlur="15px"
         alignItems="center"
         justifyContent="space-between"
         px={{ base: "1em", md: "2em" }}
@@ -65,6 +66,7 @@ const Layout = () => {
           listStyleType="none"
           margin="0"
           padding="0"
+          fontWeight="bold"
         >
           <MenuItem to="/experience" noButton>
             Interview Experiences
@@ -78,6 +80,16 @@ const Layout = () => {
           <MenuItem to="/team" noButton>
             Team
           </MenuItem>
+        </Flex>
+
+        <Flex
+          className="navbar-links"
+          display={{ base: "none", md: "flex" }}
+          alignItems="center"
+          listStyleType="none"
+          margin="0"
+          padding="0"
+        >
           {!user ? (
             <MenuItem to="/login">
               <Button
@@ -85,7 +97,7 @@ const Layout = () => {
                 bg="lightGreen"
                 color="black"
                 fontWeight="bold"
-                borderRadius="8px"
+                borderRadius="15px"
                 margin="5px"
                 padding="10px"
                 _hover={{ bg: "#60C80A" }}
