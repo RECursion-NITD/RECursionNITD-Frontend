@@ -15,8 +15,18 @@
   justify-content: center;
   width: fit-content;
   min-height: 100vh;
-  min-width: 100vw;
+  width: 100%;
   height: fit-content;
+}
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.features{
+  margin-top: 0;
 }
 
 .content,.container01 {
@@ -47,6 +57,8 @@
   border-radius: 20px;
   padding: 2em;
   width: 90vw;
+  margin: 0;
+  margin-top: 200px;
 }
 
 .homepageCard {
@@ -65,6 +77,7 @@
   align-items: center;
   position: relative;
   height: 120vh;
+  width: 100%;
   z-index: 1;
 }
 .content2::before {
@@ -267,6 +280,27 @@
 	.our-team {
 		margin-bottom: 20px;
 	}
+  .card1{
+    position: absolute;
+    top: 0;
+  }
+  .card2{
+    position: absolute;
+    top: 35%;
+  }
+  .card3{
+    position: absolute;
+    top: 70%;
+  }
+  .content2{
+    height: 1500px;
+  }
+  .container{
+    margin-bottom: 75px;
+  }
+  .content{
+    margin-top: 50px;
+  }
 }
 
 .markdown-style{
@@ -460,15 +494,10 @@ ul, ol {
 
 .t1,.t2,.t3,.t4,.t5,.t6 {
   scroll-snap-align: start;
-  /* width: 400px;
-  height: 250px; */
   list-style-type: none;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  /* z-index: 1; */
-  /* background-position: center;
-  background-size: cover; */
   border-radius: 20px;
   box-shadow: 0 20px 30px rgba(255,255,255,0.3) inset;
   transition: transform 0.1s, left 0.75s, top 0.75s, width 0.75s, height 0.75s;
@@ -489,8 +518,8 @@ ul, ol {
   z-index: 9;
   position: absolute;
   left: 100%;
-  background-color: #001f20;
   top: 0;
+  background-color: #001f20;
   width: 75%;
   height: 100%;
   padding-top: 25%;
@@ -517,6 +546,9 @@ ul, ol {
   border-radius: 0;
   box-shadow: none;
   opacity: 1;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 .co1,.co2,.co3,.co4,.co5,.co6 {
   width: min(30vw,400px);
@@ -600,4 +632,24 @@ ul, ol {
 }
 .custom-font-size {
   font-size: 16px;
+}
+
+.shadow{
+  color: #ccc;
+  position: relative;
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.shadow p{
+  font-weight: 100;
+  opacity: 0.2;
+}
+
+.shadow h2{
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
 }
