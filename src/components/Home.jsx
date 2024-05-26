@@ -153,7 +153,7 @@ function Home() {
           trigger: ".container",
           pin: ".headContainer",
           start: "top top",
-          end: "bottom 40%",
+          end: "bottom 60%",
           scrub: true,
           invalidateOnRefresh: true,
         },
@@ -191,29 +191,29 @@ function Home() {
     };
 
 
-    const createCardAnimation2 = (card, start, end, i) => {
-      gsap.fromTo(
-        card,
-        {
-          autoAlpha: 0,
-          scale: 0.5,
-          xPercent: i % 2 === 0 ? -100 : 100,
-        },
-        {
-          xPercent: 10,
-          autoAlpha: 1,
-          scale: 1,
-          duration: 3,
-          scrollTrigger: {
-            pin: ".content2",
-            trigger: card,
-            start,
-            end,
-            scrub: true,
-          },
-        }
-      );
-    };
+    // const createCardAnimation2 = (card, start, end, i) => {
+    //   gsap.fromTo(
+    //     card,
+    //     {
+    //       autoAlpha: 0,
+    //       scale: 0.5,
+    //       xPercent: i % 2 === 0 ? -100 : 100,
+    //     },
+    //     {
+    //       xPercent: 10,
+    //       autoAlpha: 1,
+    //       scale: 1,
+    //       duration: 3,
+    //       scrollTrigger: {
+    //         pin: ".content2",
+    //         trigger: card,
+    //         start,
+    //         end,
+    //         scrub: true,
+    //       },
+    //     }
+    //   );
+    // };
 
     const missionCard = document.querySelector(".missionCard");
     const visionCard = document.querySelector(".visionCard");
@@ -239,11 +239,11 @@ function Home() {
           autoAlpha: 0,
           scale: 0.5,
           xPercent: i % 2 === 0 ? -100 : 100,
-          height: 400,
-          width: 550,
+          // height: 400,
+          // width: 550,
         },
         {
-          xPercent: screenWidth > 900 ? 30 : 50,
+          xPercent: screenWidth > 900 ? 50 : 0,
           autoAlpha: 1,
           scale: 1,
           duration: 3,
@@ -303,14 +303,14 @@ function Home() {
       <div className="container">
         <div style={{ color: "#FFFFFF" }} className="content">
           <div className="shadow">
-            <p>Programming Community of NIT Durgapur</p>
+            {/* <p>Programming Community of NIT Durgapur</p> */}
             <h2 style={{
-            fontWeight: "600",
-            textAlign: "center",
-            justifyContent: "center",
-            alignItems: "center",
-            fontSize: ".4em",
-          }}>Programming Community of NIT Durgapur</h2>
+              fontWeight: "600",
+              textAlign: "center",
+              justifyContent: "center",
+              alignItems: "center",
+              fontSize: ".4em",
+            }}>Programming Community of NIT Durgapur</h2>
           </div>
           <hr style={{ flex: 1, color: "teal.200" }} className="mt-2" />
           <br></br>
@@ -327,24 +327,24 @@ function Home() {
           </div>
         </div>
         <div className="features">
-                <div
-                  style={{
-                    padding: "1em",
-                    margin: "1em",
-                    borderRight: "solid white 1px",
-                  }}
-                >
-                  <h1>Have a Ques ? </h1>
-                  <Button style={{ color: "black", backgroundColor: "yellow" }}>
-                    AskREC
-                  </Button>
-                </div>
-                <div>
-                  <h1>New to programming ? </h1>
-                  <Button style={{ color: "black", backgroundColor: "yellow" }}>
-                    get Started
-                  </Button>
-                </div>
+          <div
+            style={{
+              padding: "1em",
+              margin: "1em",
+              borderRight: "solid white 1px",
+            }}
+          >
+            <h1>Have a Ques ? </h1>
+            <Button style={{ color: "black", backgroundColor: "yellow" }}>
+              AskREC
+            </Button>
+          </div>
+          <div>
+            <h1>New to programming ? </h1>
+            <Button style={{ color: "black", backgroundColor: "yellow" }}>
+              get Started
+            </Button>
+          </div>
         </div>
       </div>
       <div style={{
@@ -355,28 +355,31 @@ function Home() {
         flexDirection: "column",
       }} className="whoareweheader">
         <div className="shadow">
-          <p>Who are we ?</p>
-        <h2
-          style={{
-            color: "#FFD700",
-            alignContent: "center",
-            textAlign: "center",
-            fontSize: "35px",
-            fontWeight: "600",
-          }}
-        >
-          Who are we ?
-        </h2>
+          {/* <p>Who are we ?</p> */}
+          <h2
+            style={{
+              color: "#FFD700",
+              alignContent: "center",
+              textAlign: "center",
+              fontSize: "35px",
+              fontWeight: "600",
+              marginTop: "50px",
+            }}
+          >
+            WHO ARE WE ?
+          </h2>
         </div>
         <br></br>
         <hr style={{ flex: 1, width: "100%", color: "80CBC4", border: "2px solid #80CBC4" }}></hr>
         <br></br>
       </div>
+
       <div className="content2 mt-0 mb-20">
 
         <div ref={containerRef} className="WhoAreWeCard">
           <StackComponent
-            spacing="30px"
+            spacing={screenWidth < 900 ? "0px" : "1vw"}
+            justifyContent={screenWidth < 900 ? "center" : "flex-start"}
             divider={
               <StackDivider
                 className="dividerline"
@@ -614,21 +617,21 @@ function Home() {
           </StackComponent>
         </div>
       </div>
-      {/* <div className="content3"></div> */}
+      <div className="content3"></div>
       <div className="content4 mt-0 mb-20">
         <div className="shadow">
-          <p>Our Activities</p>
+          {/* <p>Our Activities</p> */}
           <h2
-          style={{
-            color: "white",
-            alignContent: "center",
-            textAlign: "center",
-            fontSize: "25px",
-            fontWeight: "500",
-          }}
-        >
-          Our Activities
-        </h2>
+            style={{
+              color: "#FFD700",
+              alignContent: "center",
+              textAlign: "center",
+              fontSize: "30px",
+              fontWeight: "600",
+            }}
+          >
+            OUR ACTIVITIES
+          </h2>
         </div>
         <hr></hr>
         <div className="wrapper">
@@ -647,12 +650,12 @@ function Home() {
                           backgroundImage: `url(${item.image})`,
                         }}
                       >
-                        <div
-                          style={{
-                            borderRadius: "10px",
-                            backgroundImage: "linear-gradient(to top right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))"
-                          }}
-                        />
+                        {/* <div
+                            style={{
+                              borderRadius: "10px",
+                              backgroundImage: "linear-gradient(to top right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))"
+                            }}
+                          /> */}
                         <div className={item.co}
                           style={{
                             backgroundColor: "rgba(0, 0, 0, 0)",
@@ -678,24 +681,24 @@ function Home() {
       <div className="contentstop"></div>
       <div className="content5">
         <div className="shadow">
-          <p>So far we have witnessed...</p>
+          {/* <p>So far we have witnessed...</p> */}
           <h2
-          style={{
-            color: "white",
-            alignContent: "center",
-            textAlign: "center",
-            fontSize: "25px",
-            fontWeight: "500",
-          }}
-        >
-          So far we have witnessed...
-        </h2>
+            style={{
+              color: "#FFD700",
+              alignContent: "center",
+              textAlign: "center",
+              fontSize: "25px",
+              fontWeight: "500",
+            }}
+          >
+            SO FAR WE HAVE WITNESSED...
+          </h2>
         </div>
         <hr style={{ flex: 1, color: "80CBC4" }}></hr>
-        <StackComponent spacing="20px">
+        <StackComponent spacing="1vw">
           <Card w="200px" height="200px" overflow="hidden" border="none" mt={8}>
             <div className={"slide-fade1 visible"}>
-              <Box py="60px" w="200px" mt="5" 
+              <Box py="60px" w="200px" mt="5"
                 bg="#31363F" shadow="md">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -715,7 +718,7 @@ function Home() {
           </Card>
           <Card w="200px" height="200px" overflow="hidden" border="none" mt={8}>
             <div className={"slide-fade1 visible"}>
-              <Box py="60px" w="200px" mt="5" 
+              <Box py="60px" w="200px" mt="5"
                 bg="#31363F" shadow="md">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -735,7 +738,7 @@ function Home() {
           </Card>
           <Card w="200px" height="200px" overflow="hidden" border="none" mt={8}>
             <div className="slide-fade1 visible">
-              <Box py="60px" w="200px" mt="5" 
+              <Box py="60px" w="200px" mt="5"
                 bg="#31363F" shadow="md">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -755,7 +758,7 @@ function Home() {
           </Card>
           <Card w="200px" height="200px" overflow="hidden" border="none" mt={8}>
             <div className="slide-fade1 visible">
-              <Box py="60px" w="200px" mt="5" 
+              <Box py="60px" w="200px" mt="5"
                 bg="#31363F" shadow="md">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -777,21 +780,21 @@ function Home() {
       </div>
       <div className="content6 mt-20">
         <div className="shadow">
-          <p>Our Past Sponsors</p>
+          {/* <p>Our Past Sponsors</p> */}
           <h2
-          style={{
-            color: "white",
-            alignContent: "center",
-            textAlign: "center",
-            fontSize: "25px",
-            fontWeight: "500",
-          }}
-        >
-          Our Past Sponsors
-        </h2>
+            style={{
+              color: "#FFD700",
+              alignContent: "center",
+              textAlign: "center",
+              fontSize: "25px",
+              fontWeight: "500",
+            }}
+          >
+            OUR PAST SPONSORS
+          </h2>
         </div>
         <hr style={{ flex: 1, color: "80CBC4" }}></hr>
-        <div className="row mt-4">
+        <div className="row mt-4 pb-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 place-content-center mx-auto">
             <a href="https://www.jetbrains.com/" target="_blank">
               <Image
