@@ -25,8 +25,9 @@ const Layout = () => {
     <>
       <Flex
         h="8vh"
-        bg="#171923"
-        alignItems="space-around"
+        backdropFilter="auto"
+        backdropBlur="15px"
+        alignItems="center"
         justifyContent="space-between"
         px={{ base: "1em", md: "2em" }}
         position="fixed"
@@ -40,6 +41,7 @@ const Layout = () => {
             style={{
               textDecoration: "none",
               display: "flex",
+              alignItems: "center",
             }}
           >
             <img
@@ -64,6 +66,7 @@ const Layout = () => {
           listStyleType="none"
           margin="0"
           padding="0"
+          fontWeight="bold"
         >
           <MenuItem to="/experience" noButton>
             Interview Experiences
@@ -77,15 +80,24 @@ const Layout = () => {
           <MenuItem to="/team" noButton>
             Team
           </MenuItem>
+        </Flex>
+
+        <Flex
+          className="navbar-links"
+          display={{ base: "none", md: "flex" }}
+          alignItems="center"
+          listStyleType="none"
+          margin="0"
+          padding="0"
+        >
           {!user ? (
             <MenuItem to="/login">
               <Button
-                onClick={logoutUser}
                 variant="solid"
                 bg="lightGreen"
                 color="black"
                 fontWeight="bold"
-                borderRadius="8px"
+                borderRadius="15px"
                 margin="5px"
                 padding="10px"
                 _hover={{ bg: "#60C80A" }}
@@ -140,7 +152,6 @@ const Layout = () => {
             {!user ? (
               <MenuItem to="/login">
                 <Button
-                  onClick={logoutUser}
                   variant="solid"
                   bg="lightGreen"
                   color="black"

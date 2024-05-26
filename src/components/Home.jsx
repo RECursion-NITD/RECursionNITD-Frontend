@@ -373,6 +373,7 @@ function Home() {
         <hr style={{ flex: 1, width: "100%", color: "80CBC4", border: "2px solid #80CBC4" }}></hr>
         <br></br>
       </div>
+
       <div className="content2 mt-0 mb-20">
 
         <div ref={containerRef} className="WhoAreWeCard">

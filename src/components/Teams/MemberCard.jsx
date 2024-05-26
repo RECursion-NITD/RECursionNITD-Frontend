@@ -16,9 +16,10 @@ const TeamMember = ({ member }) => (
         src={member.image}
         alt={member.name}
         borderRadius="100%"
-        borderColor="#343A3F"
-        borderWidth="10px"
+        borderColor="white"
+        borderWidth="3px"
         borderStyle="solid"
+        boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
       />
 
       <List className="social-links">

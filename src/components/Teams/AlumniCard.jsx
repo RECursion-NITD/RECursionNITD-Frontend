@@ -6,18 +6,25 @@ import {
   Card,
   CardBody,
   Stack,
+  Flex,
 } from "@chakra-ui/react";
 import { FaLinkedin } from "react-icons/fa";
 const AlumniCard = ({ alumni }) => (
   <Card
     // direction={{ base: "column", sm: "row" }}
+    w="400px"
+    h="150px"
+    // p="50px"
+    m="10px"
     display="flex"
     flexDirection="row"
     overflow="hidden"
     variant="outline"
     bg="whiteAlpha.200"
-    border="none"
-    boxShadow="2px 2px 4px #BDE0FF"
+    border="solid"
+    borderColor="white"
+    borderWidth="1px"
+    // boxShadow="2px 2px 4px #BDE0FF"
     _hover={{ transform: "scale(1.05)", transition: "ease-in 0.3s" }}
     mb="15px"
   >
@@ -47,7 +54,11 @@ const AlumniCard = ({ alumni }) => (
           display="flex"
           alignItems="center"
         >
-          <FaLinkedin style={{ marginRight: "0.5rem" }} /> LinkedIn Profile
+          {/* <FaLinkedin style={{ marginRight: "0.5rem", alignItems:"center"}} /> LinkedIn Profile */}
+          <Flex alignItems="center">
+            <FaLinkedin style={{ marginRight: "0.5rem" }} />
+            <span>LinkedIn Profile</span>
+          </Flex>
         </Link>
       </CardBody>
     </Stack>

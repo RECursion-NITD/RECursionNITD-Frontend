@@ -5,7 +5,7 @@ import { getEvents, FilterSearchEvents, getNextEvents } from "../../api/events";
 import useLoading from "../../hooks/useLoading";
 import Loader from "../Loader";
 import FilterEvent from "./FilterEvent";
-import { Box, Flex, Heading, useMediaQuery, Text,Button } from "@chakra-ui/react";
+import { Box, Flex, Heading, useMediaQuery, Text,Button, SimpleGrid } from "@chakra-ui/react";
 import { EditIcon } from '@chakra-ui/icons'
 import EventCard from "./EventCard";
 import useAuth from "../../hooks/useAuth";
@@ -97,22 +97,17 @@ const Events = () => {
     //   )}
     // </div>
     <>
-      {!isMobile && (
-        <FilterEvent
-          EventType={EventType}
-          setEventType={setEventType}
-          setSearchQuery={setSearchQuery}
-          FilterSearchHandler={FilterSearchHandler}
-        />
-      )}
-
+    <Box bg={"gray.800"} height={"100%"} width={"100%"}>
       <Box
-        marginTop={"8vh"}
-        marginLeft={isMobile ? "0vw" : "20vw"}
-        width={isMobile ? "100%" : "80vw"}
-        minHeight={"92vh"}
+        // marginTop={"8vh"}
+        // marginLeft={isMobile ? "0vw" : "20vw"}
+        // marginLeft={"0vw"}
+        // width={"100%"}
+        // minHeight={"92vh"}
+        display={"flex"}   //added flex caused the white line to shrink
+        flexDirection={"column"}
         bg="gray.800"
-        justifyContent={"center"}
+        justifyContent={"flex-start"}
         alignItems={"center"}
       >
         <Box mt="2%">
@@ -135,7 +130,7 @@ const Events = () => {
             textAlign="center"
             color="whitesmoke"
           >
-            We don remember the dates, we remember events!
+            We don't remember the dates, we remember events!
           </Text>
           <hr className="m-auto mt-[2em] w-[90%] d-flex align-center color-secondaryText " />
         </Box>
@@ -151,27 +146,26 @@ const Events = () => {
          
         }
 
-        {isMobile && (
+        {
           <FilterEvent
             EventType={EventType}
             setEventType={setEventType}
             setSearchQuery={setSearchQuery}
             FilterSearchHandler={FilterSearchHandler}
           />
-        )}
+        }
 
-        <Flex
-          mt={12}
-          flexDirection={"row"}
-          flexWrap={"wrap"}
-          justifyContent={"flex-start"}
-          alignItems={"flex-start"}
-          maxWidth={isMobile ? "100%" : "80vw"}
+        {/*The main box with all the event cards */}
+        <SimpleGrid
+          // mt={5}
+          spacing={2}
+          minChildWidth={"300px"}
+          width={"86%"}
         >
           {Events?.results?.map((event, key) => (
-            <EventCard margin={"1em 5px"} key={key} event={event} />
+            <EventCard key={key} event={event} />
           ))}
-        </Flex>
+        </SimpleGrid>
 
         <div
           style={{
@@ -223,6 +217,7 @@ const Events = () => {
           )}
         </div>
       </Box>
+    </Box>
     </>
   );
 };

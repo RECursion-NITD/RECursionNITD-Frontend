@@ -44,17 +44,17 @@ const EventCard = ({ event }) => {
     <Link to={`/events/detail/${event.id}`}>
       <Box
         className="col-md-4 lg-4 col-sm-6 item"
-        p={3}
-        m={"5px auto"}
+        // p={3}
+        m={"17px 10px"}
         display="flex"
         justifyContent="center"
         width="300px"
-        height="450px"
+        // height="470px"
         cursor="pointer"
       >
         <Box
           className="card item-card card-block"
-          _hover={{ transform: "scale(1.05)", transition: "ease-in 0.3s" }}
+          _hover={{ transform: "scale(1.05)", transition: "ease-in 0.15s" }}
           p={3}
           borderWidth="0.5px"
           borderColor="#343A40"
@@ -63,28 +63,28 @@ const EventCard = ({ event }) => {
           width="100%"
           height="100%"
           bg="whiteAlpha.200"
-          boxShadow="2px 2px 4px #BDE0FF"
+          // boxShadow="2px 2px 4px #BDE0FF"
         >
           {event.image ? (
             <Image
               borderRadius={"8px"}
               src={event.image}
               alt="RECursion Event Poster"
-              height="200px"
+              height="260px"
               width="100%"
-              mb={3}
+              // mb={3}
             />
           ) : (
             <Image
               src="{% static 'image/logo_event.png'%}"
               alt="RECursion Event Poster"
               height="200px"
-              width="200px"
-              mb={3}
+              width="150px"
+              // mb={3}
             />
           )}
 
-          <Heading as="h5" fontSize="20px" color="lightBlue" mb={3}>
+          <Heading as="h5" fontSize="27px" color="lightBlue" margin={3}>
             <a textDecoration="none">{event.title}</a>
             {perms && (
               <>
@@ -112,7 +112,7 @@ const EventCard = ({ event }) => {
 
           <Button
             as="a"
-            mt={3}
+            margin={2}
             p={2}
             sx={{
               borderRadius: "8px",
