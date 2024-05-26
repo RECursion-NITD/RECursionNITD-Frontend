@@ -26,11 +26,13 @@ import {
   // SimpleGrid,
   Card,
   HStack,
+  VStack,
   Textarea,
   // Heading,
   // CardHeader,
   // CardBody,
   // CardFooter,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import useAuth from "../hooks/useAuth";
 import useLoading from "../hooks/useLoading";
@@ -58,6 +60,7 @@ function Home() {
       image:
         "https://images.unsplash.com/photo-1566522650166-bd8b3e3a2b4b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
       c: "c1",
+      t: "t1",
       co: "co1",
     },
     {
@@ -68,6 +71,7 @@ function Home() {
       image:
         "https://images.unsplash.com/photo-1581836499506-4a660b39478a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
       c: "c2",
+      t: "t2",
       co: "co2",
     },
     {
@@ -78,6 +82,7 @@ function Home() {
       image:
         "https://images.unsplash.com/photo-1566522650166-bd8b3e3a2b4b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
       c: "c3",
+      t: "t3",
       co: "co3",
     },
     {
@@ -88,6 +93,7 @@ function Home() {
       image:
         "https://images.unsplash.com/flagged/photo-1564918031455-72f4e35ba7a6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
       c: "c4",
+      t: "t4",
       co: "co4",
     },
     {
@@ -98,6 +104,7 @@ function Home() {
       image:
         "https://images.unsplash.com/photo-1579130781921-76e18892b57b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
       c: "c5",
+      t: "t5",
       co: "co5",
     },
     {
@@ -108,6 +115,7 @@ function Home() {
       image:
         "https://images.unsplash.com/flagged/photo-1564918031455-72f4e35ba7a6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
       c: "c6",
+      t: "t6",
       co: "co6",
     },
   ];
@@ -145,7 +153,7 @@ function Home() {
           trigger: ".container",
           pin: ".headContainer",
           start: "top top",
-          end: "bottom 40%",
+          end: "bottom 60%",
           scrub: true,
           invalidateOnRefresh: true,
         },
@@ -155,7 +163,7 @@ function Home() {
         scale: 0.75,
       })
       .to(".head", {
-        color: "#b2f5ea",
+        color: "#FFD700",
         duration: 0.1,
       });
 
@@ -182,65 +190,96 @@ function Home() {
       );
     };
 
+
+    // const createCardAnimation2 = (card, start, end, i) => {
+    //   gsap.fromTo(
+    //     card,
+    //     {
+    //       autoAlpha: 0,
+    //       scale: 0.5,
+    //       xPercent: i % 2 === 0 ? -100 : 100,
+    //     },
+    //     {
+    //       xPercent: 10,
+    //       autoAlpha: 1,
+    //       scale: 1,
+    //       duration: 3,
+    //       scrollTrigger: {
+    //         pin: ".content2",
+    //         trigger: card,
+    //         start,
+    //         end,
+    //         scrub: true,
+    //       },
+    //     }
+    //   );
+    // };
+
     const missionCard = document.querySelector(".missionCard");
     const visionCard = document.querySelector(".visionCard");
     const valueCard = document.querySelector(".valueCard");
 
-    createCardAnimation(missionCard, "top 30%", "top 20%");
-    createCardAnimation(valueCard, "top 20%", "top 10%");
-    createCardAnimation(visionCard, "top 10%", "top 0%");
+    const screenWidth = window.innerWidth;
+    if (screenWidth > 900) {
+      createCardAnimation(missionCard, "top 30%", "top 20%");
+      createCardAnimation(valueCard, "top 20%", "top 10%");
+      createCardAnimation(visionCard, "top 10%", "top 0%");
+    }
 
     () => {
       animate.kill();
     };
 
-  const slider = sliderRef.current;
+    const slider = sliderRef.current;
 
-  const createItemAnimation = (item, start, end, i) => {
-    gsap.fromTo(
-      item,
-      { 
-        autoAlpha: 0,
-        scale: 0.5,
-        xPercent: i % 2 === 0 ? -100 : 100,
-        height:400,
-        width:550, 
-      },
-      {
-        xPercent: 30,
-        autoAlpha: 1,
-        scale: 1,
-        duration: 3,
-        scrollTrigger: {
-          pin: ".content4",
-          trigger: item,
-          start: start,
-          end: end,
-          scrub: true,
+    const createItemAnimation = (item, start, end, i) => {
+      gsap.fromTo(
+        item,
+        {
+          autoAlpha: 0,
+          scale: 0.5,
+          xPercent: i % 2 === 0 ? -100 : 100,
+          // height: 400,
+          // width: 550,
         },
-      }
-    );
-  };
+        {
+          xPercent: screenWidth > 900 ? 50 : 0,
+          autoAlpha: 1,
+          scale: 1,
+          duration: 3,
+          scrollTrigger: {
+            pin: ".content4",
+            trigger: item,
+            start: start,
+            end: end,
+            scrub: true,
+          },
+        }
+      );
+    };
 
-  const c1 = document.querySelector(".c1");
-  const c2 = document.querySelector(".c2");
-  const c3 = document.querySelector(".c3");
-  const c4 = document.querySelector(".c4");
-  const c5 = document.querySelector(".c5");
-  const c6 = document.querySelector(".c6");
+    const t1 = document.querySelector(".t1");
+    const t2 = document.querySelector(".t2");
+    const t3 = document.querySelector(".t3");
+    const t4 = document.querySelector(".t4");
+    const t5 = document.querySelector(".t5");
+    const t6 = document.querySelector(".t6");
 
-  createItemAnimation(c1, "top 40%", "top 20%", 1);
-  createItemAnimation(c2, "top 20%", "top 0%", 2);
-  createItemAnimation(c3, "top 0%", "top -20%", 3);
-  createItemAnimation(c4, "top -20%", "top -40%", 4);
-  createItemAnimation(c5, "top -40%", "top -60%", 5);
-  createItemAnimation(c6, "top -60%", "top -80%", 6);
+    createItemAnimation(t1, "top 40%", "top 20%", 1);
+    createItemAnimation(t2, "top 20%", "top 0%", 2);
+    createItemAnimation(t3, "top 0%", "top -20%", 3);
+    createItemAnimation(t4, "top -20%", "top -40%", 4);
+    createItemAnimation(t5, "top -40%", "top -60%", 5);
+    createItemAnimation(t6, "top -60%", "top -80%", 6);
 
-  () => {
-    animate.kill();
-  };
+    () => {
+      animate.kill();
+    };
 
-}, [loading]);
+  }, [loading]);
+
+  const StackComponent = useBreakpointValue({ base: VStack, md: HStack });
+  const screenWidth = window.innerWidth;
 
   return loading ? (
     <Loader />
@@ -262,8 +301,17 @@ function Home() {
       </div>
       <div className="container container01"></div>
       <div className="container">
-        <div className="content">
-          <h4>Programming Community of NIT Durgapur</h4>
+        <div style={{ color: "#FFFFFF" }} className="content">
+          <div className="shadow">
+            {/* <p>Programming Community of NIT Durgapur</p> */}
+            <h2 style={{
+              fontWeight: "600",
+              textAlign: "center",
+              justifyContent: "center",
+              alignItems: "center",
+              fontSize: ".4em",
+            }}>Programming Community of NIT Durgapur</h2>
+          </div>
           <hr style={{ flex: 1, color: "teal.200" }} className="mt-2" />
           <br></br>
           <p>
@@ -278,264 +326,312 @@ function Home() {
             <p>{homeData?.hours_teaching} + hours of teaching</p>
           </div>
         </div>
+        <div className="features">
+          <div
+            style={{
+              padding: "1em",
+              margin: "1em",
+              borderRight: "solid white 1px",
+            }}
+          >
+            <h1>Have a Ques ? </h1>
+            <Button style={{ color: "black", backgroundColor: "yellow" }}>
+              AskREC
+            </Button>
+          </div>
+          <div>
+            <h1>New to programming ? </h1>
+            <Button style={{ color: "black", backgroundColor: "yellow" }}>
+              get Started
+            </Button>
+          </div>
+        </div>
+      </div>
+      <div style={{
+        width: "90vw",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+      }} className="whoareweheader">
+        <div className="shadow">
+          {/* <p>Who are we ?</p> */}
+          <h2
+            style={{
+              color: "#FFD700",
+              alignContent: "center",
+              textAlign: "center",
+              fontSize: "35px",
+              fontWeight: "600",
+              marginTop: "50px",
+            }}
+          >
+            WHO ARE WE ?
+          </h2>
+        </div>
+        <br></br>
+        <hr style={{ flex: 1, width: "100%", color: "80CBC4", border: "2px solid #80CBC4" }}></hr>
+        <br></br>
       </div>
       <div className="content2 mt-0 mb-20">
-        <h2
-          style={{
-            color: "white",
-            alignContent: "center",
-            textAlign: "center",
-            fontSize: "25px",
-            fontWeight: "500",
-          }}
-        >
-          Who are we ?
-        </h2>
-        <hr style={{ flex: 1, color: "80CBC4" }}></hr>
+
         <div ref={containerRef} className="WhoAreWeCard">
-          <HStack
-            spacing="30px"
+          <StackComponent
+            spacing={screenWidth < 900 ? "0px" : "1vw"}
+            justifyContent={screenWidth < 900 ? "center" : "flex-start"}
             divider={
               <StackDivider
                 className="dividerline"
                 borderColor="teal.200"
-                height="340px"
+                height={screenWidth < 900 ? "0px" : "340px"}
                 alignSelf="center"
               />
             }
           >
-            <Card
-              className="missionCard"
-              w="280px"
-              height="400px"
-              rounded="20px"
-              overflow="hidden"
-              bg="teal.900"
-              cursor="pointer"
-              _hover={{
-                border: "1px solid white",
-                transform: "scale(1.05)",
-                transition: "ease-in 0.3s",
-              }}
-              onMouseEnter={() => {
-                setIsHovered1(true);
-              }}
-              onMouseLeave={() => setIsHovered1(false)}
-              mt={8}
-            >
-              <Image
-                src={logoInverted}
-                alt="Card Image"
-                boxSize="220px"
-              ></Image>
-              <div className={`slide-fade1 ${isHovered1 ? "visible" : ""}`}>
-                <SlideFade in={isHovered1}>
-                  <Box
-                    p="75px"
-                    w="280px"
-                    color="black"
-                    mt="4"
-                    bg="teal.100"
-                    rounded="md"
-                    shadow="md"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      height="2em"
-                      viewBox="0 0 640 512"
+            <div className="card1">
+              <Card
+                className="missionCard"
+                w="280px"
+                height="400px"
+                rounded="20px"
+                overflow="hidden"
+                bg="#31363F"
+                cursor="pointer"
+                _hover={{
+                  border: "1px solid white",
+                  transform: "scale(1.05)",
+                  transition: "ease-in 0.3s",
+                }}
+                onMouseEnter={() => {
+                  setIsHovered1(true);
+                }}
+                onMouseLeave={() => setIsHovered1(false)}
+                mt={8}
+              >
+                <Image
+                  src={logoInverted}
+                  alt="Card Image"
+                  boxSize="200px"
+                ></Image>
+                <div className={`slide-fade1 ${isHovered1 ? "visible" : ""}`}>
+                  <SlideFade in={isHovered1}>
+                    <Box
+                      p="75px"
+                      w="280px"
+                      color="black"
+                      mt="4"
+                      //bg="teal.100"
+                      rounded="md"
+                      shadow="md"
                     >
-                      <path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3L562.7 256l-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z" />
-                    </svg>
-                  </Box>
-                </SlideFade>
-              </div>
-              <Box p={5}>
-                <Stack align="center">
-                  <Badge
-                    variant="subtle"
-                    color="teal.100"
-                    rounded="full"
-                    px={2}
-                    fontSize="0.8em"
-                  >
-                    Mission
-                  </Badge>
-                </Stack>
-                <Stack align="center">
-                  <br></br>
-                  <Text fontWeight="light">
-                    Working towards the improvement of campus&apos;s coding
-                    culture by organizing regular coding classes and contests.
-                  </Text>
-                </Stack>
-                <Flex>
-                  <Spacer />
-                  <Button variant="solid" color="teal.200" size="sm">
-                    Learn More
-                  </Button>
-                </Flex>
-              </Box>
-            </Card>
-            <Card
-              className="valueCard"
-              w="280px"
-              height="400px"
-              rounded="20px"
-              overflow="hidden"
-              bg="teal.900"
-              cursor="pointer"
-              _hover={{
-                border: "1px solid white",
-                transform: "scale(1.05)",
-                transition: "ease-in 0.3s",
-              }}
-              onMouseEnter={() => {
-                setIsHovered2(true);
-              }}
-              onMouseLeave={() => setIsHovered2(false)}
-              mt={8}
-            >
-              <Image
-                src={logoInverted}
-                alt="Card Image"
-                boxSize="210px"
-              ></Image>
-              <div className={`slide-fade1 ${isHovered2 ? "visible" : ""}`}>
-                <SlideFade in={isHovered2}>
-                  <Box
-                    p="75px"
-                    w="280px"
-                    color="black"
-                    mt="4"
-                    bg="teal.100"
-                    rounded="md"
-                    shadow="md"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      height="2em"
-                      viewBox="0 0 512 512"
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="2em"
+                        viewBox="0 0 640 512"
+                      >
+                        <path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3L562.7 256l-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z" />
+                      </svg>
+                    </Box>
+                  </SlideFade>
+                </div>
+                <Box p={5}>
+                  <Stack align="center">
+                    <Badge
+                      variant="subtle"
+                      color="teal.100"
+                      rounded="full"
+                      px={2}
+                      fontSize="0.8em"
+                      backgroundColor="black"
                     >
-                      <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
-                    </svg>
-                  </Box>
-                </SlideFade>
-              </div>
-              <Box p={5}>
-                <Stack align="center">
-                  <Badge
-                    variant="subtle"
-                    color="teal.100"
-                    rounded="full"
-                    px={2}
-                    fontSize="0.8em"
-                  >
-                    Value
-                  </Badge>
-                </Stack>
-                <Stack align="center">
-                  <br></br>
-                  <Text fontWeight="light">
-                    We believe that helping each other is the only way. We take
-                    care and always look to get the best out of everyone.
-                  </Text>
-                </Stack>
-                <Flex>
-                  <Spacer />
-                  <Button variant="solid" color="teal.200" size="sm">
-                    Learn More
-                  </Button>
-                </Flex>
-              </Box>
-            </Card>
-            <Card
-              className="visionCard"
-              w="280px"
-              height="400px"
-              rounded="20px"
-              overflow="hidden"
-              bg="teal.900"
-              cursor="pointer"
-              _hover={{
-                border: "1px solid white",
-                transform: "scale(1.05)",
-                transition: "ease-in 0.3s",
-              }}
-              onMouseEnter={() => {
-                setIsHovered3(true);
-              }}
-              onMouseLeave={() => setIsHovered3(false)}
-              mt={8}
-            >
-              <Image
-                src={logoInverted}
-                alt="Card Image"
-                boxSize="210px"
-              ></Image>
-              <div className={`slide-fade1 ${isHovered3 ? "visible" : ""}`}>
-                <SlideFade in={isHovered3}>
-                  <Box
-                    p="75px"
-                    w="280px"
-                    color="black"
-                    mt="4"
-                    bg="teal.100"
-                    rounded="md"
-                    shadow="md"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      height="2em"
-                      viewBox="0 0 640 512"
+                      Mission
+                    </Badge>
+                  </Stack>
+                  <Stack align="center">
+                    <br></br>
+                    <Text fontWeight="light" color="white">
+                      Working towards the improvement of campus&apos;s coding
+                      culture by organizing regular coding classes and contests.
+                    </Text>
+                  </Stack>
+                  <Flex>
+                    <Spacer />
+                    <Button variant="solid" color="teal.200" size="sm" backgroundColor="black">
+                      Learn More
+                    </Button>
+                  </Flex>
+                </Box>
+              </Card>
+            </div>
+            <div className="card2">
+              <Card
+                className="valueCard"
+                w="280px"
+                height="400px"
+                rounded="20px"
+                overflow="hidden"
+                bg="#31363F"
+                cursor="pointer"
+                _hover={{
+                  border: "1px solid white",
+                  transform: "scale(1.05)",
+                  transition: "ease-in 0.3s",
+                }}
+                onMouseEnter={() => {
+                  setIsHovered2(true);
+                }}
+                onMouseLeave={() => setIsHovered2(false)}
+                mt={8}
+              >
+                <Image
+                  src={logoInverted}
+                  alt="Card Image"
+                  boxSize="200px"
+                ></Image>
+                <div className={`slide-fade1 ${isHovered2 ? "visible" : ""}`}>
+                  <SlideFade in={isHovered2}>
+                    <Box
+                      p="75px"
+                      w="280px"
+                      color="black"
+                      mt="4"
+                      //bg="teal.100"
+                      rounded="md"
+                      shadow="md"
                     >
-                      <path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z" />
-                    </svg>
-                  </Box>
-                </SlideFade>
-              </div>
-              <Box p={5}>
-                <Stack align="center">
-                  <Badge
-                    variant="subtle"
-                    color="teal.100"
-                    rounded="full"
-                    px={2}
-                    fontSize="0.8em"
-                  >
-                    Vision
-                  </Badge>
-                </Stack>
-                <Stack align="center">
-                  <br></br>
-                  <Text fontWeight="light">
-                    To grow as a strong coding community and uphold the
-                    integrity of NIT Durgapur as a technical institution.
-                  </Text>
-                </Stack>
-                <Flex>
-                  <Spacer />
-                  <Button variant="solid" color="teal.200" size="sm">
-                    Learn More
-                  </Button>
-                </Flex>
-              </Box>
-            </Card>
-          </HStack>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="2em"
+                        viewBox="0 0 512 512"
+                      >
+                        <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                      </svg>
+                    </Box>
+                  </SlideFade>
+                </div>
+                <Box p={5}>
+                  <Stack align="center">
+                    <Badge
+                      variant="subtle"
+                      color="teal.100"
+                      rounded="full"
+                      px={2}
+                      fontSize="0.8em"
+                      backgroundColor="black"
+                    >
+                      Value
+                    </Badge>
+                  </Stack>
+                  <Stack align="center">
+                    <br></br>
+                    <Text fontWeight="light" color="white">
+                      We believe that helping each other is the only way. We take
+                      care and always look to get the best out of everyone.
+                    </Text>
+                  </Stack>
+                  <Flex>
+                    <Spacer />
+                    <Button variant="solid" color="teal.200" size="sm" backgroundColor="black">
+                      Learn More
+                    </Button>
+                  </Flex>
+                </Box>
+              </Card>
+            </div>
+            <div className="card3">
+              <Card
+                className="visionCard"
+                w="280px"
+                height="400px"
+                rounded="20px"
+                overflow="hidden"
+                bg="#31363F"
+                cursor="pointer"
+                _hover={{
+                  border: "1px solid white",
+                  transform: "scale(1.05)",
+                  transition: "ease-in 0.3s",
+                }}
+                onMouseEnter={() => {
+                  setIsHovered3(true);
+                }}
+                onMouseLeave={() => setIsHovered3(false)}
+                mt={8}
+              >
+                <Image
+                  src={logoInverted}
+                  alt="Card Image"
+                  boxSize="200px"
+                ></Image>
+                <div className={`slide-fade1 ${isHovered3 ? "visible" : ""}`}>
+                  <SlideFade in={isHovered3}>
+                    <Box
+                      p="75px"
+                      w="280px"
+                      color="black"
+                      mt="4"
+                      //bg="teal.100"
+                      rounded="md"
+                      shadow="md"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="2em"
+                        viewBox="0 0 640 512"
+                      >
+                        <path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z" />
+                      </svg>
+                    </Box>
+                  </SlideFade>
+                </div>
+                <Box p={5}>
+                  <Stack align="center">
+                    <Badge
+                      variant="subtle"
+                      color="teal.100"
+                      rounded="full"
+                      px={2}
+                      fontSize="0.8em"
+                      backgroundColor="black"
+                    >
+                      Vision
+                    </Badge>
+                  </Stack>
+                  <Stack align="center">
+                    <br></br>
+                    <Text fontWeight="light" color="white">
+                      To grow as a strong coding community and uphold the
+                      integrity of NIT Durgapur as a technical institution.
+                    </Text>
+                  </Stack>
+                  <Flex>
+                    <Spacer />
+                    <Button variant="solid" color="teal.200" size="sm" backgroundColor="black">
+                      Learn More
+                    </Button>
+                  </Flex>
+                </Box>
+              </Card>
+            </div>
+          </StackComponent>
         </div>
       </div>
-      {/* <div className="content3"></div> */}
+      <div className="content3"></div>
       <div className="content4 mt-0 mb-20">
-        <h2
-          style={{
-            color: "white",
-            alignContent: "center",
-            textAlign: "center",
-            fontSize: "25px",
-            fontWeight: "500",
-          }}
-        >
-          Our Activities
-        </h2>
+        <div className="shadow">
+          {/* <p>Our Activities</p> */}
+          <h2
+            style={{
+              color: "#FFD700",
+              alignContent: "center",
+              textAlign: "center",
+              fontSize: "30px",
+              fontWeight: "600",
+            }}
+          >
+            OUR ACTIVITIES
+          </h2>
+        </div>
         <hr></hr>
         <div className="wrapper">
           <div className="titlecontainer">
@@ -545,31 +641,33 @@ function Home() {
                   {myacti.map((item) => (
                     <li
                       key={item.key}
-                      className={item.c}
-                      style={{
-                        backgroundImage: `url(${item.image})`,
-                        borderRadius: "10px",
-                      }}
+                      className={item.t}
+
                     >
-                     <div 
-                      style={{
-                          position: "absolute",
-                          top: 0,
-                          left: 0,
-                          borderRadius: "10px",
-                          width: "100%",
-                          height: "100%",
-                          backgroundImage: "linear-gradient(to top right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))"
-                      }} 
-                      />
-                      <div className={item.co} 
-                      style={{
-                        backgroundColor: "rgba(0, 0, 0, 0)",
-                        borderRadius: "10px",
-                      }}>
-                        <h2 className="title mt-2 mb-1">{item.title}</h2>
-                        <hr></hr>
-                        <p className="description mb-0">{item.description}</p>
+                      <div className={item.c}
+                        style={{
+                          backgroundImage: `url(${item.image})`,
+                        }}
+                      >
+                        {/* <div
+                            style={{
+                              borderRadius: "10px",
+                              backgroundImage: "linear-gradient(to top right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))"
+                            }}
+                          /> */}
+                        <div className={item.co}
+                          style={{
+                            backgroundColor: "rgba(0, 0, 0, 0)",
+                            borderRadius: "10px",
+                          }}>
+                          <h2 className="title mt-2 mb-1">{item.title}</h2>
+                          <hr></hr>
+                          <p className="description mb-0">{item.description}</p>
+                        </div>
+                      </div>
+                      <div style={{ color: "white" }} className="detail">
+                        <h2>{item.title}</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor sit vitae libero a dolores eaque aliquam, cumque harum facere inventore.</p>
                       </div>
                     </li>
                   ))}
@@ -581,22 +679,26 @@ function Home() {
       </div>
       <div className="contentstop"></div>
       <div className="content5">
-        <h2
-          style={{
-            color: "white",
-            alignContent: "center",
-            textAlign: "center",
-            fontSize: "25px",
-            fontWeight: "500",
-          }}
-        >
-          So far we have witnessed...
-        </h2>
+        <div className="shadow">
+          {/* <p>So far we have witnessed...</p> */}
+          <h2
+            style={{
+              color: "#FFD700",
+              alignContent: "center",
+              textAlign: "center",
+              fontSize: "25px",
+              fontWeight: "500",
+            }}
+          >
+            SO FAR WE HAVE WITNESSED...
+          </h2>
+        </div>
         <hr style={{ flex: 1, color: "80CBC4" }}></hr>
-        <HStack spacing="20px">
+        <StackComponent spacing="1vw">
           <Card w="200px" height="200px" overflow="hidden" border="none" mt={8}>
             <div className={"slide-fade1 visible"}>
-              <Box py="60px" w="200px" mt="5" bg="#001f20" shadow="md">
+              <Box py="60px" w="200px" mt="5"
+                bg="#31363F" shadow="md">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="3em"
@@ -608,14 +710,15 @@ function Home() {
                   />
                 </svg>
                 <br></br>
-                <Text fontWeight="light">550+</Text>
-                <Text>Hours of Teaching</Text>
+                <Text color={"white"} fontWeight="light">550+</Text>
+                <Text color={"white"}  >Hours of Teaching</Text>
               </Box>
             </div>
           </Card>
           <Card w="200px" height="200px" overflow="hidden" border="none" mt={8}>
             <div className={"slide-fade1 visible"}>
-              <Box py="60px" w="200px" mt="5" bg="#001f20" shadow="md">
+              <Box py="60px" w="200px" mt="5"
+                bg="#31363F" shadow="md">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="3em"
@@ -627,14 +730,15 @@ function Home() {
                   />
                 </svg>
                 <br></br>
-                <Text fontWeight="light">9+</Text>
-                <Text>Years of Experience</Text>
+                <Text color={"white"} fontWeight="light">9+</Text>
+                <Text color={"white"} >Years of Experience</Text>
               </Box>
             </div>
           </Card>
           <Card w="200px" height="200px" overflow="hidden" border="none" mt={8}>
             <div className="slide-fade1 visible">
-              <Box py="60px" w="200px" mt="5" bg="#001f20" shadow="md">
+              <Box py="60px" w="200px" mt="5"
+                bg="#31363F" shadow="md">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="3em"
@@ -646,14 +750,15 @@ function Home() {
                   />
                 </svg>
                 <br></br>
-                <Text fontWeight="light">70+</Text>
-                <Text>On/Offline Contests</Text>
+                <Text color={"white"} fontWeight="light">70+</Text>
+                <Text color={"white"} >On/Offline Contests</Text>
               </Box>
             </div>
           </Card>
           <Card w="200px" height="200px" overflow="hidden" border="none" mt={8}>
             <div className="slide-fade1 visible">
-              <Box py="60px" w="200px" mt="5" bg="#001f20" shadow="md">
+              <Box py="60px" w="200px" mt="5"
+                bg="#31363F" shadow="md">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="3em"
@@ -665,28 +770,31 @@ function Home() {
                   />
                 </svg>
                 <br></br>
-                <Text fontWeight="light">2000+</Text>
-                <Text>Users</Text>
+                <Text color={"white"} fontWeight="light">2000+</Text>
+                <Text color={"white"} >Users</Text>
               </Box>
             </div>
           </Card>
-        </HStack>
+        </StackComponent>
       </div>
       <div className="content6 mt-20">
-        <h2
-          style={{
-            color: "white",
-            alignContent: "center",
-            textAlign: "center",
-            fontSize: "25px",
-            fontWeight: "500",
-          }}
-        >
-          Our Past Sponsors
-        </h2>
+        <div className="shadow">
+          {/* <p>Our Past Sponsors</p> */}
+          <h2
+            style={{
+              color: "#FFD700",
+              alignContent: "center",
+              textAlign: "center",
+              fontSize: "25px",
+              fontWeight: "500",
+            }}
+          >
+            OUR PAST SPONSORS
+          </h2>
+        </div>
         <hr style={{ flex: 1, color: "80CBC4" }}></hr>
-        <div className="row mt-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center mx-auto">
+        <div className="row mt-4 pb-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 place-content-center mx-auto">
             <a href="https://www.jetbrains.com/" target="_blank">
               <Image
                 className="sponsorImg ml-4 max-w-120 max-h-120"
@@ -755,6 +863,7 @@ function Home() {
             </a>
           </div>
         </div>
+
       </div>
     </div>
   );
