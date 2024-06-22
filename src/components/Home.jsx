@@ -9,6 +9,13 @@ import hiredive from "../assets/images/hiredive.jpg";
 import jetbrain from "../assets/images/jetbrain.svg.png";
 import nutrichef from "../assets/images/nutrichef.png";
 import workat_tech from "../assets/images/workat-tech.png";
+import Codingclasses from "../assets/images/Codingclasses.jpg";
+import rechase1 from "../assets/images/rechase.jpg";
+import recode from "../assets/images/INSTA_RECODE.png";
+import ama from "../assets/images/ama.png";
+import postcontest from "../assets/images/postcontest.png";
+import icpc from "../assets/images/icpc.jpg";
+import alohomora from "../assets/images/alohomora.jpg";
 
 import { useEffect, useLayoutEffect, useState, useRef } from "react";
 import {
@@ -40,6 +47,7 @@ import Loader from "./Loader";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { getHome } from "../api/home";
+import "../test.css";
 import "../App.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -57,8 +65,8 @@ function Home() {
       key: 1,
       title: "Coding Classes",
       description: "Regular coding classes and geeky sessions",
-      image:
-        "https://images.unsplash.com/photo-1566522650166-bd8b3e3a2b4b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
+      writeup: "Dive into the world of programming with our dynamic and interactive coding classes! Whether you're a complete beginner or looking to advance your skills, our classes are designed to cater to all levels.",
+      image: Codingclasses,
       c: "c1",
       t: "t1",
       co: "co1",
@@ -68,8 +76,8 @@ function Home() {
       title: "RECode",
       // subtitle: "France",
       description: "Monthly online coding contest",
-      image:
-        "https://images.unsplash.com/photo-1581836499506-4a660b39478a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
+      writeup: "Put your coding skills to the test in our monthly RECode contest where programmers of all levels come together to solve challenging problems, showcase their talents, and compete for amazing prizes.",
+      image: recode,
       c: "c2",
       t: "t2",
       co: "co2",
@@ -79,8 +87,8 @@ function Home() {
       title: "Alohomora",
       // subtitle: "Australia",
       description: " Onsite coding contest",
-      image:
-        "https://images.unsplash.com/photo-1566522650166-bd8b3e3a2b4b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
+      writeup: "Alohomora, an ACM-ICPC style competitive programming contest, where teams from all over the world will be battling against each other to come out at the top and be the best.",
+      image: alohomora,
       c: "c3",
       t: "t3",
       co: "co3",
@@ -90,8 +98,8 @@ function Home() {
       title: "ICPC",
       // subtitle: "Australia",
       description: "Improving student's participation in ICPC",
-      image:
-        "https://images.unsplash.com/flagged/photo-1564918031455-72f4e35ba7a6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
+      writeup: "We offer a range of support programs specifically designed to improve student participation and performance in ICPC.",
+      image: icpc,
       c: "c4",
       t: "t4",
       co: "co4",
@@ -101,8 +109,8 @@ function Home() {
       title: "REChase",
       // subtitle: "wechase",
       description: "Annual treasure hunt competition",
-      image:
-        "https://images.unsplash.com/photo-1579130781921-76e18892b57b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
+      writeup: "Annual treasure hunt competition which involves solving riddles and reaching the various locations inside the campus",
+      image: rechase1,
       c: "c5",
       t: "t5",
       co: "co5",
@@ -112,11 +120,22 @@ function Home() {
       title: "AMA",
       // subtitle: "Australia",
       description: "Organizing AMA Sessions with successful alumnus",
-      image:
-        "https://images.unsplash.com/flagged/photo-1564918031455-72f4e35ba7a6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
+      writeup: "Ask Me Anything (AMA) is an interactive session with our esteemed alumni for career-related tips and advice. ",
+      image: ama,
       c: "c6",
       t: "t6",
       co: "co6",
+    },
+    {
+      key: 7,
+      title: "Post Contest Discussion",
+      // subtitle: "Australia",
+      description: "Organizing Post Contest Discussion for first years",
+      writeup: "Conduct discussions to clear the doubts which might have been encountered during a contest.",
+      image: postcontest,      
+      c: "c7",
+      t: "t7",
+      co: "co7",
     },
   ];
 
@@ -264,6 +283,7 @@ function Home() {
     const t4 = document.querySelector(".t4");
     const t5 = document.querySelector(".t5");
     const t6 = document.querySelector(".t6");
+    const t7 = document.querySelector(".t7");
 
     createItemAnimation(t1, "top 40%", "top 20%", 1);
     createItemAnimation(t2, "top 20%", "top 0%", 2);
@@ -271,6 +291,7 @@ function Home() {
     createItemAnimation(t4, "top -20%", "top -40%", 4);
     createItemAnimation(t5, "top -40%", "top -60%", 5);
     createItemAnimation(t6, "top -60%", "top -80%", 6);
+    createItemAnimation(t7, "top -80%", "top -100%", 7);
 
     () => {
       animate.kill();
@@ -402,6 +423,7 @@ function Home() {
                   border: "1px solid white",
                   transform: "scale(1.05)",
                   transition: "ease-in 0.3s",
+                  background: "#2E323A",
                 }}
                 onMouseEnter={() => {
                   setIsHovered1(true);
@@ -439,7 +461,7 @@ function Home() {
                   <Stack align="center">
                     <Badge
                       variant="subtle"
-                      color="teal.100"
+                      color="teal.200"
                       rounded="full"
                       px={2}
                       fontSize="0.8em"
@@ -457,9 +479,15 @@ function Home() {
                   </Stack>
                   <Flex>
                     <Spacer />
-                    <Button variant="solid" color="teal.200" size="sm" backgroundColor="black">
+                    <Button
+                      variant="solid"
+                      color="teal.200"
+                      size="sm"
+                      backgroundColor="black"
+                      _hover={{ backgroundColor: "#184566", color: "white" }}
+                    >
                       Learn More
-                    </Button>
+                    </Button>;
                   </Flex>
                 </Box>
               </Card>
@@ -477,6 +505,7 @@ function Home() {
                   border: "1px solid white",
                   transform: "scale(1.05)",
                   transition: "ease-in 0.3s",
+                  background: "#2E323A",
                 }}
                 onMouseEnter={() => {
                   setIsHovered2(true);
@@ -532,7 +561,13 @@ function Home() {
                   </Stack>
                   <Flex>
                     <Spacer />
-                    <Button variant="solid" color="teal.200" size="sm" backgroundColor="black">
+                    <Button
+                      variant="solid"
+                      color="teal.200"
+                      size="sm"
+                      backgroundColor="black"
+                      _hover={{ backgroundColor: "#184566", color: "white" }}
+                    >
                       Learn More
                     </Button>
                   </Flex>
@@ -552,6 +587,7 @@ function Home() {
                   border: "1px solid white",
                   transform: "scale(1.05)",
                   transition: "ease-in 0.3s",
+                  background: "#2E323A",
                 }}
                 onMouseEnter={() => {
                   setIsHovered3(true);
@@ -607,7 +643,13 @@ function Home() {
                   </Stack>
                   <Flex>
                     <Spacer />
-                    <Button variant="solid" color="teal.200" size="sm" backgroundColor="black">
+                    <Button
+                      variant="solid"
+                      color="teal.200"
+                      size="sm"
+                      backgroundColor="black"
+                      _hover={{ backgroundColor: "#184566", color: "white" }}
+                    >
                       Learn More
                     </Button>
                   </Flex>
@@ -650,12 +692,21 @@ function Home() {
                           backgroundImage: `url(${item.image})`,
                         }}
                       >
-                        {/* <div
-                            style={{
-                              borderRadius: "10px",
-                              backgroundImage: "linear-gradient(to top right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))"
-                            }}
-                          /> */}
+                        <div
+                          style={{
+                            // borderRadius: "10px",
+                            backgroundImage: screenWidth > 768
+                            ? "linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0))"
+                            : "linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0))",
+                            position: "absolute",
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            height: screenWidth > 768
+                            ? "85%"
+                            : "100%",
+                          }}
+                        />
                         <div className={item.co}
                           style={{
                             backgroundColor: "rgba(0, 0, 0, 0)",
@@ -667,8 +718,14 @@ function Home() {
                         </div>
                       </div>
                       <div style={{ color: "white" }} className="detail">
-                        <h2>{item.title}</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor sit vitae libero a dolores eaque aliquam, cumque harum facere inventore.</p>
+                        <h2 style={{
+                          marginBottom: "10px",
+                          fontWeight: "bold",
+                          fontSize: "2em",
+                        }}>{item.title}</h2>
+                        <p style={{
+                          padding: "0 10px 0 10px",
+                        }}>{item.writeup}</p>
                       </div>
                     </li>
                   ))}
