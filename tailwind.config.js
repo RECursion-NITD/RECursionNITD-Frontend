@@ -15,7 +15,23 @@ module.exports = {
         secondaryText: "#BDE0FF99",
         onPrimary: "#002f68",
         codeSnippet: "#16181D",
+        blue: '#1fb6ff',
+        purple: '#7e5bef',
+        pink: '#ff49db',
+        orange: '#ff7849',
+        green: '#13ce66',
+        yellow: '#ffc82c',
+        'gray-dark': '#273444',  // Added quotes for custom keys with hyphens
+        gray: '#8492a6',
+        'gray-light': '#d3dce6', // Added quotes for custom keys with hyphens
       },
+      spacing: {
+        '8xl': '96rem',
+        '9xl': '128rem',
+      },
+      borderRadius: {
+        '4xl': '2rem',
+      }
     },
     screens: {
       sm: "640px",
@@ -28,11 +44,10 @@ module.exports = {
       head: ["Roboto", "sans-serif"],
       sub: ["Merriweather", "serif"],
       alt: ["Montserrat", "sans-serif"],
+      sans: ['Graphik', 'sans-serif'],
+      serif: ['Merriweather', 'serif'],
     },
-  },
-  fontFamily: {
-    sans: ["Graphik", "sans-serif"],
-    serif: ["Merriweather", "serif"],
   },
   plugins: [],
 };
+6
