@@ -1,16 +1,16 @@
 * {
   margin: auto;
   align-items: center;
-  background-image: url("./assets/images/homepage_grid.png");
-  background-size: contain;
-}
+  /* background-image: url("./assets/images/homepage_grid.png");
+  background-size: contain;*/
+} 
 body{
   overflow-x: hidden;
 }
 
 .App {
   background-color: #7a7adb;
-  background-image: linear-gradient(315deg, #2b63ac 0%, #170e13 74%);
+  background-image: linear-gradient(180deg, #102027 0%, #191919 29%);
   display: flex;
   flex-direction: column;
   align-items: center;
