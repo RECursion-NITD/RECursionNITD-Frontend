@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Outlet, Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import {
@@ -15,11 +15,23 @@ import Footer from "./Footer";
 
 const Layout = () => {
   const { user, logoutUser } = useAuth();
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      // Change to true when scrolled down 50px, adjust this threshold as needed
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
@@ -32,7 +44,10 @@ const Layout = () => {
         px={{ base: "1em", md: "2em" }}
         position="fixed"
         width="100%"
-        zIndex="5"
+        zIndex="40"
+        fontFamily="Open Sans"
+        bg={isScrolled ? "#191919" : "transparent"} // Toggle background color
+        transition="background-color 0.3s" // Smooth transition
       >
         {/* Left Side: Logo and Text */}
         <Flex display="flex" listStyleType="none" margin="0" padding="0">
@@ -52,7 +67,12 @@ const Layout = () => {
                 maxHeight: "5vh",
               }}
             />
-            <Text fontSize="x-large" fontWeight="bold" color="#ccc">
+            <Text
+              fontSize="x-large"
+              fontWeight="bold"
+              color="#fff"
+              fontFamily="Open Sans"
+            >
               <strong>REC</strong>ursion
             </Text>
           </Link>
@@ -94,13 +114,17 @@ const Layout = () => {
             <MenuItem to="/login">
               <Button
                 variant="solid"
-                bg="lightGreen"
-                color="black"
+                bg="transparent"
+                color="#58CDFF"
                 fontWeight="bold"
-                borderRadius="15px"
+                borderRadius="5px"
                 margin="5px"
                 padding="10px"
-                _hover={{ bg: "#60C80A" }}
+                border="2px solid"
+                borderColor="#58CDFF"
+                _hover={{ bg: "#58CDFF", color: "black" }}
+                marginRight="60px"
+                fontFamily="Open Sans"
               >
                 Login
               </Button>
@@ -109,12 +133,14 @@ const Layout = () => {
             <Button
               onClick={logoutUser}
               variant="solid"
-              bg="#ff6c2f"
-              color="white"
+              bg="#58CDFF"
+              color="black"
               fontWeight="bold"
-              borderRadius="8px"
+              borderRadius="5px"
               margin="5px"
               padding="10px"
+              marginRight="60px"
+              fontFamily="Open Sans"
             >
               Logout
             </Button>
@@ -129,6 +155,7 @@ const Layout = () => {
           aria-label="Menu"
           variant="ghost"
           onClick={toggleMenu}
+          fontFamily="Open Sans"
         />
       </Flex>
 
@@ -153,12 +180,15 @@ const Layout = () => {
               <MenuItem to="/login">
                 <Button
                   variant="solid"
-                  bg="lightGreen"
-                  color="black"
+                  bg="transparent"
+                  color="#58CDFF"
                   fontWeight="bold"
-                  borderRadius="8px"
+                  borderRadius="5px"
+                  border="2px solid"
+                  borderColor="#58CDFF"
                   margin="5px"
                   padding="10px"
+                  fontFamily="Open Sans"
                 >
                   Login
                 </Button>
@@ -167,12 +197,13 @@ const Layout = () => {
               <Button
                 onClick={logoutUser}
                 variant="solid"
-                bg="#ff6c2f"
-                color="white"
+                bg="#58CDFF"
+                color="black"
                 fontWeight="bold"
-                borderRadius="8px"
+                borderRadius="5px"
                 margin="5px"
                 padding="10px"
+                fontFamily="Open Sans"
               >
                 Logout
               </Button>
@@ -189,17 +220,19 @@ const Layout = () => {
   );
 };
 
+// MenuItem component with Open Sans font
 const MenuItem = ({ to, children, noButton }) => (
-  <Text style={{ marginRight: noButton ? "20px" : "0" }}>
+  <Text style={{ marginRight: noButton ? "20px" : "0" }} fontFamily="Open Sans">
     <Link
       to={to}
       style={{
         textDecoration: "none",
-        color: "#ccc",
+        color: "#fff",
         fontSize: "18px",
         transition: "color 0.3s",
         marginRight: "10px",
         marginBottom: "0",
+        fontFamily: "Open Sans",
       }}
     >
       {children}
