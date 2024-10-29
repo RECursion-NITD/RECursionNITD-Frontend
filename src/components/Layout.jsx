@@ -22,18 +22,8 @@ const Layout = () => {
   };
 
   return (
-    <>
-      <Flex
-        h="8vh"
-        backdropFilter="auto"
-        backdropBlur="15px"
-        alignItems="center"
-        justifyContent="space-between"
-        px={{ base: "1em", md: "2em" }}
-        position="fixed"
-        width="100%"
-        zIndex="5"
-      >
+    <div className="new-layout">
+      <div className="fixed top-0 w-full z-5 flex items-center justify-between px-4 md:px-8 backdrop-filter backdrop-blur-lg">
         {/* Left Side: Logo and Text */}
         <Flex display="flex" listStyleType="none" margin="0" padding="0">
           <Link
@@ -130,7 +120,7 @@ const Layout = () => {
           variant="ghost"
           onClick={toggleMenu}
         />
-      </Flex>
+      </div>
 
       {/* Collapsible Menu (visible on mobile) */}
       <Collapse in={isOpen} onClick={() => setIsOpen(false)}>
@@ -185,7 +175,7 @@ const Layout = () => {
         <Outlet />
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

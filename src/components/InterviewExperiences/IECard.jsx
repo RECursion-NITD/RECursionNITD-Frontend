@@ -5,6 +5,9 @@ import { Container } from "@chakra-ui/react";
 import msLogo from "../../assets/images/ms-logo.png";
 import profile from "../../assets/images/profile.png";
 import { type } from "@testing-library/user-event/dist/type";
+import { FaUserCircle } from "react-icons/fa";
+import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
+
 const IECard = ({ interview }) => {
   const getYear = (created_at) => {
     const date = new Date(created_at);
@@ -36,68 +39,42 @@ const IECard = ({ interview }) => {
   };
 
   return (
-    <Container
-      w="95%"
-      className="mt-2 mb-5 p-0 min-w-[95%] border-[1px] rounded-xl h-fit border-outline"
-      boxShadow={"3px 3px #BDE0FF"}
-      bg={"whiteAlpha.200"}
-    >
+    <div className="flex flex-col">
       <Link to={`/experience/detail/${interview.id}`}>
-        <div className="justify-start flex font-sub p-2 text-xl">
-          <div className="h-[50px] w-[50px] me-2 ms-0">
-            <img
-              src={msLogo}
-              alt="company logo"
-              className="h-[50px] w-[50px] object-cover rounded-md"
-            />
-          </div>
-          <div className="w-full font-bold">
-            <div className="w-full font-bold flex">
-              <div className="w-full font-bold font-head text-sm lg:text-xl text-onSurface">
-                <div>
-                  {" "}
-                  {interview.company} Interview Experience{" "}
-                  {getYear(interview.created_at)} | #{interview.id}{" "}
-                </div>
-                <div className="text-xs lg:text-sm text-onSurface">
-                  SWE /{" "}
-                  <span className="text-[#EF6041]">
-                    {" "}
-                    {interview.job_Profile}{" "}
-                  </span>
-                </div>
-              </div>
-              <div className="font-head text-green-500 font-bold text-xs lg:text-sm">
-                SELECTED
-              </div>
+        <div className="justify-center items-start flex font-sub p-4 w-full m-4 max-570:m-0 h-fit bg-surface hover:border-[#3a3a3a]">
+          <FaUserCircle className="text-onSurface h-[50px] w-[50px]" />
+          <div className="w-full text-onSurface font-mulish flex flex-col ps-5 pe-5 text-xl">
+            <div className="font-semibold text-left">
+              {interview.company} Interview Experience {getYear(interview.created_at)}
             </div>
-          </div>
-        </div>
-        <div className="justify-start flex font-sub p-2 pb-4 text-xl">
-          <div className="h-[50px] w-[50px] me-2 ms-0">
-            <img
-              src={profile}
-              alt="company logo"
-              className="h-[50px] w-[50px] object-cover rounded-full"
-            />
-          </div>
-          <div className="w-full font-bold flex">
-            <div className="w-full font-bold text-xs md:text-sm text-secondaryText">
-              <div> Added By {interview.user.username} </div>
-              <div>
-                {" "}
-                <i className="text-sm material-icons">date_range</i>{" "}
-                {getDate(interview.created_at)}{" "}
+            <div className="flex justify-between items-center">
+              <div className="text-sm font-mulish text-left text-[#787777]">
+                Posted By {interview.user.username} {getDate(interview.created_at)}
               </div>
-            </div>
-            <div className="font-sub font-bold text-secondaryText text-xs md:text-sm flex justify-end w-2/6">
-              {interview.no_of_Rounds}{" "}
-              {interview.no_of_Rounds > 1 ? "Rounds" : "Round"}
+              {/* Hide buttons on screens smaller than 570px */}
+              <div className="max-570:hidden">
+                <button className="text-onSurface hover:text-green-500 transition-colors duration-300 delay-100">
+                  <AiOutlineLike className="mr-4" />
+                </button>
+                <button className="text-onSurface hover:text-red-500 transition-colors duration-300 delay-100">
+                  <AiOutlineDislike className="mr-4" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </Link>
-    </Container>
+      
+      {/* Separate div for Like/Dislike buttons on screens smaller than 570px */}
+      <div className="hidden max-570:flex justify-center items-center space-x-4">
+        <button className="text-onSurface hover:text-green-500 transition-colors duration-300 delay-100">
+          <AiOutlineLike className="text-lg mb-4" />
+        </button>
+        <button className="text-onSurface hover:text-red-500 transition-colors duration-300 delay-100">
+          <AiOutlineDislike className="text-lg mb-4" />
+        </button>
+      </div>
+    </div>
   );
 };
 
