@@ -1,6 +1,6 @@
 * {
-  margin: auto;
-  align-items: center;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .App {
@@ -164,11 +164,9 @@
   margin: 5em auto;
   height: 10em;
   width : 10em;
-}
-
+} 
 .our-team .pic {
 	position: relative;
-	border-radius: 50%;
 	overflow: hidden;
 }
 
@@ -185,9 +183,9 @@
 	transition: all 1s ease-in-out 0s;
 }
 
-.our-team:hover .pic:before {
+/* .our-team:hover .pic:before {
 	box-shadow: 0 0 0 400px #6498ff98 inset;
-}
+} */
 
 .pic img {
 	width: 10em;
