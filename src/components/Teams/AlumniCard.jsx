@@ -1,3 +1,4 @@
+//AlumniCard
 import { FaLinkedin } from "react-icons/fa";
 
 const AlumniCard = ({ alumni }) => (
