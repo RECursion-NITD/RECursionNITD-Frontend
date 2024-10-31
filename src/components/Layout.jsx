@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, NavLink } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import {
   Box,
@@ -17,6 +17,7 @@ const Layout = () => {
   const { user, logoutUser } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeLink, setActiveLink] = useState("");
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -25,7 +26,6 @@ const Layout = () => {
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      // Change to true when scrolled down 50px, adjust this threshold as needed
       setIsScrolled(window.scrollY > 50);
     };
 
@@ -88,20 +88,38 @@ const Layout = () => {
           padding="0"
           fontWeight="bold"
         >
-          <MenuItem to="/experience" noButton>
+          {/* Render each link with the MenuItem component */}
+          <MenuItem
+            to="/experience"
+            isActive={activeLink === "/experience"}
+            onClick={() => setActiveLink("/experience")}
+          >
             Interview Experiences
           </MenuItem>
-          <MenuItem to="/events" noButton>
+          <MenuItem
+            to="/events"
+            isActive={activeLink === "/events"}
+            onClick={() => setActiveLink("/events")}
+          >
             Events
           </MenuItem>
-          <MenuItem to="/get_started" noButton>
+          <MenuItem
+            to="/get_started"
+            isActive={activeLink === "/get_started"}
+            onClick={() => setActiveLink("/get_started")}
+          >
             Getting Started
           </MenuItem>
-          <MenuItem to="/team" noButton>
+          <MenuItem
+            to="/team"
+            isActive={activeLink === "/team"}
+            onClick={() => setActiveLink("/team")}
+          >
             Team
           </MenuItem>
         </Flex>
 
+        {/* Login Button */}
         <Flex
           className="navbar-links"
           display={{ base: "none", md: "flex" }}
@@ -111,7 +129,7 @@ const Layout = () => {
           padding="0"
         >
           {!user ? (
-            <MenuItem to="/login">
+            <MenuItem to="/login" noHoverEffect>
               <Button
                 variant="solid"
                 bg="transparent"
@@ -172,12 +190,13 @@ const Layout = () => {
           zIndex="10"
         >
           <VStack spacing="4" mt="5vh">
+            {/* Same links as above */}
             <MenuItem to="/experience">Interview Experiences</MenuItem>
             <MenuItem to="/events">Events</MenuItem>
             <MenuItem to="/get_started">Getting Started</MenuItem>
             <MenuItem to="/team">Team</MenuItem>
             {!user ? (
-              <MenuItem to="/login">
+              <MenuItem to="/login" noHoverEffect>
                 <Button
                   variant="solid"
                   bg="transparent"
@@ -220,24 +239,41 @@ const Layout = () => {
   );
 };
 
-// MenuItem component with Open Sans font
-const MenuItem = ({ to, children, noButton }) => (
-  <Text style={{ marginRight: noButton ? "20px" : "0" }} fontFamily="Open Sans">
-    <Link
-      to={to}
-      style={{
-        textDecoration: "none",
-        color: "#fff",
-        fontSize: "18px",
-        transition: "color 0.3s",
-        marginRight: "10px",
-        marginBottom: "0",
-        fontFamily: "Open Sans",
-      }}
+const MenuItem = ({ to, children, isActive, onClick, noHoverEffect }) => {
+  return (
+    <Text
+      mr="20px"
+      fontFamily="Open Sans"
+      position="relative"
+      onClick={onClick}
     >
-      {children}
-    </Link>
-  </Text>
-);
+      <NavLink
+        to={to}
+        style={({ isActive: routeIsActive }) => ({
+          textDecoration: "none",
+          color: routeIsActive ? "#58CDFF" : "#fff",
+        })}
+      >
+        <Text
+          as="span"
+          className={`relative text-xl w-fit block ${
+            !noHoverEffect
+              ? isActive
+                ? "after:block after:content-[''] after:absolute after:h-[3px] after:bg-[#58CDFF] after:w-full after:scale-x-100"
+                : "after:block after:content-[''] after:absolute after:h-[3px] after:bg-[#ffffff] after:w-full after:scale-x-0 hover:after:scale-x-100"
+              : ""
+          } after:transition after:duration-300 after:origin-center`}
+          fontSize="18px"
+          transition="color 0.3s"
+          _hover={{
+            color: isActive ? "#58CDFF" : "#ffffff",
+          }}
+        >
+          {children}
+        </Text>
+      </NavLink>
+    </Text>
+  );
+};
 
 export default Layout;
