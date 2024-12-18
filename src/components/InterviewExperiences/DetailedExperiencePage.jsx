@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { GetDetailExperience, GetExperiences } from "../../api/experiences";
 import useLoading from "../../hooks/useLoading";
 import Loader from "../Loader";
-import IECard from "./IECard";
+import IECardblack from "./IECardblack";
 import DetailedExperienceCard from "./DetailedExperienceCard";
 import Reviews from "./Reviews";
 import useAuth from "../../hooks/useAuth";
@@ -38,33 +38,20 @@ const DetailedExperiencePage = () => {
   return loading ? (
     <Loader />
   ) : (
-    <div>
       <div
-        className="mt-[8vh] pt-[8vh] flex items-start justify-start  flex-col lg:flex-row"
-        style={{
-          background: "#1A202C",
-          minWidth: "100vw",
-          height: "max-content",
-          padding: "1em",
-        }}
+        className="mt-[7vh] pt-[1vh] flex items-start justify-start flex-col lg:flex-row w-screen mr-0 ml-0"
         >
         {DetailedExperienceCard({ experience })}
 
-        <div className=" w-full lg:w-1/3 min-w-[500px]  mt-0">
+        <div className="w-full lg:w-1/3 min-w-[500px] bg-[#121212] mt-0 mb-0">
           {InterviewExperiences?.results?.slice(0, 5).map((interview, id) => {
             if (interview.id != experienceId) {
-              return <IECard key={id} interview={interview} />;
+              return <IECardblack key={id} interview={interview} />;
             }
           })}
         </div>
       </div>
-      {
-        (experience?.user.email === user?.email || user.role <= 2)?
-        <Reviews idx={experience?.id}/>:
-        <div></div>
-
-      }
-    </div>
+      
   );
 };
 

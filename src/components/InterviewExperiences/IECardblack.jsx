@@ -1,12 +1,8 @@
 import React from "react";
 /* eslint-disable */
 import { Link } from "react-router-dom";
-import { Container } from "@chakra-ui/react";
-import msLogo from "../../assets/images/ms-logo.png";
-import profile from "../../assets/images/profile.png";
-import { type } from "@testing-library/user-event/dist/type";
 import { FaUserCircle } from "react-icons/fa";
-import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
+import { AiOutlineLike, AiOutlineDislike, AiOutlineRight } from "react-icons/ai";
 
 const IECard = ({ interview }) => {
   const getYear = (created_at) => {
@@ -41,8 +37,11 @@ const IECard = ({ interview }) => {
   return (
     <div className="flex flex-col">
       <Link to={`/experience/detail/${interview.id}`} className="m-0">
-        <div className="justify-center items-start flex font-sub p-4 w-full mt-1 mb-1 max-570:m-0 h-fit bg-surface hover:border-[#3a3a3a]">
-          <FaUserCircle className="text-onSurface h-[50px] w-[50px]" />
+        <div className="justify-center items-start flex font-sub p-4 w-full mt-4 mb-4 max-570:m-0 h-fit bg-[#121212] hover:border-[#3a3a3a] relative">
+          {/* Arrow Icon */}
+          <AiOutlineRight className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-xl text-bold" />
+
+          <FaUserCircle className="text-onSurface h-[50px] w-[50px] ml-8" />
           <div className="w-full text-onSurface font-mulish flex flex-col ps-5 pe-5 text-xl">
             <div className="font-semibold text-left m-0">
               {interview.company} Interview Experience {getYear(interview.created_at)}
@@ -64,7 +63,7 @@ const IECard = ({ interview }) => {
           </div>
         </div>
       </Link>
-      
+
       {/* Separate div for Like/Dislike buttons on screens smaller than 570px */}
       <div className="hidden max-570:flex justify-center items-center space-x-4">
         <button className="text-onSurface hover:text-green-500 transition-colors duration-300 delay-100">

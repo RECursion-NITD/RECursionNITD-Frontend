@@ -32,7 +32,7 @@ const SearchExperiences = ({ setInterviewExperiences,setSearch,setCompany,setInt
       />
       <FiSearch className="absolute left-5 top-1/2 transform -translate-y-1/2 text-black text-[#326B94] text-2xl" />
     </div>
-      <div className="flex max-900:flex-col max-900:justify-center justify-start items-center">
+      <div className="flex max-900:flex-col max-900:justify-center justify-start items-center m-0">
         <select
           onChange={(e) => setCompany(e.target.value==="Company" ? null : e.target.value)}
           value={Company === null ? "Company" : Company}
@@ -59,7 +59,7 @@ const SearchExperiences = ({ setInterviewExperiences,setSearch,setCompany,setInt
             );
           })}
         </select>
-        <Link to="/experience/add">
+        <Link to="/experience/add" className="m-0">
           <button className="w-full h-9 mt-2 mb-2 ml-1 mr-1 bg-secondary text-onSurface font-bold px-4 rounded-lg whitespace-nowrap">
             Post Experience
           </button>
