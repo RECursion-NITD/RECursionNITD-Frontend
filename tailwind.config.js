@@ -33,6 +33,7 @@ module.exports = {
       "900px": "900px",
       'max-900': { 'max': '899px' },
       'max-570': { 'max': '570px' },
+      'max-400' : {'max' : '400px'},
     },
     fontFamily: {
       head: ["Roboto", "sans-serif"],

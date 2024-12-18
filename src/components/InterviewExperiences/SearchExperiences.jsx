@@ -21,7 +21,7 @@ const SearchExperiences = ({ setInterviewExperiences,setSearch,setCompany,setInt
   ];
   const interviewType = ["All", "Internship", "Full Time"];
   return (
-    <div className="mt-4 mb-4 flex flex-col justify-between w-full">
+    <div className="mt-4 mb-4 flex flex-col justify-between w-full max-400:w-[300px] ">
       <div className="relative flex w-full justify-start">
       <input
         className="h-12 m-1 w-full outline-none border-outline rounded-3xl ps-12 pe-4 text-black bg-surface font-poppins"

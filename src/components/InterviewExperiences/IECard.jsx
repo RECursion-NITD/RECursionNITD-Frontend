@@ -41,7 +41,7 @@ const IECard = ({ interview }) => {
   return (
     <div className="flex flex-col">
       <Link to={`/experience/detail/${interview.id}`} className="m-0">
-        <div className="justify-center items-start flex font-sub p-4 w-full mt-1 mb-1 max-570:m-0 h-fit bg-surface hover:border-[#3a3a3a]">
+        <div className="justify-center items-start flex font-sub p-4 w-full mt-1 mb-1 h-fit bg-surface hover:border-[#3a3a3a] max-400:w-[300px]">
           <FaUserCircle className="text-onSurface h-[50px] w-[50px]" />
           <div className="w-full text-onSurface font-mulish flex flex-col ps-5 pe-5 text-xl">
             <div className="font-semibold text-left m-0">

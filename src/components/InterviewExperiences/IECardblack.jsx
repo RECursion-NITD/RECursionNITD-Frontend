@@ -37,13 +37,13 @@ const IECard = ({ interview }) => {
   return (
     <div className="flex flex-col">
       <Link to={`/experience/detail/${interview.id}`} className="m-0">
-        <div className="justify-center items-start flex font-sub p-4 w-full mt-4 mb-4 max-570:m-0 h-fit bg-[#121212] hover:border-[#3a3a3a] relative">
+        <div className="justify-center items-start flex font-sub p-4  w-full mt-4 mb-4 max-570:m-0 h-fit bg-[#121212] hover:border-[#3a3a3a] relative">
           {/* Arrow Icon */}
           <AiOutlineRight className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-xl text-bold" />
 
           <FaUserCircle className="text-onSurface h-[50px] w-[50px] ml-8" />
           <div className="w-full text-onSurface font-mulish flex flex-col ps-5 pe-5 text-xl">
-            <div className="font-semibold text-left m-0">
+            <div className="font-semibold text-left m-0 text-wrap">
               {interview.company} Interview Experience {getYear(interview.created_at)}
             </div>
             <div className="flex justify-between items-center m-0">

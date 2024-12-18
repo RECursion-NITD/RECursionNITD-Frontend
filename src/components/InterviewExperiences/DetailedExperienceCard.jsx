@@ -40,7 +40,7 @@ const DetailedExperienceCard = ({ experience }) => {
       <div className="flex flex-col p-4">
         <div class="bg-[#535353] text-white p-4 rounded-lg font-sans mt-2 mb-2 mr-0 ml-0 w-full">
           <div class="flex justify-between font-semibold text-lg flex">
-            <div className="m-0">Company Name:{experience?.company}</div>
+            <div className="text-left m-0">Company Name:{experience?.company}</div>
             <div className="m-0">No of Rounds: 5</div>
           </div>
           <div class="text-base font-semibold">

@@ -99,7 +99,7 @@ const Experiences = () => {
     <div className="flex">
       <div
         // className="mt-[8vh] p-4 bg-background min-w-full min-h-screen max-h-fit"
-        className="m-0 p-16 flex flex-3 flex-col justify-center items-center min-h-screen bg-background w-[70vw] max-900:w-full max-570:pl-6 max-570:pr-6"
+        className="m-0 p-16 flex flex-col justify-center items-center min-h-screen bg-background w-[70vw] max-900:w-full max-570:pl-4 max-570:pr-4"
       >
         {/* Top heading */}
         <div className="text-left w-full p-1 m-4">
@@ -139,12 +139,12 @@ const Experiences = () => {
             {/* For Previous 10 Experiences. */}
             {InterviewExperiences?.previous && (
               <button
-                className="m-4 w-20 p-4 shadow-[3px_3px_0px_#BDE0FF] border border-[#BDE0FF]"
+                className="m-4 w-24 p-2 rounded-lg text-white font-bold bg-secondary"
                 onClick={() => {
                   NextExperiences(InterviewExperiences?.previous);
                 }}
               >
-                Prev
+                Previous
               </button>
             )}
 
@@ -152,7 +152,7 @@ const Experiences = () => {
 
             {InterviewExperiences?.next && (
               <button
-                className="m-4 w-20 p-4 shadow-[3px_3px_0px_#BDE0FF] border border-[#BDE0FF] rounded-lg text-[#BDE0FF]"
+                className="m-4 w-20 p-2 rounded-lg text-white font-bold bg-secondary"
                 onClick={() => {
                   NextExperiences(InterviewExperiences?.next);
                 }}
