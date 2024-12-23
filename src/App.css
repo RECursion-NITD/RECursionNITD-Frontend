@@ -1,5 +1,6 @@
 * {
   margin: auto;
+  box-sizing: border-box;
   align-items: center;
   /* background-image: url("./assets/images/homepage_grid.png");
   background-size: contain;*/
@@ -8,18 +9,25 @@ body{
   overflow-x: hidden;
 }
 
+.new-layout{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .App {
-  background-color: #7a7adb;
-  background-image: linear-gradient(180deg, #102027 0%, #191919 29%);
+  background-color: #1e1e1e;
+  /* background-image: linear-gradient(180deg, #102027 0%, #191919 29%); */
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   justify-content: center;
-  width: fit-content;
-  min-height: 100vh;
-  width: 100%;
-  height: fit-content;
+  /* width: fit-content; */
+  min-height: 100vh;   /*Acts as canvas */
+  width: 100%; /*Acts as canvas */
+  /* height: fit-content; */
 }
 .container{
   display: flex;

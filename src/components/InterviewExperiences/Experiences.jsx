@@ -80,112 +80,111 @@ const Experiences = () => {
     return dateString;
   };
 
+  const companies = [
+    "Company",
+    "Microsoft",
+    "Adobe",
+    "Wells Fargo",
+    "BNY",
+    "Texas Instruments",
+    "Oracle",
+    "JP Morgan",
+  ];
+
   return loading ? (
     <div>
       <Loader />
     </div>
   ) : (
-    <Container
-      marginTop={"8vh"}
-      padding={"1em"}
-      bg={"gray.800"}
-      minWidth={"100vw"}
-      minHeight={"100vh"}
-      maxHeight={"fit-content"}
-    >
-      <div style={{ textAlign: "center", marginTop: "4vh" }}>
-        <h1 className="text-white font-head text-3xl mb-2">
-          Interview Experiences
-        </h1>
-        <p className="text-whitesmoke font-sub italic">
-          {" "}
-          Nothing ever becomes real'til it is experienced - John Keats{" "}
-        </p>
-      </div>
-      <div>
-        <SearchExperiences
-          setInterviewExperiences={setInterviewExperiences}
-          setSearch={setSearch}
-          setCompany={setCompany}
-          setInterviewType={setInterviewType}
-          FilterHandler={FilterHandler}
-          Company={Company}
-          InterviewType={InterviewType}
-        />
-      </div>
-
-      <div>
-      <Link to="/experience/add">
-        <Button colorScheme='teal' variant='outline'>
-            <EditIcon />
-            Post Experience
-        </Button>
-      </Link>
-      </div>
-      
-      <Container
-        p={0}
-        pt="4px"
-        borderBottom="0px"
-        width={"100vh"}
-        maxWidth={"90vw"}
-        minH="container.sm"
+    <div className="flex">
+      <div
+        // className="mt-[8vh] p-4 bg-background min-w-full min-h-screen max-h-fit"
+        className="m-0 p-16 flex flex-col justify-center items-center min-h-screen bg-background w-[70vw] max-900:w-full max-570:pl-4 max-570:pr-4"
       >
-
-        {InterviewExperiences?.results?.map((interview, id) => {
-          return <IECard key={id} interview={interview} />;
-        })}
-
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          {/* For Previous 10 Experiences. */}
-          {InterviewExperiences?.previous && (
-            <button
-              style={{
-                margin: "1em",
-                width: "5em",
-                padding: "15px",
-                boxShadow: "3px 3px #BDE0FF",
-                border: "solid 1px #BDE0FF",
-                border: "solid 1px",
-              }}
-              onClick={() => {
-                NextExperiences(InterviewExperiences?.previous);
-              }}
-            >
-              Prev
-            </button>
-          )}
-
-          {/* For Next 10 Experiences. */}
-
-          {InterviewExperiences?.next && (
-            <button
-              style={{
-                margin: "1em",
-                width: "5em",
-                padding: "15px",
-                boxShadow: "3px 3px #BDE0FF",
-                border: "solid 1px #BDE0FF",
-                borderRadius: "8px",
-                color:"#BDE0FF"
-              }}
-              onClick={() => {
-                NextExperiences(InterviewExperiences?.next);
-              }}
-            >
-              Next
-            </button>
-          )}
+        {/* Top heading */}
+        <div className="text-left w-full p-1 m-4">
+          <h1 className="text-secondary font-poppins font-semibold text-3xl mb-2">
+            Interview Experiences
+          </h1>
+          <p className="text-white font-poppins italic">
+            {" "}
+            Nothing ever becomes real'til it is experienced - John Keats{" "}
+          </p>
         </div>
-      </Container>
-    </Container>
+
+        {/*Search Area */}
+        <div className="w-full flex">
+          <SearchExperiences
+            setInterviewExperiences={setInterviewExperiences}
+            setSearch={setSearch}
+            setCompany={setCompany}
+            setInterviewType={setInterviewType}
+            FilterHandler={FilterHandler}
+            Company={Company}
+            InterviewType={InterviewType}
+          />
+          {/* <Link to="/experience/add">
+            <Button colorScheme='teal' variant='outline'>
+                Post Experience
+            </Button>
+          </Link> */}
+        </div>
+        
+        <div className="w-full">
+          {InterviewExperiences?.results?.map((interview, id) => {
+            return <IECard key={id} interview={interview} />;
+          })}
+
+          <div className="flex justify-center align-center">
+            {/* For Previous 10 Experiences. */}
+            {InterviewExperiences?.previous && (
+              <button
+                className="m-4 w-24 p-2 rounded-lg text-white font-bold bg-secondary"
+                onClick={() => {
+                  NextExperiences(InterviewExperiences?.previous);
+                }}
+              >
+                Previous
+              </button>
+            )}
+
+            {/* For Next 10 Experiences. */}
+
+            {InterviewExperiences?.next && (
+              <button
+                className="m-4 w-20 p-2 rounded-lg text-white font-bold bg-secondary"
+                onClick={() => {
+                  NextExperiences(InterviewExperiences?.next);
+                }}
+              >
+                Next
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="pt-16 pl-3 pr-2 pb-2 bg-surfaceVariant rounded-lg ml-4 flex-1 font-semibold max-900:hidden m-0">
+          <h2 className="text-white font-semibold text-lg mb-4">Search for companies</h2>
+          <div className="flex flex-wrap gap-1">
+            <button
+              className="p-2 bg-primary rounded-lg text-onPrimary"
+              onClick={() => setCompany(null)}
+            >
+              All
+            </button>
+            {companies.map((company, idx) => (
+              <button
+                key={idx}
+                className="p-2 bg-tertiary rounded-lg text-white"
+                onClick={() => setCompany(company)}
+              >
+                {company}
+              </button>
+            ))}
+          </div>
+        </div>
+    </div>
   );
 };
 
