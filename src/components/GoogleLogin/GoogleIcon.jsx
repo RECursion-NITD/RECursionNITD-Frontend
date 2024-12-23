@@ -3,7 +3,7 @@ import React from 'react'
 
 const GoogleIcon = () => {
   return (
-    <svg width="25" height="25" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="24" height="24" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
     <mask id="mask0_8_9" style={{"maskType":"luminance"}} maskUnits="userSpaceOnUse" x="2" y="2" width="43" height="44">
     <path d="M44.5 20H24V28.5H35.8C34.7 33.9 30.1 37 24 37C16.8 37 11 31.2 11 24C11 16.8 16.8 11 24 11C27.1 11 29.9 12.1 32.1 13.9L38.5 7.5C34.6 4.1 29.6 2 24 2C11.8 2 2 11.8 2 24C2 36.2 11.8 46 24 46C35 46 45 38 45 24C45 22.7 44.8 21.3 44.5 20Z" fill="white"/>
     </mask>
