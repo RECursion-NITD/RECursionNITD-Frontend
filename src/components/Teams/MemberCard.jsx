@@ -1,54 +1,51 @@
+import {
+  Box,
+  Heading,
+  Image,
+  Link,
+  Icon,
+  List,
+  ListItem,
+} from "@chakra-ui/react";
 import { FaFacebook, FaLinkedin, FaPhoneSquare } from "react-icons/fa";
 
 const TeamMember = ({ member }) => (
-  <div className="our-team text-center mt-2 w-full sm:w-36 md:w-40">
-    <div className="pic shadow-2xl border-2 border-white overflow-hidden w-full h-32 sm:h-36 md:h-40 mx-auto mb-0 relative rounded-lg">
-      <img
+  <Box className="our-team">
+    <Box className="pic" boxShadow="2px 2px 50px #0a0a0a">
+      <Image
         src={member.image}
         alt={member.name}
-        className="w-full h-full object-cover"
+        borderRadius="100%"
+        borderColor="white"
+        borderWidth="3px"
+        borderStyle="solid"
+        boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
       />
 
-      {/* Social links */}
-      <ul className="social-links absolute inset-0 flex justify-center items-center gap-4 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300">
-        <li>
-          <a
-            href={member.url_Facebook}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white text-2xl hover:text-blue-500"
-          >
-            <FaFacebook />
-          </a>
-        </li>
+      <List className="social-links">
+        <ListItem>
+          <Link href={member.url_Facebook} target="_blank" color="white">
+            <Icon as={FaFacebook} />
+          </Link>
+        </ListItem>
 
-        <li>
-          <a
-            href={member.url_LinkedIn}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white text-2xl hover:text-blue-400"
-          >
-            <FaLinkedin />
-          </a>
-        </li>
+        <ListItem>
+          <Link href={member.url_LinkedIn} target="_blank" color="white">
+            <Icon as={FaLinkedin} />
+          </Link>
+        </ListItem>
 
-        <li>
-          <a
-            href={`tel:${member.mobile}`}
-            className="text-white text-2xl hover:text-green-400"
-          >
-            <FaPhoneSquare />
-          </a>
-        </li>
-      </ul>
-    </div>
+        <ListItem>
+          <Link href={`tel:${member.mobile}`} color="white">
+            <Icon as={FaPhoneSquare} />
+          </Link>
+        </ListItem>
+      </List>
+    </Box>
 
-    <h3 className="team-title text-base sm:text-lg font-mulish font-semibold text-white">
-      {member.name}
-    </h3>
-    <p className="text-[#58CDFF] text-sm sm:text-base">{member.designation}</p>
-  </div>
+    <Heading className="team-title">{member.name}</Heading>
+    <Box color="#90ee90">{member.designation}</Box>
+  </Box>
 );
 
 export default TeamMember;
