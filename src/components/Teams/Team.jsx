@@ -4,162 +4,323 @@ import useLoading from "../../hooks/useLoading";
 import Loader from "../Loader";
 import AlumniCard from "./AlumniCard";
 import TeamMember from "./MemberCard";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import teamImage from "../../assets/images/team1.png";
-import vec from "../../assets/images/Vector.png";
+import {
+  Box,
+  Center,
+  Heading,
+  SimpleGrid,
+  Text,
+  Grid,
+  Flex,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  // MenuItemOption,
+  // MenuGroup,
+  // MenuOptionGroup,
+  // MenuDivider,
+  Button,
+  // useBreakpointValue,
+  useMediaQuery,
+} from "@chakra-ui/react";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ChevronDownIcon,
+} from "@chakra-ui/icons";
 
 const Team = () => {
   const { loading, setLoading } = useLoading();
   const scrollContainerRef = useRef(null);
-  const [alumni, setAlumni] = useState(null);
-  const [alumniYear, setAlumniYear] = useState(2023);
-  const [team, setTeam] = useState(null);
-
-  let yearSet = [];
-  const currYear = new Date().getFullYear();
-  for (let year = currYear; year >= 2016; year--) yearSet.push(year);
+  const [isMobile] = useMediaQuery("(max-width: 768px)");
 
   const scroll = (direction) => {
+    // const scrollDistance = useBreakpointValue({
+    //   base: 100,
+    //   sm: 75,
+    //   md: 100,
+    //   lg: 150,
+    //   xl: 200,
+    // });
     const scrollDistance = 530;
     if (scrollContainerRef.current) {
       const scrollLeft = scrollContainerRef.current.scrollLeft;
-      scrollContainerRef.current.scrollTo({
-        left:
-          scrollLeft +
-          (direction === "left" ? -scrollDistance : scrollDistance),
-        behavior: "smooth",
-      });
+      if (direction === "left") {
+        scrollContainerRef.current.scrollTo({
+          left: scrollLeft - scrollDistance,
+          behavior: "smooth",
+        });
+      } else if (direction === "right") {
+        scrollContainerRef.current.scrollTo({
+          left: scrollLeft + scrollDistance,
+          behavior: "smooth",
+        });
+      }
     }
   };
 
+  const [alumni, setAlumni] = useState(null);
+  const [alumniYear, setAlumniYear] = useState(2023);
+  // const [selectedAlumniYear, setSelectedAlumniYear] = useState(null);
+
+  const [team, setTeam] = useState(null);
+
+  let yearSet = [];
+  const currentDate = new Date();
+  const currYear = currentDate.getFullYear();
+  for (let year = currYear; year >= 2016; year--) {
+    yearSet.push(year);
+  }
+
   useEffect(() => {
     setLoading(true);
-    getAlumni(alumniYear).then((data) => {
-      setAlumni(data);
-      setLoading(false);
-    });
+    getAlumni(alumniYear)
+      .then((data) => {
+        setAlumni(data);
+        setLoading(false);
+      })
+      .catch((err) => console.err(err));
   }, [alumniYear]);
 
   useEffect(() => {
     setLoading(true);
-    getTeam().then((data) => {
-      setTeam(data);
-      setLoading(false);
-    });
+    getTeam()
+      .then((data) => {
+        setTeam(data);
+        setLoading(false);
+      })
+      .catch((err) => console.err(err));
   }, []);
 
   return (
-    <div className="bg-black w-full overflow-hidden py-10 px-4 sm:px-6 md:px-10">
+    <Box
+      bg="#1a202c"
+      style={{
+        padding: "auto 10vw",
+        width: "100vw",
+        overflowX: "hidden",
+      }}
+    >
       {loading && <Loader />}
 
       {/* TEAM HEADER */}
-      <div
-        className="text-center bg-cover mt-4 bg-center bg-fixed w-full h-[70vh] sm:h-[80vh] lg:h-[100vh] opacity-80 flex items-center justify-center"
-        style={{
-          backgroundImage: `url(${teamImage})`,
-        }}
-      >
-        <h1 className="text-4xl md:text-5xl lg:text-9xl sm:text-[5rem] font-bold text-white">
-          MEET OUR
-          <br />
-          TEAM
-        </h1>
-      </div>
+      <Box p={4}>
+        <Center mt="5rem">
+          <Heading className="team-heading" mt={1} mb={3} zIndex={1}>
+            Meet The Team
+          </Heading>
+        </Center>
 
-      {/* Team Members Section */}
-      {team &&
-        Object.keys(team).map((year, i) => (
-          <div key={i} className="mb-10">
-            <div className="flex items-center justify-center my-8">
-              <hr className="flex-grow border-gray-300" />
-              <h2 className="text-2xl font-bold mx-4 text-[#58CDFF]">
-                Batch of {year}
-              </h2>
-              <hr className="flex-grow border-gray-300" />
-            </div>
+        {team &&
+          Object.keys(team)
+            .filter((year) => team[year]?.length > 0)
+            .map((year, i) => (
+              <Box key={i}>
+                <Center mt="5rem" display={"flex"} flexDir={"row"}>
+                  <hr style={{ flex: 1, color: "BDE0FF99" }} />
+                  <Heading
+                    // color={"teal.100"}
+                    color={"white"}
+                    width={"max-content"}
+                    justifyContent={"center"}
+                    className="team-heading"
+                    zIndex={1}
+                    margin={"1em 1em 1em 1em"}
+                    fontSize="2xl"
+                  >
+                    Batch of {year}
+                  </Heading>
+                  <hr style={{ flex: 1, color: "BDE0FF99" }} />
+                </Center>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
-              {team[year].map((member, id) => (
-                <TeamMember key={id} member={member} />
-              ))}
-            </div>
-          </div>
-        ))}
-
-      {/* OUR TEAM BUTTON */}
-      {/* OUR TEAM BUTTON */}
-      <div className="flex justify-center mt-10">
-        <button
-          onClick={() => {
-            // Scroll to top or any specific functionality you need
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
-          className="flex items-center text-white bg-[#58CDFF] px-6 py-2 rounded-lg font-bold hover:bg-[#2b8bb5] transition-transform"
-        >
-          <span className="mr-2">OUR ALUMNI</span>
-          <img src={vec} alt="Vector Icon" className="w-4 h-4" />
-        </button>
-      </div>
+                <SimpleGrid
+                  columns={[1, 2, 3, 4, 5]}
+                  justifyContent={"space-around"}
+                >
+                  {team[year]?.length > 0 &&
+                    team[year].map((member, id) => (
+                      <TeamMember key={id} member={member} />
+                    ))}
+                </SimpleGrid>
+              </Box>
+            ))}
+      </Box>
 
       {/* ALUMNI SECTION */}
-      <div className="mt-20 text-center">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#58CDFF] mb-7">
-          MEET OUR ALUMNI
-        </h1>
 
-        <div className="flex items-center justify-center w-3/4 mx-auto bg-white py-3 h-16 rounded-2xl relative">
-          <button
-            onClick={() => scroll("left")}
-            className="w-10 h-10 rounded-full bg-[#58CDFF] flex items-center justify-center hover:bg-[#2b8bb5] transition-transform"
-            style={{ position: "absolute", left: "10px", bottom: "13px" }}
+      <Box mt={16}>
+        <Center>
+          <Heading
+            as="h1"
+            mt="5%"
+            mb="2%"
+            color="white"
+            fontSize={{ base: "xl", md: "2xl" }}
           >
-            <FaArrowLeft className="text-white" />
-          </button>
-          <div
-            ref={scrollContainerRef}
-            className="flex overflow-x-scroll whitespace-nowrap w-full mx-4 scrollbar-hide"
-          >
-            {yearSet.map((year) => (
-              <div
-                key={year}
-                className="flex-shrink-0 w-1/4 px-2 sm:px-4 text-center cursor-pointer"
-                onClick={() => {
-                  if (alumniYear === year) return;
-                  setAlumni(null);
-                  setAlumniYear(year);
-                }}
+            Meet our Alumni
+          </Heading>
+        </Center>
+
+        {!isMobile && (
+          <Flex width="90%" borderRadius="2rem" backgroundColor="whiteAlpha.50">
+            <Box
+              w="40px"
+              h="40px"
+              borderRadius="50%"
+              bg="gray.300"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              cursor="pointer"
+              marginLeft="50px"
+              marginRight="20px"
+              onClick={() => scroll("left")}
+              _hover={{
+                transform: "scale(1.2)",
+                transition: "transform 0.3s ease-in-out",
+              }}
+            >
+              <ArrowLeftIcon color="black" />
+            </Box>
+
+            <Box
+              flex="60%"
+              mr={2}
+              overflowX="scroll"
+              whiteSpace="nowrap"
+              p={4}
+              ref={scrollContainerRef}
+              sx={{
+                "&::-webkit-scrollbar": {
+                  display: "none",
+                },
+              }}
+            >
+              <Flex>
+                {yearSet.map((year) => (
+                  <Box
+                    flex="0 0 33.33%"
+                    p={2}
+                    textAlign="center"
+                    key={year}
+                    _hover={{
+                      transform: "scale(1.2)",
+                      transition: "transform 0.3s ease-in-out",
+                    }}
+                  >
+                    <Text
+                      color={year === alumniYear ? "white" : "#BDE0FF99"}
+                      _hover={{
+                        color: year === alumniYear ? "#fff" : "#ffffff99",
+                      }}
+                      // borderBottom="1px solid white"
+                      display="inline"
+                      cursor="pointer"
+                      fontSize="lg"
+                      fontWeight="bold"
+                      onClick={() => {
+                        if (alumniYear === year) return;
+                        setAlumni(null);
+                        setAlumniYear(year);
+                      }}
+                    >
+                      Batch of {year}
+                    </Text>
+                  </Box>
+                ))}
+              </Flex>
+            </Box>
+
+            <Box
+              w="40px" // Set the width and height to create a circular shape
+              h="40px"
+              borderRadius="50%"
+              bg="gray.300"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              cursor="pointer"
+              marginLeft="20px"
+              marginRight="50px"
+              onClick={() => scroll("right")}
+              _hover={{
+                transform: "scale(1.2)",
+                transition: "transform 0.3s ease-in-out",
+              }}
+            >
+              <ArrowRightIcon color="black" />
+            </Box>
+          </Flex>
+        )}
+
+        {isMobile && (
+          <Center>
+            <Menu>
+              <MenuButton
+                className="w-4/5"
+                as={Button}
+                rightIcon={<ChevronDownIcon />}
+                backgroundColor="#596274"
+                color="#ffffff"
+                pl="41px"
               >
-                <span
-                  className={`text-sm sm:text-lg font-semibold ${
-                    alumniYear === year ? "text-black" : "text-gray-600"
-                  }`}
-                >
-                  Batch of {year}
-                </span>
-              </div>
-            ))}
-          </div>
-          <button
-            onClick={() => scroll("right")}
-            className="w-10 h-10 rounded-full bg-[#58CDFF] flex items-center justify-center hover:bg-[#2b8bb5] transition-transform"
-            style={{ position: "absolute", right: "10px", bottom: "13px" }}
-          >
-            <FaArrowRight className="text-white" />
-          </button>
-        </div>
+                {alumniYear === null ? "Select Batch Year" : alumniYear}
+              </MenuButton>
+              <MenuList display="flex" flexDirection="column">
+                {yearSet.map((year) => (
+                  <MenuItem
+                    width="90%"
+                    borderRadius="10px"
+                    backgroundColor={
+                      year === alumniYear ? "#BDE0FF" : "#ffffff"
+                    }
+                    onClick={() => {
+                      if (alumniYear === year) return;
+                      setAlumni(null);
+                      setAlumniYear(year);
+                    }}
+                    key={year}
+                  >
+                    {year}
+                  </MenuItem>
+                ))}
+              </MenuList>
+            </Menu>
+          </Center>
+        )}
 
-        <div className="text-center mt-10">
-          <h2 className="text-2xl font-bold text-[#58CDFF]">
+        <Grid key={alumniYear} mb={2} direction="column">
+          <Heading
+            as="h1"
+            mt="3rem"
+            mb="2%"
+            // color="teal.100"
+            color="white"
+            fontSize={{ base: "lg", md: "2xl" }}
+            textAlign="center"
+          >
             Batch of {alumniYear}
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-6">
-            {alumni?.map((alumniMember, id) => (
-              <AlumniCard key={id} alumni={alumniMember} />
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
+          </Heading>
+
+          <Grid
+            px="3rem"
+            mb="3rem"
+            templateColumns={{
+              base: "repeat(1, 1fr)",
+              lg: "repeat(3, 1fr)",
+            }}
+            gap={4}
+            padding={{ base: "15px", sm: "10px", md: "30px" }}
+          >
+            {alumni &&
+              alumni?.map((alumni, id) => (
+                <AlumniCard key={id} alumni={alumni} />
+              ))}
+          </Grid>
+        </Grid>
+      </Box>
+    </Box>
   );
 };
 

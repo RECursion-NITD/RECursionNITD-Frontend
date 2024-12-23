@@ -3,7 +3,6 @@
 @tailwind utilities;
 body {
   margin: 0;
-  box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -79,24 +78,3 @@ code {
     transform: rotate(360deg);
   }
 }
-.scrollbar-hide {
-  @apply overflow-hidden;
-}
-.bg-fixed {
-  background-attachment: scroll !important;
-}
-.bg-cover {
-  background-position: center;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-.md\:px-10 {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-.sm\:px-6 {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-

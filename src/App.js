@@ -41,6 +41,7 @@ function App() {
               <Route path="events" element={<Events />} />
               <Route path="get_started" element={<ContentsPage />} />
               <Route path="get_started/:subtopicId" element={<GetStarted />} />
+
               {/* private routes */}
               <Route element={<RequireAuth />}>
                 <Route path="forum" element={<AskREC />} />
@@ -67,5 +68,4 @@ function App() {
     </>
   );
 }
-
 export default App;
