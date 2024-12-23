@@ -1,5 +1,4 @@
 /* eslint-disable */
-import logoInverted from "../assets/images/logoInverted.png";
 import algo_zenith from "../assets/images/algo_zenith.png";
 import cloudsploit from "../assets/images/cloudsploit.png";
 import codechef from "../assets/images/codechef.png";
@@ -9,6 +8,12 @@ import hiredive from "../assets/images/hiredive.jpg";
 import jetbrain from "../assets/images/jetbrain.svg.png";
 import nutrichef from "../assets/images/nutrichef.png";
 import workat_tech from "../assets/images/workat-tech.png";
+import mgif from "../assets/images/xRemoved.gif";
+import teaching from "../assets/images/500teaching.svg";
+import bulb from "../assets/images/bulb.svg";
+import angularr from "../assets/images/angular.svg";
+import people from "../assets/images/people.svg";
+
 
 import { useEffect, useLayoutEffect, useState, useRef } from "react";
 import {
@@ -26,19 +31,20 @@ import {
   // SimpleGrid,
   Card,
   HStack,
-  Textarea,
-  // Heading,
-  // CardHeader,
-  // CardBody,
-  // CardFooter,
+  VStack,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import useAuth from "../hooks/useAuth";
 import useLoading from "../hooks/useLoading";
 import Loader from "./Loader";
+import FlipCard from "./FlipCard";
+import CarouselWithContent from "./CarouselHome";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { getHome } from "../api/home";
+import "../test.css";
 import "../App.css";
+import { motion } from 'framer-motion';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -50,712 +56,186 @@ function Home() {
   const [isHovered2, setIsHovered2] = useState(false);
   const [isHovered3, setIsHovered3] = useState(false);
   const toast = useToast();
-  const myacti = [
-    {
-      key: 1,
-      title: "Coding Classes",
-      description: "Regular coding classes and geeky sessions",
-      image:
-        "https://images.unsplash.com/photo-1566522650166-bd8b3e3a2b4b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
-      c: "c1",
-      co: "co1",
-    },
-    {
-      key: 2,
-      title: "RECode",
-      // subtitle: "France",
-      description: "Monthly online coding contest",
-      image:
-        "https://images.unsplash.com/photo-1581836499506-4a660b39478a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
-      c: "c2",
-      co: "co2",
-    },
-    {
-      key: 3,
-      title: "Alohomora",
-      // subtitle: "Australia",
-      description: " Onsite coding contest",
-      image:
-        "https://images.unsplash.com/photo-1566522650166-bd8b3e3a2b4b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
-      c: "c3",
-      co: "co3",
-    },
-    {
-      key: 4,
-      title: "ICPC",
-      // subtitle: "Australia",
-      description: "Improving student's participation in ICPC",
-      image:
-        "https://images.unsplash.com/flagged/photo-1564918031455-72f4e35ba7a6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
-      c: "c4",
-      co: "co4",
-    },
-    {
-      key: 5,
-      title: "REChase",
-      // subtitle: "wechase",
-      description: "Annual treasure hunt competition",
-      image:
-        "https://images.unsplash.com/photo-1579130781921-76e18892b57b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
-      c: "c5",
-      co: "co5",
-    },
-    {
-      key: 6,
-      title: "AMA",
-      // subtitle: "Australia",
-      description: "Organizing AMA Sessions with successful alumnus",
-      image:
-        "https://images.unsplash.com/flagged/photo-1564918031455-72f4e35ba7a6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ",
-      c: "c6",
-      co: "co6",
-    },
-  ];
 
-  useEffect(() => {
-    if (!user) return;
-    toast({
-      title: `Welcome ${user?.username}.`,
-      position: "top-right",
-      status: "success",
-      duration: 2500,
-      isClosable: false,
-    });
-  }, [user]);
 
-  useEffect(() => {
-    setLoading(true);
-    getHome()
-      .then((data) => {
-        setHomeData(data);
-        setLoading(false);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  const containerRef = useRef(null);
-  const sliderRef = useRef(null);
-
-  useLayoutEffect(() => {
-    gsap.set(".container", { autoAlpha: 1 });
-
-    const animate = gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: ".container",
-          pin: ".headContainer",
-          start: "top top",
-          end: "bottom 40%",
-          scrub: true,
-          invalidateOnRefresh: true,
-        },
-        defaults: { duration: 1, ease: "ease-in" },
-      })
-      .to(".head", {
-        scale: 0.75,
-      })
-      .to(".head", {
-        color: "#b2f5ea",
-        duration: 0.1,
-      });
-
-    () => {
-      animate.kill();
-    };
-
-    const createCardAnimation = (card, start, end) => {
-      gsap.fromTo(
-        card,
-        { autoAlpha: 0, scale: 0.8 },
-        {
-          autoAlpha: 1,
-          scale: 1,
-          duration: 0.5,
-          scrollTrigger: {
-            pin: ".content2",
-            trigger: card,
-            start,
-            end,
-            scrub: true,
-          },
-        }
-      );
-    };
-
-    const missionCard = document.querySelector(".missionCard");
-    const visionCard = document.querySelector(".visionCard");
-    const valueCard = document.querySelector(".valueCard");
-
-    createCardAnimation(missionCard, "top 30%", "top 20%");
-    createCardAnimation(valueCard, "top 20%", "top 10%");
-    createCardAnimation(visionCard, "top 10%", "top 0%");
-
-    () => {
-      animate.kill();
-    };
-
-  const slider = sliderRef.current;
-
-  const createItemAnimation = (item, start, end, i) => {
-    gsap.fromTo(
-      item,
-      { 
-        autoAlpha: 0,
-        scale: 0.5,
-        xPercent: i % 2 === 0 ? -100 : 100,
-        height:400,
-        width:550, 
-      },
-      {
-        xPercent: 30,
-        autoAlpha: 1,
-        scale: 1,
-        duration: 3,
-        scrollTrigger: {
-          pin: ".content4",
-          trigger: item,
-          start: start,
-          end: end,
-          scrub: true,
-        },
-      }
-    );
-  };
-
-  const c1 = document.querySelector(".c1");
-  const c2 = document.querySelector(".c2");
-  const c3 = document.querySelector(".c3");
-  const c4 = document.querySelector(".c4");
-  const c5 = document.querySelector(".c5");
-  const c6 = document.querySelector(".c6");
-
-  createItemAnimation(c1, "top 40%", "top 20%", 1);
-  createItemAnimation(c2, "top 20%", "top 0%", 2);
-  createItemAnimation(c3, "top 0%", "top -20%", 3);
-  createItemAnimation(c4, "top -20%", "top -40%", 4);
-  createItemAnimation(c5, "top -40%", "top -60%", 5);
-  createItemAnimation(c6, "top -60%", "top -80%", 6);
-
-  () => {
-    animate.kill();
-  };
-
-}, [loading]);
+  const StackComponent = useBreakpointValue({ base: VStack, md: HStack });
+  const screenWidth = window.innerWidth;
 
   return loading ? (
     <Loader />
   ) : (
     <div className="App">
-      <div className="container headContainer">
-        <div className="head">
-          <h1
-            style={{
-              fontWeight: "500",
-              textAlign: "center",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
+      <div className="main-name w-full mt-10">
+        <svg
+          style={{ marginLeft: "7em", display: "block", marginTop: "4em" }}
+          width="714"
+          height="130"
+          viewBox="0 0 714 130"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M9.244 98V36.4H36.964C40.8947 36.4 44.444 37.2507 47.612 38.952C50.8387 40.6533 53.3613 43 55.18 45.992C56.9987 48.9253 57.908 52.2693 57.908 56.024C57.908 59.896 56.9987 63.3867 55.18 66.496C53.3613 69.5467 50.868 71.952 47.7 73.712C44.532 75.472 40.9533 76.352 36.964 76.352H23.5V98H9.244ZM43.388 98L27.724 70.192L43.036 67.992L60.46 98H43.388ZM23.5 64.912H35.644C37.1693 64.912 38.4893 64.5893 39.604 63.944C40.7773 63.24 41.6573 62.272 42.244 61.04C42.8893 59.808 43.212 58.4 43.212 56.816C43.212 55.232 42.86 53.8533 42.156 52.68C41.452 51.448 40.4253 50.5093 39.076 49.864C37.7853 49.2187 36.2013 48.896 34.324 48.896H23.5V64.912ZM71.0331 98V36.4H113.977V49.16H85.5531V85.24H114.857V98H71.0331ZM78.0731 72.744V60.6H110.017V72.744H78.0731ZM155.736 98.88C151.101 98.88 146.818 98.1173 142.888 96.592C139.016 95.008 135.642 92.808 132.768 89.992C129.893 87.1173 127.664 83.744 126.08 79.872C124.554 75.9413 123.792 71.6293 123.792 66.936C123.792 62.36 124.613 58.136 126.256 54.264C127.898 50.392 130.157 47.048 133.032 44.232C135.965 41.3573 139.397 39.128 143.328 37.544C147.317 35.96 151.658 35.168 156.352 35.168C159.285 35.168 162.16 35.5493 164.976 36.312C167.792 37.0747 170.402 38.2187 172.808 39.744C175.272 41.2107 177.384 42.9707 179.144 45.024L169.992 55.496C168.76 54.2053 167.44 53.0907 166.032 52.152C164.682 51.1547 163.186 50.392 161.544 49.864C159.901 49.336 158.141 49.072 156.264 49.072C153.917 49.072 151.688 49.512 149.576 50.392C147.522 51.2133 145.704 52.416 144.12 54C142.594 55.5253 141.392 57.4027 140.512 59.632C139.632 61.8613 139.192 64.3547 139.192 67.112C139.192 69.8107 139.632 72.2747 140.512 74.504C141.392 76.6747 142.624 78.552 144.208 80.136C145.792 81.72 147.698 82.9227 149.928 83.744C152.216 84.5653 154.738 84.976 157.496 84.976C159.373 84.976 161.162 84.712 162.864 84.184C164.565 83.656 166.12 82.952 167.528 82.072C168.994 81.1333 170.285 80.0773 171.4 78.904L178.616 90.344C177.149 91.9867 175.184 93.4533 172.72 94.744C170.314 96.0347 167.616 97.0613 164.624 97.824C161.69 98.528 158.728 98.88 155.736 98.88ZM203.285 98.968C199.824 98.968 196.861 98.2347 194.397 96.768C191.992 95.2427 190.115 93.072 188.765 90.256C187.475 87.44 186.829 84.0667 186.829 80.136V51.272H200.997V78.2C200.997 80.0773 201.291 81.6907 201.877 83.04C202.464 84.3893 203.344 85.4453 204.517 86.208C205.691 86.912 207.099 87.264 208.741 87.264C209.973 87.264 211.088 87.0587 212.085 86.648C213.141 86.2373 214.021 85.68 214.725 84.976C215.488 84.2133 216.075 83.3627 216.485 82.424C216.896 81.4267 217.101 80.3413 217.101 79.168V51.272H231.269V98H217.981L217.365 88.408L220.005 87.352C219.301 89.5813 218.128 91.576 216.485 93.336C214.843 95.0373 212.877 96.416 210.589 97.472C208.301 98.4693 205.867 98.968 203.285 98.968ZM243.818 98V51.272H257.194L257.81 66.496L255.17 63.592C255.874 61.0693 257.018 58.8107 258.602 56.816C260.245 54.8213 262.152 53.2373 264.322 52.064C266.493 50.8907 268.81 50.304 271.274 50.304C272.33 50.304 273.298 50.392 274.178 50.568C275.117 50.744 275.968 50.9493 276.73 51.184L272.858 66.76C272.213 66.3493 271.333 66.0267 270.218 65.792C269.162 65.4987 268.048 65.352 266.874 65.352C265.584 65.352 264.381 65.5867 263.266 66.056C262.152 66.4667 261.213 67.0827 260.45 67.904C259.688 68.7253 259.072 69.6933 258.602 70.808C258.192 71.9227 257.986 73.184 257.986 74.592V98H243.818ZM299.617 98.88C295.041 98.88 290.993 98.1467 287.473 96.68C284.012 95.2133 281.255 93.248 279.201 90.784L287.737 83.392C289.556 85.2107 291.609 86.56 293.897 87.44C296.185 88.2613 298.356 88.672 300.409 88.672C301.231 88.672 301.964 88.584 302.609 88.408C303.255 88.232 303.783 87.9973 304.193 87.704C304.663 87.352 305.015 86.9707 305.249 86.56C305.484 86.0907 305.601 85.5627 305.601 84.976C305.601 83.8027 305.073 82.8933 304.017 82.248C303.489 81.9547 302.609 81.6027 301.377 81.192C300.145 80.7813 298.561 80.312 296.625 79.784C293.868 79.08 291.463 78.2587 289.409 77.32C287.415 76.3227 285.772 75.1787 284.481 73.888C283.308 72.656 282.399 71.3067 281.753 69.84C281.108 68.3147 280.785 66.6133 280.785 64.736C280.785 62.5653 281.284 60.6 282.281 58.84C283.337 57.08 284.716 55.5547 286.417 54.264C288.177 52.9733 290.172 52.0053 292.401 51.36C294.689 50.656 297.036 50.304 299.441 50.304C302.023 50.304 304.487 50.5973 306.833 51.184C309.18 51.7707 311.351 52.592 313.345 53.648C315.399 54.704 317.217 55.9653 318.801 57.432L311.409 65.704C310.353 64.7067 309.151 63.8267 307.801 63.064C306.511 62.2427 305.161 61.5973 303.753 61.128C302.345 60.6587 301.055 60.424 299.881 60.424C299.001 60.424 298.209 60.512 297.505 60.688C296.86 60.8053 296.303 61.04 295.833 61.392C295.364 61.6853 295.012 62.0667 294.777 62.536C294.543 62.9467 294.425 63.4453 294.425 64.032C294.425 64.6187 294.572 65.176 294.865 65.704C295.217 66.232 295.687 66.672 296.273 67.024C296.86 67.376 297.799 67.7867 299.089 68.256C300.38 68.6667 302.14 69.1947 304.369 69.84C307.127 70.6027 309.503 71.4533 311.497 72.392C313.492 73.3307 315.076 74.4453 316.249 75.736C317.188 76.7333 317.892 77.9067 318.361 79.256C318.831 80.5467 319.065 81.9547 319.065 83.48C319.065 86.472 318.215 89.1413 316.513 91.488C314.871 93.776 312.583 95.5947 309.649 96.944C306.716 98.2347 303.372 98.88 299.617 98.88ZM328.228 98V51.272H342.308V98H328.228ZM335.268 42.032C332.628 42.032 330.545 41.416 329.02 40.184C327.553 38.8933 326.82 37.0747 326.82 34.728C326.82 32.616 327.582 30.8853 329.108 29.536C330.633 28.1867 332.686 27.512 335.268 27.512C337.908 27.512 339.961 28.1573 341.428 29.448C342.894 30.68 343.628 32.44 343.628 34.728C343.628 36.8987 342.865 38.6587 341.34 40.008C339.873 41.3573 337.849 42.032 335.268 42.032ZM377.537 98.88C372.668 98.88 368.326 97.824 364.513 95.712C360.758 93.6 357.766 90.7253 355.537 87.088C353.366 83.4507 352.281 79.2853 352.281 74.592C352.281 69.8987 353.366 65.7333 355.537 62.096C357.766 58.4587 360.758 55.584 364.513 53.472C368.326 51.36 372.668 50.304 377.537 50.304C382.406 50.304 386.718 51.36 390.473 53.472C394.286 55.584 397.278 58.4587 399.449 62.096C401.62 65.7333 402.705 69.8987 402.705 74.592C402.705 79.2853 401.62 83.4507 399.449 87.088C397.278 90.7253 394.286 93.6 390.473 95.712C386.718 97.824 382.406 98.88 377.537 98.88ZM377.537 86.736C379.649 86.736 381.526 86.208 383.169 85.152C384.812 84.096 386.102 82.6587 387.041 80.84C387.98 79.0213 388.42 76.9387 388.361 74.592C388.42 72.2453 387.98 70.1627 387.041 68.344C386.102 66.4667 384.812 65 383.169 63.944C381.526 62.888 379.649 62.36 377.537 62.36C375.425 62.36 373.518 62.888 371.817 63.944C370.174 65 368.884 66.4667 367.945 68.344C367.006 70.1627 366.566 72.2453 366.625 74.592C366.566 76.9387 367.006 79.0213 367.945 80.84C368.884 82.6587 370.174 84.096 371.817 85.152C373.518 86.208 375.425 86.736 377.537 86.736ZM411.912 98V51.272H425.288L425.728 60.776L422.912 61.832C423.557 59.72 424.701 57.8133 426.344 56.112C428.045 54.352 430.069 52.944 432.416 51.888C434.763 50.832 437.227 50.304 439.808 50.304C443.328 50.304 446.291 51.0373 448.696 52.504C451.101 53.912 452.92 56.0533 454.152 58.928C455.384 61.744 456 65.2053 456 69.312V98H441.832V70.456C441.832 68.5787 441.568 67.024 441.04 65.792C440.512 64.56 439.691 63.6507 438.576 63.064C437.52 62.4187 436.2 62.1253 434.616 62.184C433.384 62.184 432.24 62.3893 431.184 62.8C430.128 63.152 429.219 63.7093 428.456 64.472C427.693 65.176 427.077 65.9973 426.608 66.936C426.197 67.8747 425.992 68.9013 425.992 70.016V98H419.04C417.397 98 415.989 98 414.816 98C413.643 98 412.675 98 411.912 98Z" fill="#58CDFF" />
+        </svg>
+      </div>
+      <div className="main-part flex justify-between w-full">
+        <div className="left-content mt-0 w-6/12" style={{
+          color: "white",
+          fontSize: "27px",
+          textAlign: "left",
+        }}>
+          <div className="sub-title font-bold">The Official Programming Community of NIT Durgapur</div>
+          <div className="details-title text-2xl mt-10">We are programming community of NIT Durgapur, with focus on improving coding culture institute wide by conducting regular lectures from beginner to advance topics of programming. Our goal is to increase student's participation in inter-collegiate contest like ACM-ICPC and help them get better.</div>
+          <div className="first-button mt-12">
+            <button type="button" class="flex text-white bg-[#2B8BB5] hover:bg-[#205F7A] focus:ring-4 focus:ring-[#2B8BB5] font-medium rounded-lg text-xl px-7 py-3 me-2 mb-2 dark:bg-[#2B8BB5] dark:hover:bg-[#205F7A] focus:outline-none dark:focus:ring-[#2B8BB5]">
+              <div>Get Started</div>
+              <div>
+                <svg width="2em" height="1.3em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path></svg>
+              </div>
+            </button>
+          </div>
+        </div>
+        <div className="right-content">
+          <img src={mgif} alt="RECursion" style={{
+            width: "300px",
+            height: "300px",
+          }} />
+        </div>
+      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="who-are-we p-10 mt-20 w-full"
+      >
+        <h1 className="text-white font-mullish font-extrabold text-[36px] ">WHO ARE WE</h1>
+      </motion.div>
+      <FlipCard></FlipCard>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="our-activities p-10 mt-20 w-full"
+      >
+        <h1 className="text-white font-mullish font-extrabold text-[36px] ">OUR ACTIVITIES</h1>
+        <CarouselWithContent></CarouselWithContent>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="our-activities p-10 mt-3 w-full"
+      >
+        <h1 className="text-white font-mullish font-extrabold text-[36px] ">SO FAR WE HAVE WITNESSED</h1>
+        <div className="outer-div flex flex-row text-white mt-10">
+          <div className="inner-div-1 flex flex-col items-center text-center">
+            <img src={teaching} alt="Teaching" className="w-36 h-36" />
+            <div>
+              <p className="text-2xl font-bold">594+</p>
+              <p className="text-lg">hours of teaching</p>
+            </div>
+          </div>
+          <div className="inner-div-2 flex flex-col items-center text-center">
+            <img src={bulb} alt="Experience" className="w-36 h-36" />
+            <div>
+              <p className="text-2xl font-bold">10+</p>
+              <p className="text-lg">years of experience</p>
+            </div>
+          </div>
+          <div className="inner-div-3 flex flex-col items-center text-center">
+            <img src={angularr} alt="Contests" className="w-36 h-36" />
+            <div>
+              <p className="text-2xl font-bold">69+</p>
+              <p className="text-lg">Online/Offline Contests</p>
+            </div>
+          </div>
+          <div className="inner-div-4 flex flex-col items-center text-center">
+            <img src={people} alt="Users" className="w-36 h-36" />
+            <div>
+              <p className="text-2xl font-bold">2000+</p>
+              <p className="text-lg">Users</p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="our-activities p-10 mt-32 w-10/12 mb-12"
+      >
+        <h1 className="text-white font-mullish font-extrabold text-[36px] ">OUR PAST SPONSORS</h1>
+      <div className="outer-sponsor-div mt-10">
+        <div className="line-1 flex flex-row w-full">
+          <a href="https://www.hackerrank.com/" target="_blank">
+            <Image
+              className="sponsorImg ml-4 max-w-160 max-h-160"
+              src={hackerrank}
+              alt="HackerRank"
+            ></Image>
+          </a>
+          <a href="https://cloudsploit.com/" target="_blank">
+            <Image
+              className="sponsorImg ml-4 max-w-160 max-h-160"
+              src={cloudsploit}
+              alt="CloudSploit"
+            ></Image>
+          </a>
+          <a href="https://www.codechef.com/" target="_blank">
+            <Image
+              className="sponsorImg ml-4 max-w-160 max-h-160"
+              src={codechef}
+              alt="CodeChef"
+            ></Image>
+          </a>
+          <a href="https://workat.tech/" target="_blank">
+            <Image
+              className="sponsorImg ml-4 max-w-160 max-h-160"
+              src={workat_tech}
+              alt="WorkAt Tech"
+            ></Image>
+          </a>
+          <a href="https://www.facebook.com/hiredive/" target="_blank">
+            <Image
+              className="sponsorImg ml-4 max-w-160 max-h-160"
+              src={hiredive}
+              alt="HireDive"
+            ></Image>
+          </a>
+        </div>
+        <div className="line-2 flex flex-row">
+          <a
+            href="https://www.facebook.com/nutrichef.ie/?ref=search&__tn__=%2Cd%2CP-R&eid=ARDTDJ4hXrAW-2WMWQ8pJF8H6bGOJwbca2ee0kDmWC8cbSwVJ7RA1F-upYN4dNK66eWp-9HvxWlsJcKY"
+            target="_blank"
           >
-            <strong>REC</strong>ursion
-          </h1>
+            <Image
+              className="sponsorImg ml-4 max-w-160 max-h-160"
+              src={nutrichef}
+              alt="Nutrichef"
+            ></Image>
+          </a>
+          <a href="https://www.jetbrains.com/" target="_blank">
+            <Image
+              className="sponsorImg ml-4 max-w-160 max-h-160"
+              src={jetbrain}
+              alt="JetBrain"
+            ></Image>
+          </a>
+          <a href="https://algozenith.com/" target="_blank">
+            <Image
+              className="sponsorImg ml-4 max-w-160 max-h-160"
+              src={algo_zenith}
+              alt="Algo Zenith"
+            ></Image>
+          </a>
+          <a href="https://www.digitalocean.com/" target="_blank">
+            <Image
+              className="sponsorImg ml-4 max-w-160 max-h-160"
+              src={digital_ocean}
+              alt="Digital Ocean"
+            ></Image>
+          </a>
         </div>
       </div>
-      <div className="container container01"></div>
-      <div className="container">
-        <div className="content">
-          <h4>Programming Community of NIT Durgapur</h4>
-          <hr style={{ flex: 1, color: "teal.200" }} className="mt-2" />
-          <br></br>
-          <p>
-            We are programming community of NIT Durgapur, with focus on
-            improving coding culture institute wide by conducting regular
-            lectures from beginner to advance topics of programming. Our goal is
-            to increase student&apos;s participation in inter-collegiate contest
-            like ACM-ICPC and help them get better.
-          </p>
-          <div>
-            <p>{homeData?.years_of_experience}+years of experience</p>
-            <p>{homeData?.hours_teaching} + hours of teaching</p>
-          </div>
-        </div>
-      </div>
-      <div className="content2 mt-0 mb-20">
-        <h2
-          style={{
-            color: "white",
-            alignContent: "center",
-            textAlign: "center",
-            fontSize: "25px",
-            fontWeight: "500",
-          }}
-        >
-          Who are we ?
-        </h2>
-        <hr style={{ flex: 1, color: "80CBC4" }}></hr>
-        <div ref={containerRef} className="WhoAreWeCard">
-          <HStack
-            spacing="30px"
-            divider={
-              <StackDivider
-                className="dividerline"
-                borderColor="teal.200"
-                height="340px"
-                alignSelf="center"
-              />
-            }
-          >
-            <Card
-              className="missionCard"
-              w="280px"
-              height="400px"
-              rounded="20px"
-              overflow="hidden"
-              bg="teal.900"
-              cursor="pointer"
-              _hover={{
-                border: "1px solid white",
-                transform: "scale(1.05)",
-                transition: "ease-in 0.3s",
-              }}
-              onMouseEnter={() => {
-                setIsHovered1(true);
-              }}
-              onMouseLeave={() => setIsHovered1(false)}
-              mt={8}
-            >
-              <Image
-                src={logoInverted}
-                alt="Card Image"
-                boxSize="220px"
-              ></Image>
-              <div className={`slide-fade1 ${isHovered1 ? "visible" : ""}`}>
-                <SlideFade in={isHovered1}>
-                  <Box
-                    p="75px"
-                    w="280px"
-                    color="black"
-                    mt="4"
-                    bg="teal.100"
-                    rounded="md"
-                    shadow="md"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      height="2em"
-                      viewBox="0 0 640 512"
-                    >
-                      <path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3L562.7 256l-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z" />
-                    </svg>
-                  </Box>
-                </SlideFade>
-              </div>
-              <Box p={5}>
-                <Stack align="center">
-                  <Badge
-                    variant="subtle"
-                    color="teal.100"
-                    rounded="full"
-                    px={2}
-                    fontSize="0.8em"
-                  >
-                    Mission
-                  </Badge>
-                </Stack>
-                <Stack align="center">
-                  <br></br>
-                  <Text fontWeight="light">
-                    Working towards the improvement of campus&apos;s coding
-                    culture by organizing regular coding classes and contests.
-                  </Text>
-                </Stack>
-                <Flex>
-                  <Spacer />
-                  <Button variant="solid" color="teal.200" size="sm">
-                    Learn More
-                  </Button>
-                </Flex>
-              </Box>
-            </Card>
-            <Card
-              className="valueCard"
-              w="280px"
-              height="400px"
-              rounded="20px"
-              overflow="hidden"
-              bg="teal.900"
-              cursor="pointer"
-              _hover={{
-                border: "1px solid white",
-                transform: "scale(1.05)",
-                transition: "ease-in 0.3s",
-              }}
-              onMouseEnter={() => {
-                setIsHovered2(true);
-              }}
-              onMouseLeave={() => setIsHovered2(false)}
-              mt={8}
-            >
-              <Image
-                src={logoInverted}
-                alt="Card Image"
-                boxSize="210px"
-              ></Image>
-              <div className={`slide-fade1 ${isHovered2 ? "visible" : ""}`}>
-                <SlideFade in={isHovered2}>
-                  <Box
-                    p="75px"
-                    w="280px"
-                    color="black"
-                    mt="4"
-                    bg="teal.100"
-                    rounded="md"
-                    shadow="md"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      height="2em"
-                      viewBox="0 0 512 512"
-                    >
-                      <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
-                    </svg>
-                  </Box>
-                </SlideFade>
-              </div>
-              <Box p={5}>
-                <Stack align="center">
-                  <Badge
-                    variant="subtle"
-                    color="teal.100"
-                    rounded="full"
-                    px={2}
-                    fontSize="0.8em"
-                  >
-                    Value
-                  </Badge>
-                </Stack>
-                <Stack align="center">
-                  <br></br>
-                  <Text fontWeight="light">
-                    We believe that helping each other is the only way. We take
-                    care and always look to get the best out of everyone.
-                  </Text>
-                </Stack>
-                <Flex>
-                  <Spacer />
-                  <Button variant="solid" color="teal.200" size="sm">
-                    Learn More
-                  </Button>
-                </Flex>
-              </Box>
-            </Card>
-            <Card
-              className="visionCard"
-              w="280px"
-              height="400px"
-              rounded="20px"
-              overflow="hidden"
-              bg="teal.900"
-              cursor="pointer"
-              _hover={{
-                border: "1px solid white",
-                transform: "scale(1.05)",
-                transition: "ease-in 0.3s",
-              }}
-              onMouseEnter={() => {
-                setIsHovered3(true);
-              }}
-              onMouseLeave={() => setIsHovered3(false)}
-              mt={8}
-            >
-              <Image
-                src={logoInverted}
-                alt="Card Image"
-                boxSize="210px"
-              ></Image>
-              <div className={`slide-fade1 ${isHovered3 ? "visible" : ""}`}>
-                <SlideFade in={isHovered3}>
-                  <Box
-                    p="75px"
-                    w="280px"
-                    color="black"
-                    mt="4"
-                    bg="teal.100"
-                    rounded="md"
-                    shadow="md"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      height="2em"
-                      viewBox="0 0 640 512"
-                    >
-                      <path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z" />
-                    </svg>
-                  </Box>
-                </SlideFade>
-              </div>
-              <Box p={5}>
-                <Stack align="center">
-                  <Badge
-                    variant="subtle"
-                    color="teal.100"
-                    rounded="full"
-                    px={2}
-                    fontSize="0.8em"
-                  >
-                    Vision
-                  </Badge>
-                </Stack>
-                <Stack align="center">
-                  <br></br>
-                  <Text fontWeight="light">
-                    To grow as a strong coding community and uphold the
-                    integrity of NIT Durgapur as a technical institution.
-                  </Text>
-                </Stack>
-                <Flex>
-                  <Spacer />
-                  <Button variant="solid" color="teal.200" size="sm">
-                    Learn More
-                  </Button>
-                </Flex>
-              </Box>
-            </Card>
-          </HStack>
-        </div>
-      </div>
-      {/* <div className="content3"></div> */}
-      <div className="content4 mt-0 mb-20">
-        <h2
-          style={{
-            color: "white",
-            alignContent: "center",
-            textAlign: "center",
-            fontSize: "25px",
-            fontWeight: "500",
-          }}
-        >
-          Our Activities
-        </h2>
-        <hr></hr>
-        <div className="wrapper">
-          <div className="titlecontainer">
-            <div className="main">
-              <div className="carousel-container" ref={sliderRef}>
-                <ul className="slider">
-                  {myacti.map((item) => (
-                    <li
-                      key={item.key}
-                      className={item.c}
-                      style={{
-                        backgroundImage: `url(${item.image})`,
-                        borderRadius: "10px",
-                      }}
-                    >
-                     <div 
-                      style={{
-                          position: "absolute",
-                          top: 0,
-                          left: 0,
-                          borderRadius: "10px",
-                          width: "100%",
-                          height: "100%",
-                          backgroundImage: "linear-gradient(to top right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))"
-                      }} 
-                      />
-                      <div className={item.co} 
-                      style={{
-                        backgroundColor: "rgba(0, 0, 0, 0)",
-                        borderRadius: "10px",
-                      }}>
-                        <h2 className="title mt-2 mb-1">{item.title}</h2>
-                        <hr></hr>
-                        <p className="description mb-0">{item.description}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="contentstop"></div>
-      <div className="content5">
-        <h2
-          style={{
-            color: "white",
-            alignContent: "center",
-            textAlign: "center",
-            fontSize: "25px",
-            fontWeight: "500",
-          }}
-        >
-          So far we have witnessed...
-        </h2>
-        <hr style={{ flex: 1, color: "80CBC4" }}></hr>
-        <HStack spacing="20px">
-          <Card w="200px" height="200px" overflow="hidden" border="none" mt={8}>
-            <div className={"slide-fade1 visible"}>
-              <Box py="60px" w="200px" mt="5" bg="#001f20" shadow="md">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="3em"
-                  viewBox="0 0 640 512"
-                >
-                  <path
-                    fill="#ffffff"
-                    d="M160 64c0-35.3 28.7-64 64-64H576c35.3 0 64 28.7 64 64V352c0 35.3-28.7 64-64 64H336.8c-11.8-25.5-29.9-47.5-52.4-64H384V320c0-17.7 14.3-32 32-32h64c17.7 0 32 14.3 32 32v32h64V64L224 64v49.1C205.2 102.2 183.3 96 160 96V64zm0 64a96 96 0 1 1 0 192 96 96 0 1 1 0-192zM133.3 352h53.3C260.3 352 320 411.7 320 485.3c0 14.7-11.9 26.7-26.7 26.7H26.7C11.9 512 0 500.1 0 485.3C0 411.7 59.7 352 133.3 352z"
-                  />
-                </svg>
-                <br></br>
-                <Text fontWeight="light">550+</Text>
-                <Text>Hours of Teaching</Text>
-              </Box>
-            </div>
-          </Card>
-          <Card w="200px" height="200px" overflow="hidden" border="none" mt={8}>
-            <div className={"slide-fade1 visible"}>
-              <Box py="60px" w="200px" mt="5" bg="#001f20" shadow="md">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="3em"
-                  viewBox="0 0 384 512"
-                >
-                  <path
-                    fill="#ffffff"
-                    d="M272 384c9.6-31.9 29.5-59.1 49.2-86.2l0 0c5.2-7.1 10.4-14.2 15.4-21.4c19.8-28.5 31.4-63 31.4-100.3C368 78.8 289.2 0 192 0S16 78.8 16 176c0 37.3 11.6 71.9 31.4 100.3c5 7.2 10.2 14.3 15.4 21.4l0 0c19.8 27.1 39.7 54.4 49.2 86.2H272zM192 512c44.2 0 80-35.8 80-80V416H112v16c0 44.2 35.8 80 80 80zM112 176c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-61.9 50.1-112 112-112c8.8 0 16 7.2 16 16s-7.2 16-16 16c-44.2 0-80 35.8-80 80z"
-                  />
-                </svg>
-                <br></br>
-                <Text fontWeight="light">9+</Text>
-                <Text>Years of Experience</Text>
-              </Box>
-            </div>
-          </Card>
-          <Card w="200px" height="200px" overflow="hidden" border="none" mt={8}>
-            <div className="slide-fade1 visible">
-              <Box py="60px" w="200px" mt="5" bg="#001f20" shadow="md">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="3em"
-                  viewBox="0 0 640 512"
-                >
-                  <path
-                    fill="#ffffff"
-                    d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3L562.7 256l-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"
-                  />
-                </svg>
-                <br></br>
-                <Text fontWeight="light">70+</Text>
-                <Text>On/Offline Contests</Text>
-              </Box>
-            </div>
-          </Card>
-          <Card w="200px" height="200px" overflow="hidden" border="none" mt={8}>
-            <div className="slide-fade1 visible">
-              <Box py="60px" w="200px" mt="5" bg="#001f20" shadow="md">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="3em"
-                  viewBox="0 0 640 512"
-                >
-                  <path
-                    fill="#ffffff"
-                    d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z"
-                  />
-                </svg>
-                <br></br>
-                <Text fontWeight="light">2000+</Text>
-                <Text>Users</Text>
-              </Box>
-            </div>
-          </Card>
-        </HStack>
-      </div>
-      <div className="content6 mt-20">
-        <h2
-          style={{
-            color: "white",
-            alignContent: "center",
-            textAlign: "center",
-            fontSize: "25px",
-            fontWeight: "500",
-          }}
-        >
-          Our Past Sponsors
-        </h2>
-        <hr style={{ flex: 1, color: "80CBC4" }}></hr>
-        <div className="row mt-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center mx-auto">
-            <a href="https://www.jetbrains.com/" target="_blank">
-              <Image
-                className="sponsorImg ml-4 max-w-120 max-h-120"
-                src={jetbrain}
-                alt="JetBrain"
-              ></Image>
-            </a>
-            <a href="https://www.hackerrank.com/" target="_blank">
-              <Image
-                className="sponsorImg ml-4 max-w-120 max-h-120"
-                src={hackerrank}
-                alt="HackerRank"
-              ></Image>
-            </a>
-            <a href="https://cloudsploit.com/" target="_blank">
-              <Image
-                className="sponsorImg ml-4 max-w-120 max-h-120"
-                src={cloudsploit}
-                alt="CloudSploit"
-              ></Image>
-            </a>
-            <a href="https://www.codechef.com/" target="_blank">
-              <Image
-                className="sponsorImg ml-4 max-w-120 max-h-120"
-                src={codechef}
-                alt="CodeChef"
-              ></Image>
-            </a>
-            <a href="https://workat.tech/" target="_blank">
-              <Image
-                className="sponsorImg ml-4 max-w-120 max-h-120"
-                src={workat_tech}
-                alt="WorkAt Tech"
-              ></Image>
-            </a>
-            <a href="https://www.facebook.com/hiredive/" target="_blank">
-              <Image
-                className="sponsorImg ml-4 max-w-120 max-h-120"
-                src={hiredive}
-                alt="HireDive"
-              ></Image>
-            </a>
-            <a
-              href="https://www.facebook.com/nutrichef.ie/?ref=search&__tn__=%2Cd%2CP-R&eid=ARDTDJ4hXrAW-2WMWQ8pJF8H6bGOJwbca2ee0kDmWC8cbSwVJ7RA1F-upYN4dNK66eWp-9HvxWlsJcKY"
-              target="_blank"
-            >
-              <Image
-                className="sponsorImg ml-4 max-w-120 max-h-120"
-                src={nutrichef}
-                alt="Nutrichef"
-              ></Image>
-            </a>
-            <a href="https://algozenith.com/" target="_blank">
-              <Image
-                className="sponsorImg ml-4 max-w-120 max-h-120"
-                src={algo_zenith}
-                alt="Algo Zenith"
-              ></Image>
-            </a>
-            <a href="https://www.digitalocean.com/" target="_blank">
-              <Image
-                className="sponsorImg ml-4 max-w-120 max-h-120"
-                src={digital_ocean}
-                alt="Digital Ocean"
-              ></Image>
-            </a>
-          </div>
-        </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

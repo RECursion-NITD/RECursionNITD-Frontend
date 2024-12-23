@@ -2,8 +2,7 @@
 // define apis for login with google
 export const loginWithGoogle = async (token) => {
   const response = await fetch(
-    "https://recnitdgp.pythonanywhere.com/api/token/google/", // for production
-    // "http://127.0.0.1:8000/api/token/google/", // for development
+    "https://api.recursionnitd.in/api/token/google/", // TODO : use axios
     {
       method: "POST",
       headers: {
@@ -15,6 +14,6 @@ export const loginWithGoogle = async (token) => {
     }
   );
   const data = await response.json();
-  console.log("data", data);
+  console.log("google token data", data);
   return data;
 };

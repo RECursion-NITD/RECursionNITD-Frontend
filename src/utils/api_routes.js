@@ -9,4 +9,5 @@ export const API_ROUTES = {
   EXPERIENCES: "/experiences",
   HOME: "/",
   GET_STARTED: "/getting_started",
+  ROLES: "/users/roles",
 };

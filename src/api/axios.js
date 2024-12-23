@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const api = process.env.API || "https://recnitdgp.pythonanywhere.com/api";
-// const api = "http://localhost:8000/api";
+const api = process.env.REACT_APP_API || "https://api.recursionnitd.in/api";
 
 export default axios.create({
   baseURL: api,

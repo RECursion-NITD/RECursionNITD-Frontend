@@ -1,19 +1,22 @@
 /* eslint-disable */
-export const getProfileRoles = async (id) => {
-    const token = JSON.parse(localStorage.getItem("authTokens")).access;
-    const response = await fetch(
-        "https://recnitdgp.pythonanywhere.com/api/users/roles/",
-        // "http://localhost:8000/api/users/roles/",
-        {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-        }
-        }
-    );
-    const data = await response.json();
-    console.log("data", data);
-    return data;
-};
+import axios from "./axios";
+import { API_ROUTES } from "../utils/api_routes";
 
+const ROLES_URL = API_ROUTES.ROLES;
+
+export const getProfileRoles = async (id) => {
+  const token = JSON.parse(localStorage.getItem("authTokens")).access;
+  const response = await axios.post(
+    ROLES_URL,
+    {},
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  const data = response.data;
+  console.log("roles data : ", data);
+  return data;
+};

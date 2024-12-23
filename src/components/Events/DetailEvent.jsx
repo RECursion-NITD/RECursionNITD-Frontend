@@ -63,7 +63,7 @@ const DetailEvent = () => {
       height={"100%"}
       bg="rgb(35 39 47)"
       padding={4}
-      mt="2rem"
+      mt="3rem"
       flexDirection={{ base: "column", md: "row" }}
       // flexDirection={"row"}
       // flexWrap={"wrap"}

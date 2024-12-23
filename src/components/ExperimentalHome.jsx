@@ -215,9 +215,9 @@ function Home() {
               Upcoming Events
             </MenuButton>
             <MenuList>
-              {/* {homeData?.upcoming_events.map((event) => (
+              {homeData?.upcoming_events.map((event) => (
                 <MenuItem key={event.id}>{event.title}</MenuItem>
-              ))} */}
+              ))}
               <MenuItem key="1">event.title </MenuItem>
             </MenuList>
           </Menu>

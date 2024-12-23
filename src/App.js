@@ -1,8 +1,8 @@
 import "./App.css";
 import Home from "./components/Home";
-import ExperimentalHome from "./components/ExperimentalHome";
+// import ExperimentalHome from "./components/ExperimentalHome";
 import Login from "./components/Login";
-import Signup from "./components/Signup"; // Import the Signup component
+import SignUp from "./components/SignUp";
 import Layout from "./components/Layout";
 import Team from "./components/Teams/Team";
 import { Route, Routes } from "react-router-dom";
@@ -32,10 +32,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout />}>
               {/* public routes*/}
+              <Route path="" element={<Home />} />
               <Route path="home" element={<Home />} />
-              <Route path="" element={<ExperimentalHome />} />
               <Route path="login" element={<Login />} />
-              <Route path="signup" element={<Signup />} /> {/* Add this line */}
+              <Route path="signup" element={<SignUp />} />
               <Route path="register" element={<Register />} />
               <Route path="team" element={<Team />} />
               <Route path="events" element={<Events />} />
