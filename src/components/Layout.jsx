@@ -81,7 +81,7 @@ const Layout = () => {
         {/* Desktop Menu (visible on desktop) */}
         <Flex
           className="navbar-links"
-          display={{ base: "none", md: "flex" }}
+          display={{ base: "none", lg: "flex" }}
           alignItems="center"
           listStyleType="none"
           margin="0"
@@ -122,7 +122,7 @@ const Layout = () => {
         {/* Login Button */}
         <Flex
           className="navbar-links"
-          display={{ base: "none", md: "flex" }}
+          display={{ base: "none", lg: "flex" }}
           alignItems="center"
           listStyleType="none"
           margin="0"
@@ -168,7 +168,7 @@ const Layout = () => {
         {/* Hamburger Menu Icon (visible on mobile) */}
         <IconButton
           color="whitesmoke"
-          display={{ base: "block", md: "none" }}
+          display={{ base: "block", lg: "none" }}
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
           aria-label="Menu"
           variant="ghost"
