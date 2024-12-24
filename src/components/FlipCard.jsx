@@ -66,9 +66,13 @@ const FlipCard = () => {
         }
       `}</style>
 
-      <div className="flex flex-col md:flex-row justify-center gap-10 md:gap-20 mt-8">
+      <div className="flex flex-wrap justify-center gap-10 mt-8">
         {cardData.map((card, index) => (
-          <div ref={cardRef} key={index} className="perspective w-80 h-96">
+          <div
+            ref={cardRef}
+            key={index}
+            className="perspective w-full sm:w-80 h-96 max-w-xs"
+          >
             <div
               className={`flip-card-inner relative w-full h-full ${
                 isFlipped ? "rotate-y-180" : ""
@@ -82,19 +86,23 @@ const FlipCard = () => {
                   color: index < 3 ? "white" : "black",
                 }}
               >
-                <img src={logo} alt="Logo" className="w-32 h-32" />
-                <h2 className="text-xl font-bold"></h2>
+                <img
+                  src={logo}
+                  alt="Logo"
+                  className="w-20 sm:w-32 h-20 sm:h-32 opacity-50"
+                />
+                <h2 className="text-lg sm:text-xl font-bold"></h2>
               </div>
               <div
                 className="flip-card-back absolute w-full h-full text-white flex flex-col items-center rounded-lg shadow-lg rotate-y-180 backface-hidden"
                 style={{
                   backgroundColor:
-                    index < 3 ? "rgba(41, 41, 41, 0.57)" : "white",
+                    index < 3 ? "rgba(41, 41, 41, 0.43)" : "white",
                   color: index < 3 ? "white" : "black",
                 }}
               >
-                <div className="card-top-content mt-10 mb-0">
-                  <h2 className="text-2xl font-bold text-[#8DDDFF]">
+                <div className="card-top-content mt-10 mb-0 text-center">
+                  <h2 className="text-xl sm:text-2xl font-bold text-[#8DDDFF]">
                     {card.backTitle}
                   </h2>
                   <svg
@@ -111,7 +119,9 @@ const FlipCard = () => {
                     />
                   </svg>
                 </div>
-                <p className="mt-10 w-9/12 text-l">{card.backContent}</p>
+                <p className="mt-6 sm:mt-10 w-10/12 text-sm sm:text-base text-center">
+                  {card.backContent}
+                </p>
               </div>
             </div>
           </div>
