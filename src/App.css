@@ -1,9 +1,14 @@
 * {
   margin: auto;
+  align-items: center;
   box-sizing: border-box;
 }
 body{
   overflow-x: hidden;
+}
+
+.no-align * {
+  align-items: unset; /* or "initial" if you want to reset it to the default value */
 }
 
 .new-layout{

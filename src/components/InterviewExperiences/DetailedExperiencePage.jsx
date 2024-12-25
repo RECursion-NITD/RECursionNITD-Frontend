@@ -39,7 +39,7 @@ const DetailedExperiencePage = () => {
     <Loader />
   ) : (
       <div
-        className="mt-[7vh] pt-[1vh] flex items-start justify-start flex-col lg:flex-row w-screen mr-0 ml-0"
+        className="mt-[7vh] pt-[1vh] flex items-start justify-start flex-col lg:flex-row w-screen mr-0 ml-0 no-align"
         >
         {DetailedExperienceCard({ experience })}
 
