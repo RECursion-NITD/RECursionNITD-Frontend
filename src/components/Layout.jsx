@@ -1,5 +1,5 @@
-import React from "react";
-import { Outlet, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Outlet, Link, NavLink } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import {
   Box,
@@ -15,11 +15,23 @@ import Footer from "./Footer";
 
 const Layout = () => {
   const { user, logoutUser } = useAuth();
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeLink, setActiveLink] = useState("");
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
@@ -32,7 +44,10 @@ const Layout = () => {
         px={{ base: "1em", md: "2em" }}
         position="fixed"
         width="100%"
-        zIndex="5"
+        zIndex="40"
+        fontFamily="Open Sans"
+        bg={isScrolled ? "#191919" : "transparent"} // Toggle background color
+        transition="background-color 0.3s" // Smooth transition
       >
         {/* Left Side: Logo and Text */}
         <Flex display="flex" listStyleType="none" margin="0" padding="0">
@@ -52,7 +67,12 @@ const Layout = () => {
                 maxHeight: "5vh",
               }}
             />
-            <Text fontSize="x-large" fontWeight="bold" color="#ccc">
+            <Text
+              fontSize="x-large"
+              fontWeight="bold"
+              color="#fff"
+              fontFamily="Open Sans"
+            >
               <strong>REC</strong>ursion
             </Text>
           </Link>
@@ -68,20 +88,38 @@ const Layout = () => {
           padding="0"
           fontWeight="bold"
         >
-          <MenuItem to="/experience" noButton>
+          {/* Render each link with the MenuItem component */}
+          <MenuItem
+            to="/experience"
+            isActive={activeLink === "/experience"}
+            onClick={() => setActiveLink("/experience")}
+          >
             Interview Experiences
           </MenuItem>
-          <MenuItem to="/events" noButton>
+          <MenuItem
+            to="/events"
+            isActive={activeLink === "/events"}
+            onClick={() => setActiveLink("/events")}
+          >
             Events
           </MenuItem>
-          <MenuItem to="/get_started" noButton>
+          <MenuItem
+            to="/get_started"
+            isActive={activeLink === "/get_started"}
+            onClick={() => setActiveLink("/get_started")}
+          >
             Getting Started
           </MenuItem>
-          <MenuItem to="/team" noButton>
+          <MenuItem
+            to="/team"
+            isActive={activeLink === "/team"}
+            onClick={() => setActiveLink("/team")}
+          >
             Team
           </MenuItem>
         </Flex>
 
+        {/* Login Button */}
         <Flex
           className="navbar-links"
           display={{ base: "none", md: "flex" }}
@@ -91,16 +129,20 @@ const Layout = () => {
           padding="0"
         >
           {!user ? (
-            <MenuItem to="/login">
+            <MenuItem to="/login" noHoverEffect>
               <Button
                 variant="solid"
-                bg="lightGreen"
-                color="black"
+                bg="transparent"
+                color="#58CDFF"
                 fontWeight="bold"
-                borderRadius="15px"
+                borderRadius="5px"
                 margin="5px"
                 padding="10px"
-                _hover={{ bg: "#60C80A" }}
+                border="2px solid"
+                borderColor="#58CDFF"
+                _hover={{ bg: "#58CDFF", color: "black" }}
+                marginRight="60px"
+                fontFamily="Open Sans"
               >
                 Login
               </Button>
@@ -109,12 +151,14 @@ const Layout = () => {
             <Button
               onClick={logoutUser}
               variant="solid"
-              bg="#ff6c2f"
-              color="white"
+              bg="#58CDFF"
+              color="black"
               fontWeight="bold"
-              borderRadius="8px"
+              borderRadius="5px"
               margin="5px"
               padding="10px"
+              marginRight="60px"
+              fontFamily="Open Sans"
             >
               Logout
             </Button>
@@ -129,6 +173,7 @@ const Layout = () => {
           aria-label="Menu"
           variant="ghost"
           onClick={toggleMenu}
+          fontFamily="Open Sans"
         />
       </Flex>
 
@@ -145,20 +190,24 @@ const Layout = () => {
           zIndex="10"
         >
           <VStack spacing="4" mt="5vh">
+            {/* Same links as above */}
             <MenuItem to="/experience">Interview Experiences</MenuItem>
             <MenuItem to="/events">Events</MenuItem>
             <MenuItem to="/get_started">Getting Started</MenuItem>
             <MenuItem to="/team">Team</MenuItem>
             {!user ? (
-              <MenuItem to="/login">
+              <MenuItem to="/login" noHoverEffect>
                 <Button
                   variant="solid"
-                  bg="lightGreen"
-                  color="black"
+                  bg="transparent"
+                  color="#58CDFF"
                   fontWeight="bold"
-                  borderRadius="8px"
+                  borderRadius="5px"
+                  border="2px solid"
+                  borderColor="#58CDFF"
                   margin="5px"
                   padding="10px"
+                  fontFamily="Open Sans"
                 >
                   Login
                 </Button>
@@ -167,12 +216,13 @@ const Layout = () => {
               <Button
                 onClick={logoutUser}
                 variant="solid"
-                bg="#ff6c2f"
-                color="white"
+                bg="#58CDFF"
+                color="black"
                 fontWeight="bold"
-                borderRadius="8px"
+                borderRadius="5px"
                 margin="5px"
                 padding="10px"
+                fontFamily="Open Sans"
               >
                 Logout
               </Button>
@@ -189,22 +239,41 @@ const Layout = () => {
   );
 };
 
-const MenuItem = ({ to, children, noButton }) => (
-  <Text style={{ marginRight: noButton ? "20px" : "0" }}>
-    <Link
-      to={to}
-      style={{
-        textDecoration: "none",
-        color: "#ccc",
-        fontSize: "18px",
-        transition: "color 0.3s",
-        marginRight: "10px",
-        marginBottom: "0",
-      }}
+const MenuItem = ({ to, children, isActive, onClick, noHoverEffect }) => {
+  return (
+    <Text
+      mr="20px"
+      fontFamily="Open Sans"
+      position="relative"
+      onClick={onClick}
     >
-      {children}
-    </Link>
-  </Text>
-);
+      <NavLink
+        to={to}
+        style={({ isActive: routeIsActive }) => ({
+          textDecoration: "none",
+          color: routeIsActive ? "#58CDFF" : "#fff",
+        })}
+      >
+        <Text
+          as="span"
+          className={`relative text-xl w-fit block ${
+            !noHoverEffect
+              ? isActive
+                ? "after:block after:content-[''] after:absolute after:h-[3px] after:bg-[#58CDFF] after:w-full after:scale-x-100"
+                : "after:block after:content-[''] after:absolute after:h-[3px] after:bg-[#ffffff] after:w-full after:scale-x-0 hover:after:scale-x-100"
+              : ""
+          } after:transition after:duration-300 after:origin-center`}
+          fontSize="18px"
+          transition="color 0.3s"
+          _hover={{
+            color: isActive ? "#58CDFF" : "#ffffff",
+          }}
+        >
+          {children}
+        </Text>
+      </NavLink>
+    </Text>
+  );
+};
 
 export default Layout;

@@ -2,7 +2,10 @@
   margin: auto;
   align-items: center;
   box-sizing: border-box;
-}
+  align-items: center;
+  /* background-image: url("./assets/images/homepage_grid.png");
+  background-size: contain;*/
+} 
 body{
   overflow-x: hidden;
 }
