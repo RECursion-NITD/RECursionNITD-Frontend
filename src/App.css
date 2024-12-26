@@ -1,9 +1,7 @@
 * {
-  margin: auto;
-  /* align-items: center; */
-  /* background-image: url("./assets/images/homepage_grid.png");
-  background-size: contain;*/
+  margin: 0;
   box-sizing: border-box;
+  align-items: center;
 } 
 body{
   overflow-x: hidden;

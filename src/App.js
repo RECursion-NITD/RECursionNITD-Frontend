@@ -2,6 +2,7 @@ import "./App.css";
 import Home from "./components/Home";
 import ExperimentalHome from "./components/ExperimentalHome";
 import Login from "./components/Login";
+import Signup from "./components/Signup"; // Import the Signup component
 import Layout from "./components/Layout";
 import Team from "./components/Teams/Team";
 import { Route, Routes } from "react-router-dom";
@@ -34,12 +35,12 @@ function App() {
               <Route path="home" element={<Home />} />
               <Route path="" element={<ExperimentalHome />} />
               <Route path="login" element={<Login />} />
+              <Route path="signup" element={<Signup />} /> {/* Add this line */}
               <Route path="register" element={<Register />} />
               <Route path="team" element={<Team />} />
               <Route path="events" element={<Events />} />
               <Route path="get_started" element={<ContentsPage />} />
               <Route path="get_started/:subtopicId" element={<GetStarted />} />
-
               {/* private routes */}
               <Route element={<RequireAuth />}>
                 <Route path="forum" element={<AskREC />} />
@@ -66,4 +67,5 @@ function App() {
     </>
   );
 }
+
 export default App;
