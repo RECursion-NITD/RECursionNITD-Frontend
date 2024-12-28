@@ -10,6 +10,7 @@ import { EditIcon } from '@chakra-ui/icons'
 import EventCard from "./EventCard";
 import useAuth from "../../hooks/useAuth";
 import { ROLES } from "../../utils/roles";
+import ContestList from "./ContestList";
 
 const Events = () => {
   const [Events, setEvents] = useState([]);
@@ -18,6 +19,50 @@ const Events = () => {
   const [SearchQuery, setSearchQuery] = useState("");
   const [EventType, setEventType] = useState("All");
   const {user} = useAuth();
+
+  const dummyEvents = {
+    count: 3,
+    next: null,
+    previous: null,
+    results: [
+      {
+        id: 1,
+        title: "BIT MANIPULATION",
+        date: "Sep 12, 2024, 6:15 PM",
+        duration: "1 hour 45 minutes",
+      },
+      {
+        id: 2,
+        title: "ALGORITHMS - DYNAMIC PROGRAMMING",
+        date: "Sep 14, 2024, 5:00 PM",
+        duration: "2 hours",
+      },
+      {
+        id: 3,
+        title: "DATA STRUCTURES - TREES",
+        date: "Sep 16, 2024, 3:30 PM",
+        duration: "1 hour 30 minutes",
+      },
+      {
+        id: 2,
+        title: "ALGORITHMS - DYNAMIC PROGRAMMING",
+        date: "Sep 14, 2024, 5:00 PM",
+        duration: "2 hours",
+      },
+      {
+        id: 3,
+        title: "DATA STRUCTURES - TREES",
+        date: "Sep 16, 2024, 3:30 PM",
+        duration: "1 hour 30 minutes",
+      },
+      {
+        id: 2,
+        title: "ALGORITHMS - DYNAMIC PROGRAMMING",
+        date: "Sep 14, 2024, 5:00 PM",
+        duration: "2 hours",
+      }
+    ],
+  };
 
   const FilterSearchHandler = () => {
     console.log("Inside search handler", EventType, SearchQuery);
@@ -97,7 +142,7 @@ const Events = () => {
     //   )}
     // </div>
     <>
-    <Box bg={"gray.800"} height={"100%"} width={"100%"}>
+    <Flex mt={"2%"} height={"100%"} width={"100%"} flexDirection={"row"} alignItems={"flex-start"} justifyContent={"flex-start"} >
       <Box
         // marginTop={"8vh"}
         // marginLeft={isMobile ? "0vw" : "20vw"}
@@ -106,63 +151,62 @@ const Events = () => {
         // minHeight={"92vh"}
         display={"flex"}   //added flex caused the white line to shrink
         flexDirection={"column"}
-        bg="gray.800"
         justifyContent={"flex-start"}
-        alignItems={"center"}
+        alignItems={"left"}
+        height={"100%"} width={"100%"}
+        pl={"4%"}
+        pr={"4%"}
       >
-        <Box mt="2%">
-          <Heading
-            as="h2"
-            fontSize="2xl"
-            marginTop="5rem"
-            textAlign="center"
-            color="white"
-          >
-            Events
-          </Heading>
-          <link
-            href="https://fonts.googleapis.com/css?family=Pacifico&display=swap"
-            rel="stylesheet"
-          />
-          <Text
-            fontSize="sm"
-            fontFamily="'Pacifico', cursive"
-            textAlign="center"
-            color="whitesmoke"
-          >
-            We don't remember the dates, we remember events!
-          </Text>
-          <hr className="m-auto mt-[2em] w-[90%] d-flex align-center color-secondaryText " />
-        </Box>
-        { user?.role<=ROLES.MODERATOR &&
-            <div>
-              <Link to="/events/create">
-                <Button colorScheme='teal' variant='outline' className="mt-4">
-                    <EditIcon />
-                    Add Event
-                </Button>
-              </Link>
-            </div>
-         
-        }
+        <Box
+          width={"86%"}
+          padding={"12px"}
+          ml={0}
+        >
+          <Box mt="2%" mb="2%">
+            <Heading
+              as="h1"
+              fontSize="3xl"
+              textAlign="left"
+              color="#34aaff"
+            >
+              Events
+            </Heading>
+            <link
+              href="https://fonts.googleapis.com/css?family=Pacifico&display=swap"
+              rel="stylesheet"
+            />
+          </Box>
+          { user?.role<=ROLES.MODERATOR &&
+              <div>
+                <Link to="/events/create">
+                  <Button colorScheme='teal' variant='outline' className="mt-4">
+                      <EditIcon />
+                      Add Event
+                  </Button>
+                </Link>
+              </div>
+          
+          }
 
-        {
-          <FilterEvent
-            EventType={EventType}
-            setEventType={setEventType}
-            setSearchQuery={setSearchQuery}
-            FilterSearchHandler={FilterSearchHandler}
-          />
-        }
+          {
+            <FilterEvent
+              EventType={EventType}
+              setEventType={setEventType}
+              setSearchQuery={setSearchQuery}
+              FilterSearchHandler={FilterSearchHandler}
+            />
+          }
+        </Box>
 
         {/*The main box with all the event cards */}
         <SimpleGrid
           // mt={5}
-          spacing={2}
-          minChildWidth={"300px"}
-          width={"86%"}
+          ml={0}
+          spacing={1}
+          minChildWidth={"400px"}
+          width={"100%"}
         >
-          {Events?.results?.map((event, key) => (
+          {dummyEvents?.results?.map((event, key) => (
             <EventCard key={key} event={event} />
           ))}
         </SimpleGrid>
@@ -217,7 +261,8 @@ const Events = () => {
           )}
         </div>
       </Box>
-    </Box>
+      <ContestList/>
+    </Flex>
     </>
   );
 };

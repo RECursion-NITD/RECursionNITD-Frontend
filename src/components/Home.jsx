@@ -9,7 +9,7 @@ import jetbrain from "../assets/images/jetbrain.svg.png";
 import nutrichef from "../assets/images/nutrichef.png";
 import workat_tech from "../assets/images/workat-tech.png";
 import mgif from "../assets/images/xRemoved.gif";
-import teaching from "../assets/images/500teaching.svg";
+// import teaching from "../assets/images/500teaching.svg";
 import bulb from "../assets/images/bulb.svg";
 import angularr from "../assets/images/angular.svg";
 import people from "../assets/images/people.svg";
@@ -38,7 +38,7 @@ import useAuth from "../hooks/useAuth";
 import useLoading from "../hooks/useLoading";
 import Loader from "./Loader";
 import FlipCard from "./FlipCard";
-import CarouselWithContent from "./CarouselHome";
+// import CarouselWithContent from "./CarouselHome";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { getHome } from "../api/home";
@@ -116,7 +116,7 @@ function Home() {
         className="our-activities p-10 mt-20 w-full"
       >
         <h1 className="text-white font-mullish font-extrabold text-[36px] ">OUR ACTIVITIES</h1>
-        <CarouselWithContent></CarouselWithContent>
+        {/* <CarouselWithContent></CarouselWithContent> */}
       </motion.div>
       <motion.div
         initial={{ opacity: 0, y: 50 }}
@@ -127,7 +127,7 @@ function Home() {
         <h1 className="text-white font-mullish font-extrabold text-[36px] ">SO FAR WE HAVE WITNESSED</h1>
         <div className="outer-div flex flex-row text-white mt-10">
           <div className="inner-div-1 flex flex-col items-center text-center">
-            <img src={teaching} alt="Teaching" className="w-36 h-36" />
+            {/* {<img src={teaching} alt="Teaching" className="w-36 h-36" />} */}
             <div>
               <p className="text-2xl font-bold">594+</p>
               <p className="text-lg">hours of teaching</p>
