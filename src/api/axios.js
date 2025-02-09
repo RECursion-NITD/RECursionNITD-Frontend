@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api = process.env.REACT_APP_API || "https://api.recursionnitd.in/api";
+const api = process.env.REACT_APP_API || "https://recursion70.pythonanywhere.com/";
 
 export default axios.create({
   baseURL: api,
