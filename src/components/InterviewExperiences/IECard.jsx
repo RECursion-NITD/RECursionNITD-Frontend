@@ -44,7 +44,7 @@ const IECard = ({ interview }) => {
         <div className="justify-center items-start flex font-sub p-4 w-full mt-1 mb-1 h-fit bg-surface hover:border-[#3a3a3a] max-400:w-[300px]">
           <FaUserCircle className="text-onSurface h-[50px] w-[50px]" />
           <div className="w-full text-onSurface font-mulish flex flex-col ps-5 pe-5 text-xl">
-            <div className="font-semibold text-left m-0">
+            <div className="font-semibold text-left mt-1 m-0">
               {interview.company} Interview Experience {getYear(interview.created_at)}
             </div>
             <div className="flex justify-between items-center m-0">

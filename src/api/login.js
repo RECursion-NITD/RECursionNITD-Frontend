@@ -1,7 +1,7 @@
 // define apis for login
 export const login = async (formData) => {
   const response = await fetch(
-    "https://api.recursionnitd.in/api/token/", // TODO : use axios
+    "https://recursion70.pythonanywhere.com/token/", // TODO : use axios
     {
       method: "POST",
       headers: {
