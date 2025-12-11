@@ -21,7 +21,7 @@ const SearchExperiences = ({ setInterviewExperiences,setSearch,setCompany,setInt
   ];
   const interviewType = ["All", "Internship", "Full Time"];
   return (
-    <div className="mt-4 mb-4 flex flex-col justify-between w-full max-400:w-[300px] ">
+    <div className="mt-4 mb-4 flex flex-col justify-between w-full max-400:w-[300px] m-0">
       <div className="relative flex w-full justify-start">
       <input
         className="h-12 m-1 w-full outline-none border-outline rounded-3xl ps-12 pe-4 text-black bg-surface font-poppins"
@@ -60,7 +60,7 @@ const SearchExperiences = ({ setInterviewExperiences,setSearch,setCompany,setInt
           })}
         </select>
         <Link to="/experience/add" className="m-0">
-          <button className="w-full h-9 mt-2 mb-2 ml-1 mr-1 bg-secondary text-onSurface font-bold px-4 rounded-lg whitespace-nowrap">
+          <button className="w-full h-9 mt-1 mb-2 ml-1 mr-1 bg-secondary text-onSurface font-bold px-4 rounded-lg whitespace-nowrap">
             Post Experience
           </button>
         </Link>

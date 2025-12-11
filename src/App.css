@@ -1,5 +1,6 @@
 * {
   margin: auto;
+  align-items: center;
   box-sizing: border-box;
   align-items: center;
   /* background-image: url("./assets/images/homepage_grid.png");
@@ -7,6 +8,10 @@
 } 
 body{
   overflow-x: hidden;
+}
+
+.no-align * {
+  align-items: unset; /* or "initial" if you want to reset it to the default value */
 }
 
 .new-layout{
