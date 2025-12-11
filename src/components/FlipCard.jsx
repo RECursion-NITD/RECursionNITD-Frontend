@@ -66,7 +66,7 @@ const FlipCard = () => {
         }
       `}</style>
 
-      <div className="flex flex-col md:flex-row justify-center gap-10 md:gap-20 mt-8">
+      <div className="flex flex-col lg:flex-row justify-center gap-10 lg:gap-5 md:gap-4 mt-8">
         {cardData.map((card, index) => (
           <div ref={cardRef} key={index} className="perspective w-80 h-96">
             <div
@@ -75,7 +75,7 @@ const FlipCard = () => {
               }`}
             >
               <div
-                className="flip-card-front absolute w-full h-full flex flex-col items-center justify-center rounded-lg shadow-lg backface-hidden"
+                className="flip-card-front absolute lg:w-7/11 w-full h-full flex flex-col items-center justify-center rounded-lg shadow-lg backface-hidden"
                 style={{
                   backgroundColor:
                     index < 3 ? "rgba(41, 41, 41, 0.57)" : "white",
@@ -86,7 +86,7 @@ const FlipCard = () => {
                 <h2 className="text-xl font-bold"></h2>
               </div>
               <div
-                className="flip-card-back absolute w-full h-full text-white flex flex-col items-center rounded-lg shadow-lg rotate-y-180 backface-hidden"
+                className="flip-card-back absolute lg:w-7/11 w-full h-full text-white flex flex-col items-center rounded-lg shadow-lg rotate-y-180 backface-hidden"
                 style={{
                   backgroundColor:
                     index < 3 ? "rgba(41, 41, 41, 0.57)" : "white",
