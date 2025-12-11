@@ -48,26 +48,23 @@ const EventCard = ({ event }) => {
         m={"17px 10px"}
         display="flex"
         justifyContent="center"
-        width="300px"
+        width="400px"
         // height="470px"
         cursor="pointer"
+        backgroundColor='#121212'
       >
         <Box
           className="card item-card card-block"
           _hover={{ transform: "scale(1.05)", transition: "ease-in 0.15s" }}
           p={3}
-          borderWidth="0.5px"
-          borderColor="#343A40"
           rounded="md"
           textAlign="center"
           width="100%"
           height="100%"
-          bg="whiteAlpha.200"
           // boxShadow="2px 2px 4px #BDE0FF"
         >
           {event.image ? (
             <Image
-              borderRadius={"8px"}
               src={event.image}
               alt="RECursion Event Poster"
               height="260px"
@@ -84,61 +81,28 @@ const EventCard = ({ event }) => {
             />
           )}
 
-          <Heading as="h5" fontSize="27px" color="lightBlue" margin={3}>
-            <a textDecoration="none">{event.title}</a>
+          <Text color="white"
+            style={{
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}>
+            Title: {event.title}
             {perms && (
               <>
                 <br />
                 <a>(Update)</a>
               </>
             )}
-          </Heading>
-
-          <Text color="white">
-            <strong>{event.event_type}</strong>: {event.target_year}
           </Text>
 
           <Text color="white">
-            <Icon as={SlCalender} />
-            <span style={{ paddingLeft: "10px" }}>
-              {formatDate(event.start_time)}
-            </span>
+            Date: {formatDate(event.date)}
           </Text>
 
-          <Text color="lightBlue">
-            <Icon as={IoLocationSharp} />
-            {event.venue}
+          <Text color="white">
+            Duration: {event.duration}
           </Text>
-
-          <Button
-            as="a"
-            margin={2}
-            p={2}
-            sx={{
-              borderRadius: "8px",
-
-              backgroundImage:
-                "linear-gradient(to right, #BDE0FF 50%, #596274 50%)",
-              backgroundSize: "200% 100%",
-              transition: "background-position .5s ease-out",
-              backgroundPosition: "right",
-              color: "white", // Add text color
-              textAlign: "center", // Center text
-              textDecoration: "none", // Remove underline
-              cursor: "pointer", // Change cursor on hover
-              "&:hover": {
-                backgroundImage:
-                  "linear-gradient(to right, #BDE0FF 50%, #596274 50%)",
-                backgroundPosition: "left",
-                color: "black",
-                fontWeight: "bold",
-                boxShadow: "2px 2px 3px #1a202c",
-                backgroundSize: "200% 100%",
-              },
-            }}
-          >
-            Know more
-          </Button>
         </Box>
       </Box>
     </Link>

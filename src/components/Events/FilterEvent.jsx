@@ -20,132 +20,70 @@ const FilterEvent = ({
 
   return (
     <Flex
-      borderRadius={"16px"}
-      padding={"15px"}
-      flexDirection={"column"} // Stack items vertically
-      width={"80%"} // Increase width slightly on mobile
-      height={"fit-content"}
-      position={"relative"}
-      top={"2em"}
-      bg={"gray.700"}
-      // left={!"0"}
-      alignItems={"center"}
-      // color={"#BDE0FF"}
-      marginBottom={"4em"}
+      display={"flex"}   // added flex caused the white line to shrink
+      flexDirection={"column"}
+      justifyContent={"flex-start"}
+      alignItems={"flex-start"}
     >
-      {/* Filter (All, classes, contests, events) */}
       <Box
-        width="100%"
-        bg="gray.700"
-        // paddingBottom={"15px"}
-        // marginTop={"1em"}
-        // marginBottom={"1em"} // Add margin for spacing on mobile
-        // borderBottom={"solid #212121 2px"}
-      >
-        <Flex width="100%">
-          <Input
-            color="black"
-            bg="white"
-            mr={2}
-            flex="1"
-            placeholder="Search Events"
-            onChange={(e) => {
-              setSearchQuery(e.target.value);
-            }}
-          />
-          <IconButton
-            backgroundColor="#BDE0FF"
-            color="#596274"
-            marginBottom={"1em"}
-            _hover={{
-              background: "gray.700",
-              color: "#BDE0FF",
-            }}
-            aria-label="Search database"
-            icon={<SearchIcon />}
-            onClick={FilterSearchHandler}
-          />
-        </Flex>
-      </Box>
-
-      <Box
-        borderRadius={"16px"}
-        width="100%"
-        bg="gray.700"
-        // height={!"100%"}
-        display="flex"
+        display={"flex"}   // added flex caused the white line to shrink
         flexDirection={"row"}
-        // alignItems="center" // Align items to the left
-        justifyContent="space-evenly" // Space around items
+        justifyContent={"flex-start"}
+        alignItems={"flex-start"}
+        margin={0}
       >
         <Button
           _hover={{
-            background: "gray.800",
+            background: "#34aaff",
           }}
-          margin={"0.1em"}
-          padding={"0.5em"}
-          flex={1}
-          borderRadius={"16px"}
-          // textAlign="left"
-          background={EventType === "All" ? "gray.800" : "gray.700"}
-          color="lightBlue"
+          background={EventType === "All" ? "#34aaff" : "#203f55"}
+          color="white"
           onClick={() => {
             setEventType("All");
           }}
+          marginRight={"12px"}
         >
           {"All"}
         </Button>
 
         <Button
           _hover={{
-            background: "gray.800",
+            background: "#34aaff",
           }}
-          margin={"0.1em"}
-          borderRadius={"16px"}
-          flex={1}
-          padding={"1em"}
-          // textAlign="left"
-          background={EventType === "Contest" ? "gray.800" : "gray.700"}
-          color="lightBlue"
+          background={EventType === "Contest" ? "#34aaff" : "#203f55"}
+          color="white"
           onClick={() => {
             setEventType("Contest");
           }}
+          marginRight={"12px"}
         >
           Contests
         </Button>
 
         <Button
           _hover={{
-            background: "gray.800",
+            background: "#34aaff",
           }}
-          margin={"0.1em"}
-          borderRadius={"16px"}
-          flex={1}
-          // textAlign="left"
-          padding={"1em"}
-          background={EventType === "Class" ? "gray.800" : "gray.700"}
-          color="lightBlue"
+          background={EventType === "Class" ? "#34aaff" : "#203f55"}
+          color="white"
           onClick={() => {
             setEventType("Class");
           }}
+          marginRight={"12px"}
         >
           Classes
         </Button>
 
         <Button
           _hover={{
-            background: "gray.800",
+            background: "#34aaff",
           }}
-          margin={"0.1em"}
-          borderRadius={"16px"}
-          flex={1}
-          // textAlign="left"
-          padding={"1em"}
-          background={EventType === "Event" ? "gray.800" : "gray.700"}
-          color="lightBlue"
+          background={EventType === "Event" ? "#34aaff" : "#203f55"}
+          color="white"
           onClick={() => {
             setEventType("Event");
           }}
+          marginRight={"12px"}
         >
           Events
         </Button>

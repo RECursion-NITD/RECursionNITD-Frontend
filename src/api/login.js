@@ -1,7 +1,7 @@
 // define apis for login
 export const login = async (formData) => {
   const response = await fetch(
-    "https://recursion70.pythonanywhere.com/token/", // TODO : use axios
+    "http://127.0.0.1:8000/api/token/", // TODO : use axios
     {
       method: "POST",
       headers: {
