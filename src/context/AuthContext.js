@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { createContext, useEffect, useState } from "react";
 import { login } from "../api/login";
+import { register } from "../api/register";
 import { refresh } from "../api/refreshToken";
 import jwtDecode from "jwt-decode";
 import { useToast } from "@chakra-ui/react";
@@ -108,6 +109,94 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  // const registerUser = async (formData) => {
+  //   try {
+  //     setStatus("submitting");
+
+  //     const data = await register(formData);
+
+  //     if (data?.error || data?.errors) {
+  //       toast({
+  //         title: "Registration Failed",
+  //         description: data?.error || "Invalid details",
+  //         position: "top",
+  //         status: "error",
+  //         duration: 3000,
+  //         isClosable: true,
+  //       });
+  //       setStatus("typing");
+  //       return;
+  //     }
+
+  //     toast({
+  //       title: "Account Created",
+  //       description: "You can now login with your credentials",
+  //       position: "top",
+  //       status: "success",
+  //       duration: 3000,
+  //       isClosable: true,
+  //     });
+
+  //     setStatus("typing");
+  //   } catch (err) {
+  //     console.error("register error:", err);
+  //     toast({
+  //       title: "Registration Error",
+  //       description: "Something went wrong",
+  //       position: "top",
+  //       status: "error",
+  //       duration: 3000,
+  //       isClosable: true,
+  //     });
+  //     setStatus("typing");
+  //   }
+  // };
+
+  const registerUser = async ({ username, email, password, confirmPassword }) => {
+    try {
+      const formData = new FormData();
+      formData.append("username", username);
+      formData.append("email", email);
+      formData.append("password1", password);        // Django default
+      formData.append("password2", confirmPassword); // Django default
+      formData.append("ajax_check", "True");
+
+      const response = await fetch("http://127.0.0.1:8000/profile/register/", {
+        method: "POST",
+        body: formData,
+        credentials: "include", // IMPORTANT for CSRF
+      });
+
+      const text = await response.text();
+      // alert(text); // show Django message
+      if (text=="A user with that Email already exists." || text=="This password is too common." || text=="A user with that username already exists." || text=="This field is required." || text=="This password is too short. It must contain at least 8 characters."){
+        toast({
+          title: "Signup failed",
+          description: text,
+          position: "top",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+      else{
+        toast({
+          title: "Signup successful",
+          description: text,
+          position: "top",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+
+      setStatus("typing");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+
   const logoutUser = () => {
     localStorage.removeItem("authTokens");
     localStorage.removeItem("user");
@@ -136,6 +225,7 @@ export const AuthProvider = ({ children }) => {
     token: authToken,
     loginUser: loginUser,
     logoutUser: logoutUser,
+    registerUser: registerUser,
     setStatus: setStatus,
     status: status,
     decodeTokens: decodeTokens,
