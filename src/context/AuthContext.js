@@ -62,51 +62,53 @@ export const AuthProvider = ({ children }) => {
   };
 
   const loginUser = async (formData) => {
-    login(formData)
-      .then((data) => {
-        localStorage.setItem("authTokens", JSON.stringify(data));
-        getProfileRoles(jwtDecode(data?.access).user_id)
-        .then((res)=>{
-          localStorage.setItem(
-            "user",
-            JSON.stringify({
-              id: jwtDecode(data?.access).user_id,
-              username: formData.username,
-              role:res.role,
-            })
-          );
-          setUser({
-            id: jwtDecode(data?.access).user_id,
-            username: formData.username,
-            role:res.role,
-          });
+    try {
+      const data = await login(formData);
+      localStorage.setItem("authTokens", JSON.stringify(data));
+
+      const res = await getProfileRoles(jwtDecode(data?.access).user_id);
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          id: jwtDecode(data?.access).user_id,
+          username: formData.username,
+          role: res.role,
         })
-        setAuthToken(data);
-      })
-      .catch((err) => {
-        setLoading(false);
-        if (formData.username && formData.password) {
-          toast({
-            title: "Account not Found",
-            description: "Username or Password is incorrect.",
-            position: "top",
-            status: "error",
-            duration: 3000,
-            isClosable: true,
-          });
-        } else {
-          toast({
-            title: "Login Failed",
-            description: "Please fill in all the fields",
-            position: "top",
-            status: "error",
-            duration: 3000,
-            isClosable: true,
-          });
-        }
-        console.log("cant login user -> err", err);
-        setStatus("typing");
+      );
+
+      setUser({
+        id: jwtDecode(data?.access).user_id,
+        username: formData.username,
+        role: res.role,
       });
+
+      setAuthToken(data);
+
+    } catch (err) {
+      setLoading(false);
+      if (formData.username && formData.password) {
+        toast({
+          title: "Account not Found",
+          description: "Username or Password is incorrect.",
+          position: "top",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "Login Failed",
+          description: "Please fill in all the fields",
+          position: "top",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+      console.log("cant login user -> err", err);
+      setStatus("typing");
+    }
   };
 
   // const registerUser = async (formData) => {
@@ -169,7 +171,7 @@ export const AuthProvider = ({ children }) => {
 
       const text = await response.text();
       // alert(text); // show Django message
-      if (text=="A user with that Email already exists." || text=="This password is too common." || text=="A user with that username already exists." || text=="This field is required." || text=="This password is too short. It must contain at least 8 characters."){
+      if (text == "A user with that Email already exists." || text == "This password is too common." || text == "A user with that username already exists." || text == "This field is required." || text == "This password is too short. It must contain at least 8 characters.") {
         toast({
           title: "Signup failed",
           description: text,
@@ -179,7 +181,7 @@ export const AuthProvider = ({ children }) => {
           isClosable: true,
         });
       }
-      else{
+      else {
         toast({
           title: "Signup successful",
           description: text,

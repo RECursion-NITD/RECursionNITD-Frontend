@@ -3,6 +3,7 @@ import Home from "./components/Home";
 // import ExperimentalHome from "./components/ExperimentalHome";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
+import EditProfile from "./components/Profile/EditProfile";
 import Layout from "./components/Layout";
 import Team from "./components/Teams/Team";
 import { Route, Routes } from "react-router-dom";
@@ -46,6 +47,7 @@ function App() {
               <Route element={<RequireAuth />}>
                 <Route path="forum" element={<AskREC />} />
                 <Route path="blog" element={<Blog />} />
+                <Route path="profile/edit" element={<EditProfile />} />
                 <Route path="experience" element={<Experiences />} />
                 <Route
                   path="experience/detail/:experienceId"
