@@ -4,7 +4,7 @@ export const API_ROUTES = {
   ALUMNI: "/team/alumni",
   TOKEN: "/token",
   REFRESH_TOKEN: "token/refresh/",
-  EVENTS: "/events",
+  EVENTS: "/events/",
   USERS: "/users",
   EXPERIENCES: "/experiences",
   HOME: "/",
