@@ -26,6 +26,7 @@ import RequireMember from "./components/RequireMember";
 import ViewProfile from "./components/Profile/ViewProfile";
 import ResetPassword from "./components/Profile/ResetPassword";
 import ResetPasswordForm from "./components/Profile/ResetPasswordForm";
+import ResetPasswordSent from "./components/Profile/ResetPasswordSent";
 
 function App() {
   return (
@@ -48,6 +49,10 @@ function App() {
               <Route
                 path="profile/reset/:uidb64/:newtoken"
                 element={<ResetPasswordForm />}
+              />
+              <Route
+                path="reset/sent"
+                element={<ResetPasswordSent />}
               />
 
               {/* private routes */}

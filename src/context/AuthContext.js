@@ -224,12 +224,14 @@ export const AuthProvider = ({ children }) => {
       else {
         toast({
           title: "Password Reset Email sent",
-          description: text,
           position: "top",
           status: "success",
           duration: 3000,
           isClosable: true,
         })
+
+        setStatus("typing");
+        navigate("reset/sent");
       }
 
       setStatus("typing");
@@ -240,7 +242,6 @@ export const AuthProvider = ({ children }) => {
 
   const resetPasswordSubmit = async({uidb64, newtoken, password, confirmPassword}) => {
     try {
-      console.log(uidb64, newtoken);
 
       const response = await fetch(`http://127.0.0.1:8000/profile/reset/${uidb64}/${newtoken}/`, {
         method: "POST",
@@ -252,7 +253,19 @@ export const AuthProvider = ({ children }) => {
 
       const text = await response.text();
 
-      if (text=="Invalid Password."){
+      if (text=="Changed."){
+        toast({
+          title: "Password successfully changed!",
+          description: text,
+          position: "top",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        })
+
+        navigate("");
+      }
+      else {
         toast({
           title: "Invalid Password",
           description: text,
@@ -262,19 +275,8 @@ export const AuthProvider = ({ children }) => {
           isClosable: true,
         })
       }
-      else {
-        toast({
-          title: "Password successfully changed!",
-          description: text,
-          position: "top",
-          status: "success",
-          duration: 3000,
-          isClosable: true,
-        })
-      }
       
       setStatus("typing");
-      navigate("");
     } catch (err){
       console.error(err);
     }
