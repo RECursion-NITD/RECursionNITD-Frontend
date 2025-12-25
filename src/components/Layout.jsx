@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Outlet, Link, NavLink } from "react-router-dom";
+import { Outlet, Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import {
   Box,
@@ -9,19 +9,52 @@ import {
   IconButton,
   Collapse,
   VStack,
+  useToast, // Added usage
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Footer from "./Footer";
+import { getProfile } from "../api/userInfo"; // Added import
 
 const Layout = () => {
   const { user, logoutUser } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeLink, setActiveLink] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const toast = useToast();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  // Enforce Profile Completeness "Jail"
+  useEffect(() => {
+    const checkProfile = async () => {
+      // Only check if user is logged in and NOT already on the edit page
+      if (user && location.pathname !== "/profile/edit") {
+        try {
+          const profile = await getProfile();
+          const isNameMissing = !profile.name || (typeof profile.name === "string" && profile.name.trim() === "");
+          const isCollegeMissing = !profile.college || (typeof profile.college === "string" && profile.college.trim() === "");
+
+          if (isNameMissing || isCollegeMissing) {
+            toast({
+              title: "Profile Incomplete",
+              description: "You must complete your profile (Name & College) to continue.",
+              status: "warning",
+              duration: 3000,
+              isClosable: true,
+            });
+            navigate("/profile/edit", { replace: true });
+          }
+        } catch (error) {
+          console.error("Profile check failed", error);
+        }
+      }
+    };
+    checkProfile();
+  }, [user, location.pathname, navigate, toast]);
 
   // Handle scroll effect
   useEffect(() => {
@@ -148,20 +181,39 @@ const Layout = () => {
               </Button>
             </MenuItem>
           ) : (
-            <Button
-              onClick={logoutUser}
-              variant="solid"
-              bg="#58CDFF"
-              color="black"
-              fontWeight="bold"
-              borderRadius="5px"
-              margin="5px"
-              padding="10px"
-              marginRight="60px"
-              fontFamily="Open Sans"
-            >
-              Logout
-            </Button>
+            <>
+              <MenuItem to="/profile/edit" noHoverEffect>
+                <Button
+                  variant="solid"
+                  bg="transparent"
+                  color="#58CDFF"
+                  fontWeight="bold"
+                  borderRadius="5px"
+                  margin="5px"
+                  padding="10px"
+                  border="2px solid"
+                  borderColor="#58CDFF"
+                  _hover={{ bg: "#58CDFF", color: "black" }}
+                  fontFamily="Open Sans"
+                >
+                  Edit Profile
+                </Button>
+              </MenuItem>
+              <Button
+                onClick={logoutUser}
+                variant="solid"
+                bg="#58CDFF"
+                color="black"
+                fontWeight="bold"
+                borderRadius="5px"
+                margin="5px"
+                padding="10px"
+                marginRight="60px"
+                fontFamily="Open Sans"
+              >
+                Logout
+              </Button>
+            </>
           )}
         </Flex>
 
@@ -213,19 +265,37 @@ const Layout = () => {
                 </Button>
               </MenuItem>
             ) : (
-              <Button
-                onClick={logoutUser}
-                variant="solid"
-                bg="#58CDFF"
-                color="black"
-                fontWeight="bold"
-                borderRadius="5px"
-                margin="5px"
-                padding="10px"
-                fontFamily="Open Sans"
-              >
-                Logout
-              </Button>
+              <>
+                <MenuItem to="/profile/edit" noHoverEffect>
+                  <Button
+                    variant="solid"
+                    bg="transparent"
+                    color="#58CDFF"
+                    fontWeight="bold"
+                    borderRadius="5px"
+                    border="2px solid"
+                    borderColor="#58CDFF"
+                    margin="5px"
+                    padding="10px"
+                    fontFamily="Open Sans"
+                  >
+                    Edit Profile
+                  </Button>
+                </MenuItem>
+                <Button
+                  onClick={logoutUser}
+                  variant="solid"
+                  bg="#58CDFF"
+                  color="black"
+                  fontWeight="bold"
+                  borderRadius="5px"
+                  margin="5px"
+                  padding="10px"
+                  fontFamily="Open Sans"
+                >
+                  Logout
+                </Button>
+              </>
             )}
           </VStack>
         </Box>
@@ -256,13 +326,12 @@ const MenuItem = ({ to, children, isActive, onClick, noHoverEffect }) => {
       >
         <Text
           as="span"
-          className={`relative text-xl w-fit block ${
-            !noHoverEffect
-              ? isActive
-                ? "after:block after:content-[''] after:absolute after:h-[3px] after:bg-[#58CDFF] after:w-full after:scale-x-100"
-                : "after:block after:content-[''] after:absolute after:h-[3px] after:bg-[#ffffff] after:w-full after:scale-x-0 hover:after:scale-x-100"
-              : ""
-          } after:transition after:duration-300 after:origin-center`}
+          className={`relative text-xl w-fit block ${!noHoverEffect
+            ? isActive
+              ? "after:block after:content-[''] after:absolute after:h-[3px] after:bg-[#58CDFF] after:w-full after:scale-x-100"
+              : "after:block after:content-[''] after:absolute after:h-[3px] after:bg-[#ffffff] after:w-full after:scale-x-0 hover:after:scale-x-100"
+            : ""
+            } after:transition after:duration-300 after:origin-center`}
           fontSize="18px"
           transition="color 0.3s"
           _hover={{

@@ -7,7 +7,15 @@ const USER_URL = API_ROUTES.USERS;
 
 export const getProfile = async () => {
   const user = localStorage.getItem("user");
-  const username = JSON.parse(user).username;
+  if (!user) {
+    throw new Error("User not found in local storage");
+  }
+  const parsedUser = JSON.parse(user);
+  if (!parsedUser || !parsedUser.username) {
+    throw new Error("Invalid user data in local storage");
+  }
+  const username = parsedUser.username;
+
   const response = await axios.get(`${USER_URL}/${username}/`, {
     headers: {
       "Content-Type": "application/json",
@@ -19,8 +27,16 @@ export const getProfile = async () => {
 };
 
 export const editProfile = async (profileData) => {
-  const token = JSON.parse(localStorage.getItem("authTokens")).access;
-  const username = JSON.parse(localStorage.getItem("user")).username;
+  const authTokens = localStorage.getItem("authTokens");
+  const user = localStorage.getItem("user");
+
+  if (!authTokens || !user) {
+    throw new Error("Missing auth tokens or user data");
+  }
+
+  const token = JSON.parse(authTokens).access;
+  const username = JSON.parse(user).username;
+
   const response = await axios.patch(`${USER_URL}/${username}/`, profileData, {
     headers: {
       "Content-Type": "multipart/form-data",

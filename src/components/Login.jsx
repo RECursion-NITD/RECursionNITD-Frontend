@@ -1,4 +1,4 @@
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import React, { useState, useEffect } from "react";
 import useLoading from "../hooks/useLoading";
@@ -7,6 +7,7 @@ import Glogin from "./GoogleLogin/Glogin";
 import Usericon from "../assets/images/userr.svg";
 import passicon from "../assets/images/password.svg";
 import loginicon from "../assets/images/login_svg.svg";
+import { getProfile } from "../api/userInfo";
 
 const Login = () => {
   const location = useLocation();
@@ -17,12 +18,34 @@ const Login = () => {
   const [rememberMe, setRememberMe] = useState(false); // State for remember me checkbox
   const { loading, setLoading } = useLoading();
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    if (token) {
-      setLoading(false);
-      setStatus("typing");
-    }
-  }, [token, setLoading, setStatus]);
+    const checkProfileAndRedirect = async () => {
+      if (token) {
+        setLoading(true); // Keep loading while we check profile
+        try {
+          const profile = await getProfile();
+          // Check if profile is incomplete (Strict check for Name and College)
+          const isNameMissing = !profile.name || (typeof profile.name === "string" && profile.name.trim() === "");
+          const isCollegeMissing = !profile.college || (typeof profile.college === "string" && profile.college.trim() === "");
+
+          if (isNameMissing || isCollegeMissing) {
+            navigate("/profile/edit");
+          } else {
+            navigate(from);
+          }
+        } catch (error) {
+          console.error("Error checking profile:", error);
+          navigate(from); // Default to home/from on error
+        } finally {
+          setLoading(false);
+          setStatus("typing");
+        }
+      }
+    };
+    checkProfileAndRedirect();
+  }, [token, setLoading, setStatus, navigate, from]);
 
   const handleUsernameChange = (e) => setUsername(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
@@ -41,7 +64,7 @@ const Login = () => {
 
   return (
     <>
-      {token && <Navigate to={from} />}
+      {/* {token && <Navigate to={from} />} */}
       <div className="flex flex-col items-center justify-center p-6 rounded-lg max-w-md mx-auto">
         <form onSubmit={handleFormSubmit} className="w-full">
           <div className="flex flex-col items-center mb-4 justify-center">
