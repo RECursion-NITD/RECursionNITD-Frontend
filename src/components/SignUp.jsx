@@ -8,10 +8,10 @@ import passicon from "../assets/images/password.svg";
 import loginicon from "../assets/images/login_svg.svg";
 import emaill from "../assets/images/email.svg";
 
-const Login = () => {
+const SignUp = () => {
   const location = useLocation();
   const from = location.state?.from.pathname || "/";
-  const { token, loginUser, setStatus, status } = useAuth();
+  const { token, loginUser, setStatus, status, registerUser } = useAuth();
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState(""); // Separate email state
@@ -35,7 +35,7 @@ const Login = () => {
     e.preventDefault();
     setStatus("submitting");
     const formData = { username, email, password, confirmPassword }; // Create the form data
-    await loginUser(formData); // Pass the form data to the login function
+    await registerUser(formData); // Pass the form data to the login function
   };
 
   if (loading) {
@@ -119,4 +119,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
