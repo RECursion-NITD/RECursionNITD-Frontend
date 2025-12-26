@@ -24,6 +24,10 @@ import { LoadingProvider } from "./context/LoadingContext";
 import PostExperience from "./components/InterviewExperiences/PostExperience";
 import CreateEvent from "./components/Events/CreateEvent";
 import RequireMember from "./components/RequireMember";
+import ViewProfile from "./components/Profile/ViewProfile";
+import ResetPassword from "./components/Profile/ResetPassword";
+import ResetPasswordForm from "./components/Profile/ResetPasswordForm";
+import ResetPasswordSent from "./components/Profile/ResetPasswordSent";
 
 function App() {
   return (
@@ -39,9 +43,18 @@ function App() {
               <Route path="signup" element={<SignUp />} />
               <Route path="register" element={<Register />} />
               <Route path="team" element={<Team />} />
+              <Route path="forgot-password" element={<ResetPassword />} />
               <Route path="events" element={<Events />} />
               <Route path="get_started" element={<ContentsPage />} />
               <Route path="get_started/:subtopicId" element={<GetStarted />} />
+              <Route
+                path="profile/reset/:uidb64/:newtoken"
+                element={<ResetPasswordForm />}
+              />
+              <Route
+                path="reset/sent"
+                element={<ResetPasswordSent />}
+              />
 
               {/* private routes */}
               <Route element={<RequireAuth />}>
