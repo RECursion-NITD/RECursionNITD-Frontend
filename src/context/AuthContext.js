@@ -6,6 +6,7 @@ import { refresh } from "../api/refreshToken";
 import jwtDecode from "jwt-decode";
 import { useToast } from "@chakra-ui/react";
 import { getProfileRoles } from "../api/getRoles";
+import { useNavigate } from "react-router-dom";
 // import useLoading from "../hooks/useLoading";
 
 const AuthContext = createContext();
@@ -14,6 +15,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState("typing");
   const toast = useToast();
+  const navigate = useNavigate();
   const [user, setUser] = useState(
     localStorage.getItem("user")
       ? JSON.parse(localStorage.getItem("user"))
@@ -198,6 +200,89 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const resetUserPassword = async( { email } ) => {
+    try {
+
+      const response = await fetch("http://127.0.0.1:8000/profile/password_reset/", {
+        method: "POST",
+        body: new URLSearchParams({
+          ajax_check: "True",
+          email: email,
+        }),
+      });
+
+      const text = await response.text();
+
+      if (text=="No user with that Email exists."){
+        toast({
+          title: "Email Not found",
+          description: text,
+          position: "top",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        })
+      }
+      else {
+        toast({
+          title: "Password Reset Email sent",
+          position: "top",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        })
+
+        setStatus("typing");
+        navigate("reset/sent");
+      }
+
+      setStatus("typing");
+    } catch (err){
+      console.error(err);
+    }
+  }
+
+  const resetPasswordSubmit = async({uidb64, newtoken, password, confirmPassword}) => {
+    try {
+
+      const response = await fetch(`http://127.0.0.1:8000/profile/reset/${uidb64}/${newtoken}/`, {
+        method: "POST",
+        body: new URLSearchParams({
+          password: password,
+          confirmPassword: confirmPassword,
+        }),
+      });
+
+      const text = await response.text();
+
+      if (text=="Changed."){
+        toast({
+          title: "Password successfully changed!",
+          description: text,
+          position: "top",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        })
+
+        navigate("");
+      }
+      else {
+        toast({
+          title: "Invalid Password",
+          description: text,
+          position: "top",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        })
+      }
+      
+      setStatus("typing");
+    } catch (err){
+      console.error(err);
+    }
+  }
 
   const logoutUser = () => {
     localStorage.removeItem("authTokens");
@@ -228,6 +313,8 @@ export const AuthProvider = ({ children }) => {
     loginUser: loginUser,
     logoutUser: logoutUser,
     registerUser: registerUser,
+    resetUserPassword: resetUserPassword,
+    resetPasswordSubmit: resetPasswordSubmit,
     setStatus: setStatus,
     status: status,
     decodeTokens: decodeTokens,

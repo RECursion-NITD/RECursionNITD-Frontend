@@ -28,7 +28,7 @@ export const FilterSearchEvents = async (EventType, SearchQuery) => {
       console.log("events data", data);
       return data;
     } else {
-      const response = await axios.get(`${EVENTS_URL}/?search=${SearchQuery}`, {
+      const response = await axios.get(`${EVENTS_URL}?search=${SearchQuery}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -38,7 +38,7 @@ export const FilterSearchEvents = async (EventType, SearchQuery) => {
       return data;
     }
   } else if (SearchQuery === "") {
-    const response = await axios.get(`${EVENTS_URL}/?event_type=${EventType}`, {
+    const response = await axios.get(`${EVENTS_URL}?event_type=${EventType}`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -48,7 +48,7 @@ export const FilterSearchEvents = async (EventType, SearchQuery) => {
     return data;
   } else {
     const response = await axios.get(
-      `${EVENTS_URL}/?event_type=${EventType}&search=${SearchQuery}`,
+      `${EVENTS_URL}?event_type=${EventType}&search=${SearchQuery}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -85,7 +85,7 @@ export const getNextEvents = async (next) => {
 };
 
 export const GetDetailEvent = async (eventId) => {
-  const response = await axios.get(`${EVENTS_URL}/${eventId}`, {
+  const response = await axios.get(`${EVENTS_URL}${eventId}`, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -98,7 +98,7 @@ export const GetDetailEvent = async (eventId) => {
 
 export const createEvent = async (userData) => {
   const token = JSON.parse(localStorage.getItem("authTokens")).access;
-  const response = await axios.post(`${EVENTS_URL}/`, userData, {
+  const response = await axios.post(`${EVENTS_URL}`, userData, {
     headers: {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${token}`,

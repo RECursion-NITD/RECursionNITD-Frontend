@@ -83,7 +83,7 @@ const Events = () => {
       .then((response) => {
         console.log(response);
         setEvents(response);
-        console.log("The event type is : ", Events[0]?.event_type);
+        // console.log("The event type is : ", Events[0]?.event_type);
         setLoading(false);
       })
       .catch((err) => console.error(err));
@@ -206,7 +206,7 @@ const Events = () => {
           minChildWidth={"400px"}
           width={"100%"}
         >
-          {dummyEvents?.results?.map((event, key) => (
+          {Events?.results?.map((event, key) => (
             <EventCard key={key} event={event} />
           ))}
         </SimpleGrid>

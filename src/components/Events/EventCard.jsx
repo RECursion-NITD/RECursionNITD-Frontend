@@ -68,7 +68,7 @@ const EventCard = ({ event }) => {
               src={event.image}
               alt="RECursion Event Poster"
               height="260px"
-              width="100%"
+              width="260px"
               // mb={3}
             />
           ) : (
@@ -97,7 +97,7 @@ const EventCard = ({ event }) => {
           </Text>
 
           <Text color="white">
-            Date: {formatDate(event.date)}
+            Date: {formatDate(event.start_time)}
           </Text>
 
           <Text color="white">
