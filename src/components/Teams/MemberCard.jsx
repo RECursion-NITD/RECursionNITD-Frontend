@@ -3,7 +3,7 @@ import {
   Heading,
   Image,
   Link,
-  Icon,
+  Icon, 
   List,
   ListItem,
 } from "@chakra-ui/react";
