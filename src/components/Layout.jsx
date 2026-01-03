@@ -17,6 +17,12 @@ import {
   MenuDivider,
   Avatar,
   useDisclosure,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Footer from "./Footer";
@@ -31,6 +37,8 @@ const Layout = () => {
   const location = useLocation();
   const toast = useToast();
   const { isOpen: isProfileOpen, onOpen: onProfileOpen, onClose: onProfileClose } = useDisclosure();
+  const { isOpen: isLogoutOpen, onOpen: onLogoutOpen, onClose: onLogoutClose } = useDisclosure();
+  const cancelRef = React.useRef();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -222,7 +230,7 @@ const Layout = () => {
                       Edit Profile
                     </ChakraMenuItem>
                     <MenuDivider borderColor="gray.600" />
-                    <ChakraMenuItem onClick={logoutUser} _hover={{ bg: "#58CDFF", color: "black" }} bg="#212121" color="white" fontFamily="Open Sans">
+                    <ChakraMenuItem onClick={onLogoutOpen} _hover={{ bg: "#58CDFF", color: "black" }} bg="#212121" color="white" fontFamily="Open Sans">
                       Logout
                     </ChakraMenuItem>
                   </MenuList>
@@ -314,7 +322,7 @@ const Layout = () => {
                   </Button>
                 </MenuItem>
                 <Button
-                  onClick={logoutUser}
+                  onClick={onLogoutOpen}
                   variant="solid"
                   bg="#58CDFF"
                   color="black"
@@ -336,6 +344,36 @@ const Layout = () => {
         <Outlet />
       </div>
       <Footer />
+
+      <AlertDialog
+        isOpen={isLogoutOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onLogoutClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent bg="#212121" color="white">
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+              Logout
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              Are you sure you want to logout?
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={onLogoutClose} bg="transparent" border="1px solid #58CDFF" color="#58CDFF" _hover={{ bg: "#58CDFF", color: "black" }}>
+                Cancel
+              </Button>
+              <Button colorScheme="red" onClick={() => {
+                logoutUser();
+                onLogoutClose();
+              }} ml={3}>
+                Logout
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
     </>
   );
 };
