@@ -63,6 +63,7 @@ function App() {
                 <Route path="forum" element={<AskREC />} />
                 <Route path="blog" element={<Blog />} />
                 <Route path="profile/edit" element={<EditProfile />} />
+                <Route path="profile/view" element={<ViewProfile />} />
                 <Route path="experience" element={<Experiences />} />
                 <Route
                   path="experience/detail/:experienceId"

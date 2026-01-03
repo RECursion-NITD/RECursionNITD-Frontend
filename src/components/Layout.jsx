@@ -9,7 +9,14 @@ import {
   IconButton,
   Collapse,
   VStack,
-  useToast, // Added usage
+  useToast,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem as ChakraMenuItem,
+  MenuDivider,
+  Avatar,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Footer from "./Footer";
@@ -23,6 +30,7 @@ const Layout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const toast = useToast();
+  const { isOpen: isProfileOpen, onOpen: onProfileOpen, onClose: onProfileClose } = useDisclosure();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -182,37 +190,44 @@ const Layout = () => {
             </MenuItem>
           ) : (
             <>
-              <MenuItem to="/profile/edit" noHoverEffect>
-                <Button
-                  variant="solid"
-                  bg="transparent"
-                  color="#58CDFF"
-                  fontWeight="bold"
-                  borderRadius="5px"
-                  margin="5px"
-                  padding="10px"
-                  border="2px solid"
-                  borderColor="#58CDFF"
-                  _hover={{ bg: "#58CDFF", color: "black" }}
-                  fontFamily="Open Sans"
-                >
-                  Edit Profile
-                </Button>
-              </MenuItem>
-              <Button
-                onClick={logoutUser}
-                variant="solid"
-                bg="#58CDFF"
-                color="black"
-                fontWeight="bold"
-                borderRadius="5px"
-                margin="5px"
-                padding="10px"
-                marginRight="60px"
-                fontFamily="Open Sans"
-              >
-                Logout
-              </Button>
+              <Box marginRight="60px">
+                <Menu isOpen={isProfileOpen}>
+                  <MenuButton
+                    as={Button}
+                    rounded={'full'}
+                    variant={'link'}
+                    cursor={'pointer'}
+                    minW={0}
+                    onMouseEnter={onProfileOpen}
+                    onMouseLeave={onProfileClose}
+                  >
+                    <Avatar
+                      size={'sm'}
+                      name={user?.username}
+                      bg="#58CDFF"
+                      color="black"
+                    />
+                  </MenuButton>
+                  <MenuList
+                    bg="#212121"
+                    borderColor="gray.700"
+                    zIndex={50}
+                    onMouseEnter={onProfileOpen}
+                    onMouseLeave={onProfileClose}
+                  >
+                    <ChakraMenuItem as={Link} to="/profile/view" _hover={{ bg: "#58CDFF", color: "black" }} bg="#212121" color="white" fontFamily="Open Sans">
+                      View Profile
+                    </ChakraMenuItem>
+                    <ChakraMenuItem as={Link} to="/profile/edit" _hover={{ bg: "#58CDFF", color: "black" }} bg="#212121" color="white" fontFamily="Open Sans">
+                      Edit Profile
+                    </ChakraMenuItem>
+                    <MenuDivider borderColor="gray.600" />
+                    <ChakraMenuItem onClick={logoutUser} _hover={{ bg: "#58CDFF", color: "black" }} bg="#212121" color="white" fontFamily="Open Sans">
+                      Logout
+                    </ChakraMenuItem>
+                  </MenuList>
+                </Menu>
+              </Box>
             </>
           )}
         </Flex>
@@ -280,6 +295,22 @@ const Layout = () => {
                     fontFamily="Open Sans"
                   >
                     Edit Profile
+                  </Button>
+                </MenuItem>
+                <MenuItem to="/profile/view" noHoverEffect>
+                  <Button
+                    variant="solid"
+                    bg="transparent"
+                    color="#58CDFF"
+                    fontWeight="bold"
+                    borderRadius="5px"
+                    border="2px solid"
+                    borderColor="#58CDFF"
+                    margin="5px"
+                    padding="10px"
+                    fontFamily="Open Sans"
+                  >
+                    View Profile
                   </Button>
                 </MenuItem>
                 <Button
