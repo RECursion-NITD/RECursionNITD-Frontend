@@ -12,13 +12,23 @@ import { getProfile } from "../api/userInfo";
 const Login = () => {
   const location = useLocation();
   const from = location.state?.from.pathname || "/";
-  const { token, loginUser, setStatus, status } = useAuth();
+  const { token, loginUser, setStatus, status, decodeTokens } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false); // State for remember me checkbox
   const { loading, setLoading } = useLoading();
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const access = searchParams.get("access");
+    const refresh = searchParams.get("refresh");
+
+    if (access && refresh) {
+      decodeTokens({ access, refresh });
+    }
+  }, [location.search, decodeTokens]);
 
   useEffect(() => {
     const checkProfileAndRedirect = async () => {
