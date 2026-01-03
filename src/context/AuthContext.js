@@ -173,7 +173,7 @@ export const AuthProvider = ({ children }) => {
 
       const text = await response.text();
       // alert(text); // show Django message
-      if (text == "A user with that Email already exists." || text == "This password is too common." || text == "A user with that username already exists." || text == "This field is required." || text == "This password is too short. It must contain at least 8 characters.") {
+      if (text.includes("A user with that Email already exists.") || text.includes("This password is too common.") || text.includes("A user with that username already exists.") || text.includes("This field is required.") || text.includes("This password is too short. It must contain at least 8 characters.")) {
         toast({
           title: "Signup failed",
           description: text,
@@ -200,7 +200,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const resetUserPassword = async( { email } ) => {
+  const resetUserPassword = async ({ email }) => {
     try {
 
       const response = await fetch("http://127.0.0.1:8000/profile/password_reset/", {
@@ -213,7 +213,7 @@ export const AuthProvider = ({ children }) => {
 
       const text = await response.text();
 
-      if (text=="No user with that Email exists."){
+      if (text == "No user with that Email exists.") {
         toast({
           title: "Email Not found",
           description: text,
@@ -237,12 +237,12 @@ export const AuthProvider = ({ children }) => {
       }
 
       setStatus("typing");
-    } catch (err){
+    } catch (err) {
       console.error(err);
     }
   }
 
-  const resetPasswordSubmit = async({uidb64, newtoken, password, confirmPassword}) => {
+  const resetPasswordSubmit = async ({ uidb64, newtoken, password, confirmPassword }) => {
     try {
 
       const response = await fetch(`http://127.0.0.1:8000/profile/reset/${uidb64}/${newtoken}/`, {
@@ -255,7 +255,7 @@ export const AuthProvider = ({ children }) => {
 
       const text = await response.text();
 
-      if (text=="Changed."){
+      if (text == "Changed.") {
         toast({
           title: "Password successfully changed!",
           description: text,
@@ -277,9 +277,9 @@ export const AuthProvider = ({ children }) => {
           isClosable: true,
         })
       }
-      
+
       setStatus("typing");
-    } catch (err){
+    } catch (err) {
       console.error(err);
     }
   }
