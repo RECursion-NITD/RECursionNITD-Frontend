@@ -51,7 +51,7 @@ const EventCard = ({ event }) => {
         width="400px"
         // height="470px"
         cursor="pointer"
-        backgroundColor='#121212'
+        backgroundColor='#313131'
       >
         <Box
           className="card item-card card-block"
@@ -81,7 +81,7 @@ const EventCard = ({ event }) => {
             />
           )}
 
-          <Text color="white"
+          <Text color="white" fontFamily="Mulish"
             style={{
               whiteSpace: "nowrap",
               overflow: "hidden",
@@ -96,11 +96,11 @@ const EventCard = ({ event }) => {
             )}
           </Text>
 
-          <Text color="white">
+          <Text color="white" fontFamily="Mulish">
             Date: {formatDate(event.start_time)}
           </Text>
 
-          <Text color="white">
+          <Text color="white" fontFamily="Mulish">
             Duration: {event.duration}
           </Text>
         </Box>

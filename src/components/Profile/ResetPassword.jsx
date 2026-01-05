@@ -5,11 +5,14 @@ import useLoading from "../../hooks/useLoading";
 import Loader from "../Loader";
 import emaill from "../../assets/images/email.svg";
 
+import { useToast } from "@chakra-ui/react"; // Added useToast import
+
 const ResetPassword = () => {
   const location = useLocation();
   const from = location.state?.from.pathname || "/";
 
   const { token, resetUserPassword, loginUser, setStatus, status, registerUser } = useAuth();
+  const toast = useToast();
 
   const [email, setEmail] = useState("");
   const { loading, setLoading } = useLoading();
@@ -26,8 +29,25 @@ const ResetPassword = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setStatus("submitting");
-    const formData = { email }; // Create the form data
-    await resetUserPassword(formData); // Pass the form data to the login function
+
+    // Show sending toast
+    const sendingToastId = toast({
+      title: "Sending password reset link to your email...",
+      status: "success",
+      position: "top",
+      duration: null, // Keeps it open until manually closed
+      isClosable: false,
+    });
+
+    try {
+      const formData = { email }; // Create the form data
+      await resetUserPassword(formData); // Pass the form data to the login function
+    } catch (error) {
+       console.error("Password reset failed", error);
+    } finally {
+       // Close the sending toast when the operation completes (success or failure)
+       toast.close(sendingToastId);
+    }
   };
 
   if (loading) {

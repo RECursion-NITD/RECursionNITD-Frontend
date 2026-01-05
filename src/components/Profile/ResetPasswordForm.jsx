@@ -62,7 +62,7 @@ const ResetPasswordForm = () => {
             <div className="flex items-center w-full mb-4">
               <img src={passicon} alt="Password Icon" className="w-11 h-11" />
               <input
-                placeholder="Password"
+                placeholder="Confirm Password"
                 type="password"
                 value={confirmPassword}
                 onChange={handleConfirmPasswordChange}

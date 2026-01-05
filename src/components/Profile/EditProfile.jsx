@@ -61,12 +61,41 @@ const EditProfile = () => {
     });
   };
 
-  const handleImageChange = (event) => {
+  const handleImageChange = async (event) => {
     const imageFile = event.target.files[0];
-    setProfileData((prevData) => ({
-      ...prevData,
-      image: imageFile,
-    }));
+    if (!imageFile) return;
+
+    try {
+      const data = new FormData();
+      data.append("image", imageFile);
+
+      // Silent submit
+      const response = await editProfile(data);
+
+      if (response && response.image) {
+        setProfileData((prevData) => ({
+          ...prevData,
+          image: response.image,
+        }));
+
+        toast({
+          title: "Image Uploaded",
+          description: "Your profile image has been updated successfully.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      toast({
+        title: "Upload Failed",
+        description: "Failed to upload profile image.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
 

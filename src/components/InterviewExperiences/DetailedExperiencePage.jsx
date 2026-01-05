@@ -43,7 +43,7 @@ const DetailedExperiencePage = () => {
         >
         {DetailedExperienceCard({ experience })}
 
-        <div className="w-full lg:min-w-[500px] bg-[#121212] mt-0 mb-0 flex-1">
+        <div className="w-full lg:min-w-[500px] bg-[#313131] mt-0 mb-0 flex-1">
           {InterviewExperiences?.results?.slice(0, 5).map((interview, id) => {
             if (interview.id != experienceId) {
               return <IECardblack key={id} interview={interview} />;

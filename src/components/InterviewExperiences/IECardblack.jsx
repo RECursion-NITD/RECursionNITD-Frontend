@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 /* eslint-disable */
 import { Link } from "react-router-dom";
-import { FaUserCircle } from "react-icons/fa";
-import { AiOutlineLike, AiOutlineDislike, AiOutlineRight } from "react-icons/ai";
+import { Avatar } from "@chakra-ui/react";
+import profile from "../../assets/images/profile.png";
+import { getUserProfile } from "../../api/userInfo";
+import { AiOutlineRight } from "react-icons/ai";
 
 const IECard = ({ interview }) => {
+  const [profileImage, setProfileImage] = useState(null);
+
+  useEffect(() => {
+    const fetchProfileImage = async () => {
+      try {
+        if (interview.user.username) {
+          const data = await getUserProfile(interview.user.username);
+          setProfileImage(data.image);
+        }
+      } catch (error) {
+        console.error("Error fetching profile image:", error);
+      }
+    };
+    fetchProfileImage();
+  }, [interview.user.username]);
   const getYear = (created_at) => {
     const date = new Date(created_at);
     const year = date.getFullYear();
@@ -37,11 +54,16 @@ const IECard = ({ interview }) => {
   return (
     <div className="flex flex-col">
       <Link to={`/experience/detail/${interview.id}`} className="m-0">
-        <div className="justify-center items-start flex font-sub p-4  w-full mt-4 mb-4 max-570:m-0 h-fit bg-[#121212] hover:border-[#3a3a3a] relative">
+        <div className="justify-center items-start flex font-sub p-4  w-full mt-4 mb-4 max-570:m-0 h-fit bg-[#313131] hover:border-[#3a3a3a] relative">
           {/* Arrow Icon */}
           <AiOutlineRight className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-xl text-bold" />
 
-          <FaUserCircle className="text-onSurface h-[50px] w-[50px] ml-8" />
+          <Avatar 
+            src={profileImage || profile} 
+            name={interview.user.username} 
+            size="md" 
+            className="text-onSurface h-[50px] w-[50px] ml-8"
+          />
           <div className="w-full text-onSurface font-mulish flex flex-col ps-5 pe-5 text-xl">
             <div className="font-semibold text-left m-0 text-wrap">
               {interview.company} Interview Experience {getYear(interview.created_at)}
@@ -52,12 +74,6 @@ const IECard = ({ interview }) => {
               </div>
               {/* Hide buttons on screens smaller than 570px */}
               <div className="max-570:hidden m-0">
-                <button className="text-onSurface hover:text-green-500 transition-colors duration-300 delay-100">
-                  <AiOutlineLike className="mr-4" />
-                </button>
-                <button className="text-onSurface hover:text-red-500 transition-colors duration-300 delay-100">
-                  <AiOutlineDislike className="mr-4" />
-                </button>
               </div>
             </div>
           </div>
@@ -66,12 +82,6 @@ const IECard = ({ interview }) => {
 
       {/* Separate div for Like/Dislike buttons on screens smaller than 570px */}
       <div className="hidden max-570:flex justify-center items-center space-x-4">
-        <button className="text-onSurface hover:text-green-500 transition-colors duration-300 delay-100">
-          <AiOutlineLike className="text-lg mb-4" />
-        </button>
-        <button className="text-onSurface hover:text-red-500 transition-colors duration-300 delay-100">
-          <AiOutlineDislike className="text-lg mb-4" />
-        </button>
       </div>
     </div>
   );

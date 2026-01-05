@@ -12,6 +12,7 @@ import {
   Text,
   Grid,
   Flex,
+  Image,
   Menu,
   MenuButton,
   MenuList,
@@ -95,7 +96,7 @@ const Team = () => {
 
   return (
     <Box
-      bg="#1a202c"
+      bg="#1e1e1e"
       style={{
         padding: "auto 10vw",
         width: "100vw",
@@ -105,12 +106,53 @@ const Team = () => {
       {loading && <Loader />}
 
       {/* TEAM HEADER */}
-      <Box p={4}>
-        <Center mt="5rem">
-          <Heading className="team-heading" mt={1} mb={3} zIndex={1}>
-            Meet The Team
-          </Heading>
-        </Center>
+      <Box w="100%" mt="0">
+        <Box
+          w="100%"
+          position="relative"
+          sx={{ "@media (max-width: 800px)": { display: "none" } }}
+        >
+          <Image 
+            src="http://localhost:8000/media/images/teamheader.jpeg" 
+            alt="Team Header" 
+            w="100%"
+            h="auto"
+            objectFit="cover"
+          />
+          <Box
+            position="absolute"
+            top="0"
+            left="0"
+            w="100%"
+            h="100%"
+            bg="blackAlpha.600"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Heading
+              color="white"
+              fontSize={{ base: "4xl", md: "6xl", lg: "7xl" }}
+              fontWeight="extrabold"
+              textAlign="center"
+              textTransform="uppercase"
+              fontFamily="Mulish"
+              letterSpacing="wide"
+            >
+              MEET OUR<br />TEAM
+            </Heading>
+          </Box>
+        </Box>
+        <Heading
+          className="team-heading"
+          mt="5rem"
+          mb={3}
+          textAlign="center"
+          display="none"
+          sx={{ "@media (max-width: 800px)": { display: "block" } }}
+        >
+          Meet Our Team
+        </Heading>
 
         {team &&
           Object.keys(team)

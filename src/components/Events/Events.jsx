@@ -10,7 +10,7 @@ import { EditIcon } from '@chakra-ui/icons'
 import EventCard from "./EventCard";
 import useAuth from "../../hooks/useAuth";
 import { ROLES } from "../../utils/roles";
-import ContestList from "./ContestList";
+
 
 const Events = () => {
   const [Events, setEvents] = useState([]);
@@ -261,7 +261,7 @@ const Events = () => {
           )}
         </div>
       </Box>
-      <ContestList/>
+      
     </Flex>
     </>
   );

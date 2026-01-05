@@ -114,7 +114,8 @@ const Layout = () => {
         {/* Desktop Menu (visible on desktop) */}
         <Flex
           className="navbar-links"
-          display={{ base: "none", lg: "flex" }}
+          display="none"
+          sx={{ "@media (min-width: 1130px)": { display: "flex" } }}
           alignItems="center"
           listStyleType="none"
           margin="0"
@@ -155,7 +156,8 @@ const Layout = () => {
         {/* Login Button */}
         <Flex
           className="navbar-links"
-          display={{ base: "none", lg: "flex" }}
+          display="none"
+          sx={{ "@media (min-width: 1130px)": { display: "flex" } }}
           alignItems="center"
           listStyleType="none"
           margin="0"
@@ -220,7 +222,8 @@ const Layout = () => {
         {/* Hamburger Menu Icon (visible on mobile) */}
         <IconButton
           color="whitesmoke"
-          display={{ base: "block", lg: "none" }}
+          display="block"
+          sx={{ "@media (min-width: 1130px)": { display: "none" } }}
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
           aria-label="Menu"
           variant="ghost"
