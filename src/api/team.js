@@ -5,7 +5,7 @@ import { API_ROUTES } from "../utils/api_routes";
 const TEAM_URL = API_ROUTES.TEAM;
 
 export const getTeam = async () => {
-  console.log("team api called");
+
 
   const currentDate = new Date();
   const year = currentDate.getFullYear();
@@ -41,18 +41,32 @@ export const getTeam = async () => {
     }
   });
 
-  console.log(team);
+  const designationPriority = {
+    "President": 1,
+    "Vice President": 2,
+    "General Secretary": 3,
+    "Treasurer": 4,
+    "Convenor": 5
+  };
+
+  team[currBatchYear].sort((a, b) => {
+    const priorityA = designationPriority[a.designation] || 999;
+    const priorityB = designationPriority[b.designation] || 999;
+    return priorityA - priorityB;
+  });
+
+
   return team;
 };
 
 export const getAlumni = async (batchyear) => {
-  console.log("Inside get alumni function");
+
   const response = await axios.get(`${TEAM_URL}/?batch_year=${batchyear}`, {
     headers: {
       "Content-Type": "application/json",
     },
   });
   const data = await response.data;
-  console.log("alumni", data);
+
   return data;
 };

@@ -22,7 +22,7 @@ export const getProfile = async () => {
     },
   });
   const data = await response.data;
-  console.log("data", data);
+
   return data;
 };
 
@@ -44,9 +44,8 @@ export const editProfile = async (profileData) => {
     },
   });
   const data = await response.data;
-  console.log("create event api called");
-  console.log(data);
-  console.log(data);
+
+
   return data;
 };
 

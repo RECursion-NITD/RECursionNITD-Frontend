@@ -14,6 +14,6 @@ export const login = async (formData) => {
     }
   );
   const data = await response.json();
-  console.log("data", data);
+
   return data;
 };

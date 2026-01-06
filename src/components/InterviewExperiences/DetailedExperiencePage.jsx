@@ -27,12 +27,12 @@ const DetailedExperiencePage = () => {
     });
     GetDetailExperience(experienceId)
       .then((res) => {
-        console.log(res.user.email,user);
+
         setExperience(res);
         setLoading(false);
       })
       // eslint-disable-next-line
-      .catch((e) => console.log("error fetching detailed exp ", e));
+      .catch((e) => {});
   }, [experienceId,user]);
 
   return loading ? (
@@ -41,7 +41,7 @@ const DetailedExperiencePage = () => {
       <div
         className="mt-[7vh] pt-[1vh] flex items-start justify-start flex-col lg:flex-row w-screen mr-0 ml-0 no-align"
         >
-        {DetailedExperienceCard({ experience })}
+        <DetailedExperienceCard experience={experience} />
 
         <div className="w-full lg:min-w-[500px] bg-[#313131] mt-0 mb-0 flex-1">
           {InterviewExperiences?.results?.slice(0, 5).map((interview, id) => {

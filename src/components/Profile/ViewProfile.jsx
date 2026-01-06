@@ -41,7 +41,7 @@ const ViewProfile = () => {
   const fetchProfileInfo = async () =>{
     setIsLoading(true);
     const data = await getProfile();
-    console.log(data);
+
     const userData = {
       name: data.name,
       username: data.user.username,

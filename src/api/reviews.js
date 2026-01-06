@@ -11,7 +11,7 @@ export const GetReviews = async (idx) => {
     },
   });
   const data = await response.data;
-  console.log("review api called");
-  console.log(data);
+
+
   return data;
 };

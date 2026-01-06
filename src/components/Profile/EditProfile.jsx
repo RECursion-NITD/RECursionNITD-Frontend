@@ -34,7 +34,7 @@ const EditProfile = () => {
     const fetchProfile = async () => {
       try {
         const data = await getProfile();
-        console.log(data);
+
         const userData = {
           name: data.name ? data.name : "",
           college: data.college ? data.college : "",
@@ -115,8 +115,7 @@ const EditProfile = () => {
     }
 
     try {
-      console.log("Inside handle Submit");
-      console.log(profileData);
+
       const data = new FormData();
       data.append("name", profileData.name);
       data.append("college", profileData.college);
@@ -130,9 +129,9 @@ const EditProfile = () => {
         data.append("image", profileData.image);
       }
 
-      console.log(data);
+
       const response = await editProfile(data);
-      console.log(response);
+
 
       toast({
         title: "Profile Updated",

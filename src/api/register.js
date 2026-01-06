@@ -16,6 +16,6 @@ export const register = async (formData) => {
     }
   );
   const data = await response.json();
-  console.log("data", data);
+
   return data;
 };

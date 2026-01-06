@@ -11,8 +11,7 @@ export const GetExperiences = async () => {
     },
   });
   const data = await response.data;
-  console.log("experiences api called");
-  console.log(data);
+
   return data;
 };
 
@@ -43,8 +42,7 @@ export const GetDetailExperience = async (experienceId) => {
     }
   );
   const data = await response.data;
-  console.log("detailed experience api called");
-  console.log(data);
+
   return data;
 };
 export const SearchExp = async (Company, RoleType, search) => {
@@ -83,8 +81,7 @@ export const SearchExp = async (Company, RoleType, search) => {
     },
   });
   const data = await response.data;
-  console.log("search experience api called");
-  console.log(data);
+
   return data;
 };
 
@@ -98,7 +95,42 @@ export const createExperience = async (userData) => {
     },
   });
   const data = await response.data;
-  console.log("create experience api called");
-  console.log(data);
+
+  return data;
+};
+
+export const updateExperience = async (id, userData) => {
+  const token = JSON.parse(localStorage.getItem("authTokens")).access;
+  const response = await axios.patch(`${API_ROUTES.EXPERIENCES}/${id}/`, userData, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = await response.data;
+  return data;
+};
+
+export const approveExperience = async (id) => {
+  const token = JSON.parse(localStorage.getItem("authTokens")).access;
+  const response = await axios.post(`${API_ROUTES.EXPERIENCES}/${id}/revisions/acc/`, {}, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = await response.data;
+  return data;
+};
+
+export const rejectExperience = async (id, message) => {
+  const token = JSON.parse(localStorage.getItem("authTokens")).access;
+  const response = await axios.post(`${API_ROUTES.EXPERIENCES}/${id}/revisions/chg/`, { message }, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = await response.data;
   return data;
 };

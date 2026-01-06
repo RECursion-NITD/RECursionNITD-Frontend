@@ -1,4 +1,5 @@
 import { Navigate, useLocation, useParams } from "react-router-dom";
+import { useToast } from "@chakra-ui/react";
 import useAuth from "../../hooks/useAuth";
 import React, { useState, useEffect } from "react";
 import useLoading from "../../hooks/useLoading";
@@ -11,6 +12,7 @@ const ResetPasswordForm = () => {
   const from = location.state?.from.pathname || "/";
   const { uidb64, newtoken } = useParams();
   const { token, loginUser, setStatus, status, resetPasswordSubmit } = useAuth();
+  const toast = useToast();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const { loading, setLoading } = useLoading();
@@ -27,8 +29,19 @@ const ResetPasswordForm = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      toast({
+        title: "Passwords do not match",
+        description: "Please ensure both passwords are the same.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+      return;
+    }
     setStatus("submitting");
-    console.log(uidb64, newtoken);
+
     const formData = { uidb64, newtoken, password, confirmPassword }; // Include rememberMe in the form data
     await resetPasswordSubmit(formData);
   };

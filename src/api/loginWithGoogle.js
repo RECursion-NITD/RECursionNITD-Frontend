@@ -2,7 +2,7 @@
 // define apis for login with google
 export const loginWithGoogle = async (token) => {
   const response = await fetch(
-    "https://recursion70.pythonanywhere.com/token/google/", // TODO : use axios
+    "http://127.0.0.1:8000/token/google/", // TODO : use axios
     {
       method: "POST",
       headers: {
@@ -14,6 +14,6 @@ export const loginWithGoogle = async (token) => {
     }
   );
   const data = await response.json();
-  console.log("google token data", data);
+
   return data;
 };

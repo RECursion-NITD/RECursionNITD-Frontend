@@ -108,7 +108,7 @@ export const AuthProvider = ({ children }) => {
           isClosable: true,
         });
       }
-      console.log("cant login user -> err", err);
+
       setStatus("typing");
     }
   };
@@ -300,7 +300,7 @@ export const AuthProvider = ({ children }) => {
           setAuthToken(data);
         })
         .catch(() => {
-          console.log("cant refresh token -> err");
+
           logoutUser();
         });
 

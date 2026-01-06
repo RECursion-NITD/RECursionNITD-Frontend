@@ -17,11 +17,8 @@ const Collapsible = ({ idx, item, setFullScreen }) => {
   const subTopicRef = useRef(contents[idx].topic[0].subtopic[0].id);
 
   function subTopicSelectionHandler(id) {
-    console.log("Inside subTopicSelectionHandler");
     setSubTopicSelected(id);
     subTopicRef.current = id;
-    console.log(id);
-    console.log(subtopicSelected);
     setFullScreen(false);
   }
 

@@ -5,14 +5,14 @@ import { API_ROUTES } from "../utils/api_routes";
 const EVENTS_URL = API_ROUTES.EVENTS;
 
 export const getEvents = async () => {
-  console.log("events api called");
+
   const response = await axios.get(EVENTS_URL, {
     headers: {
       "Content-Type": "application/json",
     },
   });
   const data = await response.data;
-  console.log("events data", data);
+
   return data;
 };
 
@@ -25,7 +25,7 @@ export const FilterSearchEvents = async (EventType, SearchQuery) => {
         },
       });
       const data = await response.data;
-      console.log("events data", data);
+
       return data;
     } else {
       const response = await axios.get(`${EVENTS_URL}?search=${SearchQuery}`, {
@@ -34,7 +34,7 @@ export const FilterSearchEvents = async (EventType, SearchQuery) => {
         },
       });
       const data = await response.data;
-      console.log("search events data", data);
+
       return data;
     }
   } else if (SearchQuery === "") {
@@ -44,7 +44,7 @@ export const FilterSearchEvents = async (EventType, SearchQuery) => {
       },
     });
     const data = await response.data;
-    console.log("events data", data);
+
     return data;
   } else {
     const response = await axios.get(
@@ -56,7 +56,7 @@ export const FilterSearchEvents = async (EventType, SearchQuery) => {
       }
     );
     const data = await response.data;
-    console.log("events data", data);
+
     return data;
   }
 };
@@ -91,8 +91,7 @@ export const GetDetailEvent = async (eventId) => {
     },
   });
   const data = await response.data;
-  console.log("detailed events api called");
-  console.log(data);
+
   return data;
 };
 
@@ -105,7 +104,6 @@ export const createEvent = async (userData) => {
     },
   });
   const data = await response.data;
-  console.log("create event api called");
-  console.log(data);
+
   return data;
 };
