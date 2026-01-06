@@ -113,7 +113,7 @@ const Team = () => {
           sx={{ "@media (max-width: 800px)": { display: "none" } }}
         >
           <Image 
-            src="http://localhost:8000/media/images/teamheader.jpeg" 
+            src={`${process.env.REACT_APP_BACKEND_URL}/media/images/teamheader.jpeg`} 
             alt="Team Header" 
             w="100%"
             h="auto"

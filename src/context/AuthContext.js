@@ -165,7 +165,7 @@ export const AuthProvider = ({ children }) => {
       formData.append("password2", confirmPassword); // Django default
       formData.append("ajax_check", "True");
 
-      const response = await fetch("http://127.0.0.1:8000/profile/register/", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/profile/register/`, {
         method: "POST",
         body: formData,
         credentials: "include", // IMPORTANT for CSRF
@@ -203,7 +203,7 @@ export const AuthProvider = ({ children }) => {
   const resetUserPassword = async( { email } ) => {
     try {
 
-      const response = await fetch("http://127.0.0.1:8000/profile/password_reset/", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/profile/password_reset/`, {
         method: "POST",
         body: new URLSearchParams({
           ajax_check: "True",
@@ -245,7 +245,7 @@ export const AuthProvider = ({ children }) => {
   const resetPasswordSubmit = async({uidb64, newtoken, password, confirmPassword}) => {
     try {
 
-      const response = await fetch(`http://127.0.0.1:8000/profile/reset/${uidb64}/${newtoken}/`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/profile/reset/${uidb64}/${newtoken}/`, {
         method: "POST",
         body: new URLSearchParams({
           password: password,
