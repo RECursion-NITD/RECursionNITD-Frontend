@@ -1,14 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { getTeam, getAlumni } from "../../api/team";
 import useLoading from "../../hooks/useLoading";
 import Loader from "../Loader";
 import AlumniCard from "./AlumniCard";
 import TeamMember from "./MemberCard";
 import { getCurrentSessionBatch } from "../../utils/batch";
 import {
-  Box, 
+  Box,
   Center,
   Heading,
+  SimpleGrid,
   Text,
+  Grid,
   Flex,
   Image,
   Menu,
@@ -23,6 +26,11 @@ import {
   // useBreakpointValue,
   useMediaQuery,
 } from "@chakra-ui/react";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ChevronDownIcon,
+} from "@chakra-ui/icons";
 
 const Team = () => {
   const { loading, setLoading } = useLoading();
@@ -67,260 +75,24 @@ const Team = () => {
   }
 
   useEffect(() => {
-    console.log("Fetching team data...");
     setLoading(true);
-    fetch("http://localhost:8000/team/api/team/")
-      .then(response => {
-        console.log("Response status:", response.status);
-        return response.json();
-      })
-      .then(data => {
-        console.log("Team data received:", data);
-        setTeamData(data);
+    getAlumni(alumniYear)
+      .then((data) => {
+        setAlumni(data);
         setLoading(false);
       })
-      .catch(err => {
-        console.error("Error fetching team data:", err);
+      .catch((err) => console.err(err));
+  }, [alumniYear]);
+
+  useEffect(() => {
+    setLoading(true);
+    getTeam()
+      .then((data) => {
+        setTeam(data);
         setLoading(false);
-      });
+      })
+      .catch((err) => console.err(err));
   }, []);
-
-  const MemberCard = ({ member, showDesignation = true }) => (
-    <Box
-      width="18%"
-      minWidth="180px"
-      margin="10px"
-      textAlign="center"
-      color="white"
-    >
-      <Box
-        position="relative"
-        width="160px"
-        height="160px"
-        mx="auto"
-        mb="15px"
-        cursor="pointer"
-        _hover={{
-          ".overlay": { opacity: 1 },
-          ".image": { transform: "scale(1.05)" }
-        }}
-      >
-        <Image
-          className="image"
-          src={member.image ? `http://localhost:8000${member.image}` : "/default-avatar.png"}
-          alt={member.name}
-          width="160px"
-          height="160px"
-          objectFit="cover"
-          borderRadius="50%"
-          border="3px solid #45c3ff"
-          transition="transform 0.4s ease"
-          boxShadow="0 6px 20px rgba(69, 195, 255, 0.3)"
-        />
-        <Box
-          className="overlay"
-          position="absolute"
-          top="0"
-          left="0"
-          width="100%"
-          height="100%"
-          bg="rgba(0,0,0,0.8)"
-          borderRadius="50%"
-          opacity={0}
-          transition="opacity 0.4s ease"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Flex gap={4}>
-            {member.facebook && (
-              <Box 
-                as="a" 
-                href={member.facebook} 
-                target="_blank" 
-                bg="#1877F2"
-                color="white"
-                px="10px"
-                py="6px"
-                borderRadius="6px"
-                fontSize="12px"
-                fontWeight="bold"
-                _hover={{ transform: "scale(1.1)", bg: "#166fe5" }}
-                transition="all 0.2s ease"
-              >
-                fb
-              </Box>
-            )}
-            {member.linkedin && (
-              <Box 
-                as="a" 
-                href={member.linkedin} 
-                target="_blank" 
-                bg="#0077B5"
-                color="white"
-                px="8px"
-                py="6px"
-                borderRadius="6px"
-                fontSize="12px"
-                fontWeight="bold"
-                _hover={{ transform: "scale(1.1)", bg: "#005885" }}
-                transition="all 0.2s ease"
-              >
-                in
-              </Box>
-            )}
-            {member.mobile && (
-              <Box 
-                as="a" 
-                href={`tel:${member.mobile}`} 
-                bg="#25D366"
-                color="white"
-                px="8px"
-                py="6px"
-                borderRadius="6px"
-                fontSize="14px"
-                _hover={{ transform: "scale(1.1)", bg: "#1da851" }}
-                transition="all 0.2s ease"
-              >
-                📞
-              </Box>
-            )}
-          </Flex>
-        </Box>
-      </Box>
-      <Text fontSize="16px" fontWeight="600" mb="3px">
-        {member.name}
-      </Text>
-      {showDesignation && (
-        <Text fontSize="13px" color="#45c3ff" fontWeight="500">
-          {member.designation}
-        </Text>
-      )}
-    </Box>
-  );
-
-  const LeaderCard = ({ member, showDesignation = true }) => (
-    <Box
-      width="18%"
-      minWidth="200px"
-      margin="15px"
-      textAlign="center"
-      color="white"
-    >
-      <Box
-        position="relative"
-        width="200px"
-        height="200px"
-        mx="auto"
-        mb="20px"
-        cursor="pointer"
-        _hover={{
-          ".overlay": { opacity: 1 },
-          ".image": { transform: "scale(1.05)" }
-        }}
-      >
-        <Image
-          className="image"
-          src={member.image ? `http://localhost:8000${member.image}` : "/default-avatar.png"}
-          alt={member.name}
-          width="200px"
-          height="200px"
-          objectFit="cover"
-          borderRadius="50%"
-          border="4px solid #45c3ff"
-          transition="transform 0.4s ease"
-          boxShadow="0 8px 25px rgba(69, 195, 255, 0.4)"
-        />
-        <Box
-          className="overlay"
-          position="absolute"
-          top="0"
-          left="0"
-          width="100%"
-          height="100%"
-          bg="rgba(0,0,0,0.8)"
-          borderRadius="50%"
-          opacity={0}
-          transition="opacity 0.4s ease"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Flex gap={6}>
-            {member.facebook && (
-              <Box 
-                as="a" 
-                href={member.facebook} 
-                target="_blank" 
-                bg="#1877F2"
-                color="white"
-                px="12px"
-                py="8px"
-                borderRadius="8px"
-                fontSize="14px"
-                fontWeight="bold"
-                _hover={{ transform: "scale(1.1)", bg: "#166fe5" }}
-                transition="all 0.2s ease"
-              >
-                fb
-              </Box>
-            )}
-            {member.linkedin && (
-              <Box 
-                as="a" 
-                href={member.linkedin} 
-                target="_blank" 
-                bg="#0077B5"
-                color="white"
-                px="10px"
-                py="8px"
-                borderRadius="8px"
-                fontSize="14px"
-                fontWeight="bold"
-                _hover={{ transform: "scale(1.1)", bg: "#005885" }}
-                transition="all 0.2s ease"
-              >
-                in
-              </Box>
-            )}
-            {member.mobile && (
-              <Box 
-                as="a" 
-                href={`tel:${member.mobile}`} 
-                bg="#25D366"
-                color="white"
-                px="10px"
-                py="8px"
-                borderRadius="8px"
-                fontSize="16px"
-                _hover={{ transform: "scale(1.1)", bg: "#1da851" }}
-                transition="all 0.2s ease"
-              >
-                📞
-              </Box>
-            )}
-          </Flex>
-        </Box>
-      </Box>
-      <Text fontSize="18px" fontWeight="600" mb="5px">
-        {member.name}
-      </Text>
-      {showDesignation && (
-        <Text fontSize="14px" color="#45c3ff" fontWeight="500">
-          {member.designation}
-        </Text>
-      )}
-    </Box>
-  );
-
-  // Separate leadership positions
-  const leadershipPositions = ["President", "Vice President", "Treasurer", "Convenor", "General Secretary"];
-  const leadership = teamData.flagbearers.filter(member => 
-    leadershipPositions.includes(member.designation)
-  );
-  const otherMembers = teamData.flagbearers.filter(member => 
-    !leadershipPositions.includes(member.designation)
-  );
 
   return (
     <Box
@@ -418,42 +190,179 @@ const Team = () => {
             ))}
       </Box>
 
-      {/* COORDINATORS SECTION */}
-      <Box p={4}>
+      {/* ALUMNI SECTION */}
+
+      <Box mt={16}>
         <Center>
-          <Heading color="white" margin="70px 0 40px 0" letterSpacing="3px">
-            COORDINATORS
+          <Heading
+            as="h1"
+            mt="5%"
+            mb="2%"
+            color="white"
+            fontSize={{ base: "xl", md: "2xl" }}
+          >
+            Meet our Alumni
           </Heading>
         </Center>
 
-        <Flex
-          flexWrap="wrap"
-          justifyContent="center"
-          bg="#111"
-          paddingBottom="40px"
-        >
-          {teamData.coordinators.map(member => (
-            <MemberCard key={member.id} member={member} />
-          ))}
-        </Flex>
-      </Box>
+        {!isMobile && (
+          <Flex width="90%" borderRadius="2rem" backgroundColor="whiteAlpha.50">
+            <Box
+              w="40px"
+              h="40px"
+              borderRadius="50%"
+              bg="gray.300"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              cursor="pointer"
+              marginLeft="50px"
+              marginRight="20px"
+              onClick={() => scroll("left")}
+              _hover={{
+                transform: "scale(1.2)",
+                transition: "transform 0.3s ease-in-out",
+              }}
+            >
+              <ArrowLeftIcon color="black" />
+            </Box>
 
-      {/* ALUMNI BUTTON */}
-      <Center margin="60px 0">
-        <Box
-          as="a"
-          href="/alumni"
-          bg="#45c3ff"
-          color="white"
-          padding="10px 20px"
-          borderRadius="6px"
-          fontSize="14px"
-          textDecoration="none"
-          display="inline-block"
-        >
-          OUR ALUMNI ↗
-        </Box>
-      </Center>
+            <Box
+              flex="60%"
+              mr={2}
+              overflowX="scroll"
+              whiteSpace="nowrap"
+              p={4}
+              ref={scrollContainerRef}
+              sx={{
+                "&::-webkit-scrollbar": {
+                  display: "none",
+                },
+              }}
+            >
+              <Flex>
+                {yearSet.map((year) => (
+                  <Box
+                    flex="0 0 33.33%"
+                    p={2}
+                    textAlign="center"
+                    key={year}
+                    _hover={{
+                      transform: "scale(1.2)",
+                      transition: "transform 0.3s ease-in-out",
+                    }}
+                  >
+                    <Text
+                      color={year === alumniYear ? "white" : "#BDE0FF99"}
+                      _hover={{
+                        color: year === alumniYear ? "#fff" : "#ffffff99",
+                      }}
+                      // borderBottom="1px solid white"
+                      display="inline"
+                      cursor="pointer"
+                      fontSize="lg"
+                      fontWeight="bold"
+                      onClick={() => {
+                        if (alumniYear === year) return;
+                        setAlumni(null);
+                        setAlumniYear(year);
+                      }}
+                    >
+                      Batch of {year}
+                    </Text>
+                  </Box>
+                ))}
+              </Flex>
+            </Box>
+
+            <Box
+              w="40px" // Set the width and height to create a circular shape
+              h="40px"
+              borderRadius="50%"
+              bg="gray.300"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              cursor="pointer"
+              marginLeft="20px"
+              marginRight="50px"
+              onClick={() => scroll("right")}
+              _hover={{
+                transform: "scale(1.2)",
+                transition: "transform 0.3s ease-in-out",
+              }}
+            >
+              <ArrowRightIcon color="black" />
+            </Box>
+          </Flex>
+        )}
+
+        {isMobile && (
+          <Center>
+            <Menu>
+              <MenuButton
+                className="w-4/5"
+                as={Button}
+                rightIcon={<ChevronDownIcon />}
+                backgroundColor="#596274"
+                color="#ffffff"
+                pl="41px"
+              >
+                {alumniYear === null ? "Select Batch Year" : alumniYear}
+              </MenuButton>
+              <MenuList display="flex" flexDirection="column">
+                {yearSet.map((year) => (
+                  <MenuItem
+                    width="90%"
+                    borderRadius="10px"
+                    backgroundColor={
+                      year === alumniYear ? "#BDE0FF" : "#ffffff"
+                    }
+                    onClick={() => {
+                      if (alumniYear === year) return;
+                      setAlumni(null);
+                      setAlumniYear(year);
+                    }}
+                    key={year}
+                  >
+                    {year}
+                  </MenuItem>
+                ))}
+              </MenuList>
+            </Menu>
+          </Center>
+        )}
+
+        <Grid key={alumniYear} mb={2} direction="column">
+          <Heading
+            as="h1"
+            mt="3rem"
+            mb="2%"
+            // color="teal.100"
+            color="white"
+            fontSize={{ base: "lg", md: "2xl" }}
+            textAlign="center"
+          >
+            Batch of {alumniYear}
+          </Heading>
+
+          <Grid
+            px="3rem"
+            mb="3rem"
+            templateColumns={{
+              base: "repeat(1, 1fr)",
+              lg: "repeat(3, 1fr)",
+            }}
+            gap={4}
+            padding={{ base: "15px", sm: "10px", md: "30px" }}
+          >
+            {alumni &&
+              alumni?.map((alumni, id) => (
+                <AlumniCard key={id} alumni={alumni} />
+              ))}
+          </Grid>
+        </Grid>
+      </Box>
     </Box>
   );
 };
