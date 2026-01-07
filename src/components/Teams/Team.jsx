@@ -4,6 +4,7 @@ import useLoading from "../../hooks/useLoading";
 import Loader from "../Loader";
 import AlumniCard from "./AlumniCard";
 import TeamMember from "./MemberCard";
+import { getCurrentSessionBatch } from "../../utils/batch";
 import {
   Box,
   Center,
@@ -61,16 +62,15 @@ const Team = () => {
     }
   };
 
+  const currentSessionBatch = getCurrentSessionBatch();
   const [alumni, setAlumni] = useState(null);
-  const [alumniYear, setAlumniYear] = useState(2023);
+  const [alumniYear, setAlumniYear] = useState(currentSessionBatch - 1);
   // const [selectedAlumniYear, setSelectedAlumniYear] = useState(null);
 
   const [team, setTeam] = useState(null);
 
   let yearSet = [];
-  const currentDate = new Date();
-  const currYear = currentDate.getFullYear();
-  for (let year = currYear; year >= 2016; year--) {
+  for (let year = currentSessionBatch - 1; year >= 2016; year--) {
     yearSet.push(year);
   }
 
@@ -156,7 +156,8 @@ const Team = () => {
 
         {team &&
           Object.keys(team)
-            .filter((year) => team[year]?.length > 0)
+            .filter((year) => team[year]?.length > 0 && parseInt(year) >= currentSessionBatch)
+            .sort((a, b) => a - b) // Ensure chronological order
             .map((year, i) => (
               <Box key={i}>
                 <Center mt="5rem" display={"flex"} flexDir={"row"}>
