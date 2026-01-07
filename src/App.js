@@ -6,6 +6,7 @@ import SignUp from "./components/SignUp";
 import EditProfile from "./components/Profile/EditProfile";
 import Layout from "./components/Layout";
 import Team from "./components/Teams/Team";
+import Alumni from "./components/Teams/Alumni";
 import { Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import RequireAuth from "./components/RequireAuth";
@@ -44,6 +45,7 @@ function App() {
               <Route path="register" element={<Register />} />
               <Route path="team" element={<Team />} />
               <Route path="forgot-password" element={<ResetPassword />} />
+              <Route path="alumni" element={<Alumni />} />
               <Route path="events" element={<Events />} />
               <Route path="get_started" element={<ContentsPage />} />
               <Route path="get_started/:subtopicId" element={<GetStarted />} />
