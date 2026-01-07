@@ -1,7 +1,7 @@
 // define apis for login
 export const register = async (formData) => {
   const response = await fetch(
-    "http://127.0.0.1:8000/api/users/register/", // TODO : use axios
+    `${process.env.REACT_APP_BACKEND_URL}/api/users/register/`, // TODO : use axios
     {
       method: "POST",
       headers: {
@@ -16,6 +16,6 @@ export const register = async (formData) => {
     }
   );
   const data = await response.json();
-  console.log("data", data);
+
   return data;
 };

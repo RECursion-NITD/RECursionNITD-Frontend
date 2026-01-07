@@ -30,7 +30,7 @@ const ResetPasswordSent = () => {
       <div className="flex flex-col items-center justify-center p-6 rounded-lg max-w-md mx-auto">
           <div className="flex flex-col items-center mb-4 justify-center">
 
-            <h1 className="text-white text-[2em] font-bold mb-8">Weve emailed you instructions for setting your password, if an account exists with the email you entered.
+            <h1 className="text-white text-[2em] font-bold mb-8">We have emailed you instructions for setting your password, if an account exists with the email you entered.
     You should receive them shortly.</h1>
 
           </div>

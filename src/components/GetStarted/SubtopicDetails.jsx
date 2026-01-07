@@ -28,7 +28,7 @@ const SubtopicDetails = () => {
   useEffect(() => {
     getSubTopicDetails(subTopicSelected).then((res) => {
       setSubtopic(res);
-      console.log(res);
+
     });
   }, [subTopicSelected]);
 

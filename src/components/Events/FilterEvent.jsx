@@ -33,6 +33,7 @@ const FilterEvent = ({
         margin={0}
       >
         <Button
+          size={{ base: "sm", md: "md" }}
           _hover={{
             background: "#34aaff",
           }}
@@ -47,6 +48,7 @@ const FilterEvent = ({
         </Button>
 
         <Button
+          size={{ base: "sm", md: "md" }}
           _hover={{
             background: "#34aaff",
           }}
@@ -61,6 +63,7 @@ const FilterEvent = ({
         </Button>
 
         <Button
+          size={{ base: "sm", md: "md" }}
           _hover={{
             background: "#34aaff",
           }}
@@ -75,6 +78,7 @@ const FilterEvent = ({
         </Button>
 
         <Button
+          size={{ base: "sm", md: "md" }}
           _hover={{
             background: "#34aaff",
           }}

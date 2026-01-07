@@ -21,12 +21,17 @@ const AlumniCard = ({ alumni }) => (
     overflow="hidden"
     variant="outline"
     bg="whiteAlpha.200"
-    border="solid"
-    borderColor="white"
-    borderWidth="1px"
+    border="none"
     // boxShadow="2px 2px 4px #BDE0FF"
     _hover={{ transform: "scale(1.05)", transition: "ease-in 0.3s" }}
     mb="15px"
+    sx={{
+      "@media (max-width: 450px)": {
+        flexDirection: "column",
+        height: "auto",
+        width: "90%",
+      },
+    }}
   >
     <Image
       objectFit="cover"
@@ -34,9 +39,23 @@ const AlumniCard = ({ alumni }) => (
       src={alumni.image}
       alt={alumni.name}
       width="40%"
+      sx={{
+        "@media (max-width: 450px)": {
+          width: "100%",
+          height: "100%",
+          aspectRatio: "1/1",
+        },
+      }}
     />
 
-    <Stack width="60%">
+    <Stack 
+      width="60%"
+      sx={{
+        "@media (max-width: 450px)": {
+          width: "100%",
+        },
+      }}
+    >
       <CardBody fontSize={{ base: "15px", md: "25px", lg: "15px" }}>
         <Heading color="#add8e6" size="md">
           {alumni.name}

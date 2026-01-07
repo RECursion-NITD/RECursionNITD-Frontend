@@ -10,7 +10,7 @@ import { EditIcon } from '@chakra-ui/icons'
 import EventCard from "./EventCard";
 import useAuth from "../../hooks/useAuth";
 import { ROLES } from "../../utils/roles";
-import ContestList from "./ContestList";
+
 
 const Events = () => {
   const [Events, setEvents] = useState([]);
@@ -65,11 +65,11 @@ const Events = () => {
   };
 
   const FilterSearchHandler = () => {
-    console.log("Inside search handler", EventType, SearchQuery);
+
     setLoading(true);
     FilterSearchEvents(EventType, SearchQuery)
       .then((response) => {
-        console.log(response);
+
         setEvents(response);
         setLoading(false);
         setSearchQuery("");
@@ -81,9 +81,9 @@ const Events = () => {
     setLoading(true);
     getEvents()
       .then((response) => {
-        console.log(response);
+
         setEvents(response);
-        // console.log("The event type is : ", Events[0]?.event_type);
+
         setLoading(false);
       })
       .catch((err) => console.error(err));
@@ -203,7 +203,7 @@ const Events = () => {
           // mt={5}
           ml={0}
           spacing={1}
-          minChildWidth={"400px"}
+          minChildWidth={{ base: "300px", md: "400px" }}
           width={"100%"}
         >
           {Events?.results?.map((event, key) => (
@@ -221,47 +221,37 @@ const Events = () => {
         >
           {/* For Previous 10 Events. */}
           {Events?.previous && (
-            <button
-              style={{
-                margin: "1em",
-                width: "5em",
-                padding: "15px",
-                boxShadow: "3px 3px #BDE0FF",
-                border: "solid 1px #BDE0FF",
-                border: "solid 1px",
-                color: "#BDE0FF",
-              }}
+            <Button
+              margin="1em"
+              backgroundColor="#34aaff"
+              color="white"
+              _hover={{ backgroundColor: "#203f55" }}
               onClick={() => {
                 NextEvents(Events?.previous);
               }}
             >
               Prev
-            </button>
+            </Button>
           )}
 
           {/* For Next 10 Events. */}
 
           {Events?.next && (
-            <button
-              style={{
-                margin: "1em",
-                width: "5em",
-                padding: "15px",
-                boxShadow: "3px 3px #BDE0FF",
-                border: "solid 1px #BDE0FF",
-                borderRadius: "8px",
-                color: "#BDE0FF",
-              }}
+            <Button
+              margin="1em"
+              backgroundColor="#34aaff"
+              color="white"
+              _hover={{ backgroundColor: "#203f55" }}
               onClick={() => {
                 NextEvents(Events?.next);
               }}
             >
               Next
-            </button>
+            </Button>
           )}
         </div>
       </Box>
-      <ContestList/>
+      
     </Flex>
     </>
   );

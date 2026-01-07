@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FormControl,
   FormLabel,
@@ -18,11 +18,11 @@ import {
   NumberDecrementStepper,
   Box,
 } from "@chakra-ui/react";
-import { createExperience } from "../../api/experiences";
+import { createExperience, updateExperience } from "../../api/experiences";
 import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const PostExperience = () => {
   const [experienceData, setExperienceData] = useState({
@@ -35,6 +35,27 @@ const PostExperience = () => {
   });
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const [isEdit, setIsEdit] = useState(false);
+  const [experienceId, setExperienceId] = useState(null);
+
+  useEffect(() => {
+    if (location.state && location.state.experience) {
+      const { experience, isEdit } = location.state;
+      if (isEdit) {
+        setIsEdit(true);
+        setExperienceId(experience.id);
+        setExperienceData({
+          companyName: experience.company,
+          year: experience.year,
+          jobProfile: experience.job_Profile,
+          roleType: experience.role_Type,
+          rounds: experience.no_of_Rounds,
+          details: experience.interview_Questions,
+        });
+      }
+    }
+  }, [location.state]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -60,7 +81,7 @@ const PostExperience = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(experienceData);
+
     const data = {
       company: experienceData.companyName,
       year: Number(experienceData.year),
@@ -69,9 +90,13 @@ const PostExperience = () => {
       job_Profile: experienceData.jobProfile,
       interview_Questions: experienceData.details,
     };
-    console.log(data);
-    const response = await createExperience(data);
-    console.log(response);
+
+    if (isEdit) {
+        await updateExperience(experienceId, data);
+    } else {
+        await createExperience(data);
+    }
+
     navigate('/experience');
   };
 

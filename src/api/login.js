@@ -1,7 +1,7 @@
 // define apis for login
 export const login = async (formData) => {
   const response = await fetch(
-    "http://127.0.0.1:8000/api/token/", // TODO : use axios
+    `${process.env.REACT_APP_BACKEND_URL}/api/token/`, // TODO : use axios
     {
       method: "POST",
       headers: {
@@ -14,6 +14,6 @@ export const login = async (formData) => {
     }
   );
   const data = await response.json();
-  console.log("data", data);
+
   return data;
 };

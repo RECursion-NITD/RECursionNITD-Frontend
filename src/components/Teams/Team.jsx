@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import useLoading from "../../hooks/useLoading";
 import Loader from "../Loader";
+import AlumniCard from "./AlumniCard";
+import TeamMember from "./MemberCard";
+import { getCurrentSessionBatch } from "../../utils/batch";
 import {
   Box, 
   Center,
@@ -8,13 +11,61 @@ import {
   Text,
   Flex,
   Image,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  // MenuItemOption,
+  // MenuGroup,
+  // MenuOptionGroup,
+  // MenuDivider,
+  Button,
+  // useBreakpointValue,
+  useMediaQuery,
 } from "@chakra-ui/react";
 
 const Team = () => {
   const { loading, setLoading } = useLoading();
-  const [teamData, setTeamData] = useState({ flagbearers: [], coordinators: [] });
+  const scrollContainerRef = useRef(null);
+  const [isMobile] = useMediaQuery("(max-width: 768px)");
 
-  // Fetch new team data from Django API
+  const scroll = (direction) => {
+    // const scrollDistance = useBreakpointValue({
+    //   base: 100,
+    //   sm: 75,
+    //   md: 100,
+    //   lg: 150,
+    //   xl: 200,
+    // });
+    const scrollDistance = 530;
+    if (scrollContainerRef.current) {
+      const scrollLeft = scrollContainerRef.current.scrollLeft;
+      if (direction === "left") {
+        scrollContainerRef.current.scrollTo({
+          left: scrollLeft - scrollDistance,
+          behavior: "smooth",
+        });
+      } else if (direction === "right") {
+        scrollContainerRef.current.scrollTo({
+          left: scrollLeft + scrollDistance,
+          behavior: "smooth",
+        });
+      }
+    }
+  };
+
+  const currentSessionBatch = getCurrentSessionBatch();
+  const [alumni, setAlumni] = useState(null);
+  const [alumniYear, setAlumniYear] = useState(currentSessionBatch - 1);
+  // const [selectedAlumniYear, setSelectedAlumniYear] = useState(null);
+
+  const [team, setTeam] = useState(null);
+
+  let yearSet = [];
+  for (let year = currentSessionBatch - 1; year >= 2016; year--) {
+    yearSet.push(year);
+  }
+
   useEffect(() => {
     console.log("Fetching team data...");
     setLoading(true);
@@ -273,7 +324,7 @@ const Team = () => {
 
   return (
     <Box
-      bg="#1a202c"
+      bg="#1e1e1e"
       style={{
         padding: "auto 10vw",
         width: "100vw",
@@ -282,79 +333,89 @@ const Team = () => {
     >
       {loading && <Loader />}
 
-      {/* FULL TEAM IMAGE */}
-      <Box width="100%" mb="40px" position="relative">
-        <Image
-          src="http://localhost:8000/media/images/teamheader.jpeg"
-          alt="Full Team Image"
-          width="100%"
-          height="auto"
-          objectFit="contain"
-          display="block"
-          filter="brightness(0.6) grayscale(30%)"
-        />
+      {/* TEAM HEADER */}
+      <Box w="100%" mt="0">
         <Box
-          position="absolute"
-          top="0"
-          left="0"
-          width="100%"
-          height="100%"
-          bg="rgba(0,0,0,0.3)"
-        />
-        <Heading
-          position="absolute"
-          top="50%"
-          left="50%"
-          transform="translate(-50%, -50%)"
-          color="white"
-          fontSize={{ base: "32px", md: "48px", lg: "64px" }}
-          fontWeight="800"
-          letterSpacing="4px"
-          textAlign="center"
-          textShadow="2px 2px 4px rgba(0,0,0,0.8)"
-          textTransform="uppercase"
-          zIndex={2}
+          w="100%"
+          position="relative"
+          sx={{ "@media (max-width: 800px)": { display: "none" } }}
         >
-          MEET OUR TEAM
+          <Image 
+            src={`${process.env.REACT_APP_BACKEND_URL}/media/images/teamheader.jpeg`} 
+            alt="Team Header" 
+            w="100%"
+            h="auto"
+            objectFit="cover"
+          />
+          <Box
+            position="absolute"
+            top="0"
+            left="0"
+            w="100%"
+            h="100%"
+            bg="blackAlpha.600"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Heading
+              color="white"
+              fontSize={{ base: "4xl", md: "6xl", lg: "7xl" }}
+              fontWeight="extrabold"
+              textAlign="center"
+              textTransform="uppercase"
+              fontFamily="Mulish"
+              letterSpacing="wide"
+            >
+              MEET OUR<br />TEAM
+            </Heading>
+          </Box>
+        </Box>
+        <Heading
+          className="team-heading"
+          mt="5rem"
+          mb={3}
+          textAlign="center"
+          display="none"
+          sx={{ "@media (max-width: 800px)": { display: "block" } }}
+        >
+          Meet Our Team
         </Heading>
-      </Box>
 
-      {/* FLAGBEARERS SECTION */}
-      <Box p={4}>
-        <Center mt="5rem">
-          <Heading color="white" margin="70px 0 40px 0" letterSpacing="3px">
-            FLAGBEARERS
-          </Heading>
-        </Center>
+        {team &&
+          Object.keys(team)
+            .filter((year) => team[year]?.length > 0 && parseInt(year) >= currentSessionBatch)
+            .sort((a, b) => a - b) // Ensure chronological order
+            .map((year, i) => (
+              <Box key={i}>
+                <Center mt="5rem" display={"flex"} flexDir={"row"}>
+                  <hr style={{ flex: 1, color: "BDE0FF99" }} />
+                  <Heading
+                    // color={"teal.100"}
+                    color={"white"}
+                    width={"max-content"}
+                    justifyContent={"center"}
+                    className="team-heading"
+                    zIndex={1}
+                    margin={"1em 1em 1em 1em"}
+                    fontSize="2xl"
+                  >
+                    Batch of {year}
+                  </Heading>
+                  <hr style={{ flex: 1, color: "BDE0FF99" }} />
+                </Center>
 
-        {/* Leadership Positions */}
-        {leadership.length > 0 && (
-          <Flex
-            flexWrap="wrap"
-            justifyContent="center"
-            bg="#111"
-            paddingBottom="40px"
-            marginBottom="40px"
-          >
-            {leadership.map(member => (
-              <LeaderCard key={member.id} member={member} />
+                <SimpleGrid
+                  columns={[1, 2, 3, 4, 5]}
+                  justifyContent={"space-around"}
+                >
+                  {team[year]?.length > 0 &&
+                    team[year].map((member, id) => (
+                      <TeamMember key={id} member={member} />
+                    ))}
+                </SimpleGrid>
+              </Box>
             ))}
-          </Flex>
-        )}
-
-        {/* Other Members */}
-        {otherMembers.length > 0 && (
-          <Flex
-            flexWrap="wrap"
-            justifyContent="center"
-            bg="#111"
-            paddingBottom="40px"
-          >
-            {otherMembers.map(member => (
-              <MemberCard key={member.id} member={member} />
-            ))}
-          </Flex>
-        )}
       </Box>
 
       {/* COORDINATORS SECTION */}

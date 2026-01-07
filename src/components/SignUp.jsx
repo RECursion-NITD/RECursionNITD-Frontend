@@ -8,10 +8,13 @@ import passicon from "../assets/images/password.svg";
 import loginicon from "../assets/images/login_svg.svg";
 import emaill from "../assets/images/email.svg";
 
+import { useToast } from "@chakra-ui/react"; // Added useToast import
+
 const SignUp = () => {
   const location = useLocation();
   const from = location.state?.from.pathname || "/";
   const { token, loginUser, setStatus, status, registerUser } = useAuth();
+  const toast = useToast(); // Initialize useToast
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState(""); // Separate email state
@@ -34,8 +37,26 @@ const SignUp = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setStatus("submitting");
-    const formData = { username, email, password, confirmPassword }; // Create the form data
-    await registerUser(formData); // Pass the form data to the login function
+    
+    // Show sending toast
+    const sendingToastId = toast({
+      title: "Sending confirmation link to your email...",
+      status: "success",
+      position: "top",
+      duration: null, // Keeps it open until manually closed
+      isClosable: false,
+    });
+
+    try {
+      const formData = { username, email, password, confirmPassword }; // Create the form data
+      await registerUser(formData); // Pass the form data to the login function
+    } catch (error) {
+      console.error("Registration failed", error);
+    } finally {
+      // Close the sending toast when the operation completes (success or failure)
+      // This assumes registerUser handles the success/error toasts or state updates that follow
+      toast.close(sendingToastId);
+    }
   };
 
   if (loading) {

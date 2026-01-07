@@ -34,7 +34,7 @@ const EditProfile = () => {
     const fetchProfile = async () => {
       try {
         const data = await getProfile();
-        console.log(data);
+
         const userData = {
           name: data.name ? data.name : "",
           college: data.college ? data.college : "",
@@ -61,12 +61,41 @@ const EditProfile = () => {
     });
   };
 
-  const handleImageChange = (event) => {
+  const handleImageChange = async (event) => {
     const imageFile = event.target.files[0];
-    setProfileData((prevData) => ({
-      ...prevData,
-      image: imageFile,
-    }));
+    if (!imageFile) return;
+
+    try {
+      const data = new FormData();
+      data.append("image", imageFile);
+
+      // Silent submit
+      const response = await editProfile(data);
+
+      if (response && response.image) {
+        setProfileData((prevData) => ({
+          ...prevData,
+          image: response.image,
+        }));
+
+        toast({
+          title: "Image Uploaded",
+          description: "Your profile image has been updated successfully.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      toast({
+        title: "Upload Failed",
+        description: "Failed to upload profile image.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
 
@@ -86,8 +115,7 @@ const EditProfile = () => {
     }
 
     try {
-      console.log("Inside handle Submit");
-      console.log(profileData);
+
       const data = new FormData();
       data.append("name", profileData.name);
       data.append("college", profileData.college);
@@ -101,9 +129,9 @@ const EditProfile = () => {
         data.append("image", profileData.image);
       }
 
-      console.log(data);
+
       const response = await editProfile(data);
-      console.log(response);
+
 
       toast({
         title: "Profile Updated",

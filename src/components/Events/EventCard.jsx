@@ -5,6 +5,7 @@ import { Box, Button, Image, Heading, Text, Icon } from "@chakra-ui/react";
 import { IoLocationSharp } from "react-icons/io5";
 import { SlCalender } from "react-icons/sl";
 import { Link } from "react-router-dom";
+import FallbackImage from "../../assets/images/REC_BLACK_with_white_background.png";
 const perms = false;
 
 const formatDate = (inputDate) => {
@@ -48,10 +49,10 @@ const EventCard = ({ event }) => {
         m={"17px 10px"}
         display="flex"
         justifyContent="center"
-        width="400px"
+        width={{ base: "300px", md: "400px" }}
         // height="470px"
         cursor="pointer"
-        backgroundColor='#121212'
+        backgroundColor='#313131'
       >
         <Box
           className="card item-card card-block"
@@ -73,15 +74,15 @@ const EventCard = ({ event }) => {
             />
           ) : (
             <Image
-              src="{% static 'image/logo_event.png'%}"
+              src={FallbackImage}
               alt="RECursion Event Poster"
               height="200px"
-              width="150px"
+              width="200px"
               // mb={3}
             />
           )}
 
-          <Text color="white"
+          <Text color="white" fontFamily="Mulish"
             style={{
               whiteSpace: "nowrap",
               overflow: "hidden",
@@ -96,11 +97,11 @@ const EventCard = ({ event }) => {
             )}
           </Text>
 
-          <Text color="white">
+          <Text color="white" fontFamily="Mulish">
             Date: {formatDate(event.start_time)}
           </Text>
 
-          <Text color="white">
+          <Text color="white" fontFamily="Mulish">
             Duration: {event.duration}
           </Text>
         </Box>

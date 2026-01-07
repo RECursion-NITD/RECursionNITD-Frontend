@@ -48,7 +48,7 @@ const DetailEvent = () => {
         setEvent(res);
         setLoading(false);
       })
-      .catch((e) => console.log("error fetching details of event ", e));
+      .catch((e) => {});
   }, []);
 
   const [isMobile] = useMediaQuery("(max-width: 768px)");

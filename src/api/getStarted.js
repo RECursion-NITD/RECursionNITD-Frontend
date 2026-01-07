@@ -6,7 +6,7 @@ import { API_ROUTES } from "../utils/api_routes";
 const GET_STARTED_URL = API_ROUTES.GET_STARTED;
 
 export const getContents = async () => {
-  console.log("getting_started/contents api called");
+
   const responsePage1 = await axios.get(`${GET_STARTED_URL}/contents/`, {
     headers: {
       "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export const getContents = async () => {
 };
 
 export const getSubTopicDetails = async (subTopic) => {
-  console.log("getting_started/subTopicDetails api called");
+
   const response = await axios.get(`${GET_STARTED_URL}/${subTopic}/`, {
     headers: {
       "Content-Type": "application/json",

@@ -17,6 +17,6 @@ export const getProfileRoles = async (id) => {
     }
   );
   const data = response.data;
-  console.log("roles data : ", data);
+
   return data;
 };

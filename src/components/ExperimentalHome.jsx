@@ -128,7 +128,7 @@ function Home() {
         setHomeData(data);
         setLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   }, []);
 
   return loading ? (
