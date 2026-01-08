@@ -81,7 +81,7 @@ const Team = () => {
         setAlumni(data);
         setLoading(false);
       })
-      .catch((err) => console.err(err));
+      .catch((err) => console.error(err));
   }, [alumniYear]);
 
   useEffect(() => {
@@ -91,7 +91,7 @@ const Team = () => {
         setTeam(data);
         setLoading(false);
       })
-      .catch((err) => console.err(err));
+      .catch((err) => console.error(err));
   }, []);
 
   return (
