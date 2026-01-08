@@ -142,7 +142,7 @@ const Events = () => {
     //   )}
     // </div>
     <>
-    <Flex mt={"2%"} height={"100%"} width={"100%"} flexDirection={"row"} alignItems={"flex-start"} justifyContent={"flex-start"} >
+    <Flex mt={"30px"} height={"100%"} width={"100%"} flexDirection={"row"} alignItems={"flex-start"} justifyContent={"flex-start"} >
       <Box
         // marginTop={"8vh"}
         // marginLeft={isMobile ? "0vw" : "20vw"}
@@ -162,7 +162,7 @@ const Events = () => {
           padding={"12px"}
           ml={0}
         >
-          <Box mt="2%" mb="2%">
+          <Box mt="20px" mb="2%" display="flex" justifyContent="space-between" alignItems="center">
             <Heading
               as="h1"
               fontSize="3xl"
@@ -175,7 +175,6 @@ const Events = () => {
               href="https://fonts.googleapis.com/css?family=Pacifico&display=swap"
               rel="stylesheet"
             />
-          </Box>
           { user?.role<=ROLES.MODERATOR &&
               <div>
                 <Link to="/events/create">
@@ -185,8 +184,8 @@ const Events = () => {
                   </Button>
                 </Link>
               </div>
-          
           }
+          </Box>
 
           {
             <FilterEvent

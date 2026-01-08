@@ -13,7 +13,8 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Footer from "./Footer";
-import { getProfile } from "../api/userInfo"; // Added import
+import { getProfile } from "../api/userInfo";
+import logo from "../assets/images/logoInverted.png"; // Added import
 
 const Layout = () => {
   const { user, logoutUser } = useAuth();
@@ -93,7 +94,7 @@ const Layout = () => {
             }}
           >
             <img
-              src="https://recursionnitd.in/static/image/logoInverted.png"
+              src={logo}
               alt="Logo"
               style={{
                 marginRight: "10px",

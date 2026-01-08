@@ -261,7 +261,13 @@ const EditProfile = () => {
             <FormControl className="flex w-2/5 mb-3 items-center justify-start">
               <FormLabel className="w-2/5 md:w-2/6 ml-0" htmlFor="currentImage">Current Image</FormLabel>
               {profileData.image !== "" && (
-                <Button className="w-1/2 mt-0" onClick={() => window.open(profileData.image)}>
+                <Button
+                  as="a"
+                  href={profileData.image}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-1/2 mt-0"
+                >
                   View
                 </Button>
               )}

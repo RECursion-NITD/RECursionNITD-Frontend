@@ -65,7 +65,7 @@ const Login = () => {
   return (
     <>
       {/* {token && <Navigate to={from} />} */}
-      <div className="flex flex-col items-center justify-center p-6 rounded-lg max-w-md mx-auto">
+      <div className="flex flex-col items-center justify-center p-6 rounded-lg max-w-lg mx-auto">
         <form onSubmit={handleFormSubmit} className="w-full">
           <div className="flex flex-col items-center mb-4 justify-center">
             {/* Login Icon centered above the Heading */}
@@ -82,7 +82,7 @@ const Login = () => {
                 value={username}
                 onChange={handleUsernameChange}
                 disabled={status === "submitting"}
-                className="w-[20em] bg-[#313131] text-white border border-[#58CDFF] px-4 py-2 focus:outline-none focus:border-[#58CDFF]"
+                className="w-full bg-[#313131] text-white border border-[#58CDFF] px-4 py-2 focus:outline-none focus:border-[#58CDFF]"
               />
             </div>
 
@@ -95,12 +95,12 @@ const Login = () => {
                 value={password}
                 onChange={handlePasswordChange}
                 disabled={status === "submitting"}
-                className="w-[20em] bg-[#313131] text-white border border-[#58CDFF] px-4 py-2 focus:outline-none focus:border-[#58CDFF]"
+                className="w-full bg-[#313131] text-white border border-[#58CDFF] px-4 py-2 focus:outline-none focus:border-[#58CDFF]"
               />
             </div>
 
             {/* Remember Me and Forgot Password in a Flex Row */}
-            <div className="flex justify-between w-full mb-4 mt-0">
+            <div className="flex flex-wrap justify-between w-full mb-4 mt-0 gap-2">
               {/* Remember Me Checkbox */}
               <div className="flex items-center ml-0">
                 <input

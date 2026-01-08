@@ -56,7 +56,7 @@ const AlumniCard = ({ alumni }) => (
         },
       }}
     >
-      <CardBody fontSize={{ base: "15px", md: "25px", lg: "15px" }}>
+      <CardBody fontSize={{ base: "15px", md: "17px", lg: "15px" }}>
         <Heading color="#add8e6" size="md">
           {alumni.name}
         </Heading>

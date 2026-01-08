@@ -57,17 +57,58 @@ const CreateEvent = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // Mandatory Fields Validation
+    if (!eventData.title || !eventData.startTime || !eventData.endTime) {
+      alert("Please fill in all mandatory fields: Title, Start Time, and End Time.");
+      return;
+    }
+
     const data = new FormData();
     data.append("title", eventData.title);
-    data.append("event_type", eventData.eventType);
-    data.append("target_year", eventData.targetYear);
-    data.append("link", eventData.eventLink);
-    data.append("start_time", eventData.startTime);
-    data.append("end_time", eventData.endTime);
-    data.append("description", eventData.description);
-    data.append("image", eventData.image);
-    data.append("venue", eventData.venue);
-    const response = await createEvent(data);
+
+    // Date Format: ISO 8601
+    try {
+      const startIso = new Date(eventData.startTime).toISOString();
+      const endIso = new Date(eventData.endTime).toISOString();
+      data.append("start_time", startIso);
+      data.append("end_time", endIso);
+    } catch (error) {
+       alert("Invalid date format.");
+       return;
+    }
+
+    // Strict Choices
+    // Defaut event_type to "Class" if empty
+    data.append("event_type", eventData.eventType || "Class");
+
+    // target_year: strict string or omit
+    if (eventData.targetYear) {
+      data.append("target_year", eventData.targetYear);
+    }
+
+    // Optional Fields: No Empty Strings
+    if (eventData.eventLink) {
+       data.append("link", eventData.eventLink);
+    }
+    if (eventData.venue) {
+       data.append("venue", eventData.venue);
+    }
+    if (eventData.description) {
+       data.append("description", eventData.description);
+    }
+
+    if (eventData.image) {
+      data.append("image", eventData.image);
+    }
+
+    try {
+      await createEvent(data);
+      alert("Event created successfully");
+    } catch (error) {
+      console.error("Failed to create event:", error);
+      alert("Failed to create event. Please check inputs.");
+    }
   };
 
   return (
