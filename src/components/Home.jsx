@@ -97,7 +97,7 @@ function Home() {
             <Link to="/get_started" className="flex">
               <button
                 type="button"
-                class="flex items-center text-white bg-[#2B8BB5] hover:bg-[#205F7A] focus:ring-4 focus:ring-[#2B8BB5] font-medium rounded-lg text-xl px-7 py-3 me-2 mb-2 dark:bg-[#2B8BB5] dark:hover:bg-[#205F7A] focus:outline-none dark:focus:ring-[#2B8BB5]"
+                className="flex items-center text-white bg-[#2B8BB5] hover:bg-[#205F7A] focus:ring-4 focus:ring-[#2B8BB5] font-medium rounded-lg text-xl px-7 py-3 me-2 mb-2 dark:bg-[#2B8BB5] dark:hover:bg-[#205F7A] focus:outline-none dark:focus:ring-[#2B8BB5]"
               >
                 <div>Get Started</div>
                 <div>
