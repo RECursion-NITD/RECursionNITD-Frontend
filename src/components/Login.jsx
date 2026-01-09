@@ -17,12 +17,18 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false); // State for remember me checkbox
   const { loading, setLoading } = useLoading();
+  const [justLoggedInWithGoogle, setJustLoggedInWithGoogle] = useState(false);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const checkProfileAndRedirect = async () => {
       if (token) {
+        if (justLoggedInWithGoogle) {
+          navigate("/profile/edit");
+          return;
+        }
+        
         setLoading(true); // Keep loading while we check profile
         try {
           const profile = await getProfile();
@@ -45,7 +51,7 @@ const Login = () => {
       }
     };
     checkProfileAndRedirect();
-  }, [token, setLoading, setStatus, navigate, from]);
+  }, [token, setLoading, setStatus, navigate, from, justLoggedInWithGoogle]);
 
   const handleUsernameChange = (e) => setUsername(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
@@ -137,7 +143,7 @@ const Login = () => {
             </button>
 
             {/* Google Login */}
-            <Glogin />
+            <Glogin setJustLoggedInWithGoogle={setJustLoggedInWithGoogle} />
             <div className="mt-2 text-sm ml-0">
               <p className="text-[#ffffff]">
                 Do not have an account?

@@ -46,34 +46,36 @@ export const GetDetailExperience = async (experienceId) => {
   return data;
 };
 export const SearchExp = async (Company, RoleType, search) => {
-  // console.log("Inside search experience", Company, RoleType, search);
   const token = JSON.parse(localStorage.getItem("authTokens")).access;
 
-  let URL;
-  if (search === "") {
-    if (Company === null && RoleType === null)
-      URL = `${API_ROUTES.EXPERIENCES}`;
-    else if (Company === null)
-      URL = `${API_ROUTES.EXPERIENCES}/?role_type=${RoleType}`;
-    else if (RoleType === null)
-      URL = `${API_ROUTES.EXPERIENCES}/?search=${Company}`;
-    else
-      URL = `${API_ROUTES.EXPERIENCES}/?role_type=${RoleType}&search=${Company}`;
-  } else if (Company === null && RoleType === null)
-    URL = `${API_ROUTES.EXPERIENCES}/?search=${search}`;
-  else if (Company === null) {
-    URL = `${API_ROUTES.EXPERIENCES}/?role_type=${RoleType}&search=${search}`;
+  const params = new URLSearchParams();
+  
+  if (search && search.trim() !== "") {
+    params.append("search", search);
+  }
+  
+  if (Company && Company !== "Company") {
+    // Reverting to use 'search' param for Company as backend likely relies on generic search.
+    // We append it. If 'search' is already there, this adds a second 'search' param.
+    // If the backend only processes the last one, we might need to combine them.
+    // But let's try appending first (standard HTTP behavior).
+    // If the user wants to search "Microsoft" (Company) AND "Intern" (Text),
+    // we want results that match BOTH?
+    // The previous code had a specific branch `URL = ...search=${Company}` when text search was empty.
+    
+    // Strategy: If we have a text search, let's prepend/append the company name to it to form a combined query?
+    // Or just use 'search' param for it.
+    
+    // Let's assume sending it as 'search' is correct.
+    params.append("search", Company); 
   }
 
-  // Here is the problem (can't accomodate search and company filter together)
-  else if (RoleType === null) {
-    // URL=`${API_ROUTES.EXPERIENCES}/?search=${Company}&search=${search}`;  //this wouldn't work
-    URL = `${API_ROUTES.EXPERIENCES}/?search=${search}`;
-  } else {
-    URL = `${API_ROUTES.EXPERIENCES}/?role_type=${RoleType}&search=${search}`;
-    // URL=`${API_ROUTES.EXPERIENCES}/?role_type=${RoleType}&search=${search}&company=${Company}`;  (NEED SOMETHING LIKE THIS)
+  if (RoleType && RoleType !== "All") {
+    params.append("role_type", RoleType);
   }
 
+  const URL = `${API_ROUTES.EXPERIENCES}/?${params.toString()}`;
+  
   const response = await axios.get(URL, {
     headers: {
       "Content-Type": "application/json",

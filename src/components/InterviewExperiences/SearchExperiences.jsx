@@ -6,7 +6,7 @@ import { SearchExp } from "../../api/experiences";
 import { FiSearch } from "react-icons/fi";
 import { Button } from '@chakra-ui/react';
 
-const SearchExperiences = ({ setInterviewExperiences,setSearch,setCompany,setInterviewType,FilterHandler,Company,InterviewType }) => {
+const SearchExperiences = ({ search, setInterviewExperiences,setSearch,setCompany,setInterviewType,FilterHandler,Company,InterviewType }) => {
   const { loading, setLoading } = useLoading();
 
   const companies = [
@@ -24,13 +24,22 @@ const SearchExperiences = ({ setInterviewExperiences,setSearch,setCompany,setInt
     <div className="mt-4 mb-4 flex flex-col justify-between w-full max-400:w-[300px] m-0">
       <div className="relative flex w-full justify-start">
       <input
-        className="h-12 m-1 w-full outline-none border-outline rounded-3xl ps-12 pe-4 text-black bg-surface font-poppins"
+        value={search}
+        className="h-12 m-1 w-full outline-none border-outline rounded-3xl ps-12 pe-4 text-white bg-surface font-poppins"
         onChange={(e) => {
           setSearch(e.target.value);
         }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            FilterHandler();
+          }
+        }}
         placeholder="Search..."
       />
-      <FiSearch className="absolute left-5 top-1/2 transform -translate-y-1/2 text-black text-[#326B94] text-2xl" />
+      <FiSearch 
+        className="absolute left-5 top-1/2 transform -translate-y-1/2 text-white text-2xl cursor-pointer" 
+        onClick={FilterHandler}
+      />
     </div>
       <div className="flex max-900:flex-col max-900:justify-center justify-start items-center m-0">
         <select

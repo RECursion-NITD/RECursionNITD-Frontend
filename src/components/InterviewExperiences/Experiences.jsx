@@ -71,7 +71,6 @@ const Experiences = () => {
   };
 
   const companies = [
-    "Company",
     "Microsoft",
     "Adobe",
     "Wells Fargo",
@@ -84,6 +83,9 @@ const Experiences = () => {
   const handleCompanyClick = (company) => {
     setSelectedCompany(company);
     setCompany(company);
+    if (company === null) {
+        setSearch("");
+    }
   };
 
   return loading ? (
@@ -106,6 +108,7 @@ const Experiences = () => {
 
         <div className="w-full flex m-0">
           <SearchExperiences
+            search={search}
             setInterviewExperiences={setInterviewExperiences}
             setSearch={setSearch}
             setCompany={setCompany}

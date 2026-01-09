@@ -4,12 +4,15 @@ import { useGoogleLogin } from "@react-oauth/google";
 import GoogleIcon from "./GoogleIcon";
 import { loginWithGoogle } from "../../api/loginWithGoogle";
 import useAuth from "../../hooks/useAuth";
-const Glogin = () => {
+const Glogin = ({ setJustLoggedInWithGoogle }) => {
   const { token, decodeTokens, setStatus, status } = useAuth();
 
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => {
       loginWithGoogle(tokenResponse.access_token).then((res) => {
+        if (setJustLoggedInWithGoogle && res.is_new_user) {
+          setJustLoggedInWithGoogle(true);
+        }
         decodeTokens(res);
       });
     },

@@ -2,7 +2,7 @@
 // define apis for login with google
 export const loginWithGoogle = async (token) => {
   const response = await fetch(
-    `${process.env.REACT_APP_BACKEND_URL}/token/google/`, // TODO : use axios
+    `${process.env.REACT_APP_BACKEND_URL}/api/token/google/`, // TODO : use axios
     {
       method: "POST",
       headers: {
