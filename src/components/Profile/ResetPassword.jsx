@@ -73,7 +73,7 @@ const ResetPassword = () => {
                 value={email} // Bind to email state
                 onChange={handleEmailChange} // Handle email input change
                 disabled={status === "submitting"}
-                className="w-[20em] bg-[#313131] text-white border border-[#58CDFF] px-4 py-2 focus:outline-none focus:border-[#58CDFF]"
+                className="w-full bg-[#313131] text-white border border-[#58CDFF] px-4 py-2 focus:outline-none focus:border-[#58CDFF]"
               />
             </div>
 

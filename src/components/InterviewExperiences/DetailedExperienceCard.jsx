@@ -11,6 +11,7 @@ import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { approveExperience, rejectExperience } from "../../api/experiences";
 import { useState } from "react";
+import { getApiError } from "../../utils/getApiError";
 
 const DetailedExperienceCard = ({ experience }) => {
   const { user } = useAuth();
@@ -52,9 +53,10 @@ const DetailedExperienceCard = ({ experience }) => {
       onClose();
       window.location.reload();
     } catch (error) {
+       const errorMessage = getApiError(error);
       toast({
         title: "Error requesting changes",
-        description: error.message,
+        description: errorMessage,
         status: "error",
         duration: 3000,
         isClosable: true,

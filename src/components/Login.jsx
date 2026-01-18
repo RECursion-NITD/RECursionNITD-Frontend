@@ -1,4 +1,4 @@
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate, useSearchParams } from "react-router-dom"; // Added useSearchParams
 import useAuth from "../hooks/useAuth";
 import React, { useState, useEffect } from "react";
 import useLoading from "../hooks/useLoading";
@@ -8,10 +8,20 @@ import Usericon from "../assets/images/userr.svg";
 import passicon from "../assets/images/password.svg";
 import loginicon from "../assets/images/login_svg.svg";
 import { getProfile } from "../api/userInfo";
+import { useToast } from "@chakra-ui/react"; // Added useToast
 
 const Login = () => {
   const location = useLocation();
-  const from = location.state?.from.pathname || "/";
+  const [searchParams] = useSearchParams();
+  const toast = useToast();
+  
+  // Logic to preserve query params from the redirected 'from' location
+  const stateFrom = location.state?.from;
+  let from = "/";
+  if (stateFrom) {
+      from = stateFrom.pathname + (stateFrom.search || "");
+  }
+
   const { token, loginUser, setStatus, status } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -20,6 +30,23 @@ const Login = () => {
   const [justLoggedInWithGoogle, setJustLoggedInWithGoogle] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check for 'activated' in current URL or in the 'from' state
+    const currentActivated = searchParams.get("activated");
+    const stateActivated = location.state?.from?.search?.includes("activated=true");
+
+    if (currentActivated === "true" || stateActivated) {
+      toast({
+        title: "Account Activated",
+        description: "Your account has been successfully activated. Please log in.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+  }, [searchParams, location.state, toast]);
 
   useEffect(() => {
     const checkProfileAndRedirect = async () => {

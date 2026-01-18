@@ -4,7 +4,7 @@ import { getUserProfile } from "../../api/userInfo";
 import { Link } from "react-router-dom";
 import { Container, Avatar } from "@chakra-ui/react";
 import msLogo from "../../assets/images/ms-logo.png";
-import profile from "../../assets/images/profile.png";
+import profile from "../../assets/images/default_profile.png";
 import { type } from "@testing-library/user-event/dist/type";
 
 

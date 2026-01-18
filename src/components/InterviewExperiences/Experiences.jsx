@@ -151,7 +151,7 @@ const Experiences = () => {
       </div>
 
       <div className="pt-16 pl-3 pr-2 pb-2 bg-surfaceVariant rounded-lg ml-4 flex-1 font-semibold max-900:hidden m-0">
-        <h2 className="text-white font-semibold text-lg mb-4">Search for companies</h2>
+        <h2 className="text-white font-semibold text-lg mb-4 mt-1">Search for companies</h2>
         <div className="flex flex-wrap gap-1">
           <button
             className={`p-2 rounded-lg ${

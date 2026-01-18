@@ -1,19 +1,17 @@
-// define apis for login
+import axios from "./axios";
+
 export const login = async (formData) => {
-  const response = await fetch(
-    `${process.env.REACT_APP_BACKEND_URL}/api/token/`, // TODO : use axios
+  const response = await axios.post(
+    `${process.env.REACT_APP_BACKEND_URL}/api/token/`,
     {
-      method: "POST",
+      username: formData.username,
+      password: formData.password,
+    },
+    {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        username: formData.username,
-        password: formData.password,
-      }),
     }
   );
-  const data = await response.json();
-
-  return data;
+  return response.data;
 };

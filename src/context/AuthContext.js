@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { createContext, useEffect, useState } from "react";
+import axios from "../api/axios";
 import { login } from "../api/login";
 import { register } from "../api/register";
 import { refresh } from "../api/refreshToken";
@@ -7,6 +8,7 @@ import jwtDecode from "jwt-decode";
 import { useToast } from "@chakra-ui/react";
 import { getProfileRoles } from "../api/getRoles";
 import { useNavigate } from "react-router-dom";
+import { getApiError } from "../utils/getApiError";
 // import useLoading from "../hooks/useLoading";
 
 const AuthContext = createContext();
@@ -40,12 +42,14 @@ export const AuthProvider = ({ children }) => {
       });
       return;
     }
-    setAuthToken({
+      setAuthToken({
       access: tokens.access,
       refresh: tokens.refresh,
     });
     localStorage.setItem("authTokens", JSON.stringify(tokens));
-    getProfileRoles(jwtDecode(tokens?.access).user_id).then((res) => {
+    
+    try {
+      const res = await getProfileRoles(jwtDecode(tokens?.access).user_id);
       localStorage.setItem(
         "user",
         JSON.stringify({
@@ -60,7 +64,19 @@ export const AuthProvider = ({ children }) => {
         email: jwtDecode(tokens?.access).email,
         role: res.role,
       });
-    });
+    } catch (error) {
+       console.error("Error fetching roles:", error);
+       // Optional: Toast specific to role fetching failure? 
+       // For now, allow login but maybe warn? Or just log it.
+       // Ensuring it doesn't crash the Google Login flow entirely (though token is valid).
+       toast({
+          title: "Profile Error",
+          description: "Could not fetch user roles.",
+          status: "warning",
+          duration: 3000,
+          isClosable: true,
+       });
+    }
   };
 
   const loginUser = async (formData) => {
@@ -89,25 +105,15 @@ export const AuthProvider = ({ children }) => {
 
     } catch (err) {
       setLoading(false);
-      if (formData.username && formData.password) {
-        toast({
-          title: "Account not Found",
-          description: "Username or Password is incorrect.",
-          position: "top",
-          status: "error",
-          duration: 3000,
-          isClosable: true,
-        });
-      } else {
-        toast({
-          title: "Login Failed",
-          description: "Please fill in all the fields",
-          position: "top",
-          status: "error",
-          duration: 3000,
-          isClosable: true,
-        });
-      }
+      const errorMessage = getApiError(err);
+      toast({
+        title: "Login Failed",
+        description: errorMessage,
+        position: "top",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
 
       setStatus("typing");
     }
@@ -158,129 +164,112 @@ export const AuthProvider = ({ children }) => {
 
   const registerUser = async ({ username, email, password, confirmPassword }) => {
     try {
-      const formData = new FormData();
-      formData.append("username", username);
-      formData.append("email", email);
-      formData.append("password1", password);        // Django default
-      formData.append("password2", confirmPassword); // Django default
-      formData.append("ajax_check", "True");
+      const payload = {
+        username,
+        email,
+        password,
+        password2: confirmPassword,
+      };
 
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/profile/register/`, {
-        method: "POST",
-        body: formData,
-        credentials: "include", // IMPORTANT for CSRF
+      const response = await axios.post("/users/register/", payload);
+      
+      // Axios throws on 4xx/5xx, so if we are here, it's mostly success.
+      // But we should check if the backend wraps errors in 200 OK (unlikely for REST)
+      // or if we need to display a specific success message.
+      
+      toast({
+        title: "Account Created",
+        description: "Activation link sent to your email.",
+        position: "top",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
       });
-
-      const text = await response.text();
-      // alert(text); // show Django message
-      if (text == "A user with that Email already exists." || text == "This password is too common." || text == "A user with that username already exists." || text == "This field is required." || text == "This password is too short. It must contain at least 8 characters.") {
-        toast({
-          title: "Signup failed",
-          description: text,
-          position: "top",
-          status: "error",
-          duration: 3000,
-          isClosable: true,
-        });
-      }
-      else {
-        toast({
-          title: "Signup successful",
-          description: text,
-          position: "top",
-          status: "success",
-          duration: 3000,
-          isClosable: true,
-        });
-      }
 
       setStatus("typing");
     } catch (err) {
       console.error(err);
+      const errorMessage = getApiError(err);
+      
+      toast({
+        title: "Signup failed",
+        description: errorMessage,
+        position: "top",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      setStatus("typing");
     }
   };
 
   const resetUserPassword = async( { email } ) => {
     try {
+      const response = await axios.post("/users/password-reset/", { email });
 
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/profile/password_reset/`, {
-        method: "POST",
-        body: new URLSearchParams({
-          ajax_check: "True",
-          email: email,
-        }),
-      });
-
-      const text = await response.text();
-
-      if (text=="No user with that Email exists."){
-        toast({
-          title: "Email Not found",
-          description: text,
-          position: "top",
-          status: "error",
-          duration: 3000,
-          isClosable: true,
-        })
-      }
-      else {
-        toast({
-          title: "Password Reset Email sent",
-          position: "top",
-          status: "success",
-          duration: 3000,
-          isClosable: true,
-        })
-
-        setStatus("typing");
-        navigate("reset/sent");
-      }
+      toast({
+        title: "Password Reset Email sent",
+        description: "Check your email for the reset link.",
+        position: "top",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      })
 
       setStatus("typing");
+      navigate("reset/sent");
     } catch (err){
       console.error(err);
+      const errorMessage = getApiError(err);
+
+      toast({
+        title: "Email Not found", // Or just "Error"
+        description: errorMessage,
+        position: "top",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      })
+      setStatus("typing");
     }
   }
 
   const resetPasswordSubmit = async({uidb64, newtoken, password, confirmPassword}) => {
     try {
+      const payload = {
+        uidb64,
+        token: newtoken,
+        password,
+        confirm_password: confirmPassword,
+      };
 
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/profile/reset/${uidb64}/${newtoken}/`, {
-        method: "POST",
-        body: new URLSearchParams({
-          password: password,
-          confirmPassword: confirmPassword,
-        }),
-      });
+      const response = await axios.post("/users/password-reset-confirm/", payload);
 
-      const text = await response.text();
+      toast({
+        title: "Password successfully changed!",
+        description: "You can now login with your new password.",
+        position: "top",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      })
 
-      if (text=="Changed."){
-        toast({
-          title: "Password successfully changed!",
-          description: text,
-          position: "top",
-          status: "success",
-          duration: 3000,
-          isClosable: true,
-        })
-
-        navigate("");
-      }
-      else {
-        toast({
-          title: "Invalid Password",
-          description: text,
-          position: "top",
-          status: "error",
-          duration: 3000,
-          isClosable: true,
-        })
-      }
+      navigate("");
       
       setStatus("typing");
     } catch (err){
       console.error(err);
+      const errorMessage = getApiError(err);
+
+      toast({
+        title: "Reset Failed",
+        description: errorMessage,
+        position: "top",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      })
+      setStatus("typing");
     }
   }
 

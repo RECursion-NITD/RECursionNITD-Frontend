@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 
 import { getProfile, editProfile } from "../../api/userInfo";
+import { getApiError } from "../../utils/getApiError";
 
 
 const EditProfile = () => {
@@ -88,9 +89,10 @@ const EditProfile = () => {
       }
     } catch (error) {
       console.error("Error uploading image:", error);
+      const errorMessage = getApiError(error);
       toast({
         title: "Upload Failed",
-        description: "Failed to upload profile image.",
+        description: errorMessage,
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -146,9 +148,10 @@ const EditProfile = () => {
 
     } catch (error) {
       console.error("Error updating profile:", error);
+      const errorMessage = getApiError(error);
       toast({
-        title: "Error",
-        description: "An error occurred while updating your profile. Please try again.",
+        title: "Update Failed",
+        description: errorMessage,
         status: "error",
         duration: 3000,
         isClosable: true,
