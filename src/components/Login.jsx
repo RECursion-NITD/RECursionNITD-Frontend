@@ -12,7 +12,7 @@ import { getProfile } from "../api/userInfo";
 const Login = () => {
   const location = useLocation();
   const from = location.state?.from.pathname || "/";
-  const { token, loginUser, setStatus, status, decodeTokens } = useAuth();
+  const { token, user, loginUser, setStatus, status, decodeTokens } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false); // State for remember me checkbox
@@ -32,7 +32,8 @@ const Login = () => {
 
   useEffect(() => {
     const checkProfileAndRedirect = async () => {
-      if (token) {
+      // Wait for both token AND user to be populated to avoid race conditions with localStorage
+      if (token && user) {
         setLoading(true); // Keep loading while we check profile
         try {
           const profile = await getProfile();
@@ -55,7 +56,7 @@ const Login = () => {
       }
     };
     checkProfileAndRedirect();
-  }, [token, setLoading, setStatus, navigate, from]);
+  }, [token, user, setLoading, setStatus, navigate, from]);
 
   const handleUsernameChange = (e) => setUsername(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);

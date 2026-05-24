@@ -28,6 +28,9 @@ import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Footer from "./Footer";
 import { getProfile } from "../api/userInfo"; // Added import
 
+const APP_PACKAGE_NAME = 'com.recursionnitd.app';
+const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=' + APP_PACKAGE_NAME;
+
 const Layout = () => {
   const { user, logoutUser } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
@@ -40,33 +43,59 @@ const Layout = () => {
   const { isOpen: isLogoutOpen, onOpen: onLogoutOpen, onClose: onLogoutClose } = useDisclosure();
   const cancelRef = React.useRef();
 
+  const [isProfileComplete, setIsProfileComplete] = useState(false);
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleOpenApp = () => {
+    const fallbackUrl = encodeURIComponent(PLAY_STORE_URL);
+    
+    // Chrome requires a 'scheme' to trigger the intent. 
+    // IMPORTANT: For this to work, the RECursion Android app's AndroidManifest.xml MUST have an intent-filter
+    // with <category android:name="android.intent.category.BROWSABLE" /> for this scheme.
+    const intentUrl = `intent://#Intent;scheme=recursionnitd;package=${APP_PACKAGE_NAME};S.browser_fallback_url=${fallbackUrl};end`;
+    
+    window.location.href = intentUrl;
   };
 
   // Enforce Profile Completeness "Jail"
   useEffect(() => {
     const checkProfile = async () => {
-      // Only check if user is logged in and NOT already on the edit page
-      if (user && location.pathname !== "/profile/edit") {
-        try {
-          const profile = await getProfile();
-          const isNameMissing = !profile.name || (typeof profile.name === "string" && profile.name.trim() === "");
-          const isCollegeMissing = !profile.college || (typeof profile.college === "string" && profile.college.trim() === "");
+      // If no user, we consider profile "complete" for navigation purposes (public access)
+      if (!user) {
+        setIsProfileComplete(true);
+        return;
+      }
 
-          if (isNameMissing || isCollegeMissing) {
-            toast({
-              title: "Profile Incomplete",
-              description: "You must complete your profile (Name & College) to continue.",
-              status: "warning",
-              duration: 3000,
-              isClosable: true,
-            });
-            navigate("/profile/edit", { replace: true });
-          }
-        } catch (error) {
-          console.error("Profile check failed", error);
+      // User exists, verify profile
+      try {
+        const profile = await getProfile();
+        const isNameMissing = !profile.name || (typeof profile.name === "string" && profile.name.trim() === "");
+        const isCollegeMissing = !profile.college || (typeof profile.college === "string" && profile.college.trim() === "");
+
+        const incomplete = isNameMissing || isCollegeMissing;
+        setIsProfileComplete(!incomplete);
+
+        // Redirect if incomplete and trying to go elsewhere
+        if (incomplete && location.pathname !== "/profile/edit") {
+          toast({
+            title: "Profile Incomplete",
+            description: "You must complete your profile (Name & College) to continue.",
+            status: "warning",
+            duration: 3000,
+            isClosable: true,
+          });
+          navigate("/profile/edit", { replace: true });
         }
+      } catch (error) {
+        console.error("Profile check failed", error);
+        // Fallback: If error, maybe keep locked or unlock? 
+        // Safer to keep locked or handle gracefully. For now, assume incomplete/error maintains lock if default was false.
+        // But if default was false, and api fails, menus never show.
+        // Let's assume on error we might want to let them browse or retry.
+        // For security/jail, we keeps it closed.
       }
     };
     checkProfile();
@@ -137,35 +166,38 @@ const Layout = () => {
           padding="0"
           fontWeight="bold"
         >
-          {/* Render each link with the MenuItem component */}
-          <MenuItem
-            to="/experience"
-            isActive={activeLink === "/experience"}
-            onClick={() => setActiveLink("/experience")}
-          >
-            Interview Experiences
-          </MenuItem>
-          <MenuItem
-            to="/events"
-            isActive={activeLink === "/events"}
-            onClick={() => setActiveLink("/events")}
-          >
-            Events
-          </MenuItem>
-          <MenuItem
-            to="/get_started"
-            isActive={activeLink === "/get_started"}
-            onClick={() => setActiveLink("/get_started")}
-          >
-            Getting Started
-          </MenuItem>
-          <MenuItem
-            to="/team"
-            isActive={activeLink === "/team"}
-            onClick={() => setActiveLink("/team")}
-          >
-            Team
-          </MenuItem>
+          {isProfileComplete && (
+            <>
+              <MenuItem
+                to="/experience"
+                isActive={activeLink === "/experience"}
+                onClick={() => setActiveLink("/experience")}
+              >
+                Interview Experiences
+              </MenuItem>
+              <MenuItem
+                to="/events"
+                isActive={activeLink === "/events"}
+                onClick={() => setActiveLink("/events")}
+              >
+                Events
+              </MenuItem>
+              <MenuItem
+                to="/get_started"
+                isActive={activeLink === "/get_started"}
+                onClick={() => setActiveLink("/get_started")}
+              >
+                Getting Started
+              </MenuItem>
+              <MenuItem
+                to="/team"
+                isActive={activeLink === "/team"}
+                onClick={() => setActiveLink("/team")}
+              >
+                Team
+              </MenuItem>
+            </>
+          )}
         </Flex>
 
         {/* Login Button */}
@@ -202,15 +234,15 @@ const Layout = () => {
                 <Menu isOpen={isProfileOpen}>
                   <MenuButton
                     as={Button}
-                    rounded={'full'}
-                    variant={'link'}
-                    cursor={'pointer'}
+                    rounded="full"
+                    variant="link"
+                    cursor="pointer"
                     minW={0}
                     onMouseEnter={onProfileOpen}
                     onMouseLeave={onProfileClose}
                   >
                     <Avatar
-                      size={'sm'}
+                      size="sm"
                       name={user?.username}
                       bg="#58CDFF"
                       color="black"
@@ -240,6 +272,26 @@ const Layout = () => {
           )}
         </Flex>
 
+        {/* Open App CTA (visible on mobile only) */}
+        <Button
+          display={{ base: "flex", lg: "none" }}
+          onClick={handleOpenApp}
+          size="sm"
+          bg="#58CDFF"
+          color="black"
+          fontWeight="bold"
+          fontFamily="Open Sans"
+          borderRadius="20px"
+          px={4}
+          _hover={{ bg: "#3ab8f0", transform: "scale(1.04)" }}
+          _active={{ transform: "scale(0.97)" }}
+          transition="all 0.2s"
+          aria-label="Open RECursion app"
+          id="mobile-open-app-btn"
+        >
+          Open app
+        </Button>
+
         {/* Hamburger Menu Icon (visible on mobile) */}
         <IconButton
           color="whitesmoke"
@@ -266,10 +318,14 @@ const Layout = () => {
         >
           <VStack spacing="4" mt="5vh">
             {/* Same links as above */}
-            <MenuItem to="/experience">Interview Experiences</MenuItem>
-            <MenuItem to="/events">Events</MenuItem>
-            <MenuItem to="/get_started">Getting Started</MenuItem>
-            <MenuItem to="/team">Team</MenuItem>
+            {isProfileComplete && (
+              <>
+                <MenuItem to="/experience">Interview Experiences</MenuItem>
+                <MenuItem to="/events">Events</MenuItem>
+                <MenuItem to="/get_started">Getting Started</MenuItem>
+                <MenuItem to="/team">Team</MenuItem>
+              </>
+            )}
             {!user ? (
               <MenuItem to="/login" noHoverEffect>
                 <Button
