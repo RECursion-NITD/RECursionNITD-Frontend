@@ -17,6 +17,7 @@ import DetailedExperiencePage from "./components/InterviewExperiences/DetailedEx
 import DetailEvent from "./components/Events/DetailEvent";
 import AskREC from "./components/AskREC";
 import Events from "./components/Events/Events";
+import Contests from "./components/Contests";
 import GetStarted from "./components/GetStarted/GetStarted";
 import ContentsPage from "./components/GetStarted/ContentsPage";
 import NotFound from "./components/NotFound";
@@ -47,6 +48,7 @@ function App() {
               <Route path="forgot-password" element={<ResetPassword />} />
               <Route path="alumni" element={<Alumni />} />
               <Route path="events" element={<Events />} />
+              <Route path="contests" element={<Contests />} />
               <Route path="get_started" element={<ContentsPage />} />
               <Route path="get_started/:subtopicId" element={<GetStarted />} />
               <Route
