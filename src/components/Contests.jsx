@@ -13,7 +13,8 @@ import {
   Link,
 } from "@chakra-ui/react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
-
+const CLIST_USERNAME = process.env.REACT_APP_CLIST_USERNAME;
+const CLIST_API_KEY = process.env.REACT_APP_CLIST_API_KEY;
 const Contests = () => {
   const [contests, setContests] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,8 +26,8 @@ const Contests = () => {
 
     try {
       const response = await fetch(
-        "https://clist.by/api/v4/contest//?username=Anin&api_key=c16cb57a4fcc896bbd7a7108dc6f24d964047916&upcoming=true&order_by=start&resource_id__in=1%2C2%2C93",
-      );
+  `https://clist.by/api/v4/contest/?username=${CLIST_USERNAME}&api_key=${CLIST_API_KEY}&upcoming=true&order_by=start&resource_id__in=1%2C2%2C93`
+);
 
       if (!response.ok) {
         throw new Error("Failed to fetch contests");
