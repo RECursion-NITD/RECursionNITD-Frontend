@@ -30,10 +30,11 @@ const ResetPassword = () => {
     e.preventDefault();
     setStatus("submitting");
 
-    // Show sending toast
+    // Show processing toast
     const sendingToastId = toast({
-      title: "Sending password reset link to your email...",
-      status: "success",
+      title: "Processing request...",
+      description: "Please wait...",
+      status: "info",
       position: "top",
       duration: null, // Keeps it open until manually closed
       isClosable: false,
