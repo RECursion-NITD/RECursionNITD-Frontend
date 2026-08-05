@@ -2,7 +2,7 @@ import axios from "./axios";
 
 export const login = async (formData) => {
   const response = await axios.post(
-    `${process.env.REACT_APP_BACKEND_URL}/api/token/`,
+    "/token/",
     {
       username: formData.username,
       password: formData.password,

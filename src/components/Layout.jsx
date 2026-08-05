@@ -51,6 +51,9 @@ const Layout = () => {
           }
         } catch (error) {
           console.error("Profile check failed", error);
+          if (error.response?.status === 404) {
+            navigate("/profile/edit", { replace: true });
+          }
         }
       }
     };

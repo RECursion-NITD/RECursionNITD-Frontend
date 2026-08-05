@@ -19,10 +19,11 @@ const Login = () => {
   const stateFrom = location.state?.from;
   let from = "/";
   if (stateFrom) {
-      from = stateFrom.pathname + (stateFrom.search || "");
+    from = stateFrom.pathname + (stateFrom.search || "");
   }
+  const targetPath = from === "/login" ? "/" : from;
 
-  const { token, loginUser, setStatus, status } = useAuth();
+  const { token, loginUser, setStatus, status, logoutUser } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false); // State for remember me checkbox
@@ -55,22 +56,27 @@ const Login = () => {
           navigate("/profile/edit");
           return;
         }
-        
+
         setLoading(true); // Keep loading while we check profile
         try {
           const profile = await getProfile();
           // Check if profile is incomplete (Strict check for Name and College)
-          const isNameMissing = !profile.name || (typeof profile.name === "string" && profile.name.trim() === "");
-          const isCollegeMissing = !profile.college || (typeof profile.college === "string" && profile.college.trim() === "");
+          const isNameMissing = !profile?.name || (typeof profile.name === "string" && profile.name.trim() === "");
+          const isCollegeMissing = !profile?.college || (typeof profile.college === "string" && profile.college.trim() === "");
 
           if (isNameMissing || isCollegeMissing) {
             navigate("/profile/edit");
           } else {
-            navigate(from);
+            navigate(targetPath);
           }
         } catch (error) {
           console.error("Error checking profile:", error);
-          navigate(from); // Default to home/from on error
+          if (error.response?.status === 401) {
+            if (logoutUser) logoutUser();
+          } else {
+            // Profile not found or incomplete - allow user to fill profile details
+            navigate("/profile/edit");
+          }
         } finally {
           setLoading(false);
           setStatus("typing");
@@ -78,7 +84,7 @@ const Login = () => {
       }
     };
     checkProfileAndRedirect();
-  }, [token, setLoading, setStatus, navigate, from, justLoggedInWithGoogle]);
+  }, [token, justLoggedInWithGoogle]);
 
   const handleUsernameChange = (e) => setUsername(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
