@@ -18,91 +18,107 @@ export const AuthProvider = ({ children }) => {
   const [status, setStatus] = useState("typing");
   const toast = useToast();
   const navigate = useNavigate();
-  const [user, setUser] = useState(
-    localStorage.getItem("user")
-      ? JSON.parse(localStorage.getItem("user"))
-      : null
-  );
-  const [authToken, setAuthToken] = useState(
-    localStorage.getItem("authTokens")
-      ? JSON.parse(localStorage.getItem("authTokens"))
-      : null
-  );
+  const [authToken, setAuthToken] = useState(() => {
+    try {
+      const saved = localStorage.getItem("authTokens");
+      return saved ? JSON.parse(saved) : null;
+    } catch (e) {
+      return null;
+    }
+  });
+
+  const [user, setUser] = useState(() => {
+    try {
+      const savedUser = localStorage.getItem("user");
+      if (savedUser) return JSON.parse(savedUser);
+
+      const savedTokens = localStorage.getItem("authTokens");
+      if (savedTokens) {
+        const parsed = JSON.parse(savedTokens);
+        if (parsed?.access) {
+          const decoded = jwtDecode(parsed.access);
+          return {
+            id: decoded.user_id,
+            username: decoded.username || decoded.email?.split("@")[0],
+            role: "normal",
+          };
+        }
+      }
+      return null;
+    } catch (e) {
+      return null;
+    }
+  });
 
   const decodeTokens = async (tokens) => {
-
-    if (!tokens.access) {
+    if (!tokens || !tokens.access) {
       toast({
         title: "Cant Authorize",
-        description: tokens.response,
+        description: tokens?.response || "Failed to authenticate",
         position: "top",
         status: "error",
         duration: 3000,
         isClosable: true,
       });
+      setStatus("typing");
       return;
     }
-      setAuthToken({
+
+    setAuthToken({
       access: tokens.access,
       refresh: tokens.refresh,
     });
     localStorage.setItem("authTokens", JSON.stringify(tokens));
-    
+
+    let role = "normal";
     try {
       const res = await getProfileRoles(jwtDecode(tokens?.access).user_id);
-      localStorage.setItem(
-        "user",
-        JSON.stringify({
-          id: jwtDecode(tokens?.access).user_id,
-          username: jwtDecode(tokens?.access).email.split("@")[0],
-          role: res.role,
-        })
-      );
-      setUser({
-        id: jwtDecode(tokens?.access).user_id,
-        username: jwtDecode(tokens?.access).email.split("@")[0],
-        email: jwtDecode(tokens?.access).email,
-        role: res.role,
-      });
+      if (res?.role) role = res.role;
     } catch (error) {
-       console.error("Error fetching roles:", error);
-       // Optional: Toast specific to role fetching failure? 
-       // For now, allow login but maybe warn? Or just log it.
-       // Ensuring it doesn't crash the Google Login flow entirely (though token is valid).
-       toast({
-          title: "Profile Error",
-          description: "Could not fetch user roles.",
-          status: "warning",
-          duration: 3000,
-          isClosable: true,
-       });
+      console.error("Error fetching roles:", error);
     }
+
+    const decoded = jwtDecode(tokens?.access);
+    const username = decoded.username || decoded.email.split("@")[0];
+    const userData = {
+      id: decoded.user_id,
+      username: username,
+      email: decoded.email,
+      role: role,
+    };
+
+    localStorage.setItem("user", JSON.stringify(userData));
+    setUser(userData);
+    setStatus("typing");
   };
 
   const loginUser = async (formData) => {
     try {
       const data = await login(formData);
+      if (!data || !data.access) {
+        throw new Error(data?.response || "Invalid login response");
+      }
+
       localStorage.setItem("authTokens", JSON.stringify(data));
-
-      const res = await getProfileRoles(jwtDecode(data?.access).user_id);
-
-      localStorage.setItem(
-        "user",
-        JSON.stringify({
-          id: jwtDecode(data?.access).user_id,
-          username: formData.username,
-          role: res.role,
-        })
-      );
-
-      setUser({
-        id: jwtDecode(data?.access).user_id,
-        username: formData.username,
-        role: res.role,
-      });
-
       setAuthToken(data);
 
+      let role = "normal";
+      try {
+        const res = await getProfileRoles(jwtDecode(data?.access).user_id);
+        if (res?.role) role = res.role;
+      } catch (e) {
+        console.warn("Could not fetch user role:", e);
+      }
+
+      const userData = {
+        id: jwtDecode(data?.access).user_id,
+        username: formData.username,
+        role: role,
+      };
+
+      localStorage.setItem("user", JSON.stringify(userData));
+      setUser(userData);
+      setStatus("typing");
     } catch (err) {
       setLoading(false);
       const errorMessage = getApiError(err);

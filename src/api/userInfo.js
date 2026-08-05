@@ -2,19 +2,42 @@
 // define apis for profile page
 import axios from "./axios";
 import { API_ROUTES } from "../utils/api_routes";
+import jwtDecode from "jwt-decode";
 
 const USER_URL = API_ROUTES.USERS;
 
 export const getProfile = async () => {
+  let username = null;
   const user = localStorage.getItem("user");
-  if (!user) {
+  if (user) {
+    try {
+      const parsedUser = JSON.parse(user);
+      if (parsedUser && parsedUser.username) {
+        username = parsedUser.username;
+      }
+    } catch (e) {}
+  }
+
+  if (!username) {
+    const authTokens = localStorage.getItem("authTokens");
+    if (authTokens) {
+      try {
+        const parsedTokens = JSON.parse(authTokens);
+        if (parsedTokens?.access) {
+          const decoded = jwtDecode(parsedTokens.access);
+          if (decoded?.username) {
+            username = decoded.username;
+          } else if (decoded?.email) {
+            username = decoded.email.split("@")[0];
+          }
+        }
+      } catch (e) {}
+    }
+  }
+
+  if (!username) {
     throw new Error("User not found in local storage");
   }
-  const parsedUser = JSON.parse(user);
-  if (!parsedUser || !parsedUser.username) {
-    throw new Error("Invalid user data in local storage");
-  }
-  const username = parsedUser.username;
 
   const response = await axios.get(`${USER_URL}/${username}/`, {
     headers: {
