@@ -10,4 +10,5 @@ export const API_ROUTES = {
   HOME: "/",
   GET_STARTED: "/getting_started",
   ROLES: "/users/roles",
+  LEADERBOARD: "/leaderboard",
 };

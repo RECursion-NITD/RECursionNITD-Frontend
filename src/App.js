@@ -19,6 +19,7 @@ import AskREC from "./components/AskREC";
 import Events from "./components/Events/Events";
 import GetStarted from "./components/GetStarted/GetStarted";
 import ContentsPage from "./components/GetStarted/ContentsPage";
+import Leaderboard from "./components/Leaderboard/Leaderboard";
 import NotFound from "./components/NotFound";
 import React from "react";
 import { LoadingProvider } from "./context/LoadingContext";
@@ -47,16 +48,14 @@ function App() {
               <Route path="forgot-password" element={<ResetPassword />} />
               <Route path="alumni" element={<Alumni />} />
               <Route path="events" element={<Events />} />
+              <Route path="leaderboard" element={<Leaderboard />} />
               <Route path="get_started" element={<ContentsPage />} />
               <Route path="get_started/:subtopicId" element={<GetStarted />} />
               <Route
                 path="profile/reset/:uidb64/:newtoken"
                 element={<ResetPasswordForm />}
               />
-              <Route
-                path="reset/sent"
-                element={<ResetPasswordSent />}
-              />
+              <Route path="reset/sent" element={<ResetPasswordSent />} />
 
               {/* private routes */}
               <Route element={<RequireAuth />}>
