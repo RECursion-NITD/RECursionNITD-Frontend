@@ -22,10 +22,10 @@
 /* Controls Bar Layout */
 .leaderboard-controls-card {
   background-color: #212121;
-  padding: 16px 24px;
+  padding: 16px 20px;
   border-radius: 12px;
   border: 1px solid #313131;
-  margin-bottom: 28px !important;
+  margin-bottom: 24px !important;
   width: 100%;
 }
 
@@ -35,43 +35,55 @@
   justify-content: space-between;
   gap: 16px;
   width: 100%;
-  flex-wrap: wrap;
 }
 
 .leaderboard-controls-left {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin: 0 !important;
+  flex-shrink: 0;
+}
+
+.leaderboard-platform-switch {
+  display: flex;
+  background-color: #191919;
+  padding: 4px;
+  border-radius: 10px;
+  border: 1px solid #313131;
+  gap: 4px;
 }
 
 .leaderboard-controls-right {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 16px;
-  margin: 0 !important;
-  flex-wrap: wrap;
+  gap: 12px;
+  flex-shrink: 0;
+  flex-wrap: nowrap; /* Keep on single row on desktop */
 }
 
-/* Standalone Switch Component for 100% Reliable knob positioning */
+/* Standalone Switch Component for 100% Reliable knob positioning across all browsers */
 .custom-toggle-container {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   background-color: #191919;
-  padding: 8px 14px;
+  padding: 7px 14px;
   border-radius: 10px;
   border: 1px solid #313131;
   cursor: pointer;
-  margin: 0 !important;
   user-select: none;
+  flex-shrink: 0;
+  transition: border-color 0.2s ease;
+}
+
+.custom-toggle-container:hover {
+  border-color: #424242;
 }
 
 .custom-toggle-switch {
   position: relative;
   display: inline-flex;
   align-items: center;
-  width: 42px;
+  width: 40px;
   height: 22px;
   background-color: #313131;
   border-radius: 9999px;
@@ -81,7 +93,6 @@
   border: 1px solid #424242;
   user-select: none;
   flex-shrink: 0;
-  margin: 0 !important;
 }
 
 .custom-toggle-switch.checked {
@@ -96,16 +107,25 @@
   border-radius: 50%;
   transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease;
   transform: translateX(0px) !important; /* Extreme left when off */
-  margin: 0 !important;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .custom-toggle-switch.checked .custom-toggle-knob {
-  transform: translateX(19px) !important; /* Slides to right when on */
+  transform: translateX(18px) !important; /* Slides to right when on */
   background-color: #000000;
 }
 
-/* Table layout and center alignment */
+.leaderboard-search-group {
+  max-width: 220px;
+  flex-shrink: 0;
+}
+
+.leaderboard-sync-btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Table layout and alignments */
 .leaderboard-table-card {
   background-color: #212121;
   border-radius: 12px;
@@ -114,29 +134,54 @@
   width: 100%;
 }
 
+.leaderboard-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .leaderboard-table {
   width: 100%;
+  min-width: 620px;
   border-collapse: collapse;
-  text-align: center;
 }
 
 .leaderboard-table th {
-  padding: 16px 20px !important;
+  padding: 16px 16px !important;
   font-size: 12px !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.05em !important;
   color: #58CDFF !important;
   border-bottom: 1px solid #313131 !important;
-  margin: 0 !important;
-  text-align: center !important;
+  background-color: #191919;
+  white-space: nowrap;
 }
 
 .leaderboard-table td {
-  padding: 14px 20px !important;
+  padding: 14px 16px !important;
   vertical-align: middle !important;
   border-bottom: 1px solid #313131 !important;
-  margin: 0 !important;
+}
+
+.leaderboard-col-rank {
+  width: 12%;
+  text-align: center !important;
+}
+
+.leaderboard-col-coder {
+  width: 44%;
+  text-align: left !important;
+  padding-left: 24px !important;
+}
+
+.leaderboard-col-rating {
+  width: 24%;
+  text-align: center !important;
+}
+
+.leaderboard-col-profile {
+  width: 20%;
   text-align: center !important;
 }
 
@@ -146,4 +191,92 @@
 
 .leaderboard-table tbody tr:hover {
   background-color: #262626 !important;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+
+/* Tablet & Medium screens (991px and below) */
+@media (max-width: 991px) {
+  .leaderboard-controls-flex {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .leaderboard-controls-left {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .leaderboard-controls-right {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 12px;
+  }
+
+  .leaderboard-search-group {
+    flex: 1 1 auto;
+    max-width: none !important;
+  }
+}
+
+/* Mobile screens (767px and below) */
+@media (max-width: 767px) {
+  .leaderboard-controls-card {
+    padding: 14px 14px;
+    margin-bottom: 18px !important;
+  }
+
+  .leaderboard-controls-flex {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .leaderboard-controls-left {
+    width: 100%;
+  }
+
+  .leaderboard-platform-switch {
+    width: 100%;
+  }
+
+  .leaderboard-platform-switch button {
+    flex: 1;
+  }
+
+  .leaderboard-controls-right {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .custom-toggle-container {
+    width: 100%;
+    justify-content: space-between;
+    padding: 10px 14px;
+  }
+
+  .leaderboard-search-group {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .leaderboard-sync-btn {
+    width: 100% !important;
+    justify-content: center;
+  }
+
+  .leaderboard-col-coder {
+    padding-left: 12px !important;
+  }
+
+  .leaderboard-table th,
+  .leaderboard-table td {
+    padding: 12px 10px !important;
+  }
 }

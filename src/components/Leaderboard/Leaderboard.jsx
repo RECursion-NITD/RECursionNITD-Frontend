@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo, useRef } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import {
   Box,
   Container,
@@ -313,13 +313,13 @@ const Leaderboard = () => {
       pt={{ base: "90px", md: "110px" }}
       pb={20}
     >
-      <Container maxW="7xl" px={{ base: 4, md: 8 }}>
+      <Container maxW="7xl" px={{ base: 3, md: 8 }}>
         {/* Header Section */}
-        <Box textAlign="center" mb={10}>
+        <Box textAlign="center" mb={8}>
           <Heading
             as="h1"
             className="leaderboard-title"
-            fontSize={{ base: "3xl", md: "5xl" }}
+            fontSize={{ base: "2xl", sm: "3xl", md: "5xl" }}
             fontWeight="900"
             color="#58CDFF"
             letterSpacing="tight"
@@ -329,7 +329,7 @@ const Leaderboard = () => {
           </Heading>
           <Text
             color="#B3B1AD"
-            fontSize={{ base: "md", md: "lg" }}
+            fontSize={{ base: "sm", md: "lg" }}
             maxW="2xl"
             mx="auto"
           >
@@ -343,14 +343,7 @@ const Leaderboard = () => {
           <div className="leaderboard-controls-flex">
             {/* Left: Platform Switcher */}
             <div className="leaderboard-controls-left">
-              <HStack
-                bg="#191919"
-                p={1}
-                borderRadius="lg"
-                border="1px solid #313131"
-                spacing={1}
-                m="0"
-              >
+              <div className="leaderboard-platform-switch">
                 <Button
                   size="md"
                   leftIcon={<SiCodeforces />}
@@ -401,7 +394,7 @@ const Leaderboard = () => {
                 >
                   CodeChef
                 </Button>
-              </HStack>
+              </div>
             </div>
 
             {/* Right: Show Inactive Users Switch + Search Input & Sync Button */}
@@ -445,7 +438,7 @@ const Leaderboard = () => {
               </div>
 
               {/* Search Box */}
-              <InputGroup maxW="240px" m="0">
+              <InputGroup className="leaderboard-search-group" m="0">
                 <InputLeftElement pointerEvents="none">
                   <Icon as={FaSearch} color="#B3B1AD" />
                 </InputLeftElement>
@@ -481,6 +474,7 @@ const Leaderboard = () => {
                 placement="top"
               >
                 <Button
+                  className="leaderboard-sync-btn"
                   leftIcon={<Icon as={FaSyncAlt} />}
                   isLoading={syncing}
                   loadingText="Syncing..."
@@ -497,7 +491,7 @@ const Leaderboard = () => {
                     bg: cooldownSec > 0 ? "#313131" : "#34aaff",
                   }}
                   borderRadius="lg"
-                  px={5}
+                  px={4}
                   onClick={handleRefresh}
                   m="0"
                 >
@@ -552,20 +546,20 @@ const Leaderboard = () => {
           </Box>
         ) : (
           <div className="leaderboard-table-card">
-            <Box overflowX="auto">
+            <div className="leaderboard-table-wrapper">
               <table className="leaderboard-table">
-                <thead style={{ backgroundColor: "#191919" }}>
+                <thead>
                   <tr>
-                    <th style={{ width: "12%", textAlign: "center" }}>
+                    <th className="leaderboard-col-rank">
                       RANK
                     </th>
-                    <th style={{ width: "42%", textAlign: "left", paddingLeft: "24px" }}>
+                    <th className="leaderboard-col-coder">
                       CODER
                     </th>
-                    <th style={{ width: "26%", textAlign: "center" }}>
+                    <th className="leaderboard-col-rating">
                       RATING & RANK
                     </th>
-                    <th style={{ width: "20%", textAlign: "center" }}>
+                    <th className="leaderboard-col-profile">
                       PROFILE
                     </th>
                   </tr>
@@ -611,7 +605,7 @@ const Leaderboard = () => {
                         }}
                       >
                         {/* 1. Rank (Center Aligned) */}
-                        <td style={{ textAlign: "center" }}>
+                        <td className="leaderboard-col-rank">
                           <Flex align="center" justify="center" m="0">
                             {coder.rank === 1 ? (
                               <Badge
@@ -661,8 +655,8 @@ const Leaderboard = () => {
                         </td>
 
                         {/* 2. Coder Info (Strictly Left Aligned) */}
-                        <td style={{ textAlign: "left", paddingLeft: "24px" }}>
-                          <Flex align="center" justify="flex-start" gap="14px" m="0">
+                        <td className="leaderboard-col-coder">
+                          <Flex align="center" justify="flex-start" gap={{ base: "10px", md: "14px" }} m="0">
                             <Avatar
                               size="sm"
                               src={coder.avatar_url}
@@ -672,13 +666,14 @@ const Leaderboard = () => {
                               flexShrink={0}
                             />
                             <Flex direction="column" align="flex-start" justify="center" m="0">
-                              <Flex align="center" gap="8px" m="0">
+                              <Flex align="center" gap="8px" m="0" flexWrap="wrap">
                                 <Text
                                   fontWeight="semibold"
                                   color="#ffffff"
                                   m="0"
                                   textAlign="left"
                                   lineHeight="1.3"
+                                  fontSize={{ base: "sm", md: "md" }}
                                 >
                                   {coder.name}
                                 </Text>
@@ -710,12 +705,12 @@ const Leaderboard = () => {
                         </td>
 
                         {/* 3. Rating & Rank (Center Aligned) */}
-                        <td style={{ textAlign: "center" }}>
-                          <Flex align="center" justify="center" gap="10px" m="0">
+                        <td className="leaderboard-col-rating">
+                          <Flex align="center" justify="center" gap="10px" m="0" flexWrap="wrap">
                             <Text
                               fontWeight="bold"
                               color={rankStyle.color}
-                              fontSize="md"
+                              fontSize={{ base: "sm", md: "md" }}
                               m="0"
                             >
                               {rating > 0 ? rating : "Unrated"}
@@ -738,7 +733,7 @@ const Leaderboard = () => {
                         </td>
 
                         {/* 4. Profile Link (Center Aligned) */}
-                        <td style={{ textAlign: "center" }}>
+                        <td className="leaderboard-col-profile">
                           <Flex justify="center" align="center" m="0">
                             <Link href={profileUrl} isExternal m="0">
                               <Button
@@ -763,12 +758,12 @@ const Leaderboard = () => {
                   })}
                 </tbody>
               </table>
-            </Box>
+            </div>
 
             {/* Pagination Controls */}
             {totalItems > 0 && (
               <Flex
-                direction={{ base: "column", sm: "row" }}
+                direction={{ base: "column", md: "row" }}
                 justify="space-between"
                 align="center"
                 p={4}
@@ -778,7 +773,7 @@ const Leaderboard = () => {
                 m="0"
               >
                 {/* Items Range & Page Size */}
-                <HStack spacing={3} m="0">
+                <HStack spacing={3} m="0" justify={{ base: "center", md: "flex-start" }} w={{ base: "100%", md: "auto" }}>
                   <Text fontSize="sm" color="#B3B1AD" m="0">
                     Showing{" "}
                     <Text as="span" fontWeight="semibold" color="#ffffff">
@@ -821,7 +816,7 @@ const Leaderboard = () => {
                 </HStack>
 
                 {/* Page Navigation Buttons */}
-                <HStack spacing={1} m="0">
+                <HStack spacing={1} m="0" justify={{ base: "center", md: "flex-end" }} w={{ base: "100%", md: "auto" }} flexWrap="wrap">
                   <IconButton
                     size="sm"
                     icon={<FaAngleDoubleLeft />}
