@@ -6,7 +6,7 @@ import Loader from "../Loader";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-import { format, addHours } from "date-fns";
+import { format } from "date-fns";
 import {
   Box,
   Flex,
@@ -31,8 +31,7 @@ import {
 
 function formatDate(inputDate) {
   const date = new Date(inputDate);
-  const adjustedDate = addHours(date, date.getTimezoneOffset() / 60);
-  const formattedDate = format(adjustedDate, "MMM. dd, yy, h a");
+  const formattedDate = format(date, "MMM. dd, yy, h a");
   return formattedDate;
 }
 
