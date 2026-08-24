@@ -29,6 +29,7 @@ import ViewProfile from "./components/Profile/ViewProfile";
 import ResetPassword from "./components/Profile/ResetPassword";
 import ResetPasswordForm from "./components/Profile/ResetPasswordForm";
 import ResetPasswordSent from "./components/Profile/ResetPasswordSent";
+import UrlRedirect from "./components/UrlRedirect";
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
                 path="reset/sent"
                 element={<ResetPasswordSent />}
               />
+              <Route path="url/:shortCode" element={<UrlRedirect />} />
 
               {/* private routes */}
               <Route element={<RequireAuth />}>
