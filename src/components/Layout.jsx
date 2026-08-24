@@ -139,6 +139,13 @@ const Layout = () => {
             Events
           </MenuItem>
           <MenuItem
+            to="/contests"
+            isActive={activeLink === "/contests"}
+            onClick={() => setActiveLink("/contests")}
+          >
+            Contests
+          </MenuItem>
+          <MenuItem
             to="/get_started"
             isActive={activeLink === "/get_started"}
             onClick={() => setActiveLink("/get_started")}
@@ -249,6 +256,7 @@ const Layout = () => {
             {/* Same links as above */}
             <MenuItem to="/experience">Interview Experiences</MenuItem>
             <MenuItem to="/events">Events</MenuItem>
+            <MenuItem to="/contests">Contests</MenuItem>
             <MenuItem to="/get_started">Getting Started</MenuItem>
             <MenuItem to="/team">Team</MenuItem>
             {!user ? (

@@ -29,6 +29,7 @@ import ViewProfile from "./components/Profile/ViewProfile";
 import ResetPassword from "./components/Profile/ResetPassword";
 import ResetPasswordForm from "./components/Profile/ResetPasswordForm";
 import ResetPasswordSent from "./components/Profile/ResetPasswordSent";
+import ContestNotifications from "./components/Contests/ContestNotifications";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
               <Route path="forgot-password" element={<ResetPassword />} />
               <Route path="alumni" element={<Alumni />} />
               <Route path="events" element={<Events />} />
+              <Route path="contests" element={<ContestNotifications />} />
               <Route path="get_started" element={<ContentsPage />} />
               <Route path="get_started/:subtopicId" element={<GetStarted />} />
               <Route
