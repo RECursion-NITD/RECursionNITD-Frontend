@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Outlet, Link, NavLink, useNavigate, useLocation } from "react-router-dom";
+import {
+  Outlet,
+  Link,
+  NavLink,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import {
   Box,
@@ -36,13 +42,19 @@ const Layout = () => {
       if (user && location.pathname !== "/profile/edit") {
         try {
           const profile = await getProfile();
-          const isNameMissing = !profile.name || (typeof profile.name === "string" && profile.name.trim() === "");
-          const isCollegeMissing = !profile.college || (typeof profile.college === "string" && profile.college.trim() === "");
+          const isNameMissing =
+            !profile.name ||
+            (typeof profile.name === "string" && profile.name.trim() === "");
+          const isCollegeMissing =
+            !profile.college ||
+            (typeof profile.college === "string" &&
+              profile.college.trim() === "");
 
           if (isNameMissing || isCollegeMissing) {
             toast({
               title: "Profile Incomplete",
-              description: "You must complete your profile (Name & College) to continue.",
+              description:
+                "You must complete your profile (Name & College) to continue.",
               status: "warning",
               duration: 3000,
               isClosable: true,
@@ -137,6 +149,13 @@ const Layout = () => {
             onClick={() => setActiveLink("/events")}
           >
             Events
+          </MenuItem>
+          <MenuItem
+            to="/leaderboard"
+            isActive={activeLink === "/leaderboard"}
+            onClick={() => setActiveLink("/leaderboard")}
+          >
+            Leaderboard
           </MenuItem>
           <MenuItem
             to="/get_started"
@@ -249,6 +268,7 @@ const Layout = () => {
             {/* Same links as above */}
             <MenuItem to="/experience">Interview Experiences</MenuItem>
             <MenuItem to="/events">Events</MenuItem>
+            <MenuItem to="/leaderboard">Leaderboard</MenuItem>
             <MenuItem to="/get_started">Getting Started</MenuItem>
             <MenuItem to="/team">Team</MenuItem>
             {!user ? (
@@ -330,12 +350,13 @@ const MenuItem = ({ to, children, isActive, onClick, noHoverEffect }) => {
       >
         <Text
           as="span"
-          className={`relative text-xl w-fit block ${!noHoverEffect
-            ? isActive
-              ? "after:block after:content-[''] after:absolute after:h-[3px] after:bg-[#58CDFF] after:w-full after:scale-x-100"
-              : "after:block after:content-[''] after:absolute after:h-[3px] after:bg-[#ffffff] after:w-full after:scale-x-0 hover:after:scale-x-100"
-            : ""
-            } after:transition after:duration-300 after:origin-center`}
+          className={`relative text-xl w-fit block ${
+            !noHoverEffect
+              ? isActive
+                ? "after:block after:content-[''] after:absolute after:h-[3px] after:bg-[#58CDFF] after:w-full after:scale-x-100"
+                : "after:block after:content-[''] after:absolute after:h-[3px] after:bg-[#ffffff] after:w-full after:scale-x-0 hover:after:scale-x-100"
+              : ""
+          } after:transition after:duration-300 after:origin-center`}
           fontSize="18px"
           transition="color 0.3s"
           _hover={{

@@ -1,0 +1,282 @@
+/* Leaderboard Scoped Styles */
+
+.leaderboard-root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 !important;
+}
+
+/* Reset margin for all elements in leaderboard to prevent global App.css '* { margin: auto }' issues */
+.leaderboard-root * {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.leaderboard-title {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 900 !important;
+  color: #58CDFF !important;
+  letter-spacing: 1px;
+}
+
+/* Controls Bar Layout */
+.leaderboard-controls-card {
+  background-color: #212121;
+  padding: 16px 20px;
+  border-radius: 12px;
+  border: 1px solid #313131;
+  margin-bottom: 24px !important;
+  width: 100%;
+}
+
+.leaderboard-controls-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
+
+.leaderboard-controls-left {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.leaderboard-platform-switch {
+  display: flex;
+  background-color: #191919;
+  padding: 4px;
+  border-radius: 10px;
+  border: 1px solid #313131;
+  gap: 4px;
+}
+
+.leaderboard-controls-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-shrink: 0;
+  flex-wrap: nowrap; /* Keep on single row on desktop */
+}
+
+/* Standalone Switch Component for 100% Reliable knob positioning across all browsers */
+.custom-toggle-container {
+  display: inline-flex;
+  align-items: center;
+  background-color: #191919;
+  padding: 7px 14px;
+  border-radius: 10px;
+  border: 1px solid #313131;
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+  transition: border-color 0.2s ease;
+}
+
+.custom-toggle-container:hover {
+  border-color: #424242;
+}
+
+.custom-toggle-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 40px;
+  height: 22px;
+  background-color: #313131;
+  border-radius: 9999px;
+  padding: 2px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  border: 1px solid #424242;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.custom-toggle-switch.checked {
+  background-color: #58CDFF;
+  border-color: #58CDFF;
+}
+
+.custom-toggle-knob {
+  width: 16px;
+  height: 16px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease;
+  transform: translateX(0px) !important; /* Extreme left when off */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.custom-toggle-switch.checked .custom-toggle-knob {
+  transform: translateX(18px) !important; /* Slides to right when on */
+  background-color: #000000;
+}
+
+.leaderboard-search-group {
+  max-width: 220px;
+  flex-shrink: 0;
+}
+
+.leaderboard-sync-btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Table layout and alignments */
+.leaderboard-table-card {
+  background-color: #212121;
+  border-radius: 12px;
+  border: 1px solid #313131;
+  overflow: hidden;
+  width: 100%;
+}
+
+.leaderboard-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.leaderboard-table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+}
+
+.leaderboard-table th {
+  padding: 16px 16px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: #58CDFF !important;
+  border-bottom: 1px solid #313131 !important;
+  background-color: #191919;
+  white-space: nowrap;
+}
+
+.leaderboard-table td {
+  padding: 14px 16px !important;
+  vertical-align: middle !important;
+  border-bottom: 1px solid #313131 !important;
+}
+
+.leaderboard-col-rank {
+  width: 12%;
+  text-align: center !important;
+}
+
+.leaderboard-col-coder {
+  width: 44%;
+  text-align: left !important;
+  padding-left: 24px !important;
+}
+
+.leaderboard-col-rating {
+  width: 24%;
+  text-align: center !important;
+}
+
+.leaderboard-col-profile {
+  width: 20%;
+  text-align: center !important;
+}
+
+.leaderboard-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.leaderboard-table tbody tr:hover {
+  background-color: #262626 !important;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+
+/* Tablet & Medium screens (991px and below) */
+@media (max-width: 991px) {
+  .leaderboard-controls-flex {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .leaderboard-controls-left {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .leaderboard-controls-right {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 12px;
+  }
+
+  .leaderboard-search-group {
+    flex: 1 1 auto;
+    max-width: none !important;
+  }
+}
+
+/* Mobile screens (767px and below) */
+@media (max-width: 767px) {
+  .leaderboard-controls-card {
+    padding: 14px 14px;
+    margin-bottom: 18px !important;
+  }
+
+  .leaderboard-controls-flex {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .leaderboard-controls-left {
+    width: 100%;
+  }
+
+  .leaderboard-platform-switch {
+    width: 100%;
+  }
+
+  .leaderboard-platform-switch button {
+    flex: 1;
+  }
+
+  .leaderboard-controls-right {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .custom-toggle-container {
+    width: 100%;
+    justify-content: space-between;
+    padding: 10px 14px;
+  }
+
+  .leaderboard-search-group {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .leaderboard-sync-btn {
+    width: 100% !important;
+    justify-content: center;
+  }
+
+  .leaderboard-col-coder {
+    padding-left: 12px !important;
+  }
+
+  .leaderboard-table th,
+  .leaderboard-table td {
+    padding: 12px 10px !important;
+  }
+}
