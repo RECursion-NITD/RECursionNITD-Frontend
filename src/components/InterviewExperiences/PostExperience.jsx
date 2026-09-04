@@ -197,14 +197,13 @@ const PostExperience = () => {
             </NumberInput>
           </FormControl>
 
-          <FormControl className="flex flex-col items-start">
-           
+          <FormControl className="flex flex-col items-start w-full">
             <div className="flex justify-start items-center">
               <FormLabel className="mt-0" htmlFor="details">
-              Details
+                Details
               </FormLabel>
             </div>
-            <div className="w-full flex flex-col md:flex-row items-center justify-center">
+            <div className="w-full flex flex-col md:flex-row items-start justify-center gap-4">
               <Textarea
                 id="details"
                 name="details"
@@ -214,18 +213,19 @@ const PostExperience = () => {
                 size="lg"
                 height="150px"
                 width={{ base: "100%", md: "50%" }}
+                resize="none"
               />
-              <div className="w-full md:w-1/2 flex flex-col items-start justify-center border border-white rounded-lg mx-2 mt-4 md:mt-0">
-                <Box w="100%">
-                  <Heading as="h5" size="sm" textAlign="center" h="100%">
+              <div className="w-full md:w-1/2 flex flex-col items-start justify-start border border-white rounded-lg mt-4 md:mt-0 h-[150px] overflow-hidden">
+                <Box w="100%" py={1}>
+                  <Heading as="h5" size="sm" textAlign="center">
                     Preview
                   </Heading>
-                  <Box borderBottom="1px solid white" />
                 </Box>
-                <div className="w-full h-[130px] text-left">
+                <Box w="100%" borderBottom="1px solid white" />
+                <div className="w-full flex-1 text-left overflow-y-auto break-all p-2">
                   <ReactMarkdown
                     children={experienceData.details}
-                    className="font-sub text-md lg:text-lg ml-2 mt-2"
+                    className="font-sub text-md lg:text-lg"
                     remarkPlugins={[remarkGfm]}
                     rehypePlugins={[rehypeRaw]}
                   />
