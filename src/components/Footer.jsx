@@ -38,7 +38,7 @@ const Footer = () => {
           <p style={{ marginBottom: "8px", lineHeight: "1.6" }}>
             <strong>Phones:</strong>
             <br />
-            Prathamesh Mandiye: +91 8240048380
+            Koustav Das: +91 82501 51205
           </p>
         </div>
 
